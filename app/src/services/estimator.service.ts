@@ -44,7 +44,7 @@ export class EstimatorService extends Singleton<PoseEstimatorPayload>{
             inputResolution: {width: 224, height: 224},
             ...payload
         });
-
+        // const actionClassifier$=await tf.loadLayersModel("https://github.com/Graduation-256GB/RNN/blob/main/dataset/model.json");
         // const actionClassifier$ = await tf.loadLayersModel('/model/actions_recognizer/model.json');
         const actionClassifier$ = await knn.create();
         const conf = AppConfig;
