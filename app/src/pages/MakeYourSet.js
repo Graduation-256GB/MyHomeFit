@@ -8,13 +8,22 @@ import SquatImg from '../images/squat.png';
 import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 
-
 import SetBox from "../components/MakeYourSet/SetBox";
 import ListBlock from '../components/MakeYourSet/ListBlock';
 
+import {useAsync} from "react-async"
+
+const loadPost=async()=>{
+    const res=await fetch('http://127.0.0.1:8000/api/')
+    if(!res.ok) throw new Error(res)
+    return res.json()
+}
 
 const MakeYourSet = () => {
-
+    const { data, error, isLoading } = useAsync({promiseFn: loadPost})
+    if (isLoading) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data)
     return (
         <div className="content">
             <div className="menu1-wrapper">
@@ -64,6 +73,9 @@ const MakeYourSet = () => {
             <div className="time-box">
                 <div>총 6개의 동작 추출</div><br/>
                 <div>예상 소요 시간: 00:20:00</div>
+            </div>
+            <div>
+                {JSON.stringify(data)}
             </div>
         </div>
     );

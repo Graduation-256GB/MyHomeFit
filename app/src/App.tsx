@@ -12,10 +12,8 @@ import './css/App.css'
 
 function App() {
   return (
-
     <div className='main-container'>
         <SideMenubar />
-
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/training" component={Training} />
         <Route path="/fitnotes" component={FitNotes} />
