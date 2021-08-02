@@ -18,7 +18,6 @@ function App() {
         <Route path="/training" component={Training} />
         <Route path="/fitnotes" component={FitNotes} />
         <Route path="/calender" component={Calender} />
-
     </div>
   );
 }
