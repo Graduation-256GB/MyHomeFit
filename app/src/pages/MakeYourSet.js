@@ -10,15 +10,28 @@ import RightBtn from '../images/menu_right.png';
 
 import SetBox from "../components/MakeYourSet/SetBox";
 import ListBlock from '../components/MakeYourSet/ListBlock';
+import axios from "axios";
 
 import {useAsync} from "react-async"
 
 const loadPost=async()=>{
-    const res=await fetch('http://127.0.0.1:8000/api/')
+    const res=await fetch('http://127.0.0.1:8000/api/users/')
     if(!res.ok) throw new Error(res)
     return res.json()
 }
+const state={
+    exercises:[]
+};
 
+// const componentDidMount=()=>{
+//     this.refreshList()
+// }
+// const refreshList=()=>{
+//     axios
+//     .get('http://127.0.0.1:8000/api/users/')
+//     .then((res)=>console.log(res.data))
+//     .catch((err)=>console.log(err))
+// }
 const MakeYourSet = () => {
     const { data, error, isLoading } = useAsync({promiseFn: loadPost})
     if (isLoading) return "Loading..."
