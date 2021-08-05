@@ -20,7 +20,7 @@ const Calender = () => {
                 </div>
                 <svg width="100" height="100">
                     {/* <circle cx="50" cy="50" r="50" fill="white"></circle> */}
-                    <Link to="/makeyourset">
+                    <Link to="/login">
                     <FaUserAlt size="50" color="lightgray"/>
                     </Link>
                 </svg>

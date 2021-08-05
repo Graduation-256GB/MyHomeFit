@@ -10,6 +10,7 @@ import SideMenubar from "./pages/menu/SideMenubar";
 import './css/App.css'
 import LoginPage from "./pages/LoginPage";	// 추가
 import SignupPage from "./pages/SignupPage";
+import Navbar from "./pages/Navbar";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/calender" component={Calender} />
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
+        <Route path="/navbar" component={Navbar} />
     </div>
   );
 }
