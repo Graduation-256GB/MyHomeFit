@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
@@ -21,3 +22,9 @@ class ListExercise(generics.ListCreateAPIView):
 class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+
+
+def keras_model(self):
+    response = HttpResponse(open('/Users/sungeun/MyHomeFit+PoseEstimator/MyHomeFit/backend/config/users/model.json', "r"),
+                            content_type='application/json', )
+    return response

@@ -115,6 +115,7 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "https://github.com",
   "jest": {
     "roots": [
       "<rootDir>/src"

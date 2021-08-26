@@ -1,6 +1,8 @@
 import * as posenet from '@tensorflow-models/posenet';
 import * as knn from '@tensorflow-models/knn-classifier';
 import * as tf from '@tensorflow/tfjs';
+import axios from 'axios'
+// import * as models from "../../../backend/config/users/models";
 
 import yolo from 'tfjs-yolo';
 import { Singleton } from '../classses/singleton.class';
@@ -18,7 +20,7 @@ export class EstimatorService extends Singleton<PoseEstimatorPayload>{
     private readonly ACTIVATE_YOLO = false;
     
     private net;
-    private actionClassifier: knn.KNNClassifier;
+    private actionClassifier; //: knn.KNNClassifier;
     private yolo;
     private loaded$: Promise<boolean>;
     private resolver: any;
@@ -44,11 +46,15 @@ export class EstimatorService extends Singleton<PoseEstimatorPayload>{
             inputResolution: {width: 224, height: 224},
             ...payload
         });
-        // const actionClassifier$=await tf.loadLayersModel("localhost:3000/model.json");
-        // const actionClassifier$ = await tf.loadLayersModel('/model/actions_recognizer/model.json');
-        const actionClassifier$ = await knn.create();
+        // const actionClassifier$=await tf.loadLayersModel('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/group55-shard1of1');
+        // const actionClassifier$=await tf.loadLayersModel('http://127.0.0.1:8000/api/model');
+        const actionClassifier$=await tf.loadLayersModel('https://github.com/sungeuni0208/keras_model/blob/master/model.json');
+        // const actionClassifier$ = await axios.get('/sungeuni0208/keras_model/blob/master/model.json', )
+        // const actionClassifier$ = await axios.get('http://127.0.0.1:8000/api/model', )
+        // const actionClassifier$ = await knn.create();
         const conf = AppConfig;
         this.actionClassifier = await actionClassifier$;
+        console.log(actionClassifier$)
         Object.keys(conf.actions).forEach(actionString => {
             const action = conf.actions[actionString];
             action.dataset.forEach(ds => this.actionClassifier.addExample(tf.tensor1d(ds), actionString));
