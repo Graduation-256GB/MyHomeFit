@@ -1,0 +1,33 @@
+.rank-fitness-container{
+    background-color: white;
+    width: 600px;
+    height: 300px;
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 70px;
+    border: 1px solid #707070;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 40px;
+}
+
+.rank-fitness-container > label{
+    font-family: NanumSquare_acR;
+    font-size: 27px;
+    color:#949090;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.rank-fitness-container > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rank-fitness-container{
+    padding: 30px;
+}

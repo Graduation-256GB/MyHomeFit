@@ -1,0 +1,134 @@
+.signup-container{
+    background-color: #DDF6F2;
+    width: 100%;
+    height: 1000px;
+}
+
+.signup-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1000px;
+}
+
+.signup-left{
+    background-color: #27CFB3;
+    width: 400px;
+    height: 530px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-right{
+    width:600px;
+    height: 530px;
+    background-color: #FFFFFF;
+}
+
+.signup-welcome{
+    color: white;
+    font-size: 45px;
+    font-family: NanumSquare_acEB;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.signup-detail{
+    color: white;
+    font-size: 30px;
+    font-family: NanumSquare_acEB;
+    display: inline-block;
+}
+
+.signup-right>div>label{
+
+}
+
+.signup-title-box{
+    margin-left: 70px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.signup-title-signup{
+    font-family: NanumSquare_acEB;
+    font-weight: bold;
+    font-size: 30px;
+    color: #AFB8B6;
+}
+
+.signup-title-div{
+    font-family: NanumSquare_acEB;
+    font-weight: bold;
+    font-size: 30px;
+    color: #AFB8B6;
+}
+
+.signup-title-login{
+    font-family: NanumSquare_acEB;
+    font-weight: bold;
+    font-size: 30px;
+    color: #27CFB3;
+}
+
+.signup-right-content>div>label{
+    font-family: NanumSquare_acEB;
+    font-size: 22px;
+    color: #7A8281;
+}
+
+.signup-right-content>div{
+    margin-bottom: 10px;
+    margin-left: 70px;
+}
+
+.signup-right-content>div>input{
+    height: 20px;
+    font-size: 20px;
+    border-bottom: 1px solid #27CFB3;
+    border-right: 0px;
+    border-left: 0px;
+    border-top:0px;
+    width:400px;
+    color: #AFB8B6;
+}
+
+.signup-right-content>div>input:focus{
+    outline: none;
+}
+
+.signup-btn-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-btn{
+
+    display: flex;
+
+}
+
+.signup-btn>img{
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.signup-btn-txt{
+    font-family: NanumSquare_acEB;
+    font-weight: bold;
+    font-size: 25px;
+    color: #FFFFFF;
+    background-color: #27CFB3;
+    outline: 0;
+    border: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 100px;
+    padding-left: 100px;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+

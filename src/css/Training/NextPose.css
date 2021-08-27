@@ -1,0 +1,10 @@
+.next-videos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    height: 180px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    border-radius: 10px;
+}

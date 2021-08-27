@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import MakeYourSet from "./pages/MakeYourSet";
+import Training from "./pages/Training";
+import FitNotes from "./pages/FitNotes";
+import Calender from "./pages/Calender";
+import SideMenubar from "./pages/menu/SideMenubar";
+import './css/App.css'
 
-function App() {
+import LoginPage from "./pages/LoginPage";	// 추가
+import SignupPage from "./pages/SignupPage";
+import Navbar from "./pages/Navbar";
+
+import Signup from "./pages/signup";
+import Login from "./pages/Login";
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className='main-container'>
+        <SideMenubar />
+        <Route path="/makeyourset" exact={true} component={MakeYourSet} />
+        <Route path="/training" component={Training} />
+        <Route path="/fitnotes" component={FitNotes} />
+        <Route path="/calender" component={Calender} />
+
+        <Route path="/" exact={true} component={Signup} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignupPage} />
+        <Route path="/navbar" component={Navbar} />
+
+        <Route path="/log" component={Login}/>
+      </div>
   );
-}
+};
 
 export default App;

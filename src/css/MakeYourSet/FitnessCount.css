@@ -1,0 +1,12 @@
+.list-text{
+    width: 100px;
+    height: 20px;
+    margin: 10px auto;
+    padding: 11px 14px 11px 20px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    border: solid 2.5px #a7a6a6;
+    text-align: center;
+    font-size: 20px;
+    color: #aaaaaa;
+}
