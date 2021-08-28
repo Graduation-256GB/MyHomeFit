@@ -37,7 +37,7 @@ function NavBar() {
      .then(data => {
        console.log(data);
        localStorage.clear();
-       window.location.replace('http://localhost:3000/login');
+       window.location.replace('http://127.0.0.1:8000/login');
      });
   };
 
