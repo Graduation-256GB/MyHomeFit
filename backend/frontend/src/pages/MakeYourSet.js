@@ -14,7 +14,7 @@ import ListBlock from '../components/MakeYourSet/ListBlock';
 import {useAsync} from "react-async"
 
 const loadPost=async()=>{
-    const res=await fetch('http://127.0.0.1:8000/api/users')
+    const res=await fetch('http://127.0.0.1:8000/api/pose')
     if(!res.ok) throw new Error(res)
     return res.json()
 }
