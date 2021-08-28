@@ -36,7 +36,7 @@ const Training = () => {
                 </div>
                 <div className="realtime-video">
                     <div className="user-video">
-
+                        <img src="http://127.0.0.1:8000/api/pose_feed"></img>
                     </div>
                     <div className="export-video">
                         <ReactPlayer className="export"

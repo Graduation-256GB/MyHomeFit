@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'pose',
     'rest_framework',
     'corsheaders',
-    'users',
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
@@ -50,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'pose.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -95,13 +94,15 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'app', 'src'),
+            os.path.join(BASE_DIR, 'frontend', 'build'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -166,6 +167,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

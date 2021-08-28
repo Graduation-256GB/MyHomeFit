@@ -11,12 +11,14 @@ import RightBtn from '../images/menu_right.png';
 import SetBox from "../components/MakeYourSet/SetBox";
 import ListBlock from '../components/MakeYourSet/ListBlock';
 
-import {useAsync} from "react-async"
+
+import { useAsync } from "react-async"
 
 const loadPost=async()=>{
-    const res=await fetch('http://127.0.0.1:8000/api/users')
-    if(!res.ok) throw new Error(res)
+    const res = await fetch('http://127.0.0.1:8000/api/pose/')
+    if (!res.ok) throw new Error(res)
     return res.json()
+
 }
 
 const MakeYourSet = () => {
