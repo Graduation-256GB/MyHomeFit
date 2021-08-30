@@ -24,7 +24,13 @@ class PoseWebCam(object):
         self.allkeypoints = []
         self.outputkeypoints = []
 
-        self.predicted_pose='start'
+        self.predicted_pose = 'start'
+
+        self.pose_cnt = 0           ### n번 째 포즈
+
+        self.fps = 12               ### 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
+        self.frame_per_second = 3   ### 1초 당 추출할 프레임 수
+        ### ### self.fps_sum        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (1)
 
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
@@ -39,6 +45,9 @@ class PoseWebCam(object):
     def get_frame(self):
 
         success, img = self.cap.read()
+
+        print("read frame")
+
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = self.pose.process(imgRGB)
         # print(results.pose_landmarks.landmark[0])
@@ -46,72 +55,92 @@ class PoseWebCam(object):
         keypoints = []  # 1프레임의 keypoints를 담은 배열
         # keypoints.add([results.pose_landmarks.landmark[0]])
 
+        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (2)
+        ### ### self.frame_cnt += 1
+
         if results.pose_landmarks:
-            self.frame_cnt += 1
+
+            for id, lm in enumerate(results.pose_landmarks.landmark):
+                self.mpDraw.draw_landmarks(
+                    img, results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
+                h, w, c = img.shape
+
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
 
             # print(results.pose_landmarks.landmark[0])
 
-            self.mpDraw.draw_landmarks(
-                img, results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
-            for id, lm in enumerate(results.pose_landmarks.landmark):
-                h, w, c = img.shape
+            self.frame_cnt += 1     ### frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
+            interval = int(self.fps) // self.frame_per_second   ### 프레임 간격(0.x초)
 
-                cx, cy = int(lm.x*w), int(lm.y*h)
-                cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
+            if self.frame_cnt % interval == 0:  ### 1초에 3 프레임 씩
 
-                keypoints.append((cx, cy))  # 1프레임에 33개의 keypoints값 차례로 넣어줌.
+                ### 프레임 순서 출력
+                frame_order = (self.frame_cnt // interval) % 16
+                if frame_order == 0 :
+                    frame_order = 16
+                print(frame_order,"th frame")
 
-            # if self.frame_cnt < 17 : # 나머지 이용
-            # self.allkeypoints.append(keypoints) # 프레임별 keypoints가 모두 있는 배열
-            # input을 계산하는데 필요한 12 points만 append 함
-            self.allkeypoints.append(keypoints)
+                for id, lm in enumerate(results.pose_landmarks.landmark):
+                    h, w, c = img.shape
+                    cx, cy = int(lm.x*w), int(lm.y*h)
 
-            if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
-                # self.outputkeypoints=[self.allkeypoints]  # 단지, 3차원 배열로 만들어주기 위함(이전까지는 2차원 배열)
-                #                                             (수정) => get_input()에서 3차원으로 입력층을 생성
-                self.outputkeypoints = self.allkeypoints
-                # self.get_keypoints() # 프레임 수가 16개가 되면, 16개의 프레임에 대한 keypoints가 모여있는 배열 반환해주는 함수
+                    keypoints.append((cx, cy))  # 1프레임에 33개의 keypoints값 차례로 넣어줌.
 
-                self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
-                print(self.predicted_pose)
-                # 예측된 포즈(라벨) 출력
-                """
-                font = ImageFont.truetype("fonts/gulim.ttc", 20)
-                img = np.full((200, 300, 3), (255, 255, 255), np.uint8)
-                img = Image.fromarray(img)
-                draw = ImageDraw(img)
-                text = predicted_pose
-                draw.text((30, 50), text, font=font, fill=(0,0,0))
-                img = np.array(img)
-                cv2.imshow("text", img)
-                """
-                # cv2.putText(img, predicted_pose, (50, 50),
-                #             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
-                frame_flip = cv2.flip(img, 1)
-                ret, jpeg = cv2.imencode('.jpg', frame_flip)
+                # if self.frame_cnt < 17 : # 나머지 이용
+                # self.allkeypoints.append(keypoints) # 프레임별 keypoints가 모두 있는 배열
+                # input을 계산하는데 필요한 12 points만 append 함
+                self.allkeypoints.append(keypoints)
 
-                self.allkeypoints = []  # 배열 초기화
 
-            # 제대로 만들었는지 확인하기 위한 print문 (cmd창 참고)
-            # print(self.frame_cnt)
-            # print(len(self.allkeypoints))
+                if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
 
-            # print(len(self.allkeypoints[0]))
+                    self.pose_cnt += 1
 
-            # print(self.allkeypoints)
+                    # self.outputkeypoints=[self.allkeypoints]  # 단지, 3차원 배열로 만들어주기 위함(이전까지는 2차원 배열)
+                    #                                             (수정) => get_input()에서 3차원으로 입력층을 생성
+                    self.outputkeypoints = self.allkeypoints
+                    # self.get_keypoints() # 프레임 수가 16개가 되면, 16개의 프레임에 대한 keypoints가 모여있는 배열 반환해주는 함수
 
-        cv2.putText(img, self.predicted_pose, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+                    self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
+                    print(self.pose_cnt,"th pose is", self.predicted_pose)
+                    # 예측된 포즈(라벨) 출력
+                    # cv2.putText(img, self.predicted_pose, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
-        cTime = time.time()
-        fps = 1/(cTime-self.pTime)
-        self.pTime = cTime
 
-        ## cv2.putText(img, str(int(fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
+                    frame_flip = cv2.flip(img, 1)
+                    ret, jpeg = cv2.imencode('.jpg', frame_flip)
+
+                    self.allkeypoints = []  # 배열 초기화
+
+                # 제대로 만들었는지 확인하기 위한 print문 (cmd창 참고)
+                # print(self.frame_cnt)
+                # print(len(self.allkeypoints))
+
+                # print(len(self.allkeypoints[0]))
+
+                # print(self.allkeypoints)
+
+        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (3)
+        ### ### cTime = time.time()
+        ### ### self.fps = 1/(cTime-self.pTime)
+
+        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (4)
+        ### ### self.frame_cnt += 1
+        ### ### self.fps_sum += int(self.fps)
+        ### ### print("current fps avg is ", self.fps_sum // self.frame_cnt)
+
+        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (5)
+        ### ### self.pTime = cTime
+
+        ### ### cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
 
         # cv2.imshow("Image", img)
         # cv2.waitKey(1)
+
         frame_flip = cv2.flip(img, 1)
         ret, jpeg = cv2.imencode('.jpg', frame_flip)
+
         return jpeg.tobytes()
 
     # 16개의 프레임에서 keypoints를 모두 모아서 반환해주는 함수 (3차원 배열 형태) -> ## 2차원으로 수정
