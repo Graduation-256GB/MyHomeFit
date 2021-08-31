@@ -26,11 +26,21 @@ class PoseWebCam(object):
 
         self.predicted_pose = 'start'
 
-        self.pose_cnt = 0           ### n번 째 포즈
+        # 임의의 데이터로 테스트(운동 순서대로 동작 인식하는지 확인)
+        self.userExerciseList = {'STANDING SIDE CRUNCH': 7,
+                                 'STEP FORWARD DYNAMIC LUNGE': 5, "BURPEE TEST": 6}
+        self.keylist = list(self.userExerciseList.keys())  # key만 뽑아서 리스트로 만들기
+        self.userexercisename = ''  # 운동 이름 하나를 차례대로 저장하는 변수
+        self.exercise_standard_cnt = 0  # 운동 기준 카운트
+        self.exercise_user_cnt = 0  # 운동 이름 하나의 개수를 세기위한 변수
+        self.tmp_cnt = 0
+        self.exercise_user_frame_cnt = 0  # frame_cnt와 구분하기 위한 변수
 
-        self.fps = 12               ### 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
-        self.frame_per_second = 3   ### 1초 당 추출할 프레임 수
-        ### ### self.fps_sum        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (1)
+        self.pose_cnt = 0  # n번 째 포즈
+
+        self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
+        self.frame_per_second = 3  # 1초 당 추출할 프레임 수
+        # self.fps_sum        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (1)
 
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
@@ -55,8 +65,13 @@ class PoseWebCam(object):
         keypoints = []  # 1프레임의 keypoints를 담은 배열
         # keypoints.add([results.pose_landmarks.landmark[0]])
 
-        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (2)
-        ### ### self.frame_cnt += 1
+        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (2)
+        # self.frame_cnt += 1
+
+        # 사용자가 만든 운동 세트에 있는 운동 이름 하나 가져오기
+        if len(self.keylist) > self.tmp_cnt:
+            self.userexercisename = self.keylist[self.tmp_cnt]
+            self.exercise_standard_cnt = self.userExerciseList[self.userexercisename]
 
         if results.pose_landmarks:
 
@@ -70,28 +85,30 @@ class PoseWebCam(object):
 
             # print(results.pose_landmarks.landmark[0])
 
-            self.frame_cnt += 1     ### frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
-            interval = int(self.fps) // self.frame_per_second   ### 프레임 간격(0.x초)
+            self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
+            interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
 
-            if self.frame_cnt % interval == 0:  ### 1초에 3 프레임 씩
+            if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
 
-                ### 프레임 순서 출력
+                self.exercise_user_frame_cnt += 1
+
+                # 프레임 순서 출력
                 frame_order = (self.frame_cnt // interval) % 16
-                if frame_order == 0 :
+                if frame_order == 0:
                     frame_order = 16
-                print(frame_order,"th frame")
+                print(frame_order, "th frame")
 
                 for id, lm in enumerate(results.pose_landmarks.landmark):
                     h, w, c = img.shape
                     cx, cy = int(lm.x*w), int(lm.y*h)
 
-                    keypoints.append((cx, cy))  # 1프레임에 33개의 keypoints값 차례로 넣어줌.
+                    # 1프레임에 33개의 keypoints값 차례로 넣어줌.
+                    keypoints.append((cx, cy))
 
                 # if self.frame_cnt < 17 : # 나머지 이용
                 # self.allkeypoints.append(keypoints) # 프레임별 keypoints가 모두 있는 배열
                 # input을 계산하는데 필요한 12 points만 append 함
                 self.allkeypoints.append(keypoints)
-
 
                 if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
 
@@ -103,10 +120,27 @@ class PoseWebCam(object):
                     # self.get_keypoints() # 프레임 수가 16개가 되면, 16개의 프레임에 대한 keypoints가 모여있는 배열 반환해주는 함수
 
                     self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
-                    print(self.pose_cnt,"th pose is", self.predicted_pose)
+                    print(self.pose_cnt, "th pose is", self.predicted_pose)
                     # 예측된 포즈(라벨) 출력
                     # cv2.putText(img, self.predicted_pose, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
+                    if self.exercise_user_frame_cnt == 16:
+                        self.exercise_user_cnt += 1
+                        self.exercise_user_frame_cnt = 0
+
+                    print("-----------------------------")
+                    print(self.userexercisename)
+                    print(self.exercise_standard_cnt)
+                    print(self.exercise_user_cnt)
+                    if self.userexercisename == self.predicted_pose:
+                        print("success!")
+                    else:
+                        print("fail")
+                    print("-----------------------------")
+
+                    if self.exercise_standard_cnt == self.exercise_user_cnt:
+                        self.tmp_cnt += 1
+                        self.exercise_user_cnt = 0
 
                     frame_flip = cv2.flip(img, 1)
                     ret, jpeg = cv2.imencode('.jpg', frame_flip)
@@ -121,19 +155,19 @@ class PoseWebCam(object):
 
                 # print(self.allkeypoints)
 
-        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (3)
-        ### ### cTime = time.time()
-        ### ### self.fps = 1/(cTime-self.pTime)
+        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (3)
+        # cTime = time.time()
+        # self.fps = 1/(cTime-self.pTime)
 
-        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (4)
-        ### ### self.frame_cnt += 1
-        ### ### self.fps_sum += int(self.fps)
-        ### ### print("current fps avg is ", self.fps_sum // self.frame_cnt)
+        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (4)
+        # self.frame_cnt += 1
+        # self.fps_sum += int(self.fps)
+        # print("current fps avg is ", self.fps_sum // self.frame_cnt)
 
-        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (5)
-        ### ### self.pTime = cTime
+        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (5)
+        # self.pTime = cTime
 
-        ### ### cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
+        # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
 
         # cv2.imshow("Image", img)
         # cv2.waitKey(1)
