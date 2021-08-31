@@ -29,7 +29,7 @@ TYPE_CHOICES = (
 
 
 class Set(models.Model):
-    name = models.CharField(max_length=40)
+    title = models.CharField(max_length=40)
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
     date = models.DateField()
@@ -58,3 +58,12 @@ class ExerciseLog(models.Model):
     # updated_at = models.DateTimeField(auto_now=True)
     time_started = models.DateTimeField(blank=True, null=True)
     time_finished = models.DateTimeField(blank=True, null=True)
+
+
+class Calendar(models.Model):
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE)
+    date = models.DateField()
+    memo = models.TextField()
+    total_calories = models.IntegerField()
+    total_time = models.IntegerField()
