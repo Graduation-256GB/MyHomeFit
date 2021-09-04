@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/MakeYourSet/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
 import SendIcon from '../images/url_send.png';
 import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 import ListBlock from '../components/MakeYourSet/ListBlock';
+import jQuery from 'jquery'
 
 import { useAsync } from "react-async"
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
 const loadExerciseList = async () => {
     const res = await fetch('http://127.0.0.1:8000/api/exercise/')
@@ -16,13 +32,49 @@ const loadExerciseList = async () => {
 
 const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
+    const [title, setTitle] = useState('');
+    const [type, setType] = useState('');
+    var csrftoken = getCookie('csrftoken');
+
+    const onSubmit = e => {
+            e.preventDefault();
+
+            const set = {
+                title: title,
+                type: type
+            };
+
+            fetch('http://127.0.0.1:8000/api/set/create/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(set)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log('sfsff');
+                if (data.key) {
+                    // localStorage.clear();
+                    // localStorage.setItem('token', data.key);
+                    window.location.replace('http://127.0.0.1:8000/makeyourset');
+                } else {
+                    setTitle('');
+                    setType('');
+                    // localStorage.clear();
+                }
+            });
+        };
+
     if (isLoading) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data){
         const arr = [];
-    Object.keys(data).forEach(function (key) {
-        arr.push(data[key]);
-    });
+        Object.keys(data).forEach(function (key) {
+            arr.push(data[key]);
+        });
+        
     return (
         <div className="content">
             <div className="menu1-wrapper">
@@ -41,9 +93,27 @@ const MakeYourSetForm = () => {
             </div>
             <div>
                 <label>Make Your Fitness Set.</label>
-                <span>Title</span>
-                <input type="text"></input>
-                <span>Category</span>
+                <form onSubmit={onSubmit}>
+                    <label htmlfor='set-title'>Title</label>
+                    <input type="text"
+                        name='set-title'
+                        value={title}
+                        required
+                        onChange={e => setTitle(e.target.value)} />
+                    <br />
+                    <label htmlfor='set-type'>Category</label>
+                    <select name='set-type'
+                    value={type}
+                    required
+                    onChange={e => setType(e.target.value)}>
+                        <option value='' selected>선택</option>
+                        <option value='upperbody'>상체 운동</option>
+                        <option value='lowerbody'>하체 운동</option>
+                        <option value='other'>기타</option>
+                    </select>
+                    <br />
+                    <input type='submit' value='make set' />
+                </form>
             </div>
             <div className="list-wrapper">
                 {/* <div className="btn-left"><img src={LeftBtn}></img></div> */}
