@@ -56,7 +56,7 @@ class PoseWebCam(object):
 
         success, img = self.cap.read()
 
-        print("read frame")
+        # print("read frame")
 
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = self.pose.process(imgRGB)
