@@ -1,0 +1,7 @@
+.form-menu-container {
+  height: 250px;
+  width: 100%;
+  background-color: #27cfb3;
+  border-bottom-left-radius: 100px;
+  display: block;
+}
