@@ -5,7 +5,8 @@
   border-bottom-left-radius: 100px;
   display: block;
 }
-.content-form h2 {
+.content-form h2,
+.content-list h2 {
   color: #a9a1a1;
   font-size: 30px;
   font-weight: 500;
@@ -13,6 +14,9 @@
 .content-form label {
   color: #a9a1a1;
   font-size: 23px;
+}
+.content-list {
+  margin-left: 40px;
 }
 .form-box {
   display: flex;
@@ -48,7 +52,8 @@
 .content-form {
   margin: 0 40px;
 }
-.form-submit {
+.form-submit,
+.set-submit {
   border-style: none;
   font-size: 23px;
   color: #a9a1a1;

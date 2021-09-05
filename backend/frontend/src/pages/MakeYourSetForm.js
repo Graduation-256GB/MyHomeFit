@@ -98,7 +98,7 @@ const MakeYourSetForm = () => {
                 </div>
             </div>
             <div className="content-form">
-                <h2>Make Your Fitness Set.</h2>
+                <h2>First Step : Make Your Fitness Set.</h2>
                 <form onSubmit={onSubmit}>
                     <div className="form-box">
                         <div className="label-box">
@@ -122,51 +122,55 @@ const MakeYourSetForm = () => {
                             </select>
                         </div>
                     </div>
-                    <input type="submit" value="Make Set" className="form-submit" />
+                    <input type="submit" value="Next Step" className="set-submit" />
                 </form>
             </div>
-            <div className="list-wrapper">
-                <div className="left-arrow" name="left-arrow" onClick={ leftArrowClick }>
-                <FiChevronLeft/>
+            <div className="content-list">
+                <h2>Second Step : Choose Exercises.</h2>
+                <div className="list-wrapper">
+                    <div className="left-arrow" name="left-arrow" onClick={ leftArrowClick }>
+                    <FiChevronLeft/>
+                    </div>
+                    <div className="exercise-set-list">
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                        <ListBlock name="Squat" />
+                    </div>
+                    <div className="right-arrow" name="right-arrow" onClick={ rightArrowClick }>
+                    <FiChevronRight />
+                    </div>
                 </div>
-                <div className="exercise-set-list">
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                </div>
-                <div className="right-arrow" name="right-arrow" onClick={ rightArrowClick }>
-                <FiChevronRight />
-                </div>
-            </div>
-            <div className="exercise-list">
-                {
-                    arr.map(item => (
+                <div className="exercise-list">
+                    {
+                        arr.map(item => (
+                        <div className="exercise-box">
+                            <div className="exercise-hover">
+                                <BiAddToQueue/>
+                            </div>
+                            <div className="exercise-img">
+                                <img src={item.img}></img>
+                            </div>
+                        <div className="exercise-title">{item.name}</div>
+                    </div>
+                        ))}
                     <div className="exercise-box">
                         <div className="exercise-hover">
                             <BiAddToQueue/>
                         </div>
                         <div className="exercise-img">
-                            <img src={item.img}></img>
+                            <img src={SquatImg}></img>
                         </div>
-                    <div className="exercise-title">{item.name}</div>
-                </div>
-                    ))}
-                <div className="exercise-box">
-                    <div className="exercise-hover">
-                        <BiAddToQueue/>
+                        <div className="exercise-title">Squat</div>
                     </div>
-                    <div className="exercise-img">
-                        <img src={SquatImg}></img>
-                    </div>
-                    <div className="exercise-title">Squat</div>
+                    
                 </div>
-                
+                <button className="form-submit">Make Set</button>
             </div>
         </div>
     );
