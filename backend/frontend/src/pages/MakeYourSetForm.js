@@ -35,6 +35,7 @@ const MakeYourSetForm = () => {
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     var csrftoken = getCookie('csrftoken');
+    const arr = [];
 
     const onSubmit = e => {
             e.preventDefault();
@@ -54,7 +55,6 @@ const MakeYourSetForm = () => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log('sfsff');
                 if (data.key) {
                     // localStorage.clear();
                     // localStorage.setItem('token', data.key);
@@ -67,14 +67,14 @@ const MakeYourSetForm = () => {
             });
         };
 
-    if (isLoading) return "Loading..."
-    if (error) return `Something went wrong: ${error.message}`
-    if (data){
-        const arr = [];
+    // if (isLoading) return "Loading..."
+    // if (error) return `Something went wrong: ${error.message}`
+    if (data) {
+        
         Object.keys(data).forEach(function (key) {
             arr.push(data[key]);
         });
-        
+    }
     return (
         <div className="content">
             <div className="menu1-wrapper">
@@ -91,28 +91,32 @@ const MakeYourSetForm = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                <label>Make Your Fitness Set.</label>
+            <div className="content-form">
+                <h2>Make Your Fitness Set.</h2>
                 <form onSubmit={onSubmit}>
-                    <label htmlfor='set-title'>Title</label>
-                    <input type="text"
-                        name='set-title'
-                        value={title}
-                        required
-                        onChange={e => setTitle(e.target.value)} />
-                    <br />
-                    <label htmlfor='set-type'>Category</label>
-                    <select name='set-type'
-                    value={type}
-                    required
-                    onChange={e => setType(e.target.value)}>
-                        <option value='' selected>선택</option>
-                        <option value='upperbody'>상체 운동</option>
-                        <option value='lowerbody'>하체 운동</option>
-                        <option value='other'>기타</option>
-                    </select>
-                    <br />
-                    <input type='submit' value='make set' />
+                    <div className="form-box">
+                        <div className="label-box">
+                            <label htmlfor="set-title">Title</label>
+                            <label htmlfor="set-type">Category</label>  
+                        </div>
+                        <div className="input-box">
+                            <input type="text"
+                                name="set-title"
+                                value={title}
+                                required
+                                onChange={e => setTitle(e.target.value)} />
+                            <select name="set-type"
+                            value={type}
+                            required
+                            onChange={e => setType(e.target.value)}>
+                                <option value="" selected>선택</option>
+                                <option value="upperbody">상체 운동</option>
+                                <option value="lowerbody">하체 운동</option>
+                                <option value="other">기타</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" value="Make Set" className="form-submit" />
                 </form>
             </div>
             <div className="list-wrapper">
@@ -131,13 +135,14 @@ const MakeYourSetForm = () => {
                 {/* <div className="btn-right"><img src={RightBtn}></img></div> */}
             </div>
             <div>
-                {arr.map(item => (
+                {
+                    arr.map(item => (
                     <span>{ item.name}</span>
                 ))}
             </div>
         </div>
     );
-}
+
 };
 
 export default MakeYourSetForm;

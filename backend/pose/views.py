@@ -47,14 +47,10 @@ def pose_feed(request):
 
 def set_create(request):
     if request.method == 'POST':
-        print('post!!')
         req = json.loads(request.body)
         set_title = req['title']
         set_type = req['type']
         set_date = DateFormat(datetime.now()).format('Y-m-d')
-        print(req)
-        print(set_date)
         set = Set.objects.create(
             title=set_title, type=set_type, date=set_date, user=request.user)
-        print('sss')
     return JsonResponse({'set_id': set.pk})

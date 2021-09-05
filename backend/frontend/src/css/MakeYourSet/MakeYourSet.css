@@ -117,7 +117,7 @@
   white-space: nowrap;
   overflow-x: scroll;
   display: flex;
-  max-width: 100%;
+  max-width: 90%;
 }
 .time-box {
   opacity: 0.51;

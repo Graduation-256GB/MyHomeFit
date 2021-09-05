@@ -5,3 +5,53 @@
   border-bottom-left-radius: 100px;
   display: block;
 }
+.content-form h2 {
+  color: #a9a1a1;
+  font-size: 30px;
+  font-weight: 500;
+}
+.content-form label {
+  color: #a9a1a1;
+  font-size: 23px;
+}
+.form-box {
+  display: flex;
+}
+.label-box {
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.input-box {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+.input-box input {
+  width: 300px;
+  height: 25px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid #a1a9a9;
+}
+.input-box select {
+  width: 150px;
+  height: 30px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid #a1a9a9;
+}
+.form-submit {
+  border-style: none;
+  font-size: 23px;
+  color: #a9a1a1;
+  background-color: #d6ecff;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin-top: 20px;
+}
