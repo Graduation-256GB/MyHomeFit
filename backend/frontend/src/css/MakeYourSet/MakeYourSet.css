@@ -111,14 +111,14 @@
   padding-top: 25px;
   padding-left: 250px;
 }
-
-.exercise-list {
+.exercise-set-list {
   width: inherit;
   white-space: nowrap;
   overflow-x: scroll;
   display: flex;
-  max-width: 90%;
+  max-width: 100%;
 }
+
 .time-box {
   opacity: 0.51;
   border-radius: 40px;
@@ -163,4 +163,7 @@
   margin-top: 10px;
 }
 .list-wrapper {
+  justify-content: center;
+  display: flex;
+  margin: 30px 0;
 }

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../css/MakeYourSet/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
 import SendIcon from '../images/url_send.png';
-import LeftBtn from '../images/menu_left.png';
-import RightBtn from '../images/menu_right.png';
+import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 import ListBlock from '../components/MakeYourSet/ListBlock';
 import jQuery from 'jquery'
+import SquatImg from '../images/squat.png';
 
 import { useAsync } from "react-async"
 
@@ -120,8 +121,10 @@ const MakeYourSetForm = () => {
                 </form>
             </div>
             <div className="list-wrapper">
-                {/* <div className="btn-left"><img src={LeftBtn}></img></div> */}
-                <div className="exercise-list">
+                <div className="left-arrow">
+                <FiChevronLeft />
+                </div>
+                <div className="exercise-set-list">
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
@@ -132,13 +135,22 @@ const MakeYourSetForm = () => {
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                 </div>
-                {/* <div className="btn-right"><img src={RightBtn}></img></div> */}
+                <div className="right-arrow">
+                <FiChevronRight />
+                </div>
             </div>
-            <div>
+            <div className="exercise-list">
                 {
                     arr.map(item => (
                     <span>{ item.name}</span>
-                ))}
+                    ))}
+                <div className="exercise-box">
+                    <div className="exercise-img">
+                        <img src={SquatImg}></img>
+                    </div>
+                    <div className="exercise-title">Squat</div>
+                </div>
+                
             </div>
         </div>
     );

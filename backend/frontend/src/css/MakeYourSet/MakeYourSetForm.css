@@ -45,13 +45,71 @@
   border: none;
   border-bottom: 1px solid #a1a9a9;
 }
+.content-form {
+  margin: 0 40px;
+}
 .form-submit {
   border-style: none;
   font-size: 23px;
   color: #a9a1a1;
-  background-color: #d6ecff;
   cursor: pointer;
   border-radius: 20px;
   padding: 5px 15px;
   margin-top: 20px;
+}
+.exercise-set-list {
+  width: inherit;
+  white-space: nowrap;
+  overflow-x: scroll;
+  display: flex;
+  max-width: 90%;
+  border-radius: 22px;
+  background: aliceblue;
+  padding: 15px;
+}
+
+/* exercise list */
+.exercise-list {
+  display: flex;
+  background: #fbfbfb;
+  border-radius: 20px;
+  padding: 20px;
+}
+.exercise-box {
+  padding: 0 20px;
+}
+.exercise-img {
+  width: 150px;
+}
+.exercise-img img {
+  border-radius: 100px;
+  width: 100%;
+  box-shadow: 1px 2px 13px #dcdcdc;
+}
+.exercise-title {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+  color: #585858;
+}
+.left-arrow,
+.right-arrow {
+  font-size: 35px;
+  width: 40px;
+  height: 40px;
+  background-color: #efefef;
+  border-radius: 100px;
+  color: #27cfb3;
+  position: relative;
+  top: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.left-arrow {
+  left: 15px;
+}
+.right-arrow {
+  right: 15px;
 }
