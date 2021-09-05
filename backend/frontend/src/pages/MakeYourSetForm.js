@@ -67,7 +67,11 @@ const MakeYourSetForm = () => {
                     // localStorage.clear();
                 }
             });
-        };
+    };
+    const leftArrowClick = e => {
+    }
+    const rightArrowClick = e => {
+    }
 
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
@@ -122,21 +126,21 @@ const MakeYourSetForm = () => {
                 </form>
             </div>
             <div className="list-wrapper">
-                <div className="left-arrow">
-                <FiChevronLeft />
+                <div className="left-arrow" name="left-arrow" onClick={ leftArrowClick }>
+                <FiChevronLeft/>
                 </div>
                 <div className="exercise-set-list">
                     <ListBlock name="Squat" />
-                    {/* <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
-                    <ListBlock name="Squat" /> */}
+                    <ListBlock name="Squat" />
+                    <ListBlock name="Squat" />
                 </div>
-                <div className="right-arrow">
+                <div className="right-arrow" name="right-arrow" onClick={ rightArrowClick }>
                 <FiChevronRight />
                 </div>
             </div>
