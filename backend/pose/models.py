@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
 class Exercise(models.Model):
     name = models.CharField(max_length=50)
     calories = models.IntegerField()
-    img = models.ImageField(null=True, blank=True)
+    img = models.ImageField(null=True, blank=True, upload_to="uploads")
     url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)  # 추가된 시간
     selected_count = models.IntegerField(default=0)

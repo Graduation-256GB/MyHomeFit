@@ -147,7 +147,15 @@ const MakeYourSetForm = () => {
             <div className="exercise-list">
                 {
                     arr.map(item => (
-                    <span>{ item.name}</span>
+                    <div className="exercise-box">
+                        <div className="exercise-hover">
+                            <BiAddToQueue/>
+                        </div>
+                        <div className="exercise-img">
+                            <img src={item.img}></img>
+                        </div>
+                    <div className="exercise-title">{item.name}</div>
+                </div>
                     ))}
                 <div className="exercise-box">
                     <div className="exercise-hover">
