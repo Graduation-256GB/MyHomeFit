@@ -159,7 +159,7 @@ const MakeYourSetForm = () => {
                         <div className="exercise-title">{item.name}</div>
                     </div>
                         ))}
-                    <div className="exercise-box">
+                    {/* <div className="exercise-box">
                         <div className="exercise-hover">
                             <BiAddToQueue/>
                         </div>
@@ -167,7 +167,7 @@ const MakeYourSetForm = () => {
                             <img src={SquatImg}></img>
                         </div>
                         <div className="exercise-title">Squat</div>
-                    </div>
+                    </div> */}
                     
                 </div>
                 <button className="form-submit">Make Set</button>
