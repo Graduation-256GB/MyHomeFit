@@ -5,6 +5,7 @@
     border-bottom-left-radius: 170px;
     display: block;
 }
+
 .menu2-title{
     display: flex;
     width: 100%;
@@ -50,41 +51,76 @@
 }
 
 .videos{
-    position: relative;
+    position: absolute;
+    left: 480px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
 }
 
+.next-pose-container{
+    display: inline-block;
+    position: absolute;
+    bottom: 75%;
+    width: 1200px;
+    height: 210px;
+    white-space:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+
+.next-pose-container::-webkit-scrollbar{
+    height: 10px;
+    background-color: #ede9e9;
+    border-radius: 10px;
+}
+
+.next-pose-container::-webkit-scrollbar-thumb{
+    background-color: #999494;
+    border-radius: 10px;
+}
+
 .left-button{
     position: absolute;
-    left: -2%;
-    bottom: 43%;
+    left: 3%;
+    bottom: 85%;
     width: 30px;
     height: 30px;
     background-color: #f0eded;
     padding: 10px;
     margin-top: 80px;
     border-radius: 50%;
+    z-index: 10;
 }
 
 .right-button{
     position: absolute;
-    left: 98%;
-    bottom: 43%;
+    left: 93%;
+    bottom: 85%;
     width: 30px;
     height: 30px;
     background-color: #f0eded;
     padding: 10px;
     border-radius: 50%;
+    z-index: 10;
+}
+
+.set-name{
+    position: absolute;
+    top: 26.5%;
+    left: 8%;
+    color: darkgray;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: NanumSquare_acEB;
 }
 
 .next-video{
     position: absolute;
     width: 230px;
     height: 230px;
-    right: 98%;
+    right: 102%;
     margin-top: 550px;
     padding: 20px 30px 30px 30px;
     border-radius: 30px;
@@ -156,26 +192,4 @@
 .export-video> .export{
     display: flex;
     object-fit: contain;
-}
-
-.next-pose-container{
-    display: inline-block;
-    position: absolute;
-    bottom: 75%;
-    width: 1200px;
-    height: 210px;
-    white-space:nowrap;
-    overflow-x:auto;
-    overflow-y:hidden;
-}
-
-.next-pose-container::-webkit-scrollbar{
-    height: 10px;
-    background-color: #ede9e9;
-    border-radius: 10px;
-}
-
-.next-pose-container::-webkit-scrollbar-thumb{
-    background-color: #999494;
-    border-radius: 10px;
 }

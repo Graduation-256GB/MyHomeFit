@@ -26,8 +26,8 @@ const Training = () => {
                 <label>Start your Fitness.</label>
             </div>
             <div className="videos">
+                <img src={LeftBtn} className="left-button"/>
                 <div className="next-pose-container">
-                    <img src={LeftBtn} className="left-button"/>
                     <NextPose/>
                     <NextPose/>
                     <NextPose/>
@@ -36,8 +36,10 @@ const Training = () => {
                     <NextPose/>
                     <NextPose/>
                     <NextPose/>
-                    <NextPose/>
-                    <img src={RightBtn} className="right-button"/>
+                </div>
+                <img src={RightBtn} className="right-button"/>
+                <div className="set-name">
+                    2 SET
                 </div>
                 <div className="next-video">
                     <div className="next-video-label">
