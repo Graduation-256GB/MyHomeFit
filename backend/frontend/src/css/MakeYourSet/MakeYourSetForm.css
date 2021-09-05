@@ -62,7 +62,7 @@
   white-space: nowrap;
   overflow-x: scroll;
   display: flex;
-  max-width: 90%;
+  min-width: 90%;
   border-radius: 22px;
   background: aliceblue;
   padding: 15px;
@@ -74,12 +74,37 @@
   background: #fbfbfb;
   border-radius: 20px;
   padding: 20px;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  margin: 25px;
 }
 .exercise-box {
   padding: 0 20px;
+  margin: 25px;
 }
 .exercise-img {
   width: 150px;
+}
+.exercise-hover {
+  border-radius: 100px;
+  width: 150px;
+  height: 150px;
+  background-color: #2b2b2b;
+  opacity: 0;
+  position: absolute;
+  display: none;
+  color: white;
+  font-size: 30px;
+}
+
+.exercise-box:hover .exercise-hover {
+  cursor: pointer;
+  transition: 1s;
+  transition-property: opacity;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .exercise-img img {
   border-radius: 100px;

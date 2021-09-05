@@ -4,6 +4,7 @@ import IconSet from '../images/icon_makeyourset.png';
 import SendIcon from '../images/url_send.png';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
+import {BiAddToQueue} from 'react-icons/bi'
 import ListBlock from '../components/MakeYourSet/ListBlock';
 import jQuery from 'jquery'
 import SquatImg from '../images/squat.png';
@@ -126,14 +127,14 @@ const MakeYourSetForm = () => {
                 </div>
                 <div className="exercise-set-list">
                     <ListBlock name="Squat" />
+                    {/* <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
                     <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
-                    <ListBlock name="Squat" />
+                    <ListBlock name="Squat" /> */}
                 </div>
                 <div className="right-arrow">
                 <FiChevronRight />
@@ -145,6 +146,9 @@ const MakeYourSetForm = () => {
                     <span>{ item.name}</span>
                     ))}
                 <div className="exercise-box">
+                    <div className="exercise-hover">
+                        <BiAddToQueue/>
+                    </div>
                     <div className="exercise-img">
                         <img src={SquatImg}></img>
                     </div>
