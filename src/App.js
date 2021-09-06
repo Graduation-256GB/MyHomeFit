@@ -14,11 +14,12 @@ import Navbar from "./pages/Navbar";
 import Signup from "./pages/signup";
 import Login from "./pages/Login";
 
+import new_makeYourSet from "./gaok/MakeYourSet";
 
 const App = () => {
   return (
       <div className='main-container'>
-        <SideMenubar />
+        {/* <SideMenubar /> */}
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/training" component={Training} />
         <Route path="/fitnotes" component={FitNotes} />
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/navbar" component={Navbar} />
 
         <Route path="/log" component={Login}/>
+        <Route path="/new/makeyourset" component={new_makeYourSet}/>
       </div>
   );
 };
