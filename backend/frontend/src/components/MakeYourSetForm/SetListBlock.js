@@ -4,15 +4,15 @@ import FitnessPicture from "./FitnessPicture";
 import FitnessCount from './FitnessCount';
 import { FiTrash2 } from 'react-icons/fi';
 
-const ListBlock=({name})=>{
+const SetListBlock=({picture,count,removeList})=>{
     return (
         <div className="list">
-            <div className="exercise-set-hover">
-                <FiTrash2/>
+            <div className="exercise-set-hover" value={ picture} onClick={ removeList}>
+                <FiTrash2 value={ picture}/>
             </div>
-            <FitnessPicture name={name}/>
-            <FitnessCount name="10"/>
+            <FitnessPicture name={picture}/>
+            <FitnessCount name={count }/>
         </div>
     )
 }
-export default ListBlock;
+export default SetListBlock;

@@ -5,22 +5,16 @@ import SquatImg from '../../images/squat.png';
 
 
 
-const ExerciseList = ({ exerciseArr,setArr }) => {
-    const addList = e => {
-        const exerciseTitle = e.target.getAttribute('value');
-        if (exerciseTitle != null) {
-            setArr.push(exerciseTitle);
-            console.log(setArr);
-        }
-    }
+const ExerciseList = ({ exerciseArr,addList }) => {
+    
 
     return(
         <div className="exercise-list">
                     {
                         exerciseArr.map(item => (
                         <div className="exercise-box">
-                            <div className="exercise-hover">
-                                <BiAddToQueue/>
+                                <div className="exercise-hover" value={ item.name} onClick={ addList}>
+                                <BiAddToQueue value={ item.name}/>
                             </div>
                             <div className="exercise-img">
                                 <img src={item.img}></img>

@@ -20,11 +20,19 @@ const loadExerciseList = async () => {
 const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
-    const setArr = [];
+    const [formArr, setFormarr] = useState(["Squat"]);
 
     const leftArrowClick = e => {
     }
     const rightArrowClick = e => {
+    }
+    const addList = e => {
+        const exerciseTitle = e.target.getAttribute('value');
+        setFormarr(formArr.concat(exerciseTitle));
+    }
+    const removeList = e => {
+        const exerciseTitle = e.target.getAttribute('value');
+        setFormarr(formArr.filter(exercise => exercise !== exerciseTitle));
     }
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
@@ -61,8 +69,8 @@ const MakeYourSetForm = () => {
                     </div>
                     <div className="exercise-set-list">
                         {
-                            setArr.map(item => (
-                                <SetListBlock name={item} />
+                            formArr.map(item => (
+                                <SetListBlock picture={item} count={'5'} removeList={removeList }/>
                             ))
                         }
                     </div>
@@ -70,7 +78,7 @@ const MakeYourSetForm = () => {
                     <FiChevronRight />
                     </div>
                 </div>
-                <ExerciseList exerciseArr={ exerciseArr } setArr={setArr} />
+                <ExerciseList exerciseArr={ exerciseArr } addList={addList} />
                 <button className="form-submit">Make Set</button>
             </div>
         </div>
