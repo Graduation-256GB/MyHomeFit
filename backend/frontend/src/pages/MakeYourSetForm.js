@@ -20,19 +20,34 @@ const loadExerciseList = async () => {
 const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
-    const [formArr, setFormarr] = useState(["Squat"]);
+    const [formArr, setFormarr] = useState([{
+        id:'1',
+        name:'Squat',
+        img: '',
+        count:'5'
+    }]);
+    const [newNum,setNewNum] = useState('0');
 
     const leftArrowClick = e => {
     }
     const rightArrowClick = e => {
     }
     const addList = e => {
-        const exerciseTitle = e.target.getAttribute('value');
-        setFormarr(formArr.concat(exerciseTitle));
+        const exerciseId = e.target.dataset.id   //exercise id
+        const exerciseName = e.target.dataset.name
+        const exerciseImg = e.target.dataset.img
+        console.log(exerciseId, exerciseName)
+        const exercise = {
+            id: exerciseId,
+            name: exerciseName,
+            img: exerciseImg,
+            count:'5'
+        }
+        setFormarr(formArr.concat(exercise));
     }
     const removeList = e => {
-        const exerciseTitle = e.target.getAttribute('value');
-        setFormarr(formArr.filter(exercise => exercise !== exerciseTitle));
+        const exerciseName = e.target.dataset.name
+        setFormarr(formArr.filter(exercise => exercise.name !== exerciseName));
     }
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
@@ -59,7 +74,7 @@ const MakeYourSetForm = () => {
             </div>
             <div className="content-form">
                 <h2>First Step : Make Your Fitness Set.</h2>
-                <SetForm />
+                <SetForm setNewNum={setNewNum } />
             </div>
             <div className="content-list">
                 <h2>Second Step : Choose Exercises.</h2>
@@ -70,7 +85,7 @@ const MakeYourSetForm = () => {
                     <div className="exercise-set-list">
                         {
                             formArr.map(item => (
-                                <SetListBlock picture={item} count={'5'} removeList={removeList }/>
+                                <SetListBlock picture={item.img} name={ item.name} count={item.count} removeList={removeList }/>
                             ))
                         }
                     </div>

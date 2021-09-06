@@ -3,7 +3,7 @@ import '../../css/MakeYourSetForm/SetForm.css';
 import jQuery from 'jquery'
 
 
-const SetForm = ({ }) => {
+const SetForm = ({setNewNum}) => {
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -43,8 +43,9 @@ const SetForm = ({ }) => {
             if (data.key) {
                 // localStorage.clear();
                 // localStorage.setItem('token', data.key);
-                window.location.replace('http://127.0.0.1:8000/makeyourset');
+                // window.location.replace('http://127.0.0.1:8000/makeyourset');
             } else {
+                setNewNum(data.set_id);
                 setTitle('');
                 setType('');
                 // localStorage.clear();
