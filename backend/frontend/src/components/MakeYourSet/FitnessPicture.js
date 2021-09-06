@@ -4,9 +4,9 @@ import StretchImg from '../../images/stretch.png';
 import SquatImg from '../../images/squat.png';
 
 const FitnessPicture = ({name}) =>{
-    return(
+    return (
         <div className="list-img">
-                <img src={SquatImg}></img>
+            <img src={SquatImg}></img>
         </div>
     )
 }

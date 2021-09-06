@@ -31,3 +31,9 @@ class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = '__all__'
+
+
+class CalendarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Set
+        fields = '__all__'

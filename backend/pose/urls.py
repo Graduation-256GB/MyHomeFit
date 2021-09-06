@@ -6,6 +6,8 @@ app_name = 'pose'
 urlpatterns = [
     path('pose/', views.ListExercise.as_view()),
     path('pose/<int:pk>/', views.DetailExercise.as_view()),
+    path('exercise/', views.ListExercise.as_view()),
+    path('set/create/', views.set_create),
     path('auth/', include('rest_auth.urls')),
     path('auth/register/', include('rest_auth.registration.urls')),
     # path('', views.index, name='index'),

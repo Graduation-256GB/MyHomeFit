@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
 class Exercise(models.Model):
     name = models.CharField(max_length=50)
     calories = models.IntegerField()
-    img = models.ImageField(null=True, blank=True)
+    img = models.ImageField(null=True, blank=True, upload_to="uploads")
     url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)  # 추가된 시간
     selected_count = models.IntegerField(default=0)
@@ -21,11 +21,11 @@ class Exercise(models.Model):
         return self.name
 
 
-TYPE_CHOICES = (
-    ('상체', '싱체'),
-    ('하체', '하체'),
-    ('기타', '기타'),
-)
+# TYPE_CHOICES = (
+#     ('상체', '싱체'),
+#     ('하체', '하체'),
+#     ('기타', '기타'),
+# )
 
 
 class Set(models.Model):
@@ -33,7 +33,7 @@ class Set(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
     date = models.DateField()
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
+    type = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
 
