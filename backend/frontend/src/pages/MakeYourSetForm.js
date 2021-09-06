@@ -6,10 +6,24 @@ import { FiChevronRight } from 'react-icons/fi';
 import SetListBlock from '../components/MakeYourSetForm/SetListBlock';
 import ExerciseList from '../components/MakeYourSetForm/ExerciseList';
 import SetForm from '../components/MakeYourSetForm/SetForm';
+import jQuery from 'jquery'
 
 import { useAsync } from "react-async"
 
-
+function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
 const loadExerciseList = async () => {
     const res = await fetch('http://127.0.0.1:8000/api/exercise/')
@@ -18,21 +32,46 @@ const loadExerciseList = async () => {
 }
 
 const MakeYourSetForm = () => {
+    const csrftoken = getCookie('csrftoken');
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
     const [newNum,setNewNum] = useState('0');
-    const [count,setCount] = useState('0');
-    const [formArr, setFormarr] = useState([{
-        setId:newNum,
-        id:'1',
-        name:'Squat',
-        img: '/static/media/squat.a09ebb93.png',
-        count:count
-    }]);
+    const [count,setCount] = useState('5');
+    const [formArr, setFormarr] = useState([
+        // {
+        // setId:newNum,
+        // id:'1',
+        // name:'Squat',
+        // img: '/static/media/squat.a09ebb93.png',
+        // count: count
+        // }
+    ]);
 
     const leftArrowClick = e => {
     }
     const rightArrowClick = e => {
+    }
+    const formSubmit = e => {
+        e.preventDefault();
+
+        fetch('http://127.0.0.1:8000/api/exercise/create/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(formArr)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.key) {
+                // localStorage.clear();
+                // localStorage.setItem('token', data.key);
+            } else {
+                // setNewNum(data.set_id);
+                window.location.replace('http://127.0.0.1:8000/makeyourset');
+            }
+        });
     }
     const addList = e => {
         const exerciseId = e.target.dataset.id   //exercise id
@@ -50,6 +89,7 @@ const MakeYourSetForm = () => {
             }
             setFormarr(formArr.concat(exercise));
         }
+        console.log(formArr)
     }
     const removeList = e => {
         const exerciseName = e.target.dataset.name
@@ -80,7 +120,7 @@ const MakeYourSetForm = () => {
             </div>
             <div className="content-form">
                 <h2>First Step : Make Your Fitness Set.</h2>
-                <SetForm setNewNum={setNewNum } />
+                <SetForm setNewNum={setNewNum } csrftoken={csrftoken} />
             </div>
             <div className="content-list">
                 <h2>Second Step : Choose Exercises.</h2>
@@ -101,7 +141,7 @@ const MakeYourSetForm = () => {
                     </div>
                 </div>
                 <ExerciseList exerciseArr={ exerciseArr } addList={addList} />
-                <button className="form-submit">Make Set</button>
+                <button className="form-submit" onClick={ formSubmit}>Make Set</button>
             </div>
         </div>
     );
