@@ -21,12 +21,13 @@ const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
     const [newNum,setNewNum] = useState('0');
+    const [count,setCount] = useState('0');
     const [formArr, setFormarr] = useState([{
         setId:newNum,
         id:'1',
         name:'Squat',
         img: '/static/media/squat.a09ebb93.png',
-        count:'5'
+        count:count
     }]);
 
     const leftArrowClick = e => {
@@ -37,6 +38,7 @@ const MakeYourSetForm = () => {
         const exerciseId = e.target.dataset.id   //exercise id
         const exerciseName = e.target.dataset.name
         const exerciseImg = e.target.dataset.img
+        
         console.log(exerciseId, exerciseName)
         if (exerciseId != null) {
             const exercise = {
@@ -44,7 +46,7 @@ const MakeYourSetForm = () => {
                 id: exerciseId,
                 name: exerciseName,
                 img: exerciseImg,
-                count: '5'
+                count: count
             }
             setFormarr(formArr.concat(exercise));
         }
@@ -83,17 +85,18 @@ const MakeYourSetForm = () => {
             <div className="content-list">
                 <h2>Second Step : Choose Exercises.</h2>
                 <div className="list-wrapper">
-                    <div className="left-arrow" name="left-arrow" onClick={ leftArrowClick }>
+                    <div className="left-arrow" name="left-arrow" onClick={leftArrowClick }>
                     <FiChevronLeft/>
                     </div>
                     <div className="exercise-set-list">
                         {
                             formArr.map(item => (
-                                <SetListBlock picture={item.img} name={ item.name} count={item.count} removeList={removeList }/>
+                                <SetListBlock picture={item.img} name={item.name}
+                                    count={item.count} removeList={removeList} />
                             ))
                         }
                     </div>
-                    <div className="right-arrow" name="right-arrow" onClick={ rightArrowClick }>
+                    <div className="right-arrow" name="right-arrow" onClick={rightArrowClick }>
                     <FiChevronRight />
                     </div>
                 </div>
