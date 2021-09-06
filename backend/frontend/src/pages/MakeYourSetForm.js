@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import '../css/MakeYourSet/MakeYourSetForm.css';
+import '../css/MakeYourSetForm/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
-import SendIcon from '../images/url_send.png';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
 import {BiAddToQueue} from 'react-icons/bi'
-import ListBlock from '../components/MakeYourSet/ListBlock';
+import SetListBlock from '../components/MakeYourSetForm/SetListBlock';
 import jQuery from 'jquery'
 import SquatImg from '../images/squat.png';
 
@@ -37,7 +36,8 @@ const MakeYourSetForm = () => {
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     var csrftoken = getCookie('csrftoken');
-    const arr = [];
+    const exerciseArr = [];
+    const setArr = [];
 
     const onSubmit = e => {
             e.preventDefault();
@@ -72,13 +72,20 @@ const MakeYourSetForm = () => {
     }
     const rightArrowClick = e => {
     }
+    const addList = e => {
+        const exerciseTitle = e.target.getAttribute('value');
+        if (exerciseTitle != null) {
+            setArr.push(exerciseTitle);
+            console.log(setArr);
+        }
+    }
 
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
     if (data) {
         
         Object.keys(data).forEach(function (key) {
-            arr.push(data[key]);
+            exerciseArr.push(data[key]);
         });
     }
     return (
@@ -132,15 +139,11 @@ const MakeYourSetForm = () => {
                     <FiChevronLeft/>
                     </div>
                     <div className="exercise-set-list">
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
-                        <ListBlock name="Squat" />
+                        {
+                            setArr.map(item => (
+                                <SetListBlock name={item} />
+                            ))
+                        }
                     </div>
                     <div className="right-arrow" name="right-arrow" onClick={ rightArrowClick }>
                     <FiChevronRight />
@@ -148,7 +151,7 @@ const MakeYourSetForm = () => {
                 </div>
                 <div className="exercise-list">
                     {
-                        arr.map(item => (
+                        exerciseArr.map(item => (
                         <div className="exercise-box">
                             <div className="exercise-hover">
                                 <BiAddToQueue/>
@@ -159,15 +162,15 @@ const MakeYourSetForm = () => {
                         <div className="exercise-title">{item.name}</div>
                     </div>
                         ))}
-                    {/* <div className="exercise-box">
-                        <div className="exercise-hover">
-                            <BiAddToQueue/>
+                    <div className="exercise-box">
+                        <div className="exercise-hover" value="Squat" onClick={ addList}>
+                            <BiAddToQueue value="Squat"/>
                         </div>
                         <div className="exercise-img">
                             <img src={SquatImg}></img>
                         </div>
-                        <div className="exercise-title">Squat</div>
-                    </div> */}
+                        <div className="exercise-title" >Stretch</div>
+                    </div>
                     
                 </div>
                 <button className="form-submit">Make Set</button>
