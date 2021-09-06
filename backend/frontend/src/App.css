@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "NanumSquare_acB";     
+  src: url("../fonts/NanumSquare_acB.ttf"); 
+}
+
+@font-face {
+  font-family: "NanumSquare_acEB";     
+  src: url("../fonts/NanumSquare_acEB.ttf"); 
+}
+
+@font-face {
+  font-family: "NanumSquare_acL";     
+  src: url("../fonts/NanumSquare_acL.ttf"); 
+}
+
+@font-face {
+  font-family: "NanumSquare_acR";     
+  src: url("../fonts/NanumSquare_acR.ttf"); 
+}
