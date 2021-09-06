@@ -20,13 +20,14 @@ const loadExerciseList = async () => {
 const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
+    const [newNum,setNewNum] = useState('0');
     const [formArr, setFormarr] = useState([{
+        setId:newNum,
         id:'1',
         name:'Squat',
-        img: '',
+        img: '/static/media/squat.a09ebb93.png',
         count:'5'
     }]);
-    const [newNum,setNewNum] = useState('0');
 
     const leftArrowClick = e => {
     }
@@ -39,10 +40,11 @@ const MakeYourSetForm = () => {
         console.log(exerciseId, exerciseName)
         if (exerciseId != null) {
             const exercise = {
+                setId:newNum,
                 id: exerciseId,
                 name: exerciseName,
                 img: exerciseImg,
-                count:'5'
+                count: '5'
             }
             setFormarr(formArr.concat(exercise));
         }
