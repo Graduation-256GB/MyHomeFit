@@ -20,7 +20,7 @@ import new_makeYourSet from "./gaok/MakeYourSet";
 const App = () => {
   return (
       <div className='main-container'>
-        {/* <SideMenubar /> */}
+        <SideMenubar />
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/makeyoursetform" component={MakeYourSetForm} />
         <Route path="/training" component={Training} />
