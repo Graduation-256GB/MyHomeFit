@@ -37,13 +37,15 @@ const MakeYourSetForm = () => {
         const exerciseName = e.target.dataset.name
         const exerciseImg = e.target.dataset.img
         console.log(exerciseId, exerciseName)
-        const exercise = {
-            id: exerciseId,
-            name: exerciseName,
-            img: exerciseImg,
-            count:'5'
+        if (exerciseId != null) {
+            const exercise = {
+                id: exerciseId,
+                name: exerciseName,
+                img: exerciseImg,
+                count:'5'
+            }
+            setFormarr(formArr.concat(exercise));
         }
-        setFormarr(formArr.concat(exercise));
     }
     const removeList = e => {
         const exerciseName = e.target.dataset.name
