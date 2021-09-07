@@ -69,7 +69,7 @@ const MakeYourSetForm = () => {
                 // localStorage.setItem('token', data.key);
             } else {
                 // setNewNum(data.set_id);
-                window.location.replace('http://127.0.0.1:8000/makeyourset');
+                window.location.replace('http://127.0.0.1:8000/new/makeyourset');
             }
         });
     }

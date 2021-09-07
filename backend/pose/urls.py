@@ -8,6 +8,7 @@ urlpatterns = [
     path('pose/<int:pk>/', views.DetailExercise.as_view()),
     path('exercise/', views.ListExercise.as_view()),
     path('set/create/', views.set_create),
+    path('set/list/', views.ListSet.as_view()),
     path('exercise/create/', views.exercise_create),
     path('auth/', include('rest_auth.urls')),
     path('auth/register/', include('rest_auth.registration.urls')),

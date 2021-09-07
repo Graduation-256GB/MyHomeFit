@@ -4,6 +4,7 @@ import IconTraining from "../images/icon_training.png"
 import IconNextVideo from "../images/icon_next_video.png"
 import PoseShoulder from "../images/pose_shoulder.png"
 import NextPose from "../components/Training/NextPose";
+import {MdReplay} from 'react-icons/md'
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
@@ -38,26 +39,31 @@ const Training = () => {
                     <NextPose/>
                 </div>
                 <img src={RightBtn} className="right-button"/>
-                <div className="set-name">
+                {/* <div className="set-name">
                     2 SET
-                </div>
+                </div> */}
                 <div className="next-video">
                     <div className="next-video-label">
-                        Next<img src={IconNextVideo}/>
+                        Next
+                        <MdReplay/>
                     </div>
                     <div className="next-video-pose">
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
+                <div className="export-video">
+                        <ReactPlayer className="export"
+                                     url={myVideo} loop muted playing controls />
+                    </div>
                 <div className="realtime-video">
                     <div className="user-video">
                         {/*IE에서 지원되지 않는 속성 포함*/}
                         <img src="http://127.0.0.1:8000/api/pose_feed"></img>
                     </div>
-                    <div className="export-video">
+                    {/* <div className="export-video">
                         <ReactPlayer className="export"
                                      url={myVideo} loop muted playing controls />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
