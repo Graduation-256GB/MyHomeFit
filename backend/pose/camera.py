@@ -122,7 +122,8 @@ class PoseWebCam(object):
                     self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
                     print(self.pose_cnt, "th pose is", self.predicted_pose)
                     # 예측된 포즈(라벨) 출력
-                    # cv2.putText(img, self.predicted_pose, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+                    cv2.putText(img, self.predicted_pose, (50, 50),
+                                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
                     if self.exercise_user_frame_cnt == 16:
                         self.exercise_user_cnt += 1
@@ -168,6 +169,8 @@ class PoseWebCam(object):
         # self.pTime = cTime
 
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
+        cv2.putText(img, self.predicted_pose, (50, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
         # cv2.imshow("Image", img)
         # cv2.waitKey(1)
