@@ -43,10 +43,5 @@
   "devDependencies": {
     "react-player": "^2.9.0",
     "react-router-dom": "^5.2.0"
-  },
-  "proxy": {
-    "/api":{
-      "target":"http://localhost:8000"
-    }
   }
 }
