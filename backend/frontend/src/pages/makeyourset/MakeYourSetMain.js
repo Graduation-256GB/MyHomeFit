@@ -22,7 +22,7 @@ const MakeYourSet = (props) => {
     return(
         <>
             <div id="trapezoid"></div>
-            {props.name?<>
+            {props.name ? <>
             <label className='center-set-name'>{blockname}</label>
             <div className='center-set-tag'>
                 <label className='center-set-tag-name'>#상체 운동</label>

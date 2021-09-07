@@ -160,19 +160,19 @@
 }
 
 .center-set-name {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #a9a1a1;
   margin-left: 10rem;
   font-family: NanumSquare_acB;
 }
 
 .center-set-tag {
-  margin-left: 50rem;
-  margin-top: 2rem;
+  margin-left: 35rem;
+  margin-top: 1rem;
+  font-size: 1.3rem;
 }
 
 .center-set-tag-name {
-  font-size: 2rem;
   color: #a9a1a1;
   margin-left: 2rem;
   font-family: NanumSquare_acB;
