@@ -26,14 +26,14 @@ const SideMenubar = () => {
                     <circle cx="50" cy="50" r="30" fill="#27cfb3"></circle>
 
                 </svg>
-                <h3>My Home Fit</h3>
+                <h3>myhomefit</h3>
             </div>
             <div className="menubar">
                 <ul>
-                    <div className={menu==1?"clicked":"unclicked"}>
+                    <div className={menu==1?"unclicked":"unclicked"}>
                         <li onClick={() => setMenu(1)}>
 
-                            <Link to="/makeyourset">
+                            <Link to="/new/makeyourset">
                                 {menu === 1 ? <img src={AddClicked}/> : <img src={Add}/>}
                             </Link>
 
@@ -43,7 +43,7 @@ const SideMenubar = () => {
                             </div>
                         </li>
                     </div>
-                    <div className={menu==2?"clicked":"unclicked"}>
+                    <div className={menu==2?"unclicked":"unclicked"}>
                         <li onClick={() => setMenu(2)}>
 
                             <Link to="/training">
@@ -56,7 +56,7 @@ const SideMenubar = () => {
                             </div>
                         </li>
                     </div>
-                    <div className={menu==3?"clicked":"unclicked"}>
+                    <div className={menu==3?"unclicked":"unclicked"}>
                         <li onClick={() => setMenu(3)}>
 
                             <Link to="/fitnotes">
@@ -69,7 +69,7 @@ const SideMenubar = () => {
                             </div>
                         </li>
                     </div>
-                    <div className={menu==4?"clicked":"unclicked"}>
+                    <div className={menu==4?"unclicked":"unclicked"}>
                         <li onClick={() => setMenu(4)}>
 
                             <Link to="/calender">

@@ -15,7 +15,7 @@ import Navbar from "./pages/Navbar";
 import Signup from "./pages/signup";
 import Login from "./pages/Login";
 
-import new_makeYourSet from "./gaok/MakeYourSet";
+import new_makeYourSet from "./pages/makeyourset/MakeYourSet";
 
 const App = () => {
   return (

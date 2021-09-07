@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from "react-responsive";
 
-import MakeYourSetMainSet from '../gaok/MakeYourSetMainSet'
-import '../gaok/MakeYourSet.css'
-import IconSet from '../images/icon_makeyourset.png';
-import IconAddSet from '../gaok/icon_add_set.png'
-import IconStart from '../gaok/icon_start.png'
-import IconSquat from '../gaok/icon_set_squat.png'
+import MakeYourSetMainSet from '../makeyourset/MakeYourSetMainSet'
+import '../../css/MakeYourSet.css'
+import IconSet from '../../images/icon_makeyourset.png';
+import IconAddSet from '../../images/icon_add_set.png'
+import IconStart from '../../images/icon_start.png'
+import IconSquat from '../../images/icon_set_squat.png'
 const MakeYourSet = (props) => {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
