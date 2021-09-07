@@ -1,5 +1,5 @@
 .list-text {
-  width: 75px;
+  width: fit-content;
   margin: 10px auto;
   padding: 4px 10px;
   border-radius: 30px;
@@ -8,4 +8,6 @@
   text-align: center;
   font-size: 18px;
   color: #3a3a3a;
+  display: flex;
+  align-items: center;
 }
