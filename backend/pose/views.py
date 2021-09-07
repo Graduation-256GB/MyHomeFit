@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer
+from .serializers import ExerciseSerializer, SetSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set
@@ -21,6 +21,11 @@ import json
 class ListExercise(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+
+
+class ListSet(generics.ListCreateAPIView):
+    queryset = Set.objects.all()
+    serializer_class = SetSerializer
 
 
 class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
