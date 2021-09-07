@@ -47,6 +47,7 @@ const MakeYourSetForm = () => {
         // }
     ]);
     const ref = useRef();
+    const nextId = useRef(0);
 
     const scroll = (scrollOffset) => {
         ref.current.scrollLeft += scrollOffset;
@@ -77,23 +78,29 @@ const MakeYourSetForm = () => {
         const exerciseId = e.target.dataset.id   //exercise id
         const exerciseName = e.target.dataset.name
         const exerciseImg = e.target.dataset.img
+        const exerciseRemove = e.target.dataset.remove
         
         console.log(exerciseId, exerciseName)
         if (exerciseId != null) {
             const exercise = {
+                id:nextId.current,
                 setId:newNum,
-                id: exerciseId,
+                exerciseId: exerciseId,
                 name: exerciseName,
                 img: exerciseImg,
-                count: count
+                count: count,
+                remove:exerciseRemove
             }
             setFormarr(formArr.concat(exercise));
         }
+        nextId.current += 1;
         console.log(formArr)
     }
-    const removeList = e => {
-        const exerciseName = e.target.dataset.name
-        setFormarr(formArr.filter(exercise => exercise.name !== exerciseName));
+    const removeList = (id) => {
+        // console.log(e.target.dataset.remove)
+        // e.target.dataset.remove='true'
+        // console.log(e.target.dataset.remove)
+        setFormarr(formArr.filter(exercise => exercise.id !== id));
     }
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
@@ -132,7 +139,7 @@ const MakeYourSetForm = () => {
                         {
                             formArr.map(item => (
                                 <SetListBlock picture={item.img} name={item.name}
-                                    count={item.count} removeList={removeList} />
+                                    count={item.count} removeList={removeList} id={ item.id}/>
                             ))
                         }
                     </div>

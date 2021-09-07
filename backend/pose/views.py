@@ -66,7 +66,7 @@ def exercise_create(request):
         req = json.loads(request.body)
         for i in range(len(req)):
             set_id = req[i]['setId']
-            exercise_id = req[i]['id']
+            exercise_id = req[i]['exerciseId']
             count = req[i]['count']
             exercise = Exercise.objects.get(id=exercise_id)
             set = Set.objects.get(id=set_id)
