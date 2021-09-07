@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import { Route, Link, BrowserRouter } from 'react-router-dom';
+import {BsFillCircleFill} from 'react-icons/bs'
 import "../../css/Menubar.css";
 import Add from '../../images/menu_library_add.png'
 import AddClicked from '../../images/menu_library_add_clicked.png'
@@ -22,10 +23,9 @@ const SideMenubar = () => {
     return (
         <div className="sidemenu-container">
             <div className="logo-wrapper">
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="30" fill="#27cfb3"></circle>
-
-                </svg>
+                <div className="logo">
+                <BsFillCircleFill/>
+                </div>
                 <h3>myhomefit</h3>
             </div>
             <div className="menubar">

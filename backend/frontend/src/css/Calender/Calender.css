@@ -1,53 +1,53 @@
-.menu4-container{
-    height: 1230px;
-    width: 100%;
-    background-color: #27cfb3;
-    display: block;
+.menu4-container {
+  height: 1230px;
+  width: 83%;
+  background-color: #27cfb3;
+  display: block;
 }
-.menu4-title{
-    display: flex;
-    width: 100%;
-    height: 110px;
-    justify-content: space-between;
-}
-
-.menu4-title>div>h5{
-    height: 0;
-    margin-left: 100px;
-    color: #ffffff;
-    font-size: 45px;
-    margin-top: 40px;
-    font-family: NanumSquare_acEB;
+.menu4-title {
+  display: flex;
+  width: 100%;
+  height: 110px;
+  justify-content: space-between;
 }
 
-.menu4-title> div{
-    display: flex;
+.menu4-title > div > h5 {
+  height: 0;
+  margin-left: 100px;
+  color: #ffffff;
+  font-size: 45px;
+  margin-top: 40px;
+  font-family: NanumSquare_acEB;
 }
 
-.menu4-title> div> img{
-    width: 60px;
-    height: 60px;
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
+.menu4-title > div {
+  display: flex;
 }
 
-.menu4-title>svg{
-    margin-right: 100px;
-    margin-top: 40px;
+.menu4-title > div > img {
+  width: 60px;
+  height: 60px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
 }
 
-.menu4-small-title{
-    margin-left: 100px;
-    font-size: 30px;
+.menu4-title > svg {
+  margin-right: 100px;
+  margin-top: 40px;
 }
 
-.menu4-small-title>label{
-    color: #ffffff;
+.menu4-small-title {
+  margin-left: 100px;
+  font-size: 30px;
 }
 
-.calendar-content{
-    margin: 50px;
+.menu4-small-title > label {
+  color: #ffffff;
+}
+
+.calendar-content {
+  margin: 50px;
 }

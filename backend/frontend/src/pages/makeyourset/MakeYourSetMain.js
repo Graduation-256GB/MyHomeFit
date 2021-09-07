@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from "react-responsive";
+import {BiAddToQueue} from 'react-icons/bi'
 
 import MakeYourSetMainSet from '../makeyourset/MakeYourSetMainSet'
 import '../../css/MakeYourSet.css'
@@ -49,7 +50,7 @@ const MakeYourSet = (props) => {
                     
                     <div className='page-block'>
                         <label>세트 추가하기</label>
-                        <img src={IconAddSet}/>
+                        <BiAddToQueue/>
                     </div>
                 </div>
                 <MakeYourSetMainSet/>

@@ -2,8 +2,7 @@
   width: 80px;
   height: 1000px;
   margin-left: 25px;
-  margin-top: 80px;
-  margin-bottom: 60px;
+  margin-top: 25px;
   padding: 0px;
   background-color: rgba(39, 207, 179, 0.56);
   border-radius: 25px;
@@ -40,7 +39,7 @@
   width: 240px;
 }
 
-.menubar > ul > .clicked:hover > li > div > label {
+/* .menubar > ul > .clicked:hover > li > div > label {
   color: #27cfb3;
   display: flex;
 }
@@ -57,7 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .menubar > ul > .unclicked > li > div > label {
   display: none;
@@ -75,7 +74,7 @@
   margin-left: 20px;
 }
 
-.menubar .unclicked li:hover {
+/* .menubar .unclicked li:hover {
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
   height: 80px;
@@ -89,7 +88,7 @@
 
 .menubar > ul > .clicked > li:hover > div > label {
   color: white;
-}
+} */
 
 div > ul > .clicked {
   background-color: #27cfb3;
@@ -126,7 +125,7 @@ div > ul > .clicked > li > div > label {
 
 .sidemenu-container {
   display: block;
-  width: 25%;
+  width: 17%;
 }
 .sidemenu-container > div {
   display: flex;
@@ -134,15 +133,20 @@ div > ul > .clicked > li > div > label {
 
 .sidemenu-container > div > h3 {
   font-family: NanumSquare_acEB;
-  font-size: 35px;
+  font-size: 2rem;
   color: #615b5b;
   margin-left: 10px;
-  width: 300px;
 }
 
 .logo-wrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   margin-top: 10px;
+}
+.logo {
+  font-size: 2rem;
+  color: #27cfb3;
+  display: flex;
+  align-items: center;
 }
