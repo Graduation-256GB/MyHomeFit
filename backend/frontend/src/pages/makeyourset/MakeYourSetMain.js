@@ -11,7 +11,7 @@ import IconSquat from '../../images/icon_set_squat.png'
 
 
     
-const MakeYourSet = (props, setArr) => {
+const MakeYourSetMain = (props, setArr) => {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
     const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
@@ -21,11 +21,6 @@ const MakeYourSet = (props, setArr) => {
 
     const [blockname, setBlockname]=useState('여름 휴가 준비')
     const [isSelected, setSelected] = useState('여름 휴가 준비')
-
-    const addSet = e => {
-        window.location.replace('http://127.0.0.1:8000/makeyoursetform');
-    }
-   
 
     return(
         <>
@@ -63,17 +58,17 @@ const MakeYourSet = (props, setArr) => {
                     ))
                     }    
                     
-                    <div className='page-block' onClick={ addSet }>
+                    <a className='page-block' href="/makeyoursetform">
                         <label>세트 추가하기</label>
                         <BiAddToQueue/>
-                    </div>
+                    </a>
                 </div>
                 <MakeYourSetMainSet/>
     </div>
-    <div className='start-btn'>
+    <a className='start-btn' href="/training">
         <div><img src={IconStart}></img></div>
         <label>Start</label>
-    </div> 
+    </a> 
     
     </>: 
     
@@ -81,10 +76,10 @@ const MakeYourSet = (props, setArr) => {
         {/* <label className='notExist-set-label'>Make Your First Fitness Set.</label> */}
         <div className='page-center-wrapper'>
                 <div className='page-block-container'>
-                    <div className='page-block'>
+                    <a className='page-block' href="/makeyoursetform">
                         <label>세트 추가하기</label>
                         <img src={IconAddSet}/>
-                    </div>
+                    </a>
                 </div>
         </div>
     </>}
@@ -94,4 +89,4 @@ const MakeYourSet = (props, setArr) => {
 
 }
 
-export default MakeYourSet;
+export default MakeYourSetMain;

@@ -6,7 +6,7 @@ import IconSet from '../../images/icon_makeyourset.png';
 import IconAddSet from '../../images/icon_add_set.png'
 import IconStart from '../../images/icon_start.png'
 import IconSquat from '../../images/icon_set_squat.png'
-const MakeYourSet = (props) => {
+const MakeYourSetMainSet = (props) => {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
     const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
@@ -35,4 +35,4 @@ const MakeYourSet = (props) => {
 
 }
 
-export default MakeYourSet;
+export default MakeYourSetMainSet;

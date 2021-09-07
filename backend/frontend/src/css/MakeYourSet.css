@@ -99,6 +99,7 @@
 }
 
 .page-block {
+  text-decoration: none;
   width: 20rem;
   height: 4.6rem;
   border-radius: 3rem;

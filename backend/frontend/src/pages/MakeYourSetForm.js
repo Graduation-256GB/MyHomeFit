@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import '../css/MakeYourSetForm/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
 import { FiChevronLeft } from 'react-icons/fi';
@@ -46,11 +46,11 @@ const MakeYourSetForm = () => {
         // count: count
         // }
     ]);
+    const ref = useRef();
 
-    const leftArrowClick = e => {
-    }
-    const rightArrowClick = e => {
-    }
+    const scroll = (scrollOffset) => {
+        ref.current.scrollLeft += scrollOffset;
+    };
     const formSubmit = e => {
         e.preventDefault();
 
@@ -125,10 +125,10 @@ const MakeYourSetForm = () => {
             <div className="content-list">
                 <h2>Second Step : Choose Exercises.</h2>
                 <div className="list-wrapper">
-                    <div className="left-arrow" name="left-arrow" onClick={leftArrowClick }>
+                    <div className="left-arrow" onClick={()=>scroll(-80)}>
                     <FiChevronLeft/>
                     </div>
-                    <div className="exercise-set-list">
+                    <div className="exercise-set-list" ref={ref}>
                         {
                             formArr.map(item => (
                                 <SetListBlock picture={item.img} name={item.name}
@@ -136,7 +136,7 @@ const MakeYourSetForm = () => {
                             ))
                         }
                     </div>
-                    <div className="right-arrow" name="right-arrow" onClick={rightArrowClick }>
+                    <div className="right-arrow" onClick={()=>scroll(80)}>
                     <FiChevronRight />
                     </div>
                 </div>
