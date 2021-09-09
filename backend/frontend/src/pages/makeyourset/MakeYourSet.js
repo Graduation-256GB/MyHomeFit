@@ -60,7 +60,7 @@ const MakeYourSet = () => {
                 </div>
             </div>
             <div className='page-center-container'>
-                <MakeYourSetMain props={isExistSet} setArr={setArr}/>
+                <MakeYourSetMain name={isExistSet} setArr={setArr}/>
             </div>
         </div>
     )

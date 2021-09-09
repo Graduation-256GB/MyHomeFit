@@ -25,7 +25,7 @@ const MakeYourSetMain = (props, setArr) => {
     return(
         <>
             <div id="trapezoid"></div>
-            {props.name ? <>
+            {props.name?<>
             <label className='center-set-name'>{blockname}</label>
             <div className='center-set-tag'>
                 <label className='center-set-tag-name'>#상체 운동</label>
@@ -50,13 +50,6 @@ const MakeYourSetMain = (props, setArr) => {
                         <label>여름 휴가 준비</label>
                     </div>
                     </> : <></>}
-                    {
-                    setArr.map(item => (
-                        <div className={isSelected=='여름 휴가 준비'? 'page-block-selected' : 'page-block-unselected'} onClick={()=>{setBlockname('여름 휴가 준비'); setSelected('여름 휴가 준비')}}>
-                            <label>{item.name}</label>
-                    </div>
-                    ))
-                    }    
                     
                     <a className='page-block' href="/makeyoursetform">
                         <label>세트 추가하기</label>
