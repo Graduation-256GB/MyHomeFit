@@ -117,14 +117,19 @@ const MakeYourSetForm = () => {
         // console.log(e.target.dataset.remove)
         setFormarr(formArr.filter(exercise => exercise.id !== id));
     }
-    const clickCount = (id) => {
+    const clickCount = (id,count) => {
         // setCount(count - 1);
-        console.log(id)
+        console.log(count)
         // setCount(countList.map(element =>
         //     element.id === id ? {...element,count:element.count+=1} : element))
         // // const countNum=count.find(item=>item.id===parseInt(exerciseId)? true:false)
-        setFormarr(formArr.map(element =>
-            element.id === id ? {...element,count:element.count+=1} : element))
+        if (count === "up") {
+            setFormarr(formArr.map(element =>
+                element.id === id ? { ...element, count: element.count += 1 } : element))
+        }else{
+            setFormarr(formArr.map(element =>
+                element.id === id ? { ...element, count: element.count -= 1 } : element))
+        }
         // console.log(countList)
     }
     // if (isLoading) return "Loading..."

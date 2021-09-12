@@ -9,9 +9,9 @@ const FitnessCount = ({ count,clickCount,id }) => {
     // }
     return(
         <div className="list-text">
-            <AiFillCaretUp onClick={ ()=>clickCount(id) }/>
+            <AiFillCaretUp data-count="count-up" onClick={ ()=>clickCount(id,'up') }/>
             {count}회 반복
-            <AiFillCaretDown onClick={ ()=>clickCount(id) }/>
+            <AiFillCaretDown data-count="count-down" onClick={ ()=>clickCount(id,'down') }/>
         </div>
     )
 }
