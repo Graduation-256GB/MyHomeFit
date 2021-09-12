@@ -36,7 +36,16 @@ const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
     const [newNum,setNewNum] = useState('0');
-    const [count,setCount] = useState('5');
+    // const [countList, setCount] = useState([
+    //     // {
+    //     //     id: 0,
+    //     //     count:1
+    //     // },
+    //     // {
+    //     //     id: 1,
+    //     //     count:2
+    //     // }
+    // ]);
     const [formArr, setFormarr] = useState([
         // {
         // setId:newNum,
@@ -79,18 +88,24 @@ const MakeYourSetForm = () => {
         const exerciseName = e.target.dataset.name
         const exerciseImg = e.target.dataset.img
         const exerciseRemove = e.target.dataset.remove
-        
-        console.log(exerciseId, exerciseName)
+        //const countNum=count.find(item=>item.id===parseInt(exerciseId)? true:false)
+
+        console.log(exerciseId)
         if (exerciseId != null) {
+            // const count = {
+            // id: nextId.current,
+            // count:10
+            // }
             const exercise = {
                 id:nextId.current,
                 setId:newNum,
                 exerciseId: exerciseId,
                 name: exerciseName,
                 img: exerciseImg,
-                count: count,
+                count: 10,
                 remove:exerciseRemove
             }
+            // setCount(countList.concat(count));
             setFormarr(formArr.concat(exercise));
         }
         nextId.current += 1;
@@ -101,6 +116,16 @@ const MakeYourSetForm = () => {
         // e.target.dataset.remove='true'
         // console.log(e.target.dataset.remove)
         setFormarr(formArr.filter(exercise => exercise.id !== id));
+    }
+    const clickCount = (id) => {
+        // setCount(count - 1);
+        console.log(id)
+        // setCount(countList.map(element =>
+        //     element.id === id ? {...element,count:element.count+=1} : element))
+        // // const countNum=count.find(item=>item.id===parseInt(exerciseId)? true:false)
+        setFormarr(formArr.map(element =>
+            element.id === id ? {...element,count:element.count+=1} : element))
+        // console.log(countList)
     }
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
@@ -139,7 +164,7 @@ const MakeYourSetForm = () => {
                         {
                             formArr.map(item => (
                                 <SetListBlock picture={item.img} name={item.name}
-                                    count={item.count} removeList={removeList} id={ item.id}/>
+                                    count={item.count} removeList={removeList} id={item.id} clickCount={ clickCount}/>
                             ))
                         }
                     </div>
