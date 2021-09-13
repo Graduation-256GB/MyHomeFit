@@ -11,9 +11,6 @@ import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
 
-{/* const GET_URL = 'http://127.0.0.1:8000/api/exercise/set/${setId}'
-const GET_URL = 'http://127.0.0.1:8000/api/test/'*/}
-
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
 
@@ -24,39 +21,11 @@ const loadExercises = async ({ set_id }) => {
 }
 
 const Training = () => {
-    const { data, error, isLoading } = useAsync({ promiseFn: loadExercises, set_id: 1 })
-    {/*if (isLoading) return "Loading..."
-    if (error) return `Something went wrong: ${error.message}`*/}
+    const { data, error, isLoading } = useAsync({ promiseFn: loadExercises, set_id: SET_ID })
     if (data){
         JSON.stringify(data)
         console.log(data)
     }
-
-    {/*
-    fetch('http://127.0.0.1:8000/api/exercise/join/${SET_ID}/', {
-        method: "GET",
-        dataType: 'json',
-        headers: {
-            'accept': 'application/json',
-            'Content-type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-                console.log(data)
-            {/*Object.keys(data).forEach(function (key) {
-                    if (data[key].set == SET_ID){
-                        exerciseSetList.push(data[key]);
-                        exerciseIdSet.add(data[key].exercise);
-                        exerciseIdList.push(data[key].exercise);
-                    }
-                });
-                exerciseSetList.sort((a, b) => a.set_num - b.set_num);
-                console.log("exerciseSetList: ", exerciseSetList)
-                console.log("exerciseIdSet: ", exerciseIdSet)
-                console.log("exerciseIdList: ", exerciseIdList)
-            }
-        );*/}
 
     {/*const [Exercises, SetExercises] = useState([])*/}
 
