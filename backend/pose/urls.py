@@ -7,6 +7,7 @@ urlpatterns = [
     path('pose/', views.ListExercise.as_view()),
     path('pose/<int:pk>/', views.DetailExercise.as_view()),
     path('exercise/', views.ListExercise.as_view()),
+    path('set/exercise/', views.ListSetInExercise.as_view()),
     path('set/create/', views.set_create),
     path('set/list/', views.ListSet.as_view()),
     path('exercise/create/', views.exercise_create),
