@@ -20,20 +20,21 @@ class ExerciseLogSerializer(serializers.ModelSerializer):
         model = ExerciseLog
         fields = '__all__'
 
-
-class ExerciseSetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExerciseSet
-        fields = '__all__'
-
-
 class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = '__all__'
 
+class ExerciseSetSerializer(serializers.ModelSerializer):
+    exercise = ExerciseSerializer(many=True, read_only=True)
+    set = SetSerializer(many=True, read_only=True)
+    class Meta:
+        model = ExerciseSet
+        fields = '__all__'
+        #img = serializers.ImageField(null=True, blank=True, upload_to="uploads")
 
 class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = '__all__'
+

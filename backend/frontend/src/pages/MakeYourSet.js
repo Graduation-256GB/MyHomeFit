@@ -11,7 +11,6 @@ import RightBtn from '../images/menu_right.png';
 import SetBox from "../components/MakeYourSet/SetBox";
 import ListBlock from '../components/MakeYourSet/ListBlock';
 
-
 import { useAsync } from "react-async"
 
 const loadPost=async()=>{

@@ -47,6 +47,9 @@ class ExerciseSet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
 
+    #def join_exercise (self):
+    #        return self.objects.filter(set_id=set_id).select_related('exercise_exercise').values('set_num','set_count', 'exercise__name', 'exercise__img', 'exercise__calories', 'exercise__url').order_by('set_num')
+
 
 class ExerciseLog(models.Model):
     user = models.ForeignKey(

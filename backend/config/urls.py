@@ -21,11 +21,17 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework import routers
+from django.views.static import serve	#추가
+
+#router = routers.DefaultRouter() #추가
+#router.register('Set', views.SetView, 'Set')	#추가
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('pose.urls')),
     path('accounts/allauth/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += [re_path('.*',
+urlpatterns += [re_path('',
                         TemplateView.as_view(template_name='index.html'))]

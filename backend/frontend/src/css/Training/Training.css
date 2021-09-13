@@ -59,28 +59,6 @@
   margin-top: 10px;
 }
 
-.next-pose-container {
-  display: inline-block;
-  position: absolute;
-  bottom: 75%;
-  width: 1200px;
-  height: 210px;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.next-pose-container::-webkit-scrollbar {
-  height: 10px;
-  background-color: #ede9e9;
-  border-radius: 10px;
-}
-
-.next-pose-container::-webkit-scrollbar-thumb {
-  background-color: #999494;
-  border-radius: 10px;
-}
-
 .left-button {
   position: absolute;
   left: 3%;
@@ -121,10 +99,10 @@
   width: 130px;
   height: 150px;
   left: 79%;
-  bottom: 53%;
+  bottom: 10%;
   margin-top: 550px;
   padding: 15px;
-  border-radius: 30px;
+  border-radius: 10px;
   background-color: #f0eded;
   z-index: 3;
   box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
@@ -156,6 +134,24 @@
   height: 100%;
 }
 
+.realtime-info {
+  position: absolute;
+  width: 500px;
+  height: 35px;
+  left: 7%;
+  bottom: 65%;
+  padding: 15px;
+  background-color: #27cfb3;
+  z-index: 3;
+  box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: NanumSquare_acEB;
+}
+
 .realtime-video {
   display: inline-flex;
   justify-content: space-around;
@@ -173,16 +169,17 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 80%;
-  margin-right: 15px;
+  height: 90%;
+  margin-right: 13px;
   align-items: flex-end;
 }
 
 .user-video > img {
   display: flex;
   transform: scaleX(-1);
+  object-fit: cover;
   width: 100%;
-  height: 110%;
+  height: 100%;
 }
 
 .export-video {
@@ -191,7 +188,7 @@
   width: 300px;
   height: 600px;
   background-color: #f0eded;
-  border-radius: 50px;
+  border-radius: 10px;
   margin-left: 15px;
   padding: 10px;
   position: absolute;
