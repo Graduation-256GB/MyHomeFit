@@ -132,6 +132,12 @@ const MakeYourSetForm = () => {
         }
         // console.log(countList)
     }
+    const changeCount = (id,countValue) => {
+        console.log(countValue)
+        setFormarr(formArr.map(element =>
+        element.id === id ? { ...element, count: element.count =countValue } : element))
+        // console.log(countList)
+    }
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
     if (data) {
@@ -169,7 +175,8 @@ const MakeYourSetForm = () => {
                         {
                             formArr.map(item => (
                                 <SetListBlock picture={item.img} name={item.name}
-                                    count={item.count} removeList={removeList} id={item.id} clickCount={ clickCount}/>
+                                    count={item.count} removeList={removeList} id={item.id}
+                                    clickCount={clickCount} changeCount={ changeCount}/>
                             ))
                         }
                     </div>
