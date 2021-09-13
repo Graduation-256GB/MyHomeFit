@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import '../css/MakeYourSetForm/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
 import { FiChevronLeft } from 'react-icons/fi';
@@ -36,7 +36,16 @@ const MakeYourSetForm = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
     const [newNum,setNewNum] = useState('0');
-    const [count,setCount] = useState('5');
+    // const [countList, setCount] = useState([
+    //     // {
+    //     //     id: 0,
+    //     //     count:1
+    //     // },
+    //     // {
+    //     //     id: 1,
+    //     //     count:2
+    //     // }
+    // ]);
     const [formArr, setFormarr] = useState([
         // {
         // setId:newNum,
@@ -46,11 +55,12 @@ const MakeYourSetForm = () => {
         // count: count
         // }
     ]);
+    const ref = useRef();
+    const nextId = useRef(0);
 
-    const leftArrowClick = e => {
-    }
-    const rightArrowClick = e => {
-    }
+    const scroll = (scrollOffset) => {
+        ref.current.scrollLeft += scrollOffset;
+    };
     const formSubmit = e => {
         e.preventDefault();
 
@@ -77,23 +87,56 @@ const MakeYourSetForm = () => {
         const exerciseId = e.target.dataset.id   //exercise id
         const exerciseName = e.target.dataset.name
         const exerciseImg = e.target.dataset.img
-        
-        console.log(exerciseId, exerciseName)
+        const exerciseRemove = e.target.dataset.remove
+        //const countNum=count.find(item=>item.id===parseInt(exerciseId)? true:false)
+
+        console.log(exerciseId)
         if (exerciseId != null) {
+            // const count = {
+            // id: nextId.current,
+            // count:10
+            // }
             const exercise = {
+                id:nextId.current,
                 setId:newNum,
-                id: exerciseId,
+                exerciseId: exerciseId,
                 name: exerciseName,
                 img: exerciseImg,
-                count: count
+                count: 10,
+                remove:exerciseRemove
             }
+            // setCount(countList.concat(count));
             setFormarr(formArr.concat(exercise));
         }
+        nextId.current += 1;
         console.log(formArr)
     }
-    const removeList = e => {
-        const exerciseName = e.target.dataset.name
-        setFormarr(formArr.filter(exercise => exercise.name !== exerciseName));
+    const removeList = (id) => {
+        // console.log(e.target.dataset.remove)
+        // e.target.dataset.remove='true'
+        // console.log(e.target.dataset.remove)
+        setFormarr(formArr.filter(exercise => exercise.id !== id));
+    }
+    const clickCount = (id,count) => {
+        // setCount(count - 1);
+        console.log(count)
+        // setCount(countList.map(element =>
+        //     element.id === id ? {...element,count:element.count+=1} : element))
+        // // const countNum=count.find(item=>item.id===parseInt(exerciseId)? true:false)
+        if (count === "up") {
+            setFormarr(formArr.map(element =>
+                element.id === id ? { ...element, count: parseInt(element.count) + 1 } : element))
+        }else{
+            setFormarr(formArr.map(element =>
+                element.id === id ? { ...element, count: parseInt(element.count) - 1 } : element))
+        }
+        // console.log(countList)
+    }
+    const changeCount = (id,countValue) => {
+        console.log(countValue)
+        setFormarr(formArr.map(element =>
+        element.id === id ? { ...element, count: element.count =countValue } : element))
+        // console.log(countList)
     }
     // if (isLoading) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
@@ -125,18 +168,19 @@ const MakeYourSetForm = () => {
             <div className="content-list">
                 <h2>Second Step : Choose Exercises.</h2>
                 <div className="list-wrapper">
-                    <div className="left-arrow" name="left-arrow" onClick={leftArrowClick }>
+                    <div className="left-arrow" onClick={()=>scroll(-80)}>
                     <FiChevronLeft/>
                     </div>
-                    <div className="exercise-set-list">
+                    <div className="exercise-set-list" ref={ref}>
                         {
                             formArr.map(item => (
                                 <SetListBlock picture={item.img} name={item.name}
-                                    count={item.count} removeList={removeList} />
+                                    count={item.count} removeList={removeList} id={item.id}
+                                    clickCount={clickCount} changeCount={ changeCount}/>
                             ))
                         }
                     </div>
-                    <div className="right-arrow" name="right-arrow" onClick={rightArrowClick }>
+                    <div className="right-arrow" onClick={()=>scroll(80)}>
                     <FiChevronRight />
                     </div>
                 </div>

@@ -41,8 +41,8 @@ const SetForm = ({ setNewNum,csrftoken }) => {
         <form onSubmit={onSubmit}>
                     <div className="form-box">
                         <div className="label-box">
-                            <label htmlfor="set-title">Title</label>
-                            <label htmlfor="set-type">Category</label>  
+                            <label htmlFor="set-title">Title</label>
+                            <label htmlFor="set-type">Category</label>  
                         </div>
                         <div className="input-box">
                     <input type="text"
@@ -54,7 +54,7 @@ const SetForm = ({ setNewNum,csrftoken }) => {
                             value={type}
                             required
                             onChange={e => setType(e.target.value)}>
-                                <option value="" selected>선택</option>
+                                <option value="" defaultValue>선택</option>
                                 <option value="upperbody">상체 운동</option>
                                 <option value="lowerbody">하체 운동</option>
                                 <option value="other">기타</option>
