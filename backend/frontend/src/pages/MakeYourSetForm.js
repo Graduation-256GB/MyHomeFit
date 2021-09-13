@@ -125,10 +125,10 @@ const MakeYourSetForm = () => {
         // // const countNum=count.find(item=>item.id===parseInt(exerciseId)? true:false)
         if (count === "up") {
             setFormarr(formArr.map(element =>
-                element.id === id ? { ...element, count: element.count += 1 } : element))
+                element.id === id ? { ...element, count: parseInt(element.count) + 1 } : element))
         }else{
             setFormarr(formArr.map(element =>
-                element.id === id ? { ...element, count: element.count -= 1 } : element))
+                element.id === id ? { ...element, count: parseInt(element.count) - 1 } : element))
         }
         // console.log(countList)
     }

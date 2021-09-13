@@ -13,7 +13,8 @@ const FitnessCount = ({ count,clickCount,id,changeCount }) => {
             <input value={count}
                 required
                 type="text"
-                onChange={ e=>changeCount(id,e.target.value)}/>회 반복
+                onChange={e => changeCount(id, e.target.value)} />
+            <span>회 반복</span>
             <AiFillCaretDown data-count="count-down" onClick={ ()=>clickCount(id,'down') }/>
         </div>
     )
