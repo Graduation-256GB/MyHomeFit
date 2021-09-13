@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set
@@ -17,6 +17,15 @@ import json
 #         queryset:queryset
 #     }
 #     return render(request, "index.tsx", ctx)
+
+
+# id랑 같은 인스턴스만 가져와서 만들어보기,,
+# set의 id = ExerciseSet.set
+class ListSetInExercise(generics.ListCreateAPIView):
+    queryset = ExerciseSet.objects.all()
+    # queryset = ExerciseSet.objects.
+    serializer_class = ExerciseSetSerializer
+
 
 class ListExercise(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
