@@ -7,14 +7,14 @@ import os
 import math
 from tensorflow.keras.models import load_model
 
-from .models import ExerciseSet
+from .models import ExerciseSet, Set
 
 poseEstimationModel = load_model(
     os.path.join(settings.BASE_DIR, 'pose/my_model.h5'))
 
 
 class PoseWebCam(object):
-    def __init__(self):
+    def __init__(self, pk):
         # self.vs = VideoStream(src=0).start()
         self.cap = cv2.VideoCapture(0)
         # self.mpPose = mp.solutions.pose
@@ -39,14 +39,14 @@ class PoseWebCam(object):
         self.tmp_cnt = 0
         self.exercise_user_frame_cnt = 0  # frame_cnt와 구분하기 위한 변수
 
-
         self.pose_cnt = 0  # n번 째 포즈
 
         self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
 
-        self.set_id = 1 # set_id
-        self.exercise_set = ExerciseSet.objects.filter(set_id=self.set_id)
+        self.set_id = pk  # set_id
+        self.exercise_set = ExerciseSet.objects.filter(
+            set=Set.objects.get(id=self.set_id))
         self.count = self.exercise_set[0].set_count + 1
         self.exercise_count = 0
         self.current_exercise = self.exercise_set[self.exercise_count].exercise
@@ -74,8 +74,9 @@ class PoseWebCam(object):
         keypoints = []  # 1프레임의 keypoints를 담은 배열
         # keypoints.add([results.pose_landmarks.landmark[0]])
 
-        ## 세트 목록 순서대로 정렬
-        self.exercise_set = sorted(self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
+        # 세트 목록 순서대로 정렬
+        self.exercise_set = sorted(
+            self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
         ## print("self.exercise_set_id_s:", self.exercise_set[0].id, self.exercise_set[1].id)
 
         # 사용자가 만든 운동 세트에 있는 운동 이름 하나 가져오기
@@ -172,7 +173,6 @@ class PoseWebCam(object):
                 # text = self.current_exercise, "번째 운동 :", self.count, "회"
                 self.count -= 1
 
-
         # cTime = time.time()
         # self.fps = 1/(cTime-self.pTime)
 
@@ -180,13 +180,11 @@ class PoseWebCam(object):
 
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
 
-        ##cv2.putText(img, self.predicted_pose, (50, 50),
-        ##            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
-
-
+        # cv2.putText(img, self.predicted_pose, (50, 50),
+        # cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
         cv2.putText(img, str(self.count), (50, 50),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
         # cv2.imshow("Image", img)
         # cv2.waitKey(1)

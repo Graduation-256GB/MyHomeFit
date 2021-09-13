@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Exercise, ExerciseLog, ExerciseSet, Set
 from .models import CustomUser
+import base64
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -20,21 +21,33 @@ class ExerciseLogSerializer(serializers.ModelSerializer):
         model = ExerciseLog
         fields = '__all__'
 
+
 class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = '__all__'
 
+
 class ExerciseSetSerializer(serializers.ModelSerializer):
-    exercise = ExerciseSerializer(many=True, read_only=True)
-    set = SetSerializer(many=True, read_only=True)
+    # exercise = ExerciseSerializer(many=True, read_only=True)
+    # set = SetSerializer(many=True, read_only=True)
+    img = serializers.ImageField(source='exercise.img')
+
     class Meta:
         model = ExerciseSet
-        fields = '__all__'
-        #img = serializers.ImageField(null=True, blank=True, upload_to="uploads")
+        fields = ('exercise', 'set', 'set_num',
+                  'set_count', 'created_at', 'img')
+
+
+# class ExerciseSetListSerializer(serializers.ModelSerializer):
+#     exercise_set = ExerciseSetSerializer(many=True, read_only=True)
+
+#     class Meta:
+#         model = ExerciseSet
+#         fields = '__all__'
+
 
 class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = '__all__'
-

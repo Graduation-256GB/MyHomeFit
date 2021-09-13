@@ -17,8 +17,8 @@ class Exercise(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # 추가된 시간
     selected_count = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 # TYPE_CHOICES = (
@@ -46,9 +46,6 @@ class ExerciseSet(models.Model):
     set_count = models.IntegerField()   # 세트 내에서 정해진 운동 횟수
     created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
-
-    #def join_exercise (self):
-    #        return self.objects.filter(set_id=set_id).select_related('exercise_exercise').values('set_num','set_count', 'exercise__name', 'exercise__img', 'exercise__calories', 'exercise__url').order_by('set_num')
 
 
 class ExerciseLog(models.Model):
