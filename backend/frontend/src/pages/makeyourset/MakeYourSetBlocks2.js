@@ -43,14 +43,6 @@ function MakeYourSetBlocks2 ({setArr}) {
         });
     }
 
-    const addSet = e => {
-        window.location.replace('http://127.0.0.1:8000/makeyoursetform');
-    }
-
-    const startSet = e => {
-        window.location.replace('http://127.0.0.1:8000/training');
-    }
-
     const setTitleClicked = (id, title) => {
         // setSetId(setid)
         console.log("start")
@@ -73,10 +65,10 @@ function MakeYourSetBlocks2 ({setArr}) {
                 <div className='block-container'>
                     <div id="trapezoid"></div>
                     <div id="block-wrapper">
-                        <div className='page-block-selected' onClick={ addSet }>
+                        <a className='page-block-selected' href="/makeyoursetform">
                             <label>세트 추가하기</label>
                             <BiAddToQueue className='page-block-icon'/>
-                        </div>
+                        </a>
                     
                         {setArr.map(item => (
                             <div className='page-block-selected' onClick={ () => setTitleClicked(item.id, item.title) }>
@@ -105,9 +97,9 @@ function MakeYourSetBlocks2 ({setArr}) {
                     <MakeYourSetExerciseList tmpArr={tmpArr}/>
 
                 </div>
-                <div className='page-contents-btn-start' onClick={ startSet }>
+                <a className='page-contents-btn-start' href="/training">
                     <label>START</label>
-                </div>
+                </a>
 
             </div>
         </div>

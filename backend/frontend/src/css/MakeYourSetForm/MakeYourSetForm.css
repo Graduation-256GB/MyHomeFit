@@ -5,6 +5,9 @@
   border-bottom-left-radius: 100px;
   display: block;
 }
+.content {
+  width: 83%;
+}
 .content-form h2,
 .content-list h2 {
   color: #a9a1a1;
