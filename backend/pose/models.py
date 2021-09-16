@@ -17,8 +17,8 @@ class Exercise(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # 추가된 시간
     selected_count = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 # TYPE_CHOICES = (

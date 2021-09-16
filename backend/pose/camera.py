@@ -6,12 +6,15 @@ from django.conf import settings
 import os
 import math
 from tensorflow.keras.models import load_model
+
+from .models import ExerciseSet, Set
+
 poseEstimationModel = load_model(
     os.path.join(settings.BASE_DIR, 'pose/my_model.h5'))
 
 
 class PoseWebCam(object):
-    def __init__(self):
+    def __init__(self, pk):
         # self.vs = VideoStream(src=0).start()
         self.cap = cv2.VideoCapture(0)
         # self.mpPose = mp.solutions.pose
@@ -40,7 +43,13 @@ class PoseWebCam(object):
 
         self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
-        # self.fps_sum        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (1)
+
+        self.set_id = pk  # set_id
+        self.exercise_set = ExerciseSet.objects.filter(
+            set=Set.objects.get(id=self.set_id))
+        self.count = self.exercise_set[0].set_count + 1
+        self.exercise_count = 0
+        self.current_exercise = self.exercise_set[self.exercise_count].exercise
 
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
@@ -65,8 +74,10 @@ class PoseWebCam(object):
         keypoints = []  # 1프레임의 keypoints를 담은 배열
         # keypoints.add([results.pose_landmarks.landmark[0]])
 
-        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (2)
-        # self.frame_cnt += 1
+        # 세트 목록 순서대로 정렬
+        self.exercise_set = sorted(
+            self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
+        ## print("self.exercise_set_id_s:", self.exercise_set[0].id, self.exercise_set[1].id)
 
         # 사용자가 만든 운동 세트에 있는 운동 이름 하나 가져오기
         if len(self.keylist) > self.tmp_cnt:
@@ -156,20 +167,23 @@ class PoseWebCam(object):
 
                 # print(self.allkeypoints)
 
-        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (3)
+                if self.count == 0:
+                    self.exercise_count += 1
+                    self.count = self.exercise_set[self.exercise_count].set_count + 1
+                # text = self.current_exercise, "번째 운동 :", self.count, "회"
+                self.count -= 1
+
         # cTime = time.time()
         # self.fps = 1/(cTime-self.pTime)
 
-        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (4)
-        # self.frame_cnt += 1
-        # self.fps_sum += int(self.fps)
-        # print("current fps avg is ", self.fps_sum // self.frame_cnt)
-
-        # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (5)
         # self.pTime = cTime
 
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
-        cv2.putText(img, self.predicted_pose, (50, 50),
+
+        # cv2.putText(img, self.predicted_pose, (50, 50),
+        # cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+
+        cv2.putText(img, str(self.count), (50, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
         # cv2.imshow("Image", img)
@@ -325,3 +339,5 @@ class PoseWebCam(object):
         skeleton_dic = {2: 12, 3: 14, 4: 16, 5: 11, 6: 13,
                         7: 15, 8: 24, 9: 26, 10: 28, 11: 23, 12: 25, 13: 27}
         return skeleton_dic[openpose_index]
+
+    # def print_exercise_count(self):
