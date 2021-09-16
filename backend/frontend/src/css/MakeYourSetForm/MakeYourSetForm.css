@@ -34,12 +34,14 @@
   padding: 5px 15px;
   margin-top: 20px;
 }
+.list-wrapper {
+  position: relative;
+}
 .exercise-set-list {
-  width: inherit;
   white-space: nowrap;
   overflow-x: scroll;
   display: flex;
-  min-width: 90%;
+  width: 95%;
   border-radius: 22px;
   background: aliceblue;
   padding: 15px;
@@ -53,7 +55,7 @@
   background-color: #efefef;
   border-radius: 100px;
   color: #27cfb3;
-  position: relative;
+  position: absolute;
   top: 110px;
   display: flex;
   justify-content: center;
@@ -62,7 +64,7 @@
   z-index: 3;
 }
 .left-arrow {
-  left: 15px;
+  left: -20px;
 }
 .right-arrow {
   right: 15px;
