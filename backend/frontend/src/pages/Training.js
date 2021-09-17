@@ -13,7 +13,7 @@ import { useAsync } from "react-async"
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
-{/*const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`*/}
+const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
 const loadExerciseSet = async ({ set_id }) => {
     const res = await fetch(`http://127.0.0.1:8000/api/join/${set_id}/`)
@@ -64,17 +64,17 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
-                <div className="realtime-info">
+                {/*<div className="realtime-info">
                     Squat  0/10 회
-                </div>
+                </div>*/}
                 <div className="export-video">
                     <ReactPlayer className="export"
                                  url={myVideo} loop muted playing controls />
                 </div>
                 <div className="realtime-video">
                     <div className="user-video">
-                        {/* <img src={ poseURL }></img> */}
-                        <img src="http://127.0.0.1:8000/api/pose_feed"></img>
+                        <img src={ poseURL }></img>
+                        {/* <img src="http://127.0.0.1:8000/api/pose_feed"></img> */}
                     </div>
                     {/* <div className="export-video">
                         <ReactPlayer className="export"

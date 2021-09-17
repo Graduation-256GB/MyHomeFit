@@ -62,13 +62,13 @@ def gen(camera):
 # Create your views here.
 
 
-#def pose_feed(request, pk):
-#    return StreamingHttpResponse(gen(PoseWebCam(pk)),
-#                                 content_type='multipart/x-mixed-replace; boundary=frame')
-
-def pose_feed(request):
-    return StreamingHttpResponse(gen(PoseWebCam()),
+def pose_feed(request, pk):
+    return StreamingHttpResponse(gen(PoseWebCam(pk)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
+
+#def pose_feed(request):
+#    return StreamingHttpResponse(gen(PoseWebCam()),
+#                                 content_type='multipart/x-mixed-replace; boundary=frame')
 
 def set_create(request):
     if request.method == 'POST':
