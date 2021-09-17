@@ -40,7 +40,7 @@ class Set(models.Model):
 
 class ExerciseSet(models.Model):
     exercise = models.ForeignKey(
-        Exercise, on_delete=models.SET_NULL, null=True)  # 어떤 운동인지
+        Exercise, on_delete=models.SET_NULL, null=True, related_name='exercise')  # 어떤 운동인지
     set = models.ForeignKey(Set, on_delete=models.CASCADE)  # 어떤 세트에 속하는지
     set_num = models.IntegerField()    # 세트 내에서 운동 순서, 몇번째 운동인지
     set_count = models.IntegerField()   # 세트 내에서 정해진 운동 횟수

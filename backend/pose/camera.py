@@ -14,7 +14,7 @@ poseEstimationModel = load_model(
 
 
 class PoseWebCam(object):
-    def __init__(self, pk):
+    def __init__(self):
         # self.vs = VideoStream(src=0).start()
         self.cap = cv2.VideoCapture(0)
         # self.mpPose = mp.solutions.pose
@@ -44,7 +44,7 @@ class PoseWebCam(object):
         self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
 
-        self.set_id = pk  # set_id
+        self.set_id = 1  # set_id
         self.exercise_set = ExerciseSet.objects.filter(
             set=Set.objects.get(id=self.set_id))
         self.count = self.exercise_set[0].set_count + 1

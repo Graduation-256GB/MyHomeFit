@@ -17,7 +17,7 @@ const ExerciseList = ({ exerciseArr,addList }) => {
                             <div className="exercise-hover"
                                     data-id={item.id}
                                     data-name={item.name}
-                                    data-img={ item.img}
+                                    data-img={item.img}
                                     onClick={addList}>
                             <BiAddToQueue data-id={item.id}
                                 data-name={item.name}
