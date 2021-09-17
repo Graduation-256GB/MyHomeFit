@@ -8,6 +8,8 @@ from datetime import datetime
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set
 import json
+from rest_framework.response import Response
+from rest_framework.views import APIView, View
 
 
 # def exercise_list(request):
@@ -41,6 +43,14 @@ class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
+# class ListExerciseSet(APIView):
+#     def get(self, request, pk):
+#         set = Set.objects.get(id=pk)
+#         serializer = ExerciseSetSerializer(
+#             ExerciseSet.objects.filter(set=set), many=True)
+#         return Response(serializer.data)
+#         # queryset = ExerciseSet.objects.filter(set=set)
+#         # serializer_class = ExerciseSerializer
 
 def index(request):
     return render(request, 'pose/home.html')
@@ -54,8 +64,8 @@ def gen(camera):
 # Create your views here.
 
 
-def pose_feed(request):
-    return StreamingHttpResponse(gen(PoseWebCam()),
+def pose_feed(request, pk):
+    return StreamingHttpResponse(gen(PoseWebCam(pk)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -83,3 +93,16 @@ def exercise_create(request):
                 exercise=exercise, set=set, set_num=i+1, set_count=count)
 
     return JsonResponse({'exercise_set_id': exercise_set.id})
+
+
+class SetListAPIView(APIView):
+    def get(self, request):
+        serializer = SetSerializer(Set.objects.all(), many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = SetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)

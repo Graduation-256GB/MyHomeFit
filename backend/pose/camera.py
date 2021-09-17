@@ -6,12 +6,14 @@ from django.conf import settings
 import os
 import math
 from tensorflow.keras.models import load_model
+
+from .models import ExerciseSet, Set
+
 poseEstimationModel = load_model(
     os.path.join(settings.BASE_DIR, 'pose/my_model.h5'))
 
-
 class PoseWebCam(object):
-    def __init__(self):
+    def __init__(self, pk):
         # self.vs = VideoStream(src=0).start()
         self.cap = cv2.VideoCapture(0)
         # self.mpPose = mp.solutions.pose
@@ -42,6 +44,16 @@ class PoseWebCam(object):
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
         # self.fps_sum        ### ### 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (1)
 
+
+        self.set_id = pk  # set_id
+        self.exercise_set = ExerciseSet.objects.filter(
+            set=Set.objects.get(id=self.set_id))
+
+        print(self.exercise_set)  
+        # self.count = self.exercise_set[0].set_count + 1
+        # self.exercise_count = 0
+        # self.current_exercise = self.exercise_set[self.exercise_count].exercise
+
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
         self.skeleton = {'Right Shoulder': 12, 'Right Elbow': 14, 'Right Wrist': 16, 'Left Shoulder': 11, 'Left Elbow': 13,
@@ -64,6 +76,11 @@ class PoseWebCam(object):
 
         keypoints = []  # 1프레임의 keypoints를 담은 배열
         # keypoints.add([results.pose_landmarks.landmark[0]])
+
+        # 세트 목록 순서대로 정렬
+        self.exercise_set = sorted(
+            self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
+        ## print("self.exercise_set_id_s:", self.exercise_set[0].id, self.exercise_set[1].id)
 
         # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (2)
         # self.frame_cnt += 1
@@ -155,6 +172,12 @@ class PoseWebCam(object):
                 # print(len(self.allkeypoints[0]))
 
                 # print(self.allkeypoints)
+
+                # if self.count == 0:
+                #     self.exercise_count += 1
+                #     self.count = self.exercise_set[self.exercise_count].set_count + 1
+                # # text = self.current_exercise, "번째 운동 :", self.count, "회"
+                # self.count -= 1
 
         # 본인 컴퓨터에서의 fps 평균 알아보기위한 임시 코드 (3)
         # cTime = time.time()
