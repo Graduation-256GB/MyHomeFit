@@ -3,10 +3,12 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set
+from .models import Exercise, ExerciseSet, Set, CustomUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 import json
 
 
@@ -33,13 +35,25 @@ class ListExercise(generics.ListCreateAPIView):
 
 
 class ListSet(generics.ListCreateAPIView):
-    queryset = Set.objects.all()
+    # queryset = Set.objects.filter(user=request.user)
     serializer_class = SetSerializer
+
+    def get_queryset(self):
+        # current_user = self.request.user
+        print(self.request.user)
+        current_user = CustomUser.objects.get(email='abc@naver.com')
+        return Set.objects.filter(user=current_user)
 
 
 class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+
+
+class CurrentUserView(APIView):
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 
 def index(request):
