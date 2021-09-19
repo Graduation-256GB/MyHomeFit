@@ -3,10 +3,14 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, ExerciseInSetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set, ExerciseLog
+from .models import Exercise, ExerciseSet, Set, CustomUser
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 import json
 from rest_framework.response import Response
 from rest_framework.views import APIView, View
@@ -31,11 +35,19 @@ class ListSetInExercise(generics.ListCreateAPIView):
 class ListExercise(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class ListSet(generics.ListCreateAPIView):
-    queryset = Set.objects.all()
+    # queryset = Set.objects.filter(user=request.user)
     serializer_class = SetSerializer
+
+    def get_queryset(self):
+        current_user = self.request.user
+        # print(self.request.user)
+        # current_user = CustomUser.objects.get(email='abc@naver.com')
+        return Set.objects.filter(user=current_user)
 
 
 class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
@@ -51,11 +63,6 @@ class ListExerciseSet(APIView):
         # queryset = ExerciseSet.objects.filter(set=set)
         # serializer_class = ExerciseSerializer
 
-# class DetailExerciseSet(APIView):
-#     def get(self, request, pk):
-#         serializer = ExerciseSetSerializer(
-#             ExerciseSet.objects.get(id=pk))
-#         return Response(serializer.data)
 class ListJoinAPIView(APIView):
     def get(self, request, pk):
         set = Set.objects.get(id=pk)
@@ -64,6 +71,12 @@ class ListJoinAPIView(APIView):
         return Response(serializer.data)
         # queryset = ExerciseSet.objects.filter(set=set)
         # serializer_class = ExerciseSerializer
+
+
+class CurrentUserView(APIView):
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 
 def index(request):
