@@ -73,39 +73,36 @@ function MakeYourSetExerciseList ({setid}) {
     //     });
     // }
 
-    const [resp, setGitData] = useState({ data: null, repos: null });
+    const [exercise, setExercise] = useState({ data: null });
     useEffect(() => {
         const fetchData = async () => {
-            const respRepos = await axios(
+            const exerciselist = await axios(
                 `http://127.0.0.1:8000/api/exerciseset/${setid}/`
             );
 
-            setGitData({ data: respRepos.data, repos: respRepos.data });
+            setExercise({ data: exerciselist.data });
         };
 
         fetchData();
-     }, []);
+     }, [setid]);
 
     console.log('render2');
-    if (resp.data) {
+    if (exercise.data) {
         // console.log("setlist", resp.data);
-        console.log("exerciseset", resp.repos)
+        console.log("exerciseset", exercise.data)
     }
    
     return(    
             <div className='page-contents-exercise-list'>
-                            
+
+                          
                         {/* <div className='page-contents-img-list'>   
                             
                         </div>    
 
                         <div className='page-contents-label-list'>  
                             
-                        </div>   */}
-                
-                    
-
-                        
+                        </div>   */}        
                  
             </div>
     )

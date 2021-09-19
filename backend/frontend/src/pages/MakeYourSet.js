@@ -12,39 +12,24 @@ import { useAsync } from "react-async"
 
 import MakeYourSetBlocks2 from './MakeYourSetBlocks2';
 
-// const loadSetList = async () => {
-//     const res = await fetch('http://127.0.0.1:8000/api/set/list/')
-//     if (!res.ok) throw new Error(res)
-//     return res.json() 
-// }
-
-// const loadExercise = async ({ setid }) => {
-//     const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
-//     if (!res.ok) throw new Error(res)
-//     return res.json() 
-// }
-
 function MakeYourSet () {
-    const [resp, setGitData] = useState({ data: null, repos: null });
+    const [setList, setSetList] = useState({ data: null });
 
     useEffect(() => {
         const fetchData = async () => {
-            const respGlobal = await axios(
+            const setlist = await axios(
                 'http://127.0.0.1:8000/api/set/list/'
             );
-            // const respRepos = await axios(
-            //     'http://127.0.0.1:8000/api/exerciseset/1/'
-            // );
 
-            setGitData({ data: respGlobal.data, repos: respGlobal.data });
+            setSetList({ data: setlist.data});
         };
 
         fetchData();
      }, []);
 
     console.log('render');
-    if (resp.data) {
-        console.log("setlist", resp.data);
+    if (setList.data) {
+        console.log("setlist", setList.data);
         // console.log("exerciseset", resp.repos)
     }
 
@@ -61,12 +46,12 @@ function MakeYourSet () {
 
     const [isExistSet, setExistSet] = useState(true)
     
-    if (resp.data) {
-        Object.keys(resp.data).forEach(function (key) {
-            setArr.push(resp.data[key]);
-            console.log(resp.data[key].title)
-            console.log(resp.data[key].id)
-            SetNameArr.push(resp.data[key].title)
+    if (setList.data) {
+        Object.keys(setList.data).forEach(function (key) {
+            setArr.push(setList.data[key]);
+            console.log(setList.data[key].title)
+            console.log(setList.data[key].id)
+            SetNameArr.push(setList.data[key].title)
         });
         console.log(SetNameArr.length);
         
