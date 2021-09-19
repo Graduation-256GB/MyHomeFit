@@ -5,7 +5,7 @@ import {BiAddToQueue} from 'react-icons/bi'
 import '../../css/gaok/MakeYourSet.css'
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 
-function MakeYourSetBlocks2 ({setArr}) {
+function MakeYourSetBlocks ({setArr}) {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
     const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
@@ -78,4 +78,4 @@ function MakeYourSetBlocks2 ({setArr}) {
     )
 }
 
-export default MakeYourSetBlocks2;
+export default MakeYourSetBlocks;
