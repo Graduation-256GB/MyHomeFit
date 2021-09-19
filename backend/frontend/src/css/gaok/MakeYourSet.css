@@ -111,7 +111,37 @@
   height: 20rem;
   margin-top: 1rem;
   display: flex;
+  flex-direction: row;
+}
+
+.page-contents-exercise-item{
+  display: flex;
   flex-direction: column;
+}
+
+.page-contents-exercise-item > label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  border: #a9a1a1 solid 0.1rem;
+  margin-top: 0.5rem;
+  font-family: NanumSquare_acL;
+  font-size: 1.2rem;
+  color: #a9a1a1;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.page-contents-exercise-item > img {
+  border-radius: 1rem;
+  border: #a9a1a1 solid 0.1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  width: 15rem;
+  height: 15rem;
 }
 
 .page-contents-img-list {

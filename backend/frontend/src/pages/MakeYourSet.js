@@ -2,24 +2,24 @@ import React, {useState, useEffect} from 'react';
 import { useMediaQuery } from "react-responsive";
 import axios from 'axios';
 
-// import MakeYourSetMain from './MakeYourSetMain';
 import '../css/gaok/MakeYourSet.css'
 import IconSet from '../images/icon_makeyourset.png';
-// import IconAddSet from '../../images/icon_add_set.png'
-// import IconStart from '../..//images/icon_start.png'
-// import IconSquat from '../../images/icon_set_squat.png'
-import { useAsync } from "react-async"
 
-import MakeYourSetBlocks2 from './MakeYourSetBlocks2';
+import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
 
+    const Token = localStorage.getItem('token')
+    console.log(Token)
     useEffect(() => {
         const fetchData = async () => {
-            const setlist = await axios(
-                'http://127.0.0.1:8000/api/set/list/'
-            );
+            const setlist = await axios.get(
+                'http://127.0.0.1:8000/api/set/list/', {
+                    headers: {
+                        Authorization: `Token ${Token}`
+                    }
+            });
 
             setSetList({ data: setlist.data});
         };
@@ -30,7 +30,6 @@ function MakeYourSet () {
     console.log('render');
     if (setList.data) {
         console.log("setlist", setList.data);
-        // console.log("exerciseset", resp.repos)
     }
 
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
@@ -41,8 +40,6 @@ function MakeYourSet () {
     const isRetina = useMediaQuery({ minResolution: '2dppx' })
     const setArr = []
     const SetNameArr = []
-
-    // const { data, error, isLoading } = useAsync({ promiseFn: loadSetList })
 
     const [isExistSet, setExistSet] = useState(true)
     
@@ -76,13 +73,8 @@ function MakeYourSet () {
                     </div> 
                 </div>
             </div>
-            {/* <div className='page-center-container'>
-                <div className='page-block-wrapper'>
-                    <MakeYourSetBlocks setArr={setArr}/>
-                </div>
-                <div className='page-contents-wrapper'></div>
-            </div> */}
-            <MakeYourSetBlocks2 setArr={setArr} />
+           
+            <MakeYourSetBlocks setArr={setArr} />
         </div>
 
         </>

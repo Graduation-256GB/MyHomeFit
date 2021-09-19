@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import MakeYourSet from "./pages/makeyourset/MakeYourSet";
+import MakeYourSet from "./pages/MakeYourSet";
 import MakeYourSetForm from "./pages/MakeYourSetForm";
 import Training from "./pages/Training";
 import FitNotes from "./pages/FitNotes";

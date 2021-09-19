@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set, CustomUser
@@ -133,3 +133,17 @@ class SetListAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
+class ListExerciseLogAPIView(APIView):
+    def get(self, request, pk):
+        serializer = ExerciseLogSerializer(
+            ExerciseLog.objects.filter(set_exercise__set_id=pk), many=True)
+        return Response(serializer.data)
+    """
+    def post(self, request):
+        serializer = ExerciseLogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    """
