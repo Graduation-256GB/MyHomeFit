@@ -3,10 +3,10 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, ExerciseLogSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set
+from .models import Exercise, ExerciseSet, Set, ExerciseLog
 import json
 from rest_framework.response import Response
 from rest_framework.views import APIView, View
@@ -66,9 +66,6 @@ def pose_feed(request, pk):
     return StreamingHttpResponse(gen(PoseWebCam(pk)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
-#def pose_feed(request):
-#    return StreamingHttpResponse(gen(PoseWebCam()),
-#                                 content_type='multipart/x-mixed-replace; boundary=frame')
 
 def set_create(request):
     if request.method == 'POST':
@@ -108,34 +105,17 @@ class SetListAPIView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-"""
-class JoinAPIView(APIView):
-    def get(self, request, set_id):
-        exercises = []
-        exercises_exercise = []
 
-        entries = ExerciseSet.objects.filter(set_id=set_id).select_related('exercise_exercise').values(
-            'set_num', 'set_count', 'exercise__name', 'exercise__img', 'exercise__calories', 'exercise__url').order_by('set_num')
-
-        for row in entries:
-            exercises.append(
-                {'set_num': row["set_num"], 'set_count': row["set_count"]})
-            exercises_exercise.append({'name': row["exercise__name"], 'img': row["exercise__img"],
-                                      'calories': row["exercise__calories"], 'url': row["exercise__url"]})
-            print("row['exercise__img']: ", row["exercise__img"])
-        #print("exercises: ", exercises)
-
-        serializer_exercise_set = ExerciseSetSerializer(exercises, many=True)
-        serializer_exercise = ExerciseSerializer(exercises_exercise, many=True)
-
-        for row1 in serializer_exercise_set.data:
-            for row2 in serializer_exercise.data:
-                row1.update({'name': row2['name']})
-                row1.update({'img': row2['img']})
-                row1.update({'calories': row2['calories']})
-                row1.update({'url': row2['url']})
-
-        print("serializer_exercise_set.data: ", serializer_exercise_set.data)
-
-        return Response(serializer_exercise_set.data)
-"""
+class ListExerciseLogAPIView(APIView):
+    def get(self, request, pk):
+        serializer = ExerciseLogSerializer(
+            ExerciseLog.objects.filter(set = pk), many=True)
+        return Response(serializer.data)
+    """
+    def post(self, request):
+        serializer = ExerciseLogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    """

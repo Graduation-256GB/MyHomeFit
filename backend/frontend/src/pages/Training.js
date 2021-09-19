@@ -10,6 +10,7 @@ import ReactPlayer from 'react-player'
 import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
+import RealtimeInfo from "../components/Training/RealtimeInfo";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
@@ -64,9 +65,7 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
-                {/*<div className="realtime-info">
-                    Squat  0/10 회
-                </div>*/}
+                <RealtimeInfo setId = {SET_ID} length = {Exercises.length} />
                 <div className="export-video">
                     <ReactPlayer className="export"
                                  url={myVideo} loop muted playing controls />
@@ -74,7 +73,6 @@ const Training = () => {
                 <div className="realtime-video">
                     <div className="user-video">
                         <img src={ poseURL }></img>
-                        {/* <img src="http://127.0.0.1:8000/api/pose_feed"></img> */}
                     </div>
                     {/* <div className="export-video">
                         <ReactPlayer className="export"

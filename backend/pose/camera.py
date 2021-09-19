@@ -2,12 +2,13 @@ import time
 import mediapipe as mp
 import cv2
 import numpy as np
+from datetime import datetime
 from django.conf import settings
 import os
 import math
 from tensorflow.keras.models import load_model
 
-from .models import ExerciseSet, Set
+from .models import ExerciseSet, Set, ExerciseLog
 
 poseEstimationModel = load_model(
     os.path.join(settings.BASE_DIR, 'pose/my_model.h5'))
@@ -54,6 +55,11 @@ class PoseWebCam(object):
         self.exercise_count = 1 # 실시간 수행 횟수
         self.isFinished = False # 한 세트를 끝냈는지
 
+        ### About exerciselog
+        self.user_id = 1    # user_id
+        self.isAdded = False    # ExerciseLog 객체 한 번만 생성
+        self.logs = []    # ExerciseLog id 배열
+
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
         self.skeleton = {'Right Shoulder': 12, 'Right Elbow': 14, 'Right Wrist': 16, 'Left Shoulder': 11, 'Left Elbow': 13,
@@ -88,6 +94,14 @@ class PoseWebCam(object):
             self.exercise_standard_cnt = self.userExerciseList[self.userexercisename]
 
         if results.pose_landmarks:
+            ### About exerciselog
+            if (self.isAdded == False):
+                for exercise in self.exercise_set:
+                    ### ExerciseLog 객체 생성
+                    log = ExerciseLog(user_id=self.user_id, set_id=self.set_id, set_exercise_id=exercise.id, correct_count=0, fail_count=0, time_started=datetime.now())
+                    log.save()
+                    self.logs.append(log.id)
+                self.isAdded = True # 1번 만
 
             for id, lm in enumerate(results.pose_landmarks.landmark):
                 self.mpDraw.draw_landmarks(
@@ -168,18 +182,29 @@ class PoseWebCam(object):
                     self.allkeypoints = []  # 배열 초기화
 
                     ### About pose counting
-                    # text = self.current_exercise, ":", self.exercise_count, "/", self.total_count, "회"
                     if (self.isFinished == False):
                         if self.exercise_count % self.total_count == 0:
+                            ### About exerciselog
+                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log.time_finished = datetime.now() # time_finished 필드 값 추가
+                            current_log.save()
+
                             self.exercise_count = 0
                             self.n += 1
+
                             if ( len(self.exercise_set) <= self.n ):
                                 self.isFinished = True
                             else:
                                 self.total_count = self.exercise_set[self.n].set_count
                                 self.current_exercise = self.exercise_set[self.n].exercise.name
-                        self.exercise_count += 1
-                    ###
+
+                        if ( self.n < len(self.exercise_set) ):
+                            self.exercise_count += 1
+                            ### About exerciselog
+                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log.correct_count = self.exercise_count # counting
+                            current_log.save()
+                            print("id || exercise_count: ", current_log.id, current_log.correct_count)
 
 
                 #if (self.exercise_count != 0):
@@ -204,9 +229,8 @@ class PoseWebCam(object):
         # cv2.putText(img, self.predicted_pose, (50, 50),
         # cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
-        #if(self.exercise_count != 0):
-        #    cv2.putText(img, str(int(self.exercise_count)), (50, 50),
-        #                        cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+        # if(self.exercise_count != 0) and (self.isFinished == False):
+        #     cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
 
         # cv2.imshow("Image", img)
         # cv2.waitKey(1)
