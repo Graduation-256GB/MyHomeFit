@@ -33,7 +33,7 @@ const SideMenubar = () => {
                     <div className={menu==1?"unclicked":"unclicked"}>
                         <li onClick={() => setMenu(1)}>
 
-                            <Link to="/new/makeyourset">
+                            <Link to="/makeyourset">
                                 {menu === 1 ? <img src={AddClicked}/> : <img src={Add}/>}
                             </Link>
 

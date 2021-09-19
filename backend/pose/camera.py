@@ -39,6 +39,7 @@ class PoseWebCam(object):
         self.current_exercise = self.exercise_set[self.n].exercise.name # n번째 운동 name
         self.exercise_count = 1 # 실시간 수행 횟수
         self.isFinished = False # 한 세트를 끝냈는지
+        self.successOrFail = 'Checking.....'
 
 
         print(self.exercise_set) 
@@ -114,6 +115,9 @@ class PoseWebCam(object):
 
         if results.pose_landmarks:
 
+            # Success Fail 화면에 표시 
+            cv2.putText(img, self.successOrFail, (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
+
             for id, lm in enumerate(results.pose_landmarks.landmark):
                 self.mpDraw.draw_landmarks(
                     img, results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
@@ -166,9 +170,14 @@ class PoseWebCam(object):
 
                     self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
                     print(self.pose_cnt, "th pose is", self.predicted_pose)
-                    # 예측된 포즈(라벨) 출력
-                    cv2.putText(img, self.predicted_pose, (50, 50),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+                    # # 예측된 포즈(라벨) 출력
+                    # cv2.putText(img, self.predicted_pose, (50, 50),
+                    #             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+
+                    if self.predicted_pose == self.current_exercise:
+                        self.successOrFail='Succeess'
+                    else:
+                        self.successOrFail='Fail'
 
                     # if self.exercise_user_frame_cnt == 16:
                     #     self.exercise_user_cnt += 1
@@ -238,6 +247,7 @@ class PoseWebCam(object):
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
         cv2.putText(img, self.predicted_pose, (50, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+       
         # cv2.putText(img, self.flag, (200, 200),
         #             cv2.FONT_HERSHEY_SIMPLEX, 4, (0, 0, 255), 3)
 

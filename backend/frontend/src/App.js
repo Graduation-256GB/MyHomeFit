@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import MakeYourSet from "./pages/makeyourset/MakeYourSet";
+import MakeYourSet from "./pages/MakeYourSet";
 import MakeYourSetForm from "./pages/MakeYourSetForm.js";
 import Training from "./pages/Training";
 import FitNotes from "./pages/FitNotes";
@@ -15,7 +15,7 @@ import Navbar from "./pages/Navbar";
 import Signup from "./pages/signup";
 import Login from "./pages/Login";
 
-import new_makeYourSet from "./pages/makeyourset/MakeYourSet";
+// import new_makeYourSet from "./pages/makeyourset/MakeYourSet";
 // import MakeTest from "./pages/gaok/MakeYourSet"
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
         <Route path="/navbar" component={Navbar} />
 
         <Route path="/log" component={Login}/>
-        <Route path="/new/makeyourset" component={new_makeYourSet}/>
+        {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}
         {/* <Route path="/maketest" component={MakeTest}/> */}
       </div>
   );

@@ -8,7 +8,7 @@ urlpatterns = [
     path('exercise/', views.ListExercise.as_view()),
     path('exercise/create/', views.exercise_create),
     path('exercise/<int:pk>/', views.DetailExercise.as_view()),
-    # path('exerciseset/<int:pk>/', views.ListExerciseSet.as_view()),
+    path('exerciseset/<int:pk>/', views.ListExerciseSet.as_view()),
     path('set/list/', views.SetListAPIView.as_view()),
     path('set/create/', views.set_create),
     # path('exercise/join/<int:set_id>/', views.JoinAPIView.as_view()),

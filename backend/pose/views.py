@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, ExerciseInSetSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set
@@ -26,7 +26,7 @@ from rest_framework.views import APIView, View
 class ListSetInExercise(generics.ListCreateAPIView):
     queryset = ExerciseSet.objects.all()
     # queryset = ExerciseSet.objects.
-    serializer_class = ExerciseSetSerializer
+    serializer_class = ExerciseInSetSerializer
 
 
 class ListExercise(generics.ListCreateAPIView):
@@ -43,14 +43,14 @@ class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
-# class ListExerciseSet(APIView):
-#     def get(self, request, pk):
-#         set = Set.objects.get(id=pk)
-#         serializer = ExerciseSetSerializer(
-#             ExerciseSet.objects.filter(set=set), many=True)
-#         return Response(serializer.data)
-#         # queryset = ExerciseSet.objects.filter(set=set)
-#         # serializer_class = ExerciseSerializer
+class ListExerciseSet(APIView):
+    def get(self, request, pk):
+        set = Set.objects.get(id=pk)
+        serializer = ExerciseSetSerializer(
+            ExerciseSet.objects.filter(set=set), many=True)
+        return Response(serializer.data)
+        # queryset = ExerciseSet.objects.filter(set=set)
+        # serializer_class = ExerciseSerializer
 
 def index(request):
     return render(request, 'pose/home.html')
