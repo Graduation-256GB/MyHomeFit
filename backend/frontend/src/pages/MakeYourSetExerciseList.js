@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from "react-responsive";
 import {BiAddToQueue} from 'react-icons/bi'
+import axios from 'axios';
 
 // import MakeYourSetMainSet from '../makeyourset/MakeYourSetMainSet'
 import '../css/gaok/MakeYourSet.css'
@@ -20,9 +21,9 @@ import { useAsync } from "react-async"
 // }
 
 
-function MakeYourSetExerciseList (props) {
+function MakeYourSetExerciseList ({setid}) {
 
-    const SET_ID=props.setid
+    const SET_ID=setid
     console.log("props 전달 확인")
     console.log(SET_ID)
 
@@ -36,11 +37,12 @@ function MakeYourSetExerciseList (props) {
     //         return res.json() 
     //     })
     // }, []);
-    const loadExercise = async ({setid}) => {
-        const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
-        if (!res.ok) throw new Error(res)
-        return res.json() 
-    }
+
+    // const loadExercise = async ({setid}) => {
+    //     const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
+    //     if (!res.ok) throw new Error(res)
+    //     return res.json() 
+    // }
     
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
@@ -49,7 +51,7 @@ function MakeYourSetExerciseList (props) {
     const isPortrait = useMediaQuery({orientation: 'portrait'})
     const isRetina = useMediaQuery({minResolution: '2dppx'})
 
-    const { data, error, isLoading } = useAsync({ promiseFn: loadExercise, setid: SET_ID})
+    // const { data, error, isLoading } = useAsync({ promiseFn: loadExercise, setid: SET_ID})
     // const exerciseImgArr=[]  // 모든 운동 목록
 
     // const [tmpArr, setTmpArr]=useState([])  // filter로 거른 운동 목록(set_id 기준으로)
@@ -60,42 +62,47 @@ function MakeYourSetExerciseList (props) {
     // tmpArr의 한 운동 블럭에 있는 exercise를 이용해야 한다. 
     // tmpArr를 map으로 돌면서 exercise를 출력해보자 
 
-    const exerciseArr=[]
-    if (data) {
-        Object.keys(data).forEach(function (key) {
-            console.log("api/exerciseset확인")
-            console.log(data[key])
-            console.log("item.exercise 확인")
-            console.log(data[key].name, data[key].set_count) 
-            exerciseArr.push(data[key])
-        });
+    // const exerciseArr=[]
+    // if (data) {
+    //     Object.keys(data).forEach(function (key) {
+    //         console.log("api/exerciseset확인")
+    //         console.log(data[key])
+    //         console.log("item.exercise 확인")
+    //         console.log(data[key].name, data[key].set_count) 
+    //         exerciseArr.push(data[key])
+    //     });
+    // }
+
+    const [exercise, setExercise] = useState({ data: null });
+    useEffect(() => {
+        const fetchData = async () => {
+            const exerciselist = await axios(
+                `http://127.0.0.1:8000/api/exerciseset/${setid}/`
+            );
+
+            setExercise({ data: exerciselist.data });
+        };
+
+        fetchData();
+     }, [setid]);
+
+    console.log('render2');
+    if (exercise.data) {
+        // console.log("setlist", resp.data);
+        console.log("exerciseset", exercise.data)
     }
-    
    
     return(    
             <div className='page-contents-exercise-list'>
-                            
+
+                          
                         {/* <div className='page-contents-img-list'>   
                             
                         </div>    
 
                         <div className='page-contents-label-list'>  
                             
-                        </div>   */}
-                
-                    {exerciseArr.map(item => (
-                        <div className='page-contents-exercise'>
-                        <div>
-                            <img src={item.img}/>
-                        </div>
-                        <div>
-                            <label>{item.set_count}</label>
-                        </div>
-                        </div>
-                    ))}
-                
-
-                        
+                        </div>   */}        
                  
             </div>
     )

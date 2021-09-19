@@ -12,11 +12,23 @@ import IconListSquat from '../images/icon_set_squat.png'
 import { useAsync } from "react-async"
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 
-const loadSetInExerciseList = async () => {
-    const res = await fetch('http://127.0.0.1:8000/api/set/exercise/')
-    if (!res.ok) throw new Error(res)
-    return res.json() 
-}
+// const loadSetInExerciseList = async () => {
+//     const res = await fetch('http://127.0.0.1:8000/api/set/exercise/')
+//     if (!res.ok) throw new Error(res)
+//     return res.json() 
+// }
+
+// const loadExercise = async ({ setid }) => {
+//     const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
+//     if (!res.ok) throw new Error(res)
+//     return res.json() 
+// }
+
+// function loadExercise ({ setid }) {
+//     const res = fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
+//     if (!res.ok) throw new Error(res)
+//     return res.json() 
+// }
 
 function MakeYourSetBlocks2 ({setArr}) {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
@@ -26,22 +38,22 @@ function MakeYourSetBlocks2 ({setArr}) {
     const isPortrait = useMediaQuery({orientation: 'portrait'})
     const isRetina = useMediaQuery({minResolution: '2dppx'})
 
-    const { data, error, isLoading } = useAsync({ promiseFn: loadSetInExerciseList })
+    // const { data, error, isLoading } = useAsync({ promiseFn: loadSetInExerciseList })
     
-    const exerciseArr=[]  // 모든 운동 목록
+    // const exerciseArr=[]  // 모든 운동 목록
 
-    const [tmpArr, setTmpArr]=useState([])  // filter로 거른 운동 목록(set_id 기준으로/선택한 블럭의 exercise 배열)
+    // const [tmpArr, setTmpArr]=useState([])  // filter로 거른 운동 목록(set_id 기준으로/선택한 블럭의 exercise 배열)
     const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
     // const [setExercise, setSetExercise]=useState([]) // 선택한 블럭의 exercise 저장
     
-    if (data) {
-        Object.keys(data).forEach(function (key) {
-            exerciseArr.push(data[key]);
-            console.log("test")
-            console.log(exerciseArr)
-        });
-    }
+    // if (data) {
+    //     Object.keys(data).forEach(function (key) {
+    //         // exerciseArr.push(data[key]);
+    //         // console.log("test")
+    //         // console.log(exerciseArr)
+    //     });
+    // }
 
     const addSet = e => {
         window.location.replace('http://127.0.0.1:8000/makeyoursetform');
@@ -57,8 +69,8 @@ function MakeYourSetBlocks2 ({setArr}) {
         // console.log(id)
         // console.log(exerciseArr.filter((element) => element.set==id))  
         {setSetId(id)}
-        {setTmpArr(exerciseArr.filter((element) => element.set==id))}
-        console.log(tmpArr)
+        // {setTmpArr(exerciseArr.filter((element) => element.set==id))}
+        // console.log(tmpArr)
         // {setSetExercise(tmpArr.filter((element) => element.exercise))}
         console.log("aaaaa")
         // console.log(setExercise)
