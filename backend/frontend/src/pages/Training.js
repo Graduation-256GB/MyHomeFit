@@ -13,7 +13,7 @@ import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
-const SET_ID = 2
+const SET_ID = 1
 const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
 const loadExerciseSet = async ({ set_id }) => {
