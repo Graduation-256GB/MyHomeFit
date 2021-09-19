@@ -3,13 +3,12 @@ import { useMediaQuery } from "react-responsive";
 import {BiAddToQueue} from 'react-icons/bi'
 
 // import MakeYourSetMainSet from '../makeyourset/MakeYourSetMainSet'
-import '../../css/gaok/MakeYourSet.css'
-import IconSet from '../../images/icon_makeyourset.png';
-import IconAddSet from '../../images/icon_add_set.png'
-import IconStart from '../../images/icon_start.png'
-import IconListSquat from '../../images/icon_set_squat.png'
+import '../css/gaok/MakeYourSet.css'
+import IconSet from '../images/icon_makeyourset.png';
+import IconAddSet from '../images/icon_add_set.png'
+import IconStart from '../images/icon_start.png'
+import IconListSquat from '../images/icon_set_squat.png'
 
-  
 import { useAsync } from "react-async"
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 
@@ -28,13 +27,14 @@ function MakeYourSetBlocks2 ({setArr}) {
     const isRetina = useMediaQuery({minResolution: '2dppx'})
 
     const { data, error, isLoading } = useAsync({ promiseFn: loadSetInExerciseList })
+    
     const exerciseArr=[]  // 모든 운동 목록
 
     const [tmpArr, setTmpArr]=useState([])  // filter로 거른 운동 목록(set_id 기준으로/선택한 블럭의 exercise 배열)
-    const [setid, setSetId]=useState(0)   // 선택한 블럭의 set_id 저장 
+    const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
     // const [setExercise, setSetExercise]=useState([]) // 선택한 블럭의 exercise 저장
-
+    
     if (data) {
         Object.keys(data).forEach(function (key) {
             exerciseArr.push(data[key]);
@@ -102,7 +102,7 @@ function MakeYourSetBlocks2 ({setArr}) {
 
                 <div className='set-scroll'>
 
-                    <MakeYourSetExerciseList tmpArr={tmpArr}/>
+                    <MakeYourSetExerciseList setid={setid}/>
 
                 </div>
                 <div className='page-contents-btn-start' onClick={ startSet }>

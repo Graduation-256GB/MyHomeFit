@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { useMediaQuery } from "react-responsive";
 
 // import MakeYourSetMain from './MakeYourSetMain';
-import '../../css/gaok/MakeYourSet.css'
-import IconSet from '../../images/icon_makeyourset.png';
+import '../css/gaok/MakeYourSet.css'
+import IconSet from '../images/icon_makeyourset.png';
 // import IconAddSet from '../../images/icon_add_set.png'
 // import IconStart from '../..//images/icon_start.png'
 // import IconSquat from '../../images/icon_set_squat.png'
