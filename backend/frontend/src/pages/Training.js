@@ -1,35 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../css/Training/Training.css"
 import IconTraining from "../images/icon_training.png"
-import IconNextVideo from "../images/icon_next_video.png"
 import PoseShoulder from "../images/pose_shoulder.png"
 import NextPose from "../components/Training/NextPose";
-import {MdReplay} from 'react-icons/md'
+import { MdReplay } from 'react-icons/md'
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
 import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
+import RealtimeInfo from "../components/Training/RealtimeInfo";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
 const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
 const loadExerciseSet = async ({ set_id }) => {
-    const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${set_id}/`)
+    const res = await fetch(`http://127.0.0.1:8000/api/join/${set_id}/`)
     if (!res.ok) throw new Error(res)
     return res.json()
 }
 
 const Training = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
-    if (data) {
-        JSON.stringify(data)
-        console.log(data)
-    }
 
-    {/*const [Exercises, SetExercises] = useState([])*/}
+    const Exercises = [];
+
+    if (data) {
+        Object.keys(data).forEach(function (key) {
+            Exercises.push(data[key]);
+        });
+    }
 
     return (
         <div className="menu2-container">
@@ -47,16 +49,9 @@ const Training = () => {
             </div>
             <div className="videos">
                 <img src={LeftBtn} className="left-button"/>
-                <div className="next-pose-container">
-                    <NextPose/>
-                    <NextPose/>
-                    <NextPose/>
-                    <NextPose/>
-                    <NextPose/>
-                    <NextPose/>
-                    <NextPose/>
-                    <NextPose/>
-                </div>
+
+                <NextPose exercises = { Exercises }/>
+
                 <img src={RightBtn} className="right-button"/>
                 {/* <div className="set-name">
                     2 SET
@@ -70,15 +65,14 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
+                <RealtimeInfo setId = {SET_ID} length = {Exercises.length} />
                 <div className="export-video">
-                        <ReactPlayer className="export"
-                                     url={myVideo} loop muted playing controls />
-                    </div>
+                    <ReactPlayer className="export"
+                                 url={myVideo} loop muted playing controls />
+                </div>
                 <div className="realtime-video">
                     <div className="user-video">
-                        {/*IE에서 지원되지 않는 속성 포함*/}
-                        {/* <img src="http://127.0.0.1:8000/api/pose_feed"></img> */}
-                        <img src={poseURL}></img>
+                        <img src={ poseURL }></img>
                     </div>
                     {/* <div className="export-video">
                         <ReactPlayer className="export"
@@ -88,6 +82,7 @@ const Training = () => {
             </div>
         </div>
     );
+
 };
 
 export default Training;

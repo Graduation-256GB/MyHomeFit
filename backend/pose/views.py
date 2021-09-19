@@ -6,11 +6,10 @@ from rest_framework import generics
 from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, ExerciseInSetSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set
+from .models import Exercise, ExerciseSet, Set, ExerciseLog
 import json
 from rest_framework.response import Response
 from rest_framework.views import APIView, View
-
 
 # def exercise_list(request):
 #     serializer_class = ExerciseSerializer
@@ -51,6 +50,21 @@ class ListExerciseSet(APIView):
         return Response(serializer.data)
         # queryset = ExerciseSet.objects.filter(set=set)
         # serializer_class = ExerciseSerializer
+
+# class DetailExerciseSet(APIView):
+#     def get(self, request, pk):
+#         serializer = ExerciseSetSerializer(
+#             ExerciseSet.objects.get(id=pk))
+#         return Response(serializer.data)
+class ListJoinAPIView(APIView):
+    def get(self, request, pk):
+        set = Set.objects.get(id=pk)
+        serializer = ExerciseSetSerializer(
+            ExerciseSet.objects.filter(set=set).order_by('set_num'), many=True)
+        return Response(serializer.data)
+        # queryset = ExerciseSet.objects.filter(set=set)
+        # serializer_class = ExerciseSerializer
+
 
 def index(request):
     return render(request, 'pose/home.html')
