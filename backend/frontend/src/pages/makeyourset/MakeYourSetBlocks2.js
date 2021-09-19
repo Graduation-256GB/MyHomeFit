@@ -14,7 +14,13 @@ import { useAsync } from "react-async"
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 
 const loadSetInExerciseList = async () => {
-    const res = await fetch('http://127.0.0.1:8000/api/set/exercise/')
+    const Token = localStorage.getItem('token')
+    const res = await fetch('http://127.0.0.1:8000/api/set/exercise/', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Token ${Token}`
+        }
+    })
     if (!res.ok) throw new Error(res)
     return res.json() 
 }

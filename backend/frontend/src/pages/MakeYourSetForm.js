@@ -26,7 +26,13 @@ function getCookie(name) {
     }
 
 const loadExerciseList = async () => {
-    const res = await fetch('http://127.0.0.1:8000/api/exercise/')
+    const Token = localStorage.getItem('token')
+    const res = await fetch('http://127.0.0.1:8000/api/exercise/', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Token ${Token}`
+        }
+    })
     if (!res.ok) throw new Error(res)
     return res.json()
 }

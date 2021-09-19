@@ -12,7 +12,13 @@ import { useAsync } from "react-async"
 import MakeYourSetBlocks2 from './MakeYourSetBlocks2';
 
 const loadSetList = async () => {
-    const res = await fetch('http://127.0.0.1:8000/api/set/list/')
+    const Token = localStorage.getItem('token')
+    const res = await fetch('http://127.0.0.1:8000/api/set/list/', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Token ${Token}`
+        }
+    })
     if (!res.ok) throw new Error(res)
     return res.json() 
 }
@@ -28,7 +34,7 @@ const MakeYourSet = () => {
     const SetNameArr = []
 
     const { data, error, isLoading } = useAsync({ promiseFn: loadSetList })
-
+    
     const [isExistSet, setExistSet] = useState(true)
     
     if (data) {

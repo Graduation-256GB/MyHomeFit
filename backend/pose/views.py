@@ -7,6 +7,8 @@ from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerialize
 from datetime import datetime
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set, CustomUser
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
@@ -32,6 +34,8 @@ class ListSetInExercise(generics.ListCreateAPIView):
 class ListExercise(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class ListSet(generics.ListCreateAPIView):
@@ -39,9 +43,9 @@ class ListSet(generics.ListCreateAPIView):
     serializer_class = SetSerializer
 
     def get_queryset(self):
-        # current_user = self.request.user
-        print(self.request.user)
-        current_user = CustomUser.objects.get(email='abc@naver.com')
+        current_user = self.request.user
+        # print(self.request.user)
+        # current_user = CustomUser.objects.get(email='abc@naver.com')
         return Set.objects.filter(user=current_user)
 
 
