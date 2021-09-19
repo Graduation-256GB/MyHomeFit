@@ -34,13 +34,14 @@ class ExerciseInSetSerializer(serializers.ModelSerializer):
 class ExerciseSetSerializer(serializers.ModelSerializer):
     # exercise = ExerciseSerializer(many=True, read_only=True)
     # set = SetSerializer(many=True, read_only=True)
+    setTitle = serializers.CharField(source='set.title')
     img = serializers.ImageField(source='exercise.img')
     name = serializers.CharField(source='exercise.name')
-
+    
     class Meta:
         model = ExerciseSet
         fields = ('exercise', 'name', 'set', 'set_num',
-                  'set_count', 'created_at', 'img')
+                  'set_count', 'created_at', 'img', 'setTitle')
 
 class SetSerializer(serializers.ModelSerializer):
     class Meta:

@@ -20,9 +20,9 @@ import { useAsync } from "react-async"
 // }
 
 
-function MakeYourSetExerciseList (props) {
+function MakeYourSetExerciseList ({setid}) {
 
-    const SET_ID=props.setid
+    const SET_ID=setid
     console.log("props 전달 확인")
     console.log(SET_ID)
 
@@ -50,7 +50,7 @@ function MakeYourSetExerciseList (props) {
     const isPortrait = useMediaQuery({orientation: 'portrait'})
     const isRetina = useMediaQuery({minResolution: '2dppx'})
 
-    const { data, error, isLoading } = useAsync({ promiseFn: props.loadExercise, setid: SET_ID})
+    // const { data, error, isLoading } = useAsync({ promiseFn: loadExercise, setid: SET_ID})
     // const exerciseImgArr=[]  // 모든 운동 목록
 
     // const [tmpArr, setTmpArr]=useState([])  // filter로 거른 운동 목록(set_id 기준으로)
@@ -61,16 +61,16 @@ function MakeYourSetExerciseList (props) {
     // tmpArr의 한 운동 블럭에 있는 exercise를 이용해야 한다. 
     // tmpArr를 map으로 돌면서 exercise를 출력해보자 
 
-    const exerciseArr=[]
-    if (data) {
-        Object.keys(data).forEach(function (key) {
-            console.log("api/exerciseset확인")
-            console.log(data[key])
-            console.log("item.exercise 확인")
-            console.log(data[key].name, data[key].set_count) 
-            exerciseArr.push(data[key])
-        });
-    }
+    // const exerciseArr=[]
+    // if (data) {
+    //     Object.keys(data).forEach(function (key) {
+    //         console.log("api/exerciseset확인")
+    //         console.log(data[key])
+    //         console.log("item.exercise 확인")
+    //         console.log(data[key].name, data[key].set_count) 
+    //         exerciseArr.push(data[key])
+    //     });
+    // }
     
    
     return(    
@@ -84,17 +84,7 @@ function MakeYourSetExerciseList (props) {
                             
                         </div>   */}
                 
-                    {exerciseArr.map(item => (
-                        <div className='page-contents-exercise'>
-                        <div>
-                            <img src={item.img}/>
-                        </div>
-                        <div>
-                            <label>{item.set_count}</label>
-                        </div>
-                        </div>
-                    ))}
-                
+                    
 
                         
                  
