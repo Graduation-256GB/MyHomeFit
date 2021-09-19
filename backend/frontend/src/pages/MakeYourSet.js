@@ -48,8 +48,6 @@ function MakeYourSet () {
         console.log("exerciseset", resp.repos)
     }
 
-
-
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
     const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
