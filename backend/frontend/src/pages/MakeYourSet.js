@@ -17,6 +17,12 @@ const loadSetList = async () => {
     return res.json() 
 }
 
+const loadExercise = async ({ setid }) => {
+    const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
+    if (!res.ok) throw new Error(res)
+    return res.json() 
+}
+
 const MakeYourSet = () => {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
@@ -67,7 +73,7 @@ const MakeYourSet = () => {
                 </div>
                 <div className='page-contents-wrapper'></div>
             </div> */}
-            <MakeYourSetBlocks2 setArr={setArr}/>
+            <MakeYourSetBlocks2 setArr={setArr} loadExercise={loadExercise}/>
         </div>
 
         </>

@@ -36,11 +36,12 @@ function MakeYourSetExerciseList (props) {
     //         return res.json() 
     //     })
     // }, []);
-    const loadExercise = async ({setid}) => {
-        const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
-        if (!res.ok) throw new Error(res)
-        return res.json() 
-    }
+
+    // const loadExercise = async ({setid}) => {
+    //     const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${setid}/`)
+    //     if (!res.ok) throw new Error(res)
+    //     return res.json() 
+    // }
     
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
@@ -49,7 +50,7 @@ function MakeYourSetExerciseList (props) {
     const isPortrait = useMediaQuery({orientation: 'portrait'})
     const isRetina = useMediaQuery({minResolution: '2dppx'})
 
-    const { data, error, isLoading } = useAsync({ promiseFn: loadExercise, setid: SET_ID})
+    const { data, error, isLoading } = useAsync({ promiseFn: props.loadExercise, setid: SET_ID})
     // const exerciseImgArr=[]  // 모든 운동 목록
 
     // const [tmpArr, setTmpArr]=useState([])  // filter로 거른 운동 목록(set_id 기준으로)

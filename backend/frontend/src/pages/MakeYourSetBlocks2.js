@@ -18,7 +18,7 @@ const loadSetInExerciseList = async () => {
     return res.json() 
 }
 
-function MakeYourSetBlocks2 ({setArr}) {
+function MakeYourSetBlocks2 ({setArr, loadExercise}) {
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
     const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
     const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
@@ -102,7 +102,7 @@ function MakeYourSetBlocks2 ({setArr}) {
 
                 <div className='set-scroll'>
 
-                    <MakeYourSetExerciseList setid={setid}/>
+                    <MakeYourSetExerciseList setid={setid} loadExercise={loadExercise}/>
 
                 </div>
                 <div className='page-contents-btn-start' onClick={ startSet }>
