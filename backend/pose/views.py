@@ -109,7 +109,7 @@ class SetListAPIView(APIView):
 class ListExerciseLogAPIView(APIView):
     def get(self, request, pk):
         serializer = ExerciseLogSerializer(
-            ExerciseLog.objects.filter(set = pk), many=True)
+            ExerciseLog.objects.filter(set_exercise__set_id=pk), many=True)
         return Response(serializer.data)
     """
     def post(self, request):

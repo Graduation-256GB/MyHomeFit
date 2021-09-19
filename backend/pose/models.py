@@ -54,7 +54,6 @@ class ExerciseLog(models.Model):
     correct_count = models.IntegerField(default=0)  # 사용자가 운동을 정확하게 했을 때의 카운트
     fail_count = models.IntegerField(default=0)  # 사용자가 운동을 실패했을 때의 카운트
     set_exercise = models.ForeignKey(ExerciseSet, on_delete=models.PROTECT)
-    set = models.ForeignKey(Set, on_delete=models.CASCADE, null=True)  # 어떤 세트에 속하는지
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     time_started = models.DateTimeField(blank=True, null=True)
