@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-import { useMediaQuery } from "react-responsive";
 import {BiAddToQueue} from 'react-icons/bi'
 
 import '../../css/gaok/MakeYourSet.css'
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 
 function MakeYourSetBlocks ({setArr}) {
-    const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
-    const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
-    const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
-    const isTabletOrMobileDevice = useMediaQuery({maxDeviceWidth: 1224})
-    const isPortrait = useMediaQuery({orientation: 'portrait'})
-    const isRetina = useMediaQuery({minResolution: '2dppx'})
 
     const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장

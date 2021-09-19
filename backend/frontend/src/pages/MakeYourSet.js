@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { useMediaQuery } from "react-responsive";
 import axios from 'axios';
 
 import '../css/gaok/MakeYourSet.css'
@@ -32,16 +31,8 @@ function MakeYourSet () {
         console.log("setlist", setList.data);
     }
 
-    const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
-    const isBigScreen = useMediaQuery({minDeviceWidth: 1824})
-    const isTabletOrMobile = useMediaQuery({maxWidth: 1224})
-    const isTabletOrMobileDevice = useMediaQuery({maxDeviceWidth: 1224})
-    const isPortrait = useMediaQuery({orientation: 'portrait'})
-    const isRetina = useMediaQuery({ minResolution: '2dppx' })
     const setArr = []
     const SetNameArr = []
-
-    const [isExistSet, setExistSet] = useState(true)
     
     if (setList.data) {
         Object.keys(setList.data).forEach(function (key) {
