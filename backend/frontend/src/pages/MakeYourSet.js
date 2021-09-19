@@ -10,7 +10,7 @@ import IconSet from '../images/icon_makeyourset.png';
 // import IconSquat from '../../images/icon_set_squat.png'
 import { useAsync } from "react-async"
 
-// import MakeYourSetBlocks2 from './MakeYourSetBlocks2';
+import MakeYourSetBlocks2 from './MakeYourSetBlocks2';
 
 // const loadSetList = async () => {
 //     const res = await fetch('http://127.0.0.1:8000/api/set/list/')
@@ -32,11 +32,11 @@ function MakeYourSet () {
             const respGlobal = await axios(
                 'http://127.0.0.1:8000/api/set/list/'
             );
-            const respRepos = await axios(
-                'http://127.0.0.1:8000/api/exerciseset/1/'
-            );
+            // const respRepos = await axios(
+            //     'http://127.0.0.1:8000/api/exerciseset/1/'
+            // );
 
-            setGitData({ data: respGlobal.data, repos: respRepos.data });
+            setGitData({ data: respGlobal.data, repos: respGlobal.data });
         };
 
         fetchData();
@@ -45,7 +45,7 @@ function MakeYourSet () {
     console.log('render');
     if (resp.data) {
         console.log("setlist", resp.data);
-        console.log("exerciseset", resp.repos)
+        // console.log("exerciseset", resp.repos)
     }
 
     const isDesktopOrLaptop = useMediaQuery( {minDeviceWidth: 1224} )
@@ -61,16 +61,16 @@ function MakeYourSet () {
 
     const [isExistSet, setExistSet] = useState(true)
     
-    // if (data) {
-    //     Object.keys(data).forEach(function (key) {
-    //         setArr.push(data[key]);
-    //         console.log(data[key].title)
-    //         console.log(data[key].id)
-    //         SetNameArr.push(data[key].title)
-    //     });
-    //     console.log(SetNameArr.length);
+    if (resp.data) {
+        Object.keys(resp.data).forEach(function (key) {
+            setArr.push(resp.data[key]);
+            console.log(resp.data[key].title)
+            console.log(resp.data[key].id)
+            SetNameArr.push(resp.data[key].title)
+        });
+        console.log(SetNameArr.length);
         
-    // }
+    }
     return(
         <>
         <div className='page-top-layer'>
@@ -97,7 +97,7 @@ function MakeYourSet () {
                 </div>
                 <div className='page-contents-wrapper'></div>
             </div> */}
-            {/* <MakeYourSetBlocks2 setArr={setArr} /> */}
+            <MakeYourSetBlocks2 setArr={setArr} />
         </div>
 
         </>

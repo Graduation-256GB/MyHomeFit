@@ -114,7 +114,7 @@ function MakeYourSetBlocks2 ({setArr}) {
 
                 <div className='set-scroll'>
 
-                    {/* <MakeYourSetExerciseList setid={setid}/> */}
+                    <MakeYourSetExerciseList setid={setid}/>
 
                 </div>
                 <div className='page-contents-btn-start' onClick={ startSet }>

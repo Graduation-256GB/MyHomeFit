@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from "react-responsive";
 import {BiAddToQueue} from 'react-icons/bi'
+import axios from 'axios';
 
 // import MakeYourSetMainSet from '../makeyourset/MakeYourSetMainSet'
 import '../css/gaok/MakeYourSet.css'
@@ -71,7 +72,25 @@ function MakeYourSetExerciseList ({setid}) {
     //         exerciseArr.push(data[key])
     //     });
     // }
-    
+
+    const [resp, setGitData] = useState({ data: null, repos: null });
+    useEffect(() => {
+        const fetchData = async () => {
+            const respRepos = await axios(
+                `http://127.0.0.1:8000/api/exerciseset/${setid}/`
+            );
+
+            setGitData({ data: respRepos.data, repos: respRepos.data });
+        };
+
+        fetchData();
+     }, []);
+
+    console.log('render2');
+    if (resp.data) {
+        // console.log("setlist", resp.data);
+        console.log("exerciseset", resp.repos)
+    }
    
     return(    
             <div className='page-contents-exercise-list'>
