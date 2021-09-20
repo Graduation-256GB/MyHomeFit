@@ -12,6 +12,8 @@ import LoginPage from "./pages/LoginPage";	// 추가
 import SignupPage from "./pages/SignupPage";
 import Navbar from "./pages/Navbar";
 
+// import Navbar from './components/Navbar';
+
 import Signup from "./pages/signup";
 import Login from "./pages/Login";
 
@@ -22,6 +24,7 @@ const App = () => {
   return (
       <div className='main-container'>
         <SideMenubar />
+        {/* <Navbar/> */}
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/makeyoursetform" component={MakeYourSetForm} />
         <Route path="/training" component={Training} />

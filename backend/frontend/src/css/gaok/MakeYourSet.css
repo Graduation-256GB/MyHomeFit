@@ -42,6 +42,7 @@
   height: 6.8rem;
   margin-top: 1.5rem;
   justify-content: space-between;
+  align-items: center;
 }
 
 .page-title > svg {
@@ -172,6 +173,10 @@
     border: #A9A1A1 solid 0.1rem;
 } */
 
+#block-wrapper{
+  position: fixed;
+  bottom: 30px;
+}
 .page-contents-exercise-count {
   width: 15rem;
   margin-right: 1rem;
@@ -204,9 +209,9 @@
   bottom: 30px;
   background-color: #04957c;
   text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
   text-decoration: none;
 }
 
@@ -216,6 +221,15 @@
   padding-right: 3rem;
   color: #ffffff;
   font-family: NanumSquare_acEB;
+}
+
+.page-contents-btn-start > img {
+  width: 5rem;
+  height: 5rem;
+  border: #27cfb3 solid 0.5rem;
+  border-radius: 4rem;
+  background-color: #ffffff;
+  margin-right: 1.5rem;
 }
 
 .block-container {
@@ -233,6 +247,27 @@
   width: 17rem;
   margin-left: 6.5rem;
   display: inline-block;
+}
+
+.page-block-unselected {
+  width: 20rem;
+  height: 4.6rem;
+  border-radius: 3rem;
+  background-color: #27cfb3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.2rem;
+  margin-left: 6.5rem;
+  text-decoration: none;
+  opacity: 0.5;
+}
+
+.page-block-unselected > label {
+  font-family: NanumSquare_acB;
+  color: #ffffff;
+  font-size: 1.6rem;
+  margin-right: 1rem;
 }
 
 .page-block-selected {

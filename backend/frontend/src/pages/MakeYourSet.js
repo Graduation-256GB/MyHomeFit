@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import '../css/gaok/MakeYourSet.css'
 import IconSet from '../images/icon_makeyourset.png';
+import {IoIosCut} from 'react-icons/io'
 
 import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 
@@ -51,8 +52,9 @@ function MakeYourSet () {
                 <div className='page-wrapper'>
                     <div className='page-title'>
                         <div>
-                            <label>Only for you, Gaok</label>
-                            <img src={IconSet}/>
+                            <label>Make Your Set.</label>
+                            {/* <img src={IconSet}/> */}
+                            <IoIosCut size="50" color="#ffffff"/>
                         </div>
 
                         <svg width="100" height="100">
@@ -60,7 +62,7 @@ function MakeYourSet () {
                         </svg>
                     </div>
                     <div className='page-small-title'>
-                        <label>Make Your Fitness Set.</label>
+                        <label>Only For You, Gaok</label>
                     </div> 
                 </div>
             </div>

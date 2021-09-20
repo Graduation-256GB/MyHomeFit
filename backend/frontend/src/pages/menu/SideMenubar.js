@@ -24,9 +24,9 @@ const SideMenubar = () => {
         <div className="sidemenu-container">
             <div className="logo-wrapper">
                 <div className="logo">
-                <BsFillCircleFill/>
+                {/* <BsFillCircleFill/> */}
                 </div>
-                <h3>myhomefit</h3>
+                <h3># MY_HOME_FIT</h3>
             </div>
             <div className="menubar">
                 <ul>
