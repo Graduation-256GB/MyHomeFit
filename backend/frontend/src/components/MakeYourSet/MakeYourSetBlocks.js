@@ -9,13 +9,6 @@ function MakeYourSetBlocks ({setArr}) {
     const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
 
-    const addSet = e => {
-        window.location.replace('http://127.0.0.1:8000/makeyoursetform');
-    }
-
-    const startSet = e => {
-        window.location.replace('http://127.0.0.1:8000/training');
-    }
 
     const setTitleClicked = (id, title) => {
         console.log("start")
@@ -30,10 +23,10 @@ function MakeYourSetBlocks ({setArr}) {
                 <div className='block-container'>
                     <div id="trapezoid"></div>
                     <div id="block-wrapper">
-                        <div className='page-block-selected' onClick={ addSet }>
+                        <a className='page-block-selected' href="/makeyoursetform">
                             <label>세트 추가하기</label>
                             <BiAddToQueue className='page-block-icon'/>
-                        </div>
+                        </a>
                     
                         {setArr.map(item => (
                             <div className='page-block-selected' onClick={ () => setTitleClicked(item.id, item.title) }>
@@ -62,9 +55,9 @@ function MakeYourSetBlocks ({setArr}) {
                     <MakeYourSetExerciseList setid={setid}/>
 
                 </div>
-                <div className='page-contents-btn-start' onClick={ startSet }>
+                <a className='page-contents-btn-start' href="/training">
                     <label>START</label>
-                </div>
+                </a>
 
             </div>
         </div>
