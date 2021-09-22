@@ -13,6 +13,7 @@ import { useAsync } from "react-async"
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 import TrainingReady from "../components/Training/TrainingReady";
 
+
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
 const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
@@ -51,9 +52,10 @@ const Training = () => {
                 <label>Start your Fitness.</label>
             </div>
             {
-                page===1?
-                    <TrainingReady setPage={setPage} setSpeed={setSpeed}/>
-            :
+                page === 1 &&
+                <TrainingReady setPage={setPage} setSpeed={setSpeed} />}
+            {
+                page===2 &&
             <div className="videos">
                 <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
@@ -70,7 +72,7 @@ const Training = () => {
                 <RealtimeInfo setId = {SET_ID} length = {Exercises.length} />
                 <div className="export-video">
                     <ReactPlayer className="export"
-                                 url={myVideo} loop muted playing controls />
+                                url={myVideo} loop muted playing controls />
                 </div>
                 <div className="realtime-video">
                     <div className="user-video">
