@@ -11,6 +11,7 @@ import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
 import RealtimeInfo from "../components/Training/RealtimeInfo";
+import TrainingReady from "../components/Training/TrainingReady";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
@@ -26,6 +27,8 @@ const Training = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
 
     const Exercises = [];
+    const [page, setPage] = useState(1);
+    const [speed, setSpeed] = useState('');
 
     if (data) {
         Object.keys(data).forEach(function (key) {
@@ -47,15 +50,14 @@ const Training = () => {
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>
             </div>
+            {
+                page===1?
+                    <TrainingReady setPage={setPage} setSpeed={setSpeed}/>
+            :
             <div className="videos">
                 <img src={LeftBtn} className="left-button"/>
-
                 <NextPose exercises = { Exercises }/>
-
                 <img src={RightBtn} className="right-button"/>
-                {/* <div className="set-name">
-                    2 SET
-                </div> */}
                 <div className="next-video">
                     <div className="next-video-label">
                         Next
@@ -74,12 +76,10 @@ const Training = () => {
                     <div className="user-video">
                         <img src={ poseURL }></img>
                     </div>
-                    {/* <div className="export-video">
-                        <ReactPlayer className="export"
-                                     url={myVideo} loop muted playing controls />
-                    </div> */}
                 </div>
             </div>
+
+            }
         </div>
     );
 
