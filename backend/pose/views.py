@@ -54,6 +54,7 @@ class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
+
 class ListExerciseSet(APIView):
     def get(self, request, pk):
         set = Set.objects.get(id=pk)
@@ -82,8 +83,11 @@ def gen(camera):
 # Create your views here.
 
 
-def pose_feed(request, pk):
-    return StreamingHttpResponse(gen(PoseWebCam(pk)),
+def pose_feed(request):
+    set_id = request.GET['set_id']
+    speed_num = request.GET['speed_num']
+    print(speed_num, set_id)
+    return StreamingHttpResponse(gen(PoseWebCam(set_id, speed_num)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 

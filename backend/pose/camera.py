@@ -15,7 +15,7 @@ poseEstimationModel = load_model(
 
 
 class PoseWebCam(object):
-    def __init__(self, pk):
+    def __init__(self, pk, num):
         # self.vs = VideoStream(src=0).start()
         self.cap = cv2.VideoCapture(0)
         # self.mpPose = mp.solutions.pose
@@ -30,8 +30,7 @@ class PoseWebCam(object):
 
         self.predicted_pose = 'start'
 
-
-        ### About realtime pose counting
+        # About realtime pose counting
         self.set_id = pk  # set_id
         self.exercise_set = ExerciseSet.objects.filter(set=self.set_id).order_by('set_num')
         self.exercise_log = []
@@ -71,7 +70,7 @@ class PoseWebCam(object):
 
         self.pose_cnt = 0  # n번 째 포즈
 
-        self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
+        self.fps = num  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
 
 
@@ -109,7 +108,7 @@ class PoseWebCam(object):
         #     self.exercise_standard_cnt = self.userExerciseList[self.userexercisename]
 
         if results.pose_landmarks:
-            ### About exerciselog
+            # About exerciselog
             if (self.isAdded == False):
                 for exercise in self.exercise_set:
                     ### ExerciseLog 객체 생성
@@ -124,8 +123,9 @@ class PoseWebCam(object):
                 self.isAdded = True # 1번 만
                 print("self.exercise_log: ", self.exercise_log)
 
-            # Success Fail 화면에 표시 
-            cv2.putText(img, self.successOrFail, (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
+            # Success Fail 화면에 표시
+            cv2.putText(img, self.successOrFail, (200, 200),
+                        cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
 
             for id, lm in enumerate(results.pose_landmarks.landmark):
                 self.mpDraw.draw_landmarks(
@@ -152,7 +152,8 @@ class PoseWebCam(object):
                 ### About pose counting
                 if frame_order == 1 and not self.isFinished:
                     print((self.exercise_set[self.n]).set_num, "번째 운동")
-                    print("<<", self.current_exercise, ": ",self.exercise_count,"/", self.total_count, "회 >>")
+                    print("<<", self.current_exercise, ": ",
+                          self.exercise_count, "/", self.total_count, "회 >>")
 
                 print(frame_order, "th frame")
 
@@ -169,7 +170,7 @@ class PoseWebCam(object):
                 self.allkeypoints.append(keypoints)
 
                 if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
-                    
+
                     self.pose_cnt += 1
 
                     # self.outputkeypoints=[self.allkeypoints]  # 단지, 3차원 배열로 만들어주기 위함(이전까지는 2차원 배열)
@@ -186,7 +187,7 @@ class PoseWebCam(object):
                     if self.predicted_pose == self.current_exercise:
                         self.successOrFail='Success'
                     else:
-                        self.successOrFail='Fail'
+                        self.successOrFail = 'Fail'
 
                     
                     ### About pose counting
@@ -256,7 +257,6 @@ class PoseWebCam(object):
                 # print(len(self.allkeypoints[0]))
 
                 # print(self.allkeypoints)
-
 
         # cTime = time.time()
         # self.fps = 1/(cTime-self.pTime)

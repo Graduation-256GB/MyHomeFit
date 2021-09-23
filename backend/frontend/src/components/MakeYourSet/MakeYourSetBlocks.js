@@ -12,15 +12,8 @@ function MakeYourSetBlocks ({setArr}) {
     const [type, setType]=useState('') // 선택한 블럭의 set 타입 저장
     const [isSelected, setSelected]=useState('') // 블럭 선택 유무 상태 저장 
 
-    const addSet = e => {
-        window.location.replace('http://127.0.0.1:8000/makeyoursetform');
-    }
 
-    const startSet = (id) => {
-        window.location.replace('http://127.0.0.1:8000/training');
-    }
-
-    const setTitleClicked = (id, title, type) => {
+    const setTitleClicked = (id, title) => {
         console.log("start")
         {setSetId(id)}
         console.log("aaaaa")
@@ -34,10 +27,10 @@ function MakeYourSetBlocks ({setArr}) {
                 <div className='block-container'>
                     <div id="trapezoid"></div>
                     <div id="block-wrapper">
-                        <div className='page-block-selected' onClick={ addSet }>
+                        <a className='page-block-selected' href="/makeyoursetform">
                             <label>세트 추가하기</label>
                             <BiAddToQueue className='page-block-icon'/>
-                        </div>
+                        </a>
                     
                         {setArr.map(item => (
                             <div className={isSelected==item.id?'page-block-selected':'page-block-unselected'} onClick={ () => {setTitleClicked(item.id, item.title, item.type); setSelected(item.id)}  }>
@@ -66,12 +59,10 @@ function MakeYourSetBlocks ({setArr}) {
                     <MakeYourSetExerciseList setid={setid}/>
 
                 </div>
-
-                <div className='page-contents-btn-start' onClick={ startSet }>
-                    <img src={IconStart}/>
+                <a className='page-contents-btn-start' href="/training">
                     <label>START</label>
-                </div>
-                
+                </a>
+
             </div>
         </div>
     )

@@ -13,10 +13,11 @@ import { useAsync } from "react-async"
 import jQuery from 'jquery'
 import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
+import TrainingReady from "../components/Training/TrainingReady";
+
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
-const SET_ID = 1 
-const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
+const SET_ID = 1
 
 function getCookie(name) {
     var cookieValue = null;
@@ -47,10 +48,14 @@ const loadExerciseSet = async ({ set_id }) => {
 
 const Training = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
+    const [speed_num, setSpeedNum]=useState(14)
+    const poseURL = `http://127.0.0.1:8000/api/pose_feed/?set_id=${SET_ID}&speed_num=${speed_num}`
 
     const csrftoken = getCookie('csrftoken');
 
     const Exercises = [];
+    const [page, setPage] = useState(1);
+    // const [speed, setSpeed] = useState('');
 
     if (data) {
         Object.keys(data).forEach(function (key) {
@@ -72,15 +77,15 @@ const Training = () => {
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>
             </div>
+            {
+                page === 1 &&
+                <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum} />}
+            {
+                page===2 &&
             <div className="videos">
                 <img src={LeftBtn} className="left-button"/>
-
                 <NextPose exercises = { Exercises }/>
-
                 <img src={RightBtn} className="right-button"/>
-                {/* <div className="set-name">
-                    2 SET
-                </div> */}
                 <div className="next-video">
                     <div className="next-video-label">
                         Next
@@ -99,12 +104,10 @@ const Training = () => {
                     <div className="user-video">
                         <img src={ poseURL }></img>
                     </div>
-                    {/* <div className="export-video">
-                        <ReactPlayer className="export"
-                                    url={myVideo} loop muted playing controls />
-                    </div> */}
                 </div>
             </div>
+
+            }
         </div>
     );
 
