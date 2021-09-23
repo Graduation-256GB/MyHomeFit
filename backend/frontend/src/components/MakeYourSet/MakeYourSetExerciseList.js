@@ -23,7 +23,7 @@ function MakeYourSetExerciseList ({setid}) {
         };
 
         fetchData();
-     }, [setid]);
+    }, [setid]);
 
     console.log('render2');
     const exerciseArr=[]
@@ -33,9 +33,8 @@ function MakeYourSetExerciseList ({setid}) {
             // console.log("setlist", resp.data);
             console.log("exerciseset", exercise.data)
         });
-    }  
+    }
     
-   
     return(    
             <div className='page-contents-exercise-list'>
                 
@@ -45,7 +44,6 @@ function MakeYourSetExerciseList ({setid}) {
                         <label>{item.set_count}회 반복</label>
                     </div>
                 ))}   
-                 
             </div>
     )
 }

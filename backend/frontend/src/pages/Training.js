@@ -10,21 +10,45 @@ import ReactPlayer from 'react-player'
 import LeftBtn from '../images/menu_left.png';
 import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
+import jQuery from 'jquery'
+import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1 
 const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
 const loadExerciseSet = async ({ set_id }) => {
-    const res = await fetch(`http://127.0.0.1:8000/api/join/${set_id}/`)
+    const Token = localStorage.getItem('token')
+    const res = await fetch(`http://127.0.0.1:8000/api/exerciseset/${set_id}/`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Token ${Token}`
+        }
+    })
     if (!res.ok) throw new Error(res)
     return res.json()
 }
 
 const Training = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
+
+    const csrftoken = getCookie('csrftoken');
 
     const Exercises = [];
 
@@ -66,10 +90,10 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
-                <RealtimeInfo setId = {SET_ID} length = {Exercises.length} />
+                <RealtimeInfo setId = { SET_ID } exercises = { Exercises } csrftoken={csrftoken}/>
                 <div className="export-video">
                     <ReactPlayer className="export"
-                                 url={myVideo} loop muted playing controls />
+                                url={myVideo} loop muted playing controls />
                 </div>
                 <div className="realtime-video">
                     <div className="user-video">
@@ -77,7 +101,7 @@ const Training = () => {
                     </div>
                     {/* <div className="export-video">
                         <ReactPlayer className="export"
-                                     url={myVideo} loop muted playing controls />
+                                    url={myVideo} loop muted playing controls />
                     </div> */}
                 </div>
             </div>
