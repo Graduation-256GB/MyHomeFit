@@ -41,7 +41,7 @@ class PoseWebCam(object):
         self.isFinished = False # 한 세트를 끝냈는지
 
         ### About exerciselog
-        self.user_id = 1    # user_id
+        # self.user_id = 1    # user_id
         self.isAdded = False    # ExerciseLog 객체 한 번만 생성
         self.logs = []    # ExerciseLog id 배열
 
@@ -117,7 +117,8 @@ class PoseWebCam(object):
                     ###log.save()
 
                     # ExerciseLog 객체 불러옴
-                    log = ExerciseLog.objects.filter(user_id=self.user_id, set_exercise_id=exercise.id).last()
+                    # log = ExerciseLog.objects.filter(user_id=self.user_id, set_exercise_id=exercise.id).last()
+                    log = ExerciseLog.objects.filter(set_exercise_id=exercise.id).last()
                     self.exercise_log.append(log)
                     self.logs.append(log.id)
                 self.isAdded = True # 1번 만
