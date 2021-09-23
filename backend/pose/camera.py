@@ -2,7 +2,7 @@ import time
 import mediapipe as mp
 import cv2
 import numpy as np
-from datetime import datetime
+from datetime import datetime, date
 from django.conf import settings
 import os
 import math
@@ -33,15 +33,20 @@ class PoseWebCam(object):
 
         ### About realtime pose counting
         self.set_id = pk  # set_id
-        self.exercise_set = ExerciseSet.objects.filter(
-            set=Set.objects.get(id=self.set_id))
+        self.exercise_set = ExerciseSet.objects.filter(set=self.set_id).order_by('set_num')
+        self.exercise_log = []
         self.n = 0 # ExerciseSet n번째
         self.total_count = self.exercise_set[self.n].set_count   # n번째 운동 set_count
         self.current_exercise = self.exercise_set[self.n].exercise.name # n번째 운동 name
         self.exercise_count = 1 # 실시간 수행 횟수
         self.isFinished = False # 한 세트를 끝냈는지
-        self.successOrFail = 'Checking.....'
 
+        ### About exerciselog
+        self.user_id = 1    # user_id
+        self.isAdded = False    # ExerciseLog 객체 한 번만 생성
+        self.logs = []    # ExerciseLog id 배열
+
+        self.successOrFail = 'Checking.....'
 
         print(self.exercise_set) 
         
@@ -70,20 +75,6 @@ class PoseWebCam(object):
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
 
 
-        ### About realtime pose counting
-        self.set_id = pk  # set_id
-        self.exercise_set = ExerciseSet.objects.filter(set=self.set_id).order_by('set_num')
-        self.n = 0 # ExerciseSet n번째
-        self.total_count = self.exercise_set[self.n].set_count   # n번째 운동 set_count
-        self.current_exercise = self.exercise_set[self.n].exercise.name # n번째 운동 name
-        self.exercise_count = 1 # 실시간 수행 횟수
-        self.isFinished = False # 한 세트를 끝냈는지
-
-        ### About exerciselog
-        self.user_id = 1    # user_id
-        self.isAdded = False    # ExerciseLog 객체 한 번만 생성
-        self.logs = []    # ExerciseLog id 배열
-
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
         self.skeleton = {'Right Shoulder': 12, 'Right Elbow': 14, 'Right Wrist': 16, 'Left Shoulder': 11, 'Left Elbow': 13,
@@ -108,8 +99,8 @@ class PoseWebCam(object):
         # keypoints.add([results.pose_landmarks.landmark[0]])
 
         # 세트 목록 순서대로 정렬
-        self.exercise_set = sorted(
-            self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
+        # self.exercise_set = sorted(
+        #     self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
         ## print("self.exercise_set_id_s:", self.exercise_set[0].id, self.exercise_set[1].id)
 
         # # 사용자가 만든 운동 세트에 있는 운동 이름 하나 가져오기
@@ -122,10 +113,16 @@ class PoseWebCam(object):
             if (self.isAdded == False):
                 for exercise in self.exercise_set:
                     ### ExerciseLog 객체 생성
-                    log = ExerciseLog(user_id=self.user_id, set_id=self.set_id, set_exercise_id=exercise.id, correct_count=0, fail_count=0, time_started=datetime.now())
-                    log.save()
+                    ###log = ExerciseLog(user_id=self.user_id, set_exercise_id=exercise.id, 
+                    ###                    correct_count=0, fail_count=0, time_started=datetime.now())
+                    ###log.save()
+
+                    # ExerciseLog 객체 불러옴
+                    log = ExerciseLog.objects.filter(user_id=self.user_id, set_exercise_id=exercise.id).last()
+                    self.exercise_log.append(log)
                     self.logs.append(log.id)
                 self.isAdded = True # 1번 만
+                print("self.exercise_log: ", self.exercise_log)
 
             # Success Fail 화면에 표시 
             cv2.putText(img, self.successOrFail, (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
@@ -152,7 +149,7 @@ class PoseWebCam(object):
                 if frame_order == 0:
                     frame_order = 16
 
-                 ### About pose counting
+                ### About pose counting
                 if frame_order == 1 and not self.isFinished:
                     print((self.exercise_set[self.n]).set_num, "번째 운동")
                     print("<<", self.current_exercise, ": ",self.exercise_count,"/", self.total_count, "회 >>")
@@ -187,9 +184,40 @@ class PoseWebCam(object):
                     #             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
                     if self.predicted_pose == self.current_exercise:
-                        self.successOrFail='Succeess'
+                        self.successOrFail='Success'
                     else:
                         self.successOrFail='Fail'
+
+                    
+                    ### About pose counting
+                    if (self.isFinished == False):
+                        ### About exerciselog
+                        current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                        # counting
+                        if (self.successOrFail == 'Fail'):
+                            current_log.fail_count = current_log.fail_count + 1
+                        else:
+                            current_log.correct_count = current_log.correct_count + 1
+                        current_log.save()
+
+                        if self.exercise_count % self.total_count == 0:
+                            ### About exerciselog
+                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log.time_finished = datetime.now() # time_finished 필드 값 추가
+                            current_log.save()
+
+                            self.exercise_count = 0
+                            self.n += 1
+
+                            if ( len(self.exercise_set) <= self.n ):
+                                self.isFinished = True
+                            else:
+                                self.total_count = self.exercise_set[self.n].set_count
+                                self.current_exercise = self.exercise_set[self.n].exercise.name
+
+                        if ( self.n < len(self.exercise_set) ):
+                            self.exercise_count += 1
+                            
 
                     # if self.exercise_user_frame_cnt == 16:
                     #     self.exercise_user_cnt += 1
@@ -216,30 +244,6 @@ class PoseWebCam(object):
 
                     self.allkeypoints = []  # 배열 초기화
 
-                    ### About pose counting
-                    if (self.isFinished == False):
-                        if self.exercise_count % self.total_count == 0:
-                            ### About exerciselog
-                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
-                            current_log.time_finished = datetime.now() # time_finished 필드 값 추가
-                            current_log.save()
-
-                            self.exercise_count = 0
-                            self.n += 1
-
-                            if ( len(self.exercise_set) <= self.n ):
-                                self.isFinished = True
-                            else:
-                                self.total_count = self.exercise_set[self.n].set_count
-                                self.current_exercise = self.exercise_set[self.n].exercise.name
-
-                        if ( self.n < len(self.exercise_set) ):
-                            self.exercise_count += 1
-                            ### About exerciselog
-                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
-                            current_log.correct_count = self.exercise_count # counting
-                            current_log.save()
-                            print("id || exercise_count: ", current_log.id, current_log.correct_count)
 
 
                 #if (self.exercise_count != 0):
@@ -262,7 +266,7 @@ class PoseWebCam(object):
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
         cv2.putText(img, self.predicted_pose, (50, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
-       
+
         # cv2.putText(img, self.flag, (200, 200),
         #             cv2.FONT_HERSHEY_SIMPLEX, 4, (0, 0, 255), 3)
 
