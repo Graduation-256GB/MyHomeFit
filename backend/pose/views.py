@@ -139,8 +139,8 @@ class ListExerciseLogAPIView(APIView):
         log_list = []
         set_exercise_queryset = ExerciseSet.objects.filter(set=pk).order_by('set_num')
         for element in set_exercise_queryset:
-            #log_list.append(ExerciseLog.objects.filter(user_id=self.user.id, set_exercise_id=element.id).last())
-            log_list.append(ExerciseLog.objects.filter(user=1, set_exercise=element.id).last())
+            log_list.append(ExerciseLog.objects.filter(set_exercise_id=element.id).last())
+            #log_list.append(ExerciseLog.objects.filter(user=1, set_exercise=element.id).last())
         serializer_exercise_log = ExerciseLogSerializer(log_list, many=True)
 
         return Response(serializer_exercise_log.data)
@@ -153,6 +153,6 @@ def log_create(request):
             time_started = DateFormat(datetime.now()).format('Y-m-d h:m:s')
             set_exercise = ExerciseSet.objects.get(id=set_exercise_id)
             exercise_log = ExerciseLog.objects.create(
-                set_exercise=set_exercise, user=request.user, correct_count=0, fail_count=0, time_started=time_started)
+                set_exercise=set_exercise, correct_count=0, fail_count=0, time_started=time_started)
 
     return JsonResponse({'exercise_log_id': exercise_log.id})
