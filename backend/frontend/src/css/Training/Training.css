@@ -134,23 +134,7 @@
   height: 100%;
 }
 
-.realtime-info {
-  position: absolute;
-  width: 500px;
-  height: 35px;
-  left: 7%;
-  bottom: 65%;
-  padding: 15px;
-  background-color: #27cfb3;
-  z-index: 3;
-  box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
-  border-radius: 10px;
 
-  color: white;
-  font-size: 30px;
-  font-weight: bold;
-  font-family: NanumSquare_acEB;
-}
 
 .realtime-video {
   display: inline-flex;

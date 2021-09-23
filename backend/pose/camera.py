@@ -2,12 +2,13 @@ import time
 import mediapipe as mp
 import cv2
 import numpy as np
+from datetime import datetime, date
 from django.conf import settings
 import os
 import math
 from tensorflow.keras.models import load_model
 
-from .models import ExerciseSet, Set
+from .models import ExerciseSet, Set, ExerciseLog
 
 poseEstimationModel = load_model(
     os.path.join(settings.BASE_DIR, 'pose/my_model.h5'))
@@ -29,27 +30,50 @@ class PoseWebCam(object):
 
         self.predicted_pose = 'start'
 
-        # 임의의 데이터로 테스트(운동 순서대로 동작 인식하는지 확인)
-        self.userExerciseList = {'STANDING SIDE CRUNCH': 7,
-                                 'STEP FORWARD DYNAMIC LUNGE': 5, "BURPEE TEST": 6}
-        self.keylist = list(self.userExerciseList.keys())  # key만 뽑아서 리스트로 만들기
-        self.userexercisename = ''  # 운동 이름 하나를 차례대로 저장하는 변수
-        self.exercise_standard_cnt = 0  # 운동 기준 카운트
-        self.exercise_user_cnt = 0  # 운동 이름 하나의 개수를 세기위한 변수
-        self.tmp_cnt = 0
-        self.exercise_user_frame_cnt = 0  # frame_cnt와 구분하기 위한 변수
+
+        ### About realtime pose counting
+        self.set_id = pk  # set_id
+        self.exercise_set = ExerciseSet.objects.filter(set=self.set_id).order_by('set_num')
+        self.exercise_log = []
+        self.n = 0 # ExerciseSet n번째
+        self.total_count = self.exercise_set[self.n].set_count   # n번째 운동 set_count
+        self.current_exercise = self.exercise_set[self.n].exercise.name # n번째 운동 name
+        self.exercise_count = 1 # 실시간 수행 횟수
+        self.isFinished = False # 한 세트를 끝냈는지
+
+        ### About exerciselog
+        self.user_id = 1    # user_id
+        self.isAdded = False    # ExerciseLog 객체 한 번만 생성
+        self.logs = []    # ExerciseLog id 배열
+
+        self.successOrFail = 'Checking.....'
+
+        print(self.exercise_set) 
+        
+        # About realtime pose counting #2 
+        # # 16프레임마다 사용자의 카운트 + 1, 카운트가 지정한 운동의 카운트랑 같아지면, 다음 운동으로 넘어가야한다.     
+        # self.userExerciseList = dict()
+        # for i in self.exercise_set:
+        #     (self.userExerciseList)[i.exercise]=i.set_count
+        # print(self.userExerciseList)
+
+        # # 임의의 데이터로 테스트(운동 순서대로 동작 인식하는지 확인)
+        # # self.userExerciseList = {'STANDING SIDE CRUNCH': 7,
+        # #                          'STEP FORWARD DYNAMIC LUNGE': 5, "BURPEE TEST": 6}
+        # self.keylist = list(self.userExerciseList.keys())  # key만 뽑아서 리스트로 만들기
+        # self.userexercisename = ''  # 운동 이름 하나를 차례대로 저장하는 변수
+        # self.exercise_standard_cnt = 0  # 운동 기준 카운트
+        # self.exercise_user_cnt = 0  # 운동 이름 하나의 개수를 세기위한 변수
+        # self.tmp_cnt = 0
+        # self.exercise_user_frame_cnt = 0  # frame_cnt와 구분하기 위한 변수
+
+        # self.flag = ''
 
         self.pose_cnt = 0  # n번 째 포즈
 
         self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
         self.frame_per_second = 3  # 1초 당 추출할 프레임 수
 
-        self.set_id = pk  # set_id
-        self.exercise_set = ExerciseSet.objects.filter(
-            set=Set.objects.get(id=self.set_id))
-        self.count = self.exercise_set[0].set_count + 1
-        self.exercise_count = 0
-        self.current_exercise = self.exercise_set[self.exercise_count].exercise
 
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
@@ -75,16 +99,33 @@ class PoseWebCam(object):
         # keypoints.add([results.pose_landmarks.landmark[0]])
 
         # 세트 목록 순서대로 정렬
-        self.exercise_set = sorted(
-            self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
+        # self.exercise_set = sorted(
+        #     self.exercise_set, key=lambda exercise_set: exercise_set.set_num)
         ## print("self.exercise_set_id_s:", self.exercise_set[0].id, self.exercise_set[1].id)
 
-        # 사용자가 만든 운동 세트에 있는 운동 이름 하나 가져오기
-        if len(self.keylist) > self.tmp_cnt:
-            self.userexercisename = self.keylist[self.tmp_cnt]
-            self.exercise_standard_cnt = self.userExerciseList[self.userexercisename]
+        # # 사용자가 만든 운동 세트에 있는 운동 이름 하나 가져오기
+        # if len(self.keylist) > self.tmp_cnt:
+        #     self.userexercisename = self.keylist[self.tmp_cnt]
+        #     self.exercise_standard_cnt = self.userExerciseList[self.userexercisename]
 
         if results.pose_landmarks:
+            ### About exerciselog
+            if (self.isAdded == False):
+                for exercise in self.exercise_set:
+                    ### ExerciseLog 객체 생성
+                    ###log = ExerciseLog(user_id=self.user_id, set_exercise_id=exercise.id, 
+                    ###                    correct_count=0, fail_count=0, time_started=datetime.now())
+                    ###log.save()
+
+                    # ExerciseLog 객체 불러옴
+                    log = ExerciseLog.objects.filter(user_id=self.user_id, set_exercise_id=exercise.id).last()
+                    self.exercise_log.append(log)
+                    self.logs.append(log.id)
+                self.isAdded = True # 1번 만
+                print("self.exercise_log: ", self.exercise_log)
+
+            # Success Fail 화면에 표시 
+            cv2.putText(img, self.successOrFail, (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
 
             for id, lm in enumerate(results.pose_landmarks.landmark):
                 self.mpDraw.draw_landmarks(
@@ -101,12 +142,18 @@ class PoseWebCam(object):
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
 
-                self.exercise_user_frame_cnt += 1
+                # self.exercise_user_frame_cnt += 1
 
                 # 프레임 순서 출력
                 frame_order = (self.frame_cnt // interval) % 16
                 if frame_order == 0:
                     frame_order = 16
+
+                ### About pose counting
+                if frame_order == 1 and not self.isFinished:
+                    print((self.exercise_set[self.n]).set_num, "번째 운동")
+                    print("<<", self.current_exercise, ": ",self.exercise_count,"/", self.total_count, "회 >>")
+
                 print(frame_order, "th frame")
 
                 for id, lm in enumerate(results.pose_landmarks.landmark):
@@ -122,7 +169,7 @@ class PoseWebCam(object):
                 self.allkeypoints.append(keypoints)
 
                 if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
-
+                    
                     self.pose_cnt += 1
 
                     # self.outputkeypoints=[self.allkeypoints]  # 단지, 3차원 배열로 만들어주기 위함(이전까지는 2차원 배열)
@@ -132,32 +179,75 @@ class PoseWebCam(object):
 
                     self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
                     print(self.pose_cnt, "th pose is", self.predicted_pose)
-                    # 예측된 포즈(라벨) 출력
-                    cv2.putText(img, self.predicted_pose, (50, 50),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+                    # # 예측된 포즈(라벨) 출력
+                    # cv2.putText(img, self.predicted_pose, (50, 50),
+                    #             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
-                    if self.exercise_user_frame_cnt == 16:
-                        self.exercise_user_cnt += 1
-                        self.exercise_user_frame_cnt = 0
-
-                    print("-----------------------------")
-                    print(self.userexercisename)
-                    print(self.exercise_standard_cnt)
-                    print(self.exercise_user_cnt)
-                    if self.userexercisename == self.predicted_pose:
-                        print("success!")
+                    if self.predicted_pose == self.current_exercise:
+                        self.successOrFail='Success'
                     else:
-                        print("fail")
-                    print("-----------------------------")
+                        self.successOrFail='Fail'
 
-                    if self.exercise_standard_cnt == self.exercise_user_cnt:
-                        self.tmp_cnt += 1
-                        self.exercise_user_cnt = 0
+                    
+                    ### About pose counting
+                    if (self.isFinished == False):
+                        ### About exerciselog
+                        current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                        # counting
+                        if (self.successOrFail == 'Fail'):
+                            current_log.fail_count = current_log.fail_count + 1
+                        else:
+                            current_log.correct_count = current_log.correct_count + 1
+                        current_log.save()
+
+                        if self.exercise_count % self.total_count == 0:
+                            ### About exerciselog
+                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log.time_finished = datetime.now() # time_finished 필드 값 추가
+                            current_log.save()
+
+                            self.exercise_count = 0
+                            self.n += 1
+
+                            if ( len(self.exercise_set) <= self.n ):
+                                self.isFinished = True
+                            else:
+                                self.total_count = self.exercise_set[self.n].set_count
+                                self.current_exercise = self.exercise_set[self.n].exercise.name
+
+                        if ( self.n < len(self.exercise_set) ):
+                            self.exercise_count += 1
+                            
+
+                    # if self.exercise_user_frame_cnt == 16:
+                    #     self.exercise_user_cnt += 1
+                    #     self.exercise_user_frame_cnt = 0
+
+                    # print("-----------------------------")
+                    # print(self.userexercisename)
+                    # print(self.exercise_standard_cnt)
+                    # print(self.exercise_user_cnt)
+                    # if self.userexercisename == self.predicted_pose:
+                    #     print("success!")
+                    #     self.flag='succeess'
+                    # else:
+                    #     print("fail")
+                    #     self.flag='fail'
+                    # print("-----------------------------")
+
+                    # if self.exercise_standard_cnt == self.exercise_user_cnt:
+                    #     self.tmp_cnt += 1
+                    #     self.exercise_user_cnt = 0
 
                     frame_flip = cv2.flip(img, 1)
                     ret, jpeg = cv2.imencode('.jpg', frame_flip)
 
                     self.allkeypoints = []  # 배열 초기화
+
+
+
+                #if (self.exercise_count != 0):
+                #    print("count ...",self.exercise_count,"/", self.total_count)
 
                 # 제대로 만들었는지 확인하기 위한 print문 (cmd창 참고)
                 # print(self.frame_cnt)
@@ -167,11 +257,6 @@ class PoseWebCam(object):
 
                 # print(self.allkeypoints)
 
-                if self.count == 0:
-                    self.exercise_count += 1
-                    self.count = self.exercise_set[self.exercise_count].set_count + 1
-                # text = self.current_exercise, "번째 운동 :", self.count, "회"
-                self.count -= 1
 
         # cTime = time.time()
         # self.fps = 1/(cTime-self.pTime)
@@ -179,12 +264,17 @@ class PoseWebCam(object):
         # self.pTime = cTime
 
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
+        cv2.putText(img, self.predicted_pose, (50, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+
+        # cv2.putText(img, self.flag, (200, 200),
+        #             cv2.FONT_HERSHEY_SIMPLEX, 4, (0, 0, 255), 3)
 
         # cv2.putText(img, self.predicted_pose, (50, 50),
         # cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
-        cv2.putText(img, str(self.count), (50, 50),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+        # if(self.exercise_count != 0) and (self.isFinished == False):
+        #     cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
 
         # cv2.imshow("Image", img)
         # cv2.waitKey(1)
