@@ -16,7 +16,7 @@ import TrainingReady from "../components/Training/TrainingReady";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 const SET_ID = 1
-const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
+
 
 const loadExerciseSet = async ({ set_id }) => {
     const res = await fetch(`http://127.0.0.1:8000/api/join/${set_id}/`)
@@ -26,10 +26,11 @@ const loadExerciseSet = async ({ set_id }) => {
 
 const Training = () => {
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
-
+    const [speed_num, setSpeedNum]=useState(14)
+    const poseURL = `http://127.0.0.1:8000/api/pose_feed/?set_id=${SET_ID}&speed_num=${speed_num}`
     const Exercises = [];
     const [page, setPage] = useState(1);
-    const [speed, setSpeed] = useState('');
+    // const [speed, setSpeed] = useState('');
 
     if (data) {
         Object.keys(data).forEach(function (key) {
@@ -53,7 +54,7 @@ const Training = () => {
             </div>
             {
                 page === 1 &&
-                <TrainingReady setPage={setPage} setSpeed={setSpeed} />}
+                <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum} />}
             {
                 page===2 &&
             <div className="videos">

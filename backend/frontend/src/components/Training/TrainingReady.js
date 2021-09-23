@@ -2,10 +2,19 @@ import React, { useState } from 'react';
 import "../../css/Training/Training.css"
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
-const TrainingReady = ({ setPage, setSpeed }) => {
+const TrainingReady = ({ setPage, setSpeedNum }) => {
     const [countdown, setCountDown]=useState(false)
     const startTraining = e => {
-        setSpeed(e.target.name)
+        if (e.target.name === 'fast') {
+            setSpeedNum(14)
+        }
+        else if (e.target.name === 'basic') {
+            setSpeedNum(13)
+            
+        }
+        else if (e.target.name === 'slow') {
+            setSpeedNum(12)
+        }
         setCountDown(true)
     }
     return (    

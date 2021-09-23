@@ -3,10 +3,10 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set, CustomUser
+from .models import Exercise, ExerciseSet, Set, CustomUser, ExerciseLog
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -54,6 +54,7 @@ class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
+
 class ListExerciseSet(APIView):
     def get(self, request, pk):
         set = Set.objects.get(id=pk)
@@ -62,6 +63,7 @@ class ListExerciseSet(APIView):
         return Response(serializer.data)
         # queryset = ExerciseSet.objects.filter(set=set)
         # serializer_class = ExerciseSerializer
+
 
 class ListJoinAPIView(APIView):
     def get(self, request, pk):
@@ -91,8 +93,11 @@ def gen(camera):
 # Create your views here.
 
 
-def pose_feed(request, pk):
-    return StreamingHttpResponse(gen(PoseWebCam(pk)),
+def pose_feed(request):
+    set_id = request.GET['set_id']
+    speed_num = request.GET['speed_num']
+    print(speed_num, set_id)
+    return StreamingHttpResponse(gen(PoseWebCam(set_id, speed_num)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -133,6 +138,7 @@ class SetListAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
 
 class ListExerciseLogAPIView(APIView):
     def get(self, request, pk):
