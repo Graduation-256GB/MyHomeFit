@@ -13,8 +13,9 @@ import { useAsync } from "react-async"
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
-const SET_ID = 1
+const SET_ID = 1 
 const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
+
 
 const loadExerciseSet = async ({ set_id }) => {
     const res = await fetch(`http://127.0.0.1:8000/api/join/${set_id}/`)
