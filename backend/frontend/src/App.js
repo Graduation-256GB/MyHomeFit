@@ -21,12 +21,14 @@ import Login from "./pages/Login";
 // import MakeTest from "./pages/gaok/MakeYourSet"
 
 const App = () => {
+
   return (
       <div className='main-container'>
         <SideMenubar />
         {/* <Navbar/> */}
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/makeyoursetform" component={MakeYourSetForm} />
+        {/* <Route path="/makeyourset/:setId" exact={true} component={Training} /> */}
         <Route path="/training" component={Training} />
         <Route path="/fitnotes" component={FitNotes} />
         <Route path="/calender" component={Calender} />

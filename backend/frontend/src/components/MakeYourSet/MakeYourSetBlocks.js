@@ -66,6 +66,7 @@ function MakeYourSetBlocks ({setArr}) {
                     <MakeYourSetExerciseList setid={setid}/>
 
                 </div>
+
                 <div className='page-contents-btn-start' onClick={ startSet }>
                     <img src={IconStart}/>
                     <label>START</label>
