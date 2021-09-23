@@ -136,7 +136,7 @@ class ListExerciseLogAPIView(APIView):
         set_exercise_queryset = ExerciseSet.objects.filter(set=pk).order_by('set_num')
         for element in set_exercise_queryset:
             #log_list.append(ExerciseLog.objects.filter(user_id=self.user.id, set_exercise_id=element.id).last())
-            log_list.append(ExerciseLog.objects.filter(user=1, set_exercise=element.id).last())
+            log_list.append(ExerciseLog.objects.filter(user=2, set_exercise=element.id).last())
         serializer_exercise_log = ExerciseLogSerializer(log_list, many=True)
 
         return Response(serializer_exercise_log.data)
