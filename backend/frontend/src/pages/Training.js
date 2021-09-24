@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import {useRecoilState} from 'recoil';
+import { setidState } from './state';
+
 import "../css/Training/Training.css"
 import IconTraining from "../images/icon_training.png"
 import PoseShoulder from "../images/pose_shoulder.png"
@@ -13,8 +16,7 @@ import { useAsync } from "react-async"
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
-const SET_ID = 1 
-const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
+
 
 
 const loadExerciseSet = async ({ set_id }) => {
@@ -24,6 +26,12 @@ const loadExerciseSet = async ({ set_id }) => {
 }
 
 const Training = () => {
+
+    // 전역변수 사용
+    const [globalSetid, setGlobalSetid] = useRecoilState(setidState);
+    const SET_ID = {globalSetid}
+    const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
+
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
 
     const Exercises = [];
