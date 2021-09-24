@@ -3,14 +3,20 @@ import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 
 const RealtimeInfo = ( { setId, exercises, csrftoken } ) => {
-    const [IsStarted, setIsStarted] = useState(false)
+    const [isStarted, setIsStarted] = useState(false)
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [Index, setIndex] = useState(0)
-    const [FailCount, setFailCount] = useState([0,0])
-    const [CorrectCount, setCorrectCount] = useState([0,0])
+    const [FailList, setFailList] = useState([0,0])
+    const [SuccessList, setSuccessList] = useState([0,0])
+    const [FailCount, setFailCount] = useState(0)
+    const [SuccessCount, setSuccessCount] = useState(0)
     const [delay, setDelay] = useState(2000); // GET 시간 간격
     const [isRunning, setIsRunning] = useState(false)
+    const [isOK, setIsOK] = useState(false)
+    const [Result, setResult] = useState("")
+    const [ColorSuccess, setColorSuccess] = useState('#27cfb3')
+    const [ColorFail, setColorFail] = useState('#27cfb3')
 
     const formSubmit = e => {
         e.preventDefault();
@@ -50,11 +56,11 @@ const RealtimeInfo = ( { setId, exercises, csrftoken } ) => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            if (IsStarted == true) {
+            if (isStarted == true) {
                 setIsRunning(true)
             }
         });
-    }, [IsStarted]);
+    }, [isStarted]);
     
     // delay마다 반복 GET
     useInterval(() => {
@@ -70,28 +76,67 @@ const RealtimeInfo = ( { setId, exercises, csrftoken } ) => {
         })
         .then(response => response.json())
         .then(data => {
-            setCorrectCount([])
-            setFailCount([])
+            setSuccessList([])
+            setFailList([])
             Object.keys(data).forEach(function (key) {
-                setCorrectCount(CorrectCount => [...CorrectCount, data[key].correct_count]);
-                setFailCount(FailCount => [...FailCount, data[key].fail_count]);
+                setSuccessList(SuccessList => [...SuccessList, data[key].correct_count]);
+                setFailList(FailList => [...FailList, data[key].fail_count]);
             })
-            if (CorrectCount[Index] + FailCount[Index] === CountList[Index]) {
+
+            if( SuccessList[Index] !== SuccessCount ) {
+                setSuccessCount(SuccessList[Index])
+                setColorSuccess('green')
+                setColorFail('#27cfb3')
+            }
+            if( FailList[Index] !== FailCount ) {
+                setFailCount(FailList[Index])
+                setColorFail('red')
+                setColorSuccess('#27cfb3')
+            } 
+
+            if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
                 if (CountList.length <= Index) {
-                    console.log("CountList.length: ", CountList.length)
                     setIsRunning(false) 
-                    console.log("isRunning: ", isRunning)
                 }
             }
         });
     }, isRunning ? delay : null);
     
+    {/*
+    // Success
+    useEffect(() => {
+        setResult("Success")
+        setIsOK(true)
+        setTimeout(function(){ setIsOK(false); }, 1000);
+    }, [SuccessCount]);
+
+    // Fail
+    useEffect(() => {
+        setResult("Fail")
+        setIsOK(true)
+        setTimeout(function(){ setIsOK(false); }, 1000);
+    }, [FailCount]);
+    */}
 
     return (
-        <div className="realtime-info">
-            <button className="form-submit" onClick={ formSubmit }>START</button>
-            &nbsp;{ NameList[Index] }&nbsp; { CorrectCount[Index] + FailCount[Index] } / { CountList[Index] }회
+        <div>
+            <div className="realtime-pose">
+                { NameList[Index] }
+            </div>
+            <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
+                <button className="form-submit" onClick={ formSubmit }>START</button>
+                Success: { SuccessList[Index] } / { CountList[Index] }회
+                {/*{
+                    isStarted && isOK &&
+                    <div className="success_or_fail">
+                        {Result}
+                    </div>
+                }*/}
+            </div>
+            <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
+                &nbsp; Fail: { FailList[Index] } / { CountList[Index] }회
+            </div> 
         </div>
     )
 }
