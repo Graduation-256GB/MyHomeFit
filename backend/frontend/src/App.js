@@ -1,5 +1,14 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
+
 import MakeYourSet from "./pages/MakeYourSet";
 import MakeYourSetForm from "./pages/MakeYourSetForm";
 import Training from "./pages/Training";
@@ -12,6 +21,8 @@ import LoginPage from "./pages/LoginPage";	// 추가
 import SignupPage from "./pages/SignupPage";
 import Navbar from "./pages/Navbar";
 
+// import Navbar from './components/Navbar';
+
 import Signup from "./pages/signup";
 import Login from "./pages/Login";
 
@@ -19,11 +30,15 @@ import Login from "./pages/Login";
 // import MakeTest from "./pages/gaok/MakeYourSet"
 
 const App = () => {
+
   return (
+    <RecoilRoot>
       <div className='main-container'>
         <SideMenubar />
+        {/* <Navbar/> */}
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/makeyoursetform" component={MakeYourSetForm} />
+        {/* <Route path="/makeyourset/:setId" exact={true} component={Training} /> */}
         <Route path="/training" component={Training} />
         <Route path="/fitnotes" component={FitNotes} />
         <Route path="/calender" component={Calender} />
@@ -37,6 +52,7 @@ const App = () => {
         {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}
         {/* <Route path="/maketest" component={MakeTest}/> */}
       </div>
+    </RecoilRoot>
   );
 };
 

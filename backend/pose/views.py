@@ -54,6 +54,7 @@ class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
+
 class ListExerciseSet(APIView):
     def get(self, request, pk):
         set = Set.objects.get(id=pk)
@@ -82,8 +83,11 @@ def gen(camera):
 # Create your views here.
 
 
-def pose_feed(request, pk):
-    return StreamingHttpResponse(gen(PoseWebCam(pk)),
+def pose_feed(request):
+    set_id = request.GET['set_id']
+    speed_num = request.GET['speed_num']
+    print(speed_num, set_id)
+    return StreamingHttpResponse(gen(PoseWebCam(set_id, speed_num)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -135,8 +139,13 @@ class ListExerciseLogAPIView(APIView):
         log_list = []
         set_exercise_queryset = ExerciseSet.objects.filter(set=pk).order_by('set_num')
         for element in set_exercise_queryset:
+<<<<<<< HEAD
             #log_list.append(ExerciseLog.objects.filter(user_id=self.user.id, set_exercise_id=element.id).last())
             log_list.append(ExerciseLog.objects.filter(user=2, set_exercise=element.id).last())
+=======
+            log_list.append(ExerciseLog.objects.filter(set_exercise_id=element.id).last())
+            #log_list.append(ExerciseLog.objects.filter(user=1, set_exercise=element.id).last())
+>>>>>>> bd11e8ca3d5811e84fd08bddf7591fa2c636a33f
         serializer_exercise_log = ExerciseLogSerializer(log_list, many=True)
 
         return Response(serializer_exercise_log.data)
@@ -146,9 +155,10 @@ def log_create(request):
         req = json.loads(request.body)
         for i in range(len(req)):
             set_exercise_id = req[i]['id']
+            print(set_exercise_id)
             time_started = DateFormat(datetime.now()).format('Y-m-d h:m:s')
             set_exercise = ExerciseSet.objects.get(id=set_exercise_id)
             exercise_log = ExerciseLog.objects.create(
-                set_exercise=set_exercise, user=request.user, correct_count=0, fail_count=0, time_started=time_started)
+                set_exercise=set_exercise, correct_count=0, fail_count=0, time_started=time_started)
 
     return JsonResponse({'exercise_log_id': exercise_log.id})
