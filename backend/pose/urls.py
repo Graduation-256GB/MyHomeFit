@@ -6,6 +6,7 @@ app_name = 'pose'
 urlpatterns = [
     path('set/exercise/', views.ListSetInExercise.as_view()),
     path('exercise/', views.ListExercise.as_view()),
+    path('exercise/top/', views.TopListExercise.as_view()),
     path('exercise/create/', views.exercise_create),
     path('exercise/<int:pk>/', views.DetailExercise.as_view()),
     path('exerciseset/<int:pk>/', views.ListExerciseSet.as_view()),

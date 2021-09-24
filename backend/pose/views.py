@@ -39,6 +39,13 @@ class ListExercise(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
 
+class TopListExercise(generics.ListCreateAPIView):
+    queryset = Exercise.objects.all().order_by('-selected_count')[:3]
+    serializer_class = ExerciseSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
 class ListSet(generics.ListCreateAPIView):
     # queryset = Set.objects.filter(user=request.user)
     serializer_class = SetSerializer
@@ -63,7 +70,7 @@ class ListExerciseSet(APIView):
         return Response(serializer.data)
         # queryset = ExerciseSet.objects.filter(set=set)
         # serializer_class = ExerciseSerializer
-        
+
 
 class CurrentUserView(APIView):
     def get(self, request):
@@ -137,14 +144,17 @@ class ListExerciseLogAPIView(APIView):
             ExerciseLog.objects.filter(set_exercise__set_id=pk), many=True)
         """
         log_list = []
-        set_exercise_queryset = ExerciseSet.objects.filter(set=pk).order_by('set_num')
+        set_exercise_queryset = ExerciseSet.objects.filter(
+            set=pk).order_by('set_num')
         for element in set_exercise_queryset:
-            log_list.append(ExerciseLog.objects.filter(set_exercise_id=element.id).last())
+            log_list.append(ExerciseLog.objects.filter(
+                set_exercise_id=element.id).last())
             #log_list.append(ExerciseLog.objects.filter(user=1, set_exercise=element.id).last())
         serializer_exercise_log = ExerciseLogSerializer(log_list, many=True)
 
         return Response(serializer_exercise_log.data)
-    
+
+
 def log_create(request):
     if request.method == 'POST':
         req = json.loads(request.body)
