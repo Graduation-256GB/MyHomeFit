@@ -7,6 +7,7 @@ from django.conf import settings
 import os
 import math
 from tensorflow.keras.models import load_model
+import time
 
 from .models import ExerciseSet, Set, ExerciseLog
 
@@ -54,7 +55,7 @@ class PoseWebCam(object):
 
         self.pose_cnt = 0  # n번 째 포즈
 
-        self.fps = 12  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
+        self.fps = 14  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
         self.frame_per_second = int(num)  # 1초 당 추출할 프레임 수
         self.time_count = 16/self.frame_per_second
 
@@ -74,7 +75,7 @@ class PoseWebCam(object):
 
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = self.pose.process(imgRGB)
-
+        # print('time_count', math.floor(self.time_count))
         keypoints = []  # 1프레임의 keypoints를 담은 배열
         if results.pose_landmarks:
             # About exerciselog
@@ -103,6 +104,8 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
+            cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
+                        cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
 
@@ -121,8 +124,8 @@ class PoseWebCam(object):
                     self.time_count = 16/self.frame_per_second
 
                 print(frame_order, "th frame")
-                cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
-                            cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
+                # cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
+                #             cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
                 print("time_count: ", math.floor(self.time_count))
                 if frame_order % self.frame_per_second == 0 and frame_order != 15:
                     self.time_count -= 1
@@ -343,3 +346,12 @@ class PoseWebCam(object):
         return skeleton_dic[openpose_index]
 
     # def print_exercise_count(self):
+
+    # def countdown(self, num_of_secs):
+    #     print('count')
+    #     while num_of_secs:
+    #         m, s = divmod(num_of_secs, 60)
+    #         min_sec_format = '{:02d}:{:02d}'.format(m, s)
+    #         print(min_sec_format, end='/r')
+    #         time.sleep(1)
+    #         num_of_secs -= 1
