@@ -40,7 +40,7 @@
     position: absolute;
     left: 7%;
     bottom: 55%;
-    color: white;
+    color: rgb(255, 0, 98);
     border: turquoise;
     background-color: rgba( 255, 255, 255, 0 );
     z-index: 3;

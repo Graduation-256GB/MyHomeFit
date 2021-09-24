@@ -17,7 +17,7 @@ import TrainingReady from "../components/Training/TrainingReady";
 
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
-const SET_ID = 1
+const SET_ID = 4
 
 function getCookie(name) {
     var cookieValue = null;

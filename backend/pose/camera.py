@@ -28,7 +28,8 @@ class PoseWebCam(object):
         self.allkeypoints = []
         self.outputkeypoints = []
 
-        self.predicted_pose = 'start'
+        #self.predicted_pose = 'start'
+        self.predicted_pose_list = []
 
         # About realtime pose counting
         self.set_id = pk  # set_id
@@ -125,8 +126,8 @@ class PoseWebCam(object):
                 print("self.exercise_log: ", self.exercise_log)
 
             # Success Fail 화면에 표시
-            cv2.putText(img, self.successOrFail, (200, 200),
-                        cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
+            #cv2.putText(img, self.successOrFail, (200, 200),
+            #            cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
 
             for id, lm in enumerate(results.pose_landmarks.landmark):
                 self.mpDraw.draw_landmarks(
@@ -154,7 +155,7 @@ class PoseWebCam(object):
                 if frame_order == 1 and not self.isFinished:
                     print((self.exercise_set[self.n]).set_num, "번째 운동")
                     print("<<", self.current_exercise, ": ",
-                          self.exercise_count, "/", self.total_count, "회 >>")
+                        self.exercise_count, "/", self.total_count, "회 >>")
 
                 print(frame_order, "th frame")
 
@@ -179,13 +180,16 @@ class PoseWebCam(object):
                     self.outputkeypoints = self.allkeypoints
                     # self.get_keypoints() # 프레임 수가 16개가 되면, 16개의 프레임에 대한 keypoints가 모여있는 배열 반환해주는 함수
 
-                    self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
-                    print(self.pose_cnt, "th pose is", self.predicted_pose)
+                    #self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
+                    #print(self.pose_cnt, "th pose is", self.predicted_pose)
+                    self.predicted_pose_list = self.detect_and_predict_pose()
+                    print(self.pose_cnt, "th pose is", self.predicted_pose_list)
                     # # 예측된 포즈(라벨) 출력
                     # cv2.putText(img, self.predicted_pose, (50, 50),
                     #             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
-                    if self.predicted_pose == self.current_exercise:
+                    #if self.predicted_pose == self.current_exercise:
+                    if self.current_exercise in self.predicted_pose_list: # 확률이 높은 4개 중 하나라도 속하면 Success
                         self.successOrFail='Success'
                     else:
                         self.successOrFail = 'Fail'
@@ -265,8 +269,8 @@ class PoseWebCam(object):
         # self.pTime = cTime
 
         # cv2.putText(img, str(int(self.fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
-        cv2.putText(img, self.predicted_pose, (50, 50),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+        #cv2.putText(img, self.predicted_pose, (50, 50),
+        #            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
         # cv2.putText(img, self.flag, (200, 200),
         #             cv2.FONT_HERSHEY_SIMPLEX, 4, (0, 0, 255), 3)
@@ -293,7 +297,7 @@ class PoseWebCam(object):
 
     # 예측 값에 해당하는 라벨(한글) 반환하는 함수
     def detect_and_predict_pose(self):
-        """
+        
         poses = { 0: "스탠딩 사이드 크런치",
                     1: "스탠딩 니업",
                     2: "버피 테스트",
@@ -302,21 +306,29 @@ class PoseWebCam(object):
                     5: "사이드 런지",
                     6: "크로스 런지",
                     7: "굿모닝"
-                  }
+                }
+        
         """
-
         poses = {0: "STANDING SIDE CRUNCH",
-                 1: "STANDING KNEE UP",
-                 2: "BURPEE TEST",
-                 3: "STEP FORWARD DYNAMIC LUNGE",
-                 4: "STEP BACKWARD DYNAMIC LUNGE",
-                 5: "SIDE LUNGE",
-                 6: "CROSS LUNGE",
-                 7: "GOODMORNING"
-                 }
+                1: "STANDING KNEE UP",
+                2: "BURPEE TEST",
+                3: "STEP FORWARD DYNAMIC LUNGE",
+                4: "STEP BACKWARD DYNAMIC LUNGE",
+                5: "SIDE LUNGE",
+                6: "CROSS LUNGE",
+                7: "GOODMORNING"
+                }
+        """
+        ##### 확률이 높은 4개의 list를 label로 return
+        label = []
         inputs = np.array(self.get_input(), dtype="float32")
         preds = poseEstimationModel.predict(inputs, batch_size=32)
-        label = poses[np.argmax(preds)]
+        preds_listed = list(preds[0])
+        preds_sorted = np.sort(preds, axis=1)
+        preds_sorted = list(preds_sorted[0][-5:]) # 확률이 가장 높은 4개
+        for e in preds_sorted:
+            label.append(poses[preds_listed.index(e)])
+        #label = poses[np.argmax(preds)]
 
         return label
 

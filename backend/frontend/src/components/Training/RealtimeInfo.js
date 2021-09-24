@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
+//import Tts from 'react-native-tts';
 
 const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
     const [Index, setIndex] = useState(0)
@@ -71,9 +72,9 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
-                if (CountList.length <= Index) {
-                    setIsRunning(false) 
-                }
+                //if (CountList.length <= Index) {
+                //    setIsRunning(false) 
+                //}
             }
         });
     }, isRunning ? delay : null);
@@ -94,13 +95,29 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
     }, [FailCount]);
     */}
 
+
+    {/*const { messages, speak } = useSpeech();
+
+    const speakButtonHandler = async () => {
+        const utterance = await speak({
+        text: 'Hello',
+        volume: 0.5,
+        rate: 1,
+        pitch: 1
+        });
+    };*/}
+
+    {/*if(!IsStarted) {
+        Tts.voices().then(voices => console.log(voices));
+    }*/}
+
     return (
         <div>
             <div className="realtime-pose">
                 { NameList[Index] }
             </div>
             <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
-                Success: { SuccessList[Index] } / { CountList[Index] }회
+                성공: { SuccessList[Index] } / { CountList[Index] }회
                 {/*{
                     isStarted && isOK &&
                     <div className="success_or_fail">
@@ -109,7 +126,7 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
                 }*/}
             </div>
             <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
-                &nbsp; Fail: { FailList[Index] } / { CountList[Index] }회
+                실패: { FailList[Index] } / { CountList[Index] }회
             </div> 
         </div>
     )
