@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../../css/Training/Training.css"
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
-const TrainingReady = ({ setPage, setSpeedNum }) => {
+const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCountList, exercises, csrftoken }) => {
     const [countdown, setCountDown]=useState(false)
     const startTraining = e => {
         if (e.target.name === 'fast') {
@@ -16,6 +16,25 @@ const TrainingReady = ({ setPage, setSpeedNum }) => {
             setSpeedNum(12)
         }
         setCountDown(true)
+
+        fetch('http://127.0.0.1:8000/api/log/create/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(exercises)
+        })
+        .then(response=>response.json())
+        .then(data => {
+            console.log(data)
+            setIsStarted(true)
+            exercises.map(item => {
+                setNameList(NameList => [...NameList, item.name]);
+                setCountList(CountList => [...CountList, item.set_count]);
+            })
+        })
+        .catch(error=>console.log(error));
     }
     return (    
     <div className="ready-box">   

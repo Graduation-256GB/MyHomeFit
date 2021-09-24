@@ -2,37 +2,18 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 
-const RealtimeInfo = ( { setId, exercises, csrftoken } ) => {
-    const [IsStarted, setIsStarted] = useState(false)
-    const [NameList, setNameList] = useState([])
-    const [CountList, setCountList] = useState([])
+const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
     const [Index, setIndex] = useState(0)
-    const [FailCount, setFailCount] = useState([0,0])
-    const [CorrectCount, setCorrectCount] = useState([0,0])
+    const [FailList, setFailList] = useState([0,0])
+    const [SuccessList, setSuccessList] = useState([0,0])
+    const [FailCount, setFailCount] = useState(0)
+    const [SuccessCount, setSuccessCount] = useState(0)
     const [delay, setDelay] = useState(2000); // GET 시간 간격
     const [isRunning, setIsRunning] = useState(false)
-
-    const formSubmit = e => {
-        e.preventDefault();
-        fetch('http://127.0.0.1:8000/api/log/create/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body: JSON.stringify(exercises)
-        })
-        .then(response=>response.json())
-        .then(data => {
-            console.log(data)
-            setIsStarted(true)
-            exercises.map(item => {
-                setNameList(NameList => [...NameList, item.name]);
-                setCountList(CountList => [...CountList, item.set_count]);
-            })
-        })
-        .catch(error=>console.log(error));
-    }
+    //const [isOK, setIsOK] = useState(false)
+    //const [Result, setResult] = useState("")
+    const [ColorSuccess, setColorSuccess] = useState('#27cfb3')
+    const [ColorFail, setColorFail] = useState('#27cfb3')
     
 
     // start button을 눌러서 객체를 만든 후 GET
@@ -70,28 +51,66 @@ const RealtimeInfo = ( { setId, exercises, csrftoken } ) => {
         })
         .then(response => response.json())
         .then(data => {
-            setCorrectCount([])
-            setFailCount([])
+            setSuccessList([])
+            setFailList([])
             Object.keys(data).forEach(function (key) {
-                setCorrectCount(CorrectCount => [...CorrectCount, data[key].correct_count]);
-                setFailCount(FailCount => [...FailCount, data[key].fail_count]);
+                setSuccessList(SuccessList => [...SuccessList, data[key].correct_count]);
+                setFailList(FailList => [...FailList, data[key].fail_count]);
             })
-            if (CorrectCount[Index] + FailCount[Index] === CountList[Index]) {
+
+            if( SuccessList[Index] !== SuccessCount ) {
+                setSuccessCount(SuccessList[Index])
+                setColorSuccess('green')
+                setColorFail('#27cfb3')
+            }
+            if( FailList[Index] !== FailCount ) {
+                setFailCount(FailList[Index])
+                setColorFail('red')
+                setColorSuccess('#27cfb3')
+            } 
+
+            if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
                 if (CountList.length <= Index) {
-                    console.log("CountList.length: ", CountList.length)
                     setIsRunning(false) 
-                    console.log("isRunning: ", isRunning)
                 }
             }
         });
     }, isRunning ? delay : null);
     
+    {/*
+    // Success
+    useEffect(() => {
+        setResult("Success")
+        setIsOK(true)
+        setTimeout(function(){ setIsOK(false); }, 1000);
+    }, [SuccessCount]);
+
+    // Fail
+    useEffect(() => {
+        setResult("Fail")
+        setIsOK(true)
+        setTimeout(function(){ setIsOK(false); }, 1000);
+    }, [FailCount]);
+    */}
 
     return (
-        <div className="realtime-info">
-            <button className="form-submit" onClick={ formSubmit }>START</button>
-            &nbsp;{ NameList[Index] }&nbsp; { CorrectCount[Index] + FailCount[Index] } / { CountList[Index] }회
+        <div>
+            <div className="realtime-pose">
+                { NameList[Index] }
+            </div>
+            <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
+                Success: { SuccessList[Index] } / { CountList[Index] }회
+                {/*{
+                    isStarted && isOK &&
+                    <div className="success_or_fail">
+                        {Result}
+                    </div>
+                }*/}
+            </div>
+            <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
+                &nbsp; Fail: { FailList[Index] } / { CountList[Index] }회
+            </div> 
         </div>
     )
 }
