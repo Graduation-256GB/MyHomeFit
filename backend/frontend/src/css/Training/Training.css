@@ -134,8 +134,6 @@
   height: 100%;
 }
 
-
-
 .realtime-video {
   display: inline-flex;
   justify-content: space-around;
@@ -147,6 +145,38 @@
   border-radius: 70px;
   margin: 120px 20px 20px 20px;
   padding: 40px;
+}
+.ready-box {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 70rem;
+  height: 700px;
+  background-color: #ffffff;
+  border: 7px dashed #b6f4ea;
+  border-radius: 70px;
+  margin: 120px 20px 20px 20px;
+  padding: 40px;
+}
+.ready-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ready-choice {
+  display: flex;
+  /* flex-direction: column; */
+}
+.ready-content a {
+  background: #27cfb3;
+  font-size: 1.5rem;
+  border-radius: 1.5rem;
+  color: white;
+  font-weight: 500;
+  width: 15rem;
+  height: 3rem;
+  text-align: center;
+  padding-top: 1rem;
 }
 
 .user-video {

@@ -44,17 +44,16 @@ class ExerciseSetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExerciseSet
-        fields = ('exercise', 'set', 'set_num',
-                  'set_count', 'created_at', 'img', 'name', 'calories', 'url')
+        fields = ('id', 'exercise', 'set', 'set_num',
+                'set_count', 'created_at', 'img', 'name', 'calories', 'url')
 
 
 class ExerciseLogSerializer(serializers.ModelSerializer):
     #user = UserSerializer(many=True, read_only=True)
-    #exercise = ExerciseSerializer(many=True, read_only=True)
+    #set_exercise = ExerciseSetSerializer(many=True, read_only=True)
     class Meta:
         model = ExerciseLog
-        fields = ('user', 'set_exercise', 'id',
-                  'correct_count', 'fail_count', 'time_started', 'time_finished')
+        fields = ('set_exercise', 'id', 'correct_count', 'fail_count', 'time_started', 'time_finished')
 
 # class ExerciseSetListSerializer(serializers.ModelSerializer):
 #     exercise_set = ExerciseSetSerializer(many=True, read_only=True)

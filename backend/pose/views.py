@@ -3,17 +3,17 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set, CustomUser
+from .models import Exercise, ExerciseSet, Set, CustomUser, ExerciseLog
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
 from rest_framework.response import Response
-from rest_framework.views import APIView, View
+from rest_framework.views import APIView
 
 # def exercise_list(request):
 #     serializer_class = ExerciseSerializer
@@ -54,16 +54,8 @@ class DetailExercise(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
-class ListExerciseSet(APIView):
-    def get(self, request, pk):
-        set = Set.objects.get(id=pk)
-        serializer = ExerciseSetSerializer(
-            ExerciseSet.objects.filter(set=set), many=True)
-        return Response(serializer.data)
-        # queryset = ExerciseSet.objects.filter(set=set)
-        # serializer_class = ExerciseSerializer
 
-class ListJoinAPIView(APIView):
+class ListExerciseSet(APIView):
     def get(self, request, pk):
         set = Set.objects.get(id=pk)
         serializer = ExerciseSetSerializer(
@@ -71,7 +63,7 @@ class ListJoinAPIView(APIView):
         return Response(serializer.data)
         # queryset = ExerciseSet.objects.filter(set=set)
         # serializer_class = ExerciseSerializer
-
+        
 
 class CurrentUserView(APIView):
     def get(self, request):
@@ -91,8 +83,11 @@ def gen(camera):
 # Create your views here.
 
 
-def pose_feed(request, pk):
-    return StreamingHttpResponse(gen(PoseWebCam(pk)),
+def pose_feed(request):
+    set_id = request.GET['set_id']
+    speed_num = request.GET['speed_num']
+    print(speed_num, set_id)
+    return StreamingHttpResponse(gen(PoseWebCam(set_id, speed_num)),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -134,16 +129,31 @@ class SetListAPIView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+
 class ListExerciseLogAPIView(APIView):
     def get(self, request, pk):
+        """
         serializer = ExerciseLogSerializer(
             ExerciseLog.objects.filter(set_exercise__set_id=pk), many=True)
-        return Response(serializer.data)
-    """
-    def post(self, request):
-        serializer = ExerciseLogSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
-    """
+        """
+        log_list = []
+        set_exercise_queryset = ExerciseSet.objects.filter(set=pk).order_by('set_num')
+        for element in set_exercise_queryset:
+            log_list.append(ExerciseLog.objects.filter(set_exercise_id=element.id).last())
+            #log_list.append(ExerciseLog.objects.filter(user=1, set_exercise=element.id).last())
+        serializer_exercise_log = ExerciseLogSerializer(log_list, many=True)
+
+        return Response(serializer_exercise_log.data)
+    
+def log_create(request):
+    if request.method == 'POST':
+        req = json.loads(request.body)
+        for i in range(len(req)):
+            set_exercise_id = req[i]['id']
+            print(set_exercise_id)
+            time_started = DateFormat(datetime.now()).format('Y-m-d h:m:s')
+            set_exercise = ExerciseSet.objects.get(id=set_exercise_id)
+            exercise_log = ExerciseLog.objects.create(
+                set_exercise=set_exercise, correct_count=0, fail_count=0, time_started=time_started)
+
+    return JsonResponse({'exercise_log_id': exercise_log.id})

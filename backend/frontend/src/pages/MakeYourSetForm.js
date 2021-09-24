@@ -154,19 +154,21 @@ const MakeYourSetForm = () => {
     }
     return (
         <div className="content">
-            <div className="menu1-wrapper">
-                <div className="form-menu-container">
-                    <div className="menu1-title">
+            <div className='page-wrapper'>
+                    <div className='page-title'>
                         <div>
-                            <h5>Only for you, Gaok</h5>
-                            <img src={IconSet} />
+                            <label>Only for you, Gaok</label>
+                            <img src={IconSet}/>
                         </div>
+
                         <svg width="100" height="100">
                             <circle cx="50" cy="50" r="50" fill="white"></circle>
                         </svg>
                     </div>
+                    <div className='page-small-title'>
+                        <label>Make Your Fitness Set.</label>
+                    </div> 
                 </div>
-            </div>
             <div className="content-form">
                 <h2>First Step : Make Your Fitness Set.</h2>
                 <SetForm setNewNum={setNewNum } csrftoken={csrftoken} />

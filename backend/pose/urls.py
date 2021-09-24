@@ -12,10 +12,9 @@ urlpatterns = [
     path('set/list/', views.SetListAPIView.as_view()),
     path('set/create/', views.set_create),
     path('log/<int:pk>/', views.ListExerciseLogAPIView.as_view()),
-    path('join/<int:pk>/', views.ListJoinAPIView.as_view()),
-    # path('exercise/join/<int:set_id>/', views.JoinAPIView.as_view()),
+    path('log/create/', views.log_create),
     path('auth/', include('rest_auth.urls')),
     path('auth/register/', include('rest_auth.registration.urls')),
     # path('', views.index, name='index'),
-    path('pose_feed/<int:pk>/', views.pose_feed, name='pose_feed'),
+    path('pose_feed/', views.pose_feed, name='pose_feed'),
 ]

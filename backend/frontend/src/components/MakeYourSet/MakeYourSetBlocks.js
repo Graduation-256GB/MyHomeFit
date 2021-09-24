@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
-import {useRecoilState} from 'recoil';
-import { setidState } from '../../pages/state';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import { setidGetter, setidState } from '../../pages/state';
 
 import {BiAddToQueue} from 'react-icons/bi'
 import '../../css/gaok/MakeYourSet.css'
@@ -11,7 +11,9 @@ function MakeYourSetBlocks ({setArr}) {
 
     // 전역변수 사용
     const [globalSetid, setGlobalSetid] = useRecoilState(setidState);
-
+    
+    console.log("recoilvalue", useRecoilState(setidState))
+    
 
     const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
@@ -32,8 +34,12 @@ function MakeYourSetBlocks ({setArr}) {
         console.log("aaaaa")
         setSetTitle(title)
         setType(type)
-        setGlobalSetid(id)
-        console.log("전역변수 확인",{globalSetid})
+        // setGlobalSetid(id)
+        // console.log("전역변수 확인",{globalSetid})
+        const setObj = { setid: id };
+        window.localStorage.setItem("setid", id);
+        console.log("test", window.localStorage.getItem("setid"))
+        
     }
 
     return(

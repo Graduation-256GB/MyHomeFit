@@ -12,3 +12,9 @@ export const setidState = atom({
     default: '', // default value (aka initial value)
   });
   
+export const setidGetter = selector({
+	key: 'setidGetterr',
+	get: ({get}) => {
+		return get(setidState);
+	}
+});
