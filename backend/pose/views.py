@@ -150,6 +150,7 @@ def log_create(request):
         req = json.loads(request.body)
         for i in range(len(req)):
             set_exercise_id = req[i]['id']
+            print(set_exercise_id)
             time_started = DateFormat(datetime.now()).format('Y-m-d h:m:s')
             set_exercise = ExerciseSet.objects.get(id=set_exercise_id)
             exercise_log = ExerciseLog.objects.create(

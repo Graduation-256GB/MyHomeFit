@@ -1,5 +1,14 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
+
 import MakeYourSet from "./pages/MakeYourSet";
 import MakeYourSetForm from "./pages/MakeYourSetForm";
 import Training from "./pages/Training";
@@ -23,6 +32,7 @@ import Login from "./pages/Login";
 const App = () => {
 
   return (
+    <RecoilRoot>
       <div className='main-container'>
         <SideMenubar />
         {/* <Navbar/> */}
@@ -42,6 +52,7 @@ const App = () => {
         {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}
         {/* <Route path="/maketest" component={MakeTest}/> */}
       </div>
+    </RecoilRoot>
   );
 };
 
