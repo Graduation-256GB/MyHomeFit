@@ -56,6 +56,9 @@ const Training = () => {
     const Exercises = [];
     const [page, setPage] = useState(1);
     // const [speed, setSpeed] = useState('');
+    const [IsStarted, setIsStarted] = useState(false)
+    const [NameList, setNameList] = useState([])
+    const [CountList, setCountList] = useState([])
 
     if (data) {
         Object.keys(data).forEach(function (key) {
@@ -79,7 +82,9 @@ const Training = () => {
             </div>
             {
                 page === 1 &&
-                <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum} />}
+                <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum}
+                    setIsStarted={setIsStarted} setNameList={setNameList} setCountList={setCountList} 
+                    exercises = { Exercises } csrftoken={csrftoken}/>}
             {
                 page===2 &&
             <div className="videos">
@@ -95,7 +100,7 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
-                <RealtimeInfo setId = { SET_ID } exercises = { Exercises } csrftoken={csrftoken}/>
+                <RealtimeInfo setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList}/>
                 <div className="export-video">
                     <ReactPlayer className="export"
                                 url={myVideo} loop muted playing controls />
