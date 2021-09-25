@@ -46,6 +46,13 @@ class TopListExercise(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
 
+class UserRankView(generics.ListCreateAPIView):
+    queryset = CustomUser.objects.all().order_by('-user_count')[:3]
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
 class ListSet(generics.ListCreateAPIView):
     # queryset = Set.objects.filter(user=request.user)
     serializer_class = SetSerializer

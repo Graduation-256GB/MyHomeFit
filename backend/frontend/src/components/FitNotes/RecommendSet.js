@@ -8,7 +8,7 @@ const RecommendSet = ({name, rank, proImg}) => {
             {/*<label>SET {name}</label>*/}
             <div className="ranking">
                 < BiTrophy className="trophy"/>
-                <label>{rank}</label>
+                <label>{rank}등</label>
             </div>
             <div className="profile-img">
                 <img src= {proImg}/>

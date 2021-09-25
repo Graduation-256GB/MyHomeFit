@@ -82,16 +82,10 @@ const FitNotes = () => {
                 <div className="recommend-container">
                     <RecommendFitness name="Monthly Ranking" nameList={nameList1} imgList={imgList1}/>
                 </div>
-
+{/* 
                 <div className="recommend-container">
                     <RecommendFitness name="Weekly Ranking" nameList={nameList2} imgList={imgList2}/>
-                </div>
-                {/*<div className="recommend-container">
-                    <RecommendFitness name="Gaok"/>
-                </div>
-                <div className="recommend-container">
-                    <RecommendFitness name="Gaok"/>
-                </div>*/}
+                </div> */}
             </div>
         </div>
     );
