@@ -3,10 +3,9 @@ import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 import { MdDone, MdClear } from 'react-icons/md'
 
-const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, exercises, Index, setIndex } ) => {
-    // const [Index, setIndex] = useState(0)
-    const [FailList, setFailList] = useState([0,0])
-    const [SuccessList, setSuccessList] = useState([0,0])
+const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, exercises, setId, IsStarted, NameList, CountList } ) => {
+    
+    
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)
     const [delay, setDelay] = useState(2000); // GET 시간 간격
@@ -76,6 +75,15 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, exercises, Index
         });
     }, isRunning ? delay : null);
     
+
+    useEffect(()=> {
+        console.log("exercises", exercises.length)
+        console.log("Index", Index)
+        if (exercises.length < Index + 1){
+            console.log("result")
+            setPage(3)
+        }
+    })
 
     return (
 

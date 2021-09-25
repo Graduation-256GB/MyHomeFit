@@ -42,7 +42,7 @@ class ExerciseSetSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source="exercise.name")
     calories = serializers.IntegerField(source="exercise.calories")
     url = serializers.URLField(source="exercise.url")
-
+    
     class Meta:
         model = ExerciseSet
         fields = ('id', 'exercise', 'set', 'set_num',
