@@ -34,11 +34,11 @@ const Calender = () => {
 
             <div className="calendar-container">
                 <div className="calendar-content">
-                    <img src={calendarimg} width="100%"/>
+                    <Calendar activeMonth={new Date()} calendarType="US" />
                 </div>
                 <div className="calendar-box">
                     <div className="calendar-first-section">
-                        <Calendar activeMonth={new Date()} calendarType="US" />
+                        <div>Memo</div>
                     </div>
                     <div className="calendar-second-section">
                         
@@ -51,9 +51,6 @@ const Calender = () => {
                                 {userName?userName:'user name'}
                             </div>
                         </div>
-                            <div className="calorie-img">
-                                <img src={calorieimg} width="90%"/>
-                            </div>
                         </div>
                     </div>
                 </div>
