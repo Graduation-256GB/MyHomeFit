@@ -2,10 +2,11 @@ import React, { useState, useEffect,useRef } from 'react';
 import jQuery from 'jquery'
 import { useAsync } from "react-async"
 import "../css/FitNotes/FitNotes.css"
-import IconFitnotes from "../images/icon_fitnotes.png"
+import {FcCloseUpMode} from "react-icons/fc"
 import FitnessRank from "../components/FitNotes/FitnessRank";
 import RecommendFitness from "../components/FitNotes/RecommendFitness";
 import FitnessCalories from "../components/FitNotes/FitnessCalories";
+import Navbar from '../components/Navbar';
 import person1 from "../images/person1.PNG";
 import person2 from "../images/person2.PNG";
 import person3 from "../images/person3.PNG";
@@ -43,6 +44,8 @@ const FitNotes = () => {
     const csrftoken = getCookie('csrftoken');
     const { data, error, isLoading } = useAsync({ promiseFn: loadTop3List })
     const top3ListArr = [];
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
     const nameList1 = ["k8jisoo", "Ga-ok", "sungeuni0208"]
     const nameList2 = ["Sungeun Choi", "Gaok Lee", "JiSu Kim"]
     const imgList1 = [person1, person2, person3]
@@ -55,17 +58,20 @@ const FitNotes = () => {
     }
     return (
         <div className="menu3-container">
+            <Navbar/>
             <div className="menu3-title">
-                <div>
-                    <h5>Welcome, Gaok</h5>
-                    <img src={IconFitnotes}/>
+                <div className="page-label">
+                    <h5>Welcome, { userName}</h5>
+                    <div className="menu-icon">
+                        <FcCloseUpMode/>
+                    </div>
                 </div>
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="50" fill="white"></circle>
-                </svg>
+                <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
             </div>
             <div className="menu3-small-title">
-                <label>Hi Gaok, This is your FitNotes.</label>
+                <label>Hi { userName }, This is your FitNotes.</label>
             </div>
 
             <div className="fitnotes-fitness-container">

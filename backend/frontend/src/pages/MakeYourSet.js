@@ -3,14 +3,19 @@ import axios from 'axios';
 
 import '../css/gaok/MakeYourSet.css'
 import IconSet from '../images/icon_makeyourset.png';
-import {IoIosCut} from 'react-icons/io'
+// import {IoIosCut} from 'react-icons/io'
+import {FcSearch} from 'react-icons/fc'
 
 import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
+import Navbar from '../components/Navbar';
 
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
     const [currentUser, setCurrentUser] = useState({ data: null });
-
+    // const [username, setUserName] = useState();
+    const username = currentUser?.data?.username;
+    const userImg = currentUser?.data?.profile_img;
+    
     const Token = localStorage.getItem('token')
     console.log(Token)
     useEffect(() => {
@@ -21,18 +26,27 @@ function MakeYourSet () {
                         Authorization: `Token ${Token}`
                     }
             });
-
-            setSetList({ data: setlist.data});
-        };
-
-        fetchData();
-     }, []);
-
-    console.log('render');
-    if (setList.data) {
-        console.log("setlist", setList.data);
+            const setuserdata = await axios.get(
+                'http://127.0.0.1:8000/api/user/current/', {
+                    headers: {
+                        Authorization: `Token ${Token}`
+                    }
+            });
+            setCurrentUser({ data: setuserdata.data });
+            setSetList({ data: setlist.data });
+            };
+            
+            fetchData();
+        }, [currentUser.data]);
+        
+        console.log('render');
+    if (currentUser.data) {
+        console.log("userdata", currentUser.data);
+        console.log("userdata", currentUser.data.username);
+        localStorage.setItem('userImg',currentUser.data.profile_img)
+        localStorage.setItem('userName',currentUser.data.username)
+        // setUserName(currentUser.data.username);
     }
-
     const setArr = []
     const SetNameArr = []
     
@@ -50,20 +64,23 @@ function MakeYourSet () {
         <>
         <div className='page-top-layer'>
             <div className='page-top-container'>
-                <div className='page-wrapper'>
+                    <div className='page-wrapper'>
+                        <Navbar />
                     <div className='page-title'>
-                        <div>
+                        <div className="page-label">
                             <label>Make Your Set.</label>
-                            {/* <img src={IconSet}/> */}
-                            <IoIosCut size="50" color="#ffffff"/>
+                            <div className="menu-icon">
+                            <FcSearch />
+                            </div>
                         </div>
 
-                        <svg width="100" height="100">
-                            <circle cx="50" cy="50" r="50" fill="white"></circle>
-                        </svg>
+                        <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
                     </div>
                     <div className='page-small-title'>
-                        <label>Only For You, Gaok</label>
+                            <label>Only For You, </label>
+                            <label>{ username }</label>
                     </div> 
                 </div>
             </div>

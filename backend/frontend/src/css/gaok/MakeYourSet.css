@@ -40,7 +40,7 @@
   display: flex;
   width: 100%;
   height: 6.8rem;
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
   justify-content: space-between;
   align-items: center;
 }
@@ -52,10 +52,10 @@
 .page-title > div > label {
   font-family: NanumSquare_acEB;
   margin-left: 6.25rem;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   color: #ffffff;
   font-size: 2.8rem;
-  margin-top: 2.5rem;
+  margin-top: 0.5rem;
 }
 
 .page-small-title {
@@ -115,12 +115,12 @@
   flex-direction: row;
 }
 
-.page-contents-exercise-item{
+.page-contents-exercise-item {
   display: flex;
   flex-direction: column;
 }
 
-.page-contents-exercise-item > label{
+.page-contents-exercise-item > label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,7 +173,7 @@
     border: #A9A1A1 solid 0.1rem;
 } */
 
-#block-wrapper{
+#block-wrapper {
   position: fixed;
   bottom: 30px;
 }
@@ -209,9 +209,7 @@
   bottom: 30px;
   background-color: #04957c;
   text-align: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
+  padding: 0.6rem;
   text-decoration: none;
 }
 
@@ -224,8 +222,8 @@
 }
 
 .page-contents-btn-start > img {
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
   border: #27cfb3 solid 0.5rem;
   border-radius: 4rem;
   background-color: #ffffff;
@@ -313,4 +311,15 @@
 
 .set-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.user-img {
+  width: 5rem;
+  height: 5rem;
+  margin-right: 2rem;
+}
+.user-img img {
+  width: 100%;
+  border-radius: 100px;
+  height: 100%;
 }

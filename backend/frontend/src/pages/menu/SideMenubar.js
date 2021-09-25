@@ -26,7 +26,7 @@ const SideMenubar = () => {
                 <div className="logo">
                 {/* <BsFillCircleFill/> */}
                 </div>
-                <h3># MY_HOME_FIT</h3>
+                <h3>MY HOME FIT</h3>
             </div>
             <div className="menubar">
                 <ul>

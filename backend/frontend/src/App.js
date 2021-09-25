@@ -15,18 +15,10 @@ import FitNotes from "./pages/FitNotes";
 import Calender from "./pages/Calender";
 import SideMenubar from "./pages/menu/SideMenubar";
 import './App.css'
-
-import LoginPage from "./pages/LoginPage";	// 추가
-import SignupPage from "./pages/SignupPage";
-import Navbar from "./pages/Navbar";
-
-// import Navbar from './components/Navbar';
-
-import Signup from "./pages/signup";
+// import Navbar from "./components/Navbar";
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
-// import new_makeYourSet from "./pages/makeyourset/MakeYourSet";
-// import MakeTest from "./pages/gaok/MakeYourSet"
 
 const App = () => {
 
@@ -42,12 +34,11 @@ const App = () => {
         <Route path="/fitnotes" component={FitNotes} />
         <Route path="/calender" component={Calender} />
 
+        <Route path="/signup" exact={true} component={Signup} />
         <Route path="/" exact={true} component={Signup} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={SignupPage} />
-        <Route path="/navbar" component={Navbar} />
+        {/* <Route path="/navbar" component={Navbar} /> */}
 
-        <Route path="/log" component={Login}/>
+        <Route path="/login" component={Login}/>
         {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}
         {/* <Route path="/maketest" component={MakeTest}/> */}
       </div>

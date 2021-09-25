@@ -6,7 +6,7 @@ import "../css/Training/Training.css"
 import IconTraining from "../images/icon_training.png"
 import PoseShoulder from "../images/pose_shoulder.png"
 import NextPose from "../components/Training/NextPose";
-import { MdReplay } from 'react-icons/md'
+import { FcSportsMode } from "react-icons/fc";
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
@@ -17,6 +17,7 @@ import jQuery from 'jquery'
 import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 import TrainingReady from "../components/Training/TrainingReady";
+import Navbar from '../components/Navbar';
 
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
@@ -89,24 +90,28 @@ const Training = () => {
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
     const [Index, setIndex] = useState(0)
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
 
     if (data) {
         Object.keys(data).forEach(function (key) {
             Exercises.push(data[key]);
         });
     }
-
     return (
         <RecoilRoot>
-        <div className="menu2-container">
+            <div className="menu2-container">
+                <Navbar/>
             <div className="menu2-title">
                 <div>
-                    <h5>Gaok, R U Ready?</h5>
-                    <img src={IconTraining}/>
+                    <h5>{ userName }, R U Ready?</h5>
+                    <div className="menu-icon">
+                    <FcSportsMode />
+                    </div>
                 </div>
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="50" fill="white"></circle>
-                </svg>
+                <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
             </div>
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>

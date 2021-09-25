@@ -11,7 +11,7 @@ urlpatterns = [
     path('exercise/create/', views.exercise_create),
     path('exercise/<int:pk>/', views.DetailExercise.as_view()),
     path('exerciseset/<int:pk>/', views.ListExerciseSet.as_view()),
-    path('set/list/', views.SetListAPIView.as_view()),
+    path('set/list/', views.ListSet.as_view()),
     path('set/create/', views.set_create),
     path('log/<int:pk>/', views.ListExerciseLogAPIView.as_view()),
     path('log/create/', views.log_create),
