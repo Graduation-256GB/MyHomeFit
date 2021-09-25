@@ -6,14 +6,14 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
     const [countdown, setCountDown]=useState(false)
     const startTraining = e => {
         if (e.target.name === 'fast') {
-            setSpeedNum(14)
+            setSpeedNum(5)
         }
         else if (e.target.name === 'basic') {
-            setSpeedNum(13)
+            setSpeedNum(4)
             
         }
         else if (e.target.name === 'slow') {
-            setSpeedNum(12)
+            setSpeedNum(3)
         }
         setCountDown(true)
 

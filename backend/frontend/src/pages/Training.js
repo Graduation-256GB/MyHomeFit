@@ -76,7 +76,7 @@ const Training = () => {
     // const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
-    const [speed_num, setSpeedNum]=useState(14)
+    const [speed_num, setSpeedNum]=useState(4)
     const poseURL = `http://127.0.0.1:8000/api/pose_feed/?set_id=${SET_ID}&speed_num=${speed_num}`
 
     const csrftoken = getCookie('csrftoken');
