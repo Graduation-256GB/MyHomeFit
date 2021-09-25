@@ -3,6 +3,7 @@ import "../css/Calender/Calender.css"
 import IconCalender from "../images/icon_calender.png"
 import FitCards from "../images/fitCards.JPG"
 import calorieimg from "../images/calories.png"
+import calendarimg from "../images/calendar.png"
 import { FcCalendar } from "react-icons/fc";
 import Navbar from '../components/Navbar';
 import Calendar from 'react-calendar'
@@ -33,7 +34,7 @@ const Calender = () => {
 
             <div className="calendar-container">
                 <div className="calendar-content">
-
+                    <img src={calendarimg} width="100%"/>
                 </div>
                 <div className="calendar-box">
                     <div className="calendar-first-section">
