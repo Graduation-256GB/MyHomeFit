@@ -76,7 +76,7 @@ const Training = () => {
     // const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
-    const [speed_num, setSpeedNum]=useState(14)
+    const [speed_num, setSpeedNum]=useState(4)
     const poseURL = `http://127.0.0.1:8000/api/pose_feed/?set_id=${SET_ID}&speed_num=${speed_num}`
 
     const csrftoken = getCookie('csrftoken');
@@ -87,6 +87,7 @@ const Training = () => {
     const [IsStarted, setIsStarted] = useState(false)
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
+    const [ImageList, setImageList] = useState([])
 
     const [Index, setIndex] = useState(0)
     // const [datalength, setDataLength] = useState(0)
@@ -138,14 +139,14 @@ const Training = () => {
                 page === 1 &&
                 <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum}
                     setIsStarted={setIsStarted} setNameList={setNameList} setCountList={setCountList} 
-                    exercises = { Exercises } csrftoken={csrftoken}/>}
+                    exercises = { Exercises } csrftoken={csrftoken} setImageList={setImageList}/>}
             {
                 page===2 &&
             <div className="videos">
                 <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
                 <img src={RightBtn} className="right-button"/>
-                <div className="next-video">
+                {/*<div className="next-video">
                     <div className="next-video-label">
                         Next
                         <MdReplay/>
@@ -153,8 +154,8 @@ const Training = () => {
                     <div className="next-video-pose">
                         <img src={PoseShoulder}/>
                     </div>
-                </div>
-                <RealtimeInfo setId = { SET_ID } Index = {Index} setIndex = {setIndex} IsStarted = { IsStarted } NameList={NameList} CountList={CountList} exercises={Exercises}/>
+                </div>*/}
+                <RealtimeInfo setId = { SET_ID } Index={Index} setIndex={setIndex} IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
                 <div className="export-video">
                     <ReactPlayer className="export"
                                 url={myVideo} loop muted playing controls />
@@ -165,7 +166,6 @@ const Training = () => {
                     </div>
                 </div>
             </div>
-
             }
             { page === 3 &&
             <div>

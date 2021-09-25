@@ -7,7 +7,8 @@ import base64
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'last_login', 'date_joined', 'is_staff')
+        fields = ('username', 'email', 'last_login',
+                  'date_joined', 'is_staff', 'profile_img')
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
@@ -45,7 +46,7 @@ class ExerciseSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseSet
         fields = ('id', 'exercise', 'set', 'set_num',
-                'set_count', 'created_at', 'img', 'name', 'calories', 'url')
+                  'set_count', 'created_at', 'img', 'name', 'calories', 'url')
 
 
 class ExerciseLogSerializer(serializers.ModelSerializer):
@@ -53,7 +54,8 @@ class ExerciseLogSerializer(serializers.ModelSerializer):
     #set_exercise = ExerciseSetSerializer(many=True, read_only=True)
     class Meta:
         model = ExerciseLog
-        fields = ('set_exercise', 'id', 'correct_count', 'fail_count', 'time_started', 'time_finished')
+        fields = ('set_exercise', 'id', 'correct_count',
+                  'fail_count', 'time_started', 'time_finished')
 
 # class ExerciseSetListSerializer(serializers.ModelSerializer):
 #     exercise_set = ExerciseSetSerializer(many=True, read_only=True)

@@ -9,6 +9,7 @@ import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
+    const [currentUser, setCurrentUser] = useState({ data: null });
 
     const Token = localStorage.getItem('token')
     console.log(Token)

@@ -47,6 +47,7 @@
   border-radius: 22px;
   background: aliceblue;
   padding: 15px;
+  min-height: 16rem;
 }
 
 .left-arrow,
