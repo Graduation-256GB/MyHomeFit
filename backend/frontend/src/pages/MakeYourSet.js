@@ -10,7 +10,8 @@ import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
     const [currentUser, setCurrentUser] = useState({ data: null });
-
+    const [username, setUserName] = useState();
+    
     const Token = localStorage.getItem('token')
     console.log(Token)
     useEffect(() => {
@@ -21,18 +22,25 @@ function MakeYourSet () {
                         Authorization: `Token ${Token}`
                     }
             });
-
-            setSetList({ data: setlist.data});
-        };
-
-        fetchData();
-     }, []);
-
-    console.log('render');
-    if (setList.data) {
-        console.log("setlist", setList.data);
+            const setuserdata = await axios.get(
+                'http://127.0.0.1:8000/api/user/current/', {
+                    headers: {
+                        Authorization: `Token ${Token}`
+                    }
+            });
+            setCurrentUser({ data: setuserdata.data });
+            setSetList({ data: setlist.data });
+            };
+            
+            fetchData();
+        }, []);
+        
+        console.log('render');
+    if (currentUser.data) {
+        console.log("userdata", currentUser.data);
+        console.log("userdata", currentUser.data.username);
+        setUserName(currentUser.data.username);
     }
-
     const setArr = []
     const SetNameArr = []
     
@@ -63,7 +71,8 @@ function MakeYourSet () {
                         </svg>
                     </div>
                     <div className='page-small-title'>
-                        <label>Only For You, Gaok</label>
+                            <label>Only For You, </label>
+                            <label>{ username }</label>
                     </div> 
                 </div>
             </div>
