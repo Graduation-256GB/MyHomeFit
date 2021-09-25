@@ -2,7 +2,7 @@ import React, { useState, useEffect,useRef } from 'react';
 import jQuery from 'jquery'
 import { useAsync } from "react-async"
 import "../css/FitNotes/FitNotes.css"
-import IconFitnotes from "../images/icon_fitnotes.png"
+import {FcCloseUpMode} from "react-icons/fc"
 import FitnessRank from "../components/FitNotes/FitnessRank";
 import RecommendFitness from "../components/FitNotes/RecommendFitness";
 import FitnessCalories from "../components/FitNotes/FitnessCalories";
@@ -48,9 +48,11 @@ const FitNotes = () => {
     return (
         <div className="menu3-container">
             <div className="menu3-title">
-                <div>
+                <div className="page-label">
                     <h5>Welcome, { userName}</h5>
-                    <img src={IconFitnotes}/>
+                    <div className="menu-icon">
+                        <FcCloseUpMode/>
+                    </div>
                 </div>
                 <div className="user-img">
                             <img src={userImg}></img>

@@ -2,6 +2,7 @@ import React from 'react';
 import "../css/Calender/Calender.css"
 import IconCalender from "../images/icon_calender.png"
 import FitCards from "../images/fitCards.JPG"
+import { FcCalendar } from "react-icons/fc";
 
 const Calender = () => {
     const userImg=localStorage.getItem('userImg')
@@ -10,8 +11,10 @@ const Calender = () => {
         <div className="menu4-container">
             <div className="menu4-title">
                 <div>
-                    <h5>{ userName }'s Fit Card</h5>
-                    <img src={IconCalender}/>
+                    <h5>{userName}'s Fit Card</h5>
+                    <div className="menu-icon">
+                    <FcCalendar/>
+                    </div>
                 </div>
                 <div className="user-img">
                             <img src={userImg}></img>

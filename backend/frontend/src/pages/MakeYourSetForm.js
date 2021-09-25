@@ -3,10 +3,12 @@ import '../css/MakeYourSetForm/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
+import { FcOpenedFolder } from 'react-icons/fc';
 import SetListBlock from '../components/MakeYourSetForm/SetListBlock';
 import ExerciseList from '../components/MakeYourSetForm/ExerciseList';
 import SetForm from '../components/MakeYourSetForm/SetForm';
 import jQuery from 'jquery'
+
 
 import { useAsync } from "react-async"
 
@@ -158,9 +160,11 @@ const MakeYourSetForm = () => {
         <div className="content">
             <div className='page-wrapper'>
                     <div className='page-title'>
-                        <div>
+                        <div className="page-label">
                             <label>Only for you, { userName }</label>
-                            <img src={IconSet}/>
+                            <div className="menu-icon">
+                            <FcOpenedFolder/>
+                            </div>
                         </div>
 
                         <div className="user-img">

@@ -24,6 +24,7 @@
 
 .menu2-title > div {
   display: flex;
+  align-items: center;
 }
 
 .menu2-title > div > img {
@@ -49,7 +50,10 @@
 .menu2-small-title > label {
   color: #ffffff;
 }
-
+.menu-icon {
+  font-size: 4rem;
+  padding-top: 1rem;
+}
 .videos {
   position: absolute;
   left: 480px;

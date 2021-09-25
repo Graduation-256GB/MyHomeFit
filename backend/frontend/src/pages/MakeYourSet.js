@@ -3,7 +3,8 @@ import axios from 'axios';
 
 import '../css/gaok/MakeYourSet.css'
 import IconSet from '../images/icon_makeyourset.png';
-import {IoIosCut} from 'react-icons/io'
+// import {IoIosCut} from 'react-icons/io'
+import {FcSearch} from 'react-icons/fc'
 
 import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 
@@ -64,10 +65,11 @@ function MakeYourSet () {
             <div className='page-top-container'>
                 <div className='page-wrapper'>
                     <div className='page-title'>
-                        <div>
+                        <div className="page-label">
                             <label>Make Your Set.</label>
-                            {/* <img src={IconSet}/> */}
-                            <IoIosCut size="50" color="#ffffff"/>
+                            <div className="menu-icon">
+                            <FcSearch />
+                            </div>
                         </div>
 
                         <div className="user-img">

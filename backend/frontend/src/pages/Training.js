@@ -6,7 +6,7 @@ import "../css/Training/Training.css"
 import IconTraining from "../images/icon_training.png"
 import PoseShoulder from "../images/pose_shoulder.png"
 import NextPose from "../components/Training/NextPose";
-import { MdReplay } from 'react-icons/md'
+import { FcSportsMode } from "react-icons/fc";
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
@@ -102,7 +102,9 @@ const Training = () => {
             <div className="menu2-title">
                 <div>
                     <h5>{ userName }, R U Ready?</h5>
-                    <img src={IconTraining}/>
+                    <div className="menu-icon">
+                    <FcSportsMode />
+                    </div>
                 </div>
                 <div className="user-img">
                             <img src={userImg}></img>

@@ -22,6 +22,7 @@
 
 .menu4-title > div {
   display: flex;
+  align-items: center;
 }
 
 .menu4-title > div > img {

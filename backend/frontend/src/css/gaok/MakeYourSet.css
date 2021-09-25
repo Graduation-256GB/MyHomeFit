@@ -52,10 +52,10 @@
 .page-title > div > label {
   font-family: NanumSquare_acEB;
   margin-left: 6.25rem;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   color: #ffffff;
   font-size: 2.8rem;
-  margin-top: 2.5rem;
+  margin-top: 0.5rem;
 }
 
 .page-small-title {
