@@ -12,6 +12,7 @@ function MakeYourSet () {
     const [currentUser, setCurrentUser] = useState({ data: null });
     // const [username, setUserName] = useState();
     const username = currentUser?.data?.username;
+    const userImg = currentUser?.data?.profile_img;
     
     const Token = localStorage.getItem('token')
     console.log(Token)
@@ -40,6 +41,8 @@ function MakeYourSet () {
     if (currentUser.data) {
         console.log("userdata", currentUser.data);
         console.log("userdata", currentUser.data.username);
+        localStorage.setItem('userImg',currentUser.data.profile_img)
+        localStorage.setItem('userName',currentUser.data.username)
         // setUserName(currentUser.data.username);
     }
     const setArr = []
@@ -67,9 +70,9 @@ function MakeYourSet () {
                             <IoIosCut size="50" color="#ffffff"/>
                         </div>
 
-                        <svg width="100" height="100">
-                            <circle cx="50" cy="50" r="50" fill="white"></circle>
-                        </svg>
+                        <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
                     </div>
                     <div className='page-small-title'>
                             <label>Only For You, </label>

@@ -88,24 +88,25 @@ const Training = () => {
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
 
     if (data) {
         Object.keys(data).forEach(function (key) {
             Exercises.push(data[key]);
         });
     }
-
     return (
         <RecoilRoot>
         <div className="menu2-container">
             <div className="menu2-title">
                 <div>
-                    <h5>Gaok, R U Ready?</h5>
+                    <h5>{ userName }, R U Ready?</h5>
                     <img src={IconTraining}/>
                 </div>
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="50" fill="white"></circle>
-                </svg>
+                <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
             </div>
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>

@@ -37,6 +37,8 @@ const FitNotes = () => {
     const csrftoken = getCookie('csrftoken');
     const { data, error, isLoading } = useAsync({ promiseFn: loadTop3List })
     const top3ListArr = [];
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
     if (data) {
         Object.keys(data).forEach(function (key) {
             top3ListArr.push(data[key]);
@@ -47,15 +49,15 @@ const FitNotes = () => {
         <div className="menu3-container">
             <div className="menu3-title">
                 <div>
-                    <h5>Welcome, Gaok</h5>
+                    <h5>Welcome, { userName}</h5>
                     <img src={IconFitnotes}/>
                 </div>
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="50" fill="white"></circle>
-                </svg>
+                <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
             </div>
             <div className="menu3-small-title">
-                <label>Hi Gaok, This is your FitNotes.</label>
+                <label>Hi { userName }, This is your FitNotes.</label>
             </div>
 
             <div className="fitnotes-fitness-container">

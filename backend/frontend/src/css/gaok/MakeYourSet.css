@@ -115,12 +115,12 @@
   flex-direction: row;
 }
 
-.page-contents-exercise-item{
+.page-contents-exercise-item {
   display: flex;
   flex-direction: column;
 }
 
-.page-contents-exercise-item > label{
+.page-contents-exercise-item > label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,7 +173,7 @@
     border: #A9A1A1 solid 0.1rem;
 } */
 
-#block-wrapper{
+#block-wrapper {
   position: fixed;
   bottom: 30px;
 }
@@ -313,4 +313,15 @@
 
 .set-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.user-img {
+  width: 5rem;
+  height: 5rem;
+  margin-right: 2rem;
+}
+.user-img img {
+  width: 100%;
+  border-radius: 100px;
+  height: 100%;
 }

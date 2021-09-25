@@ -41,7 +41,9 @@ const MakeYourSetForm = () => {
     const csrftoken = getCookie('csrftoken');
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
-    const [newNum,setNewNum] = useState('0');
+    const [newNum, setNewNum] = useState('0');
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
     // const [countList, setCount] = useState([
     //     // {
     //     //     id: 0,
@@ -157,13 +159,13 @@ const MakeYourSetForm = () => {
             <div className='page-wrapper'>
                     <div className='page-title'>
                         <div>
-                            <label>Only for you, Gaok</label>
+                            <label>Only for you, { userName }</label>
                             <img src={IconSet}/>
                         </div>
 
-                        <svg width="100" height="100">
-                            <circle cx="50" cy="50" r="50" fill="white"></circle>
-                        </svg>
+                        <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
                     </div>
                     <div className='page-small-title'>
                         <label>Make Your Fitness Set.</label>
