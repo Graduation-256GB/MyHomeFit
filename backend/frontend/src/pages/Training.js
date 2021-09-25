@@ -90,7 +90,7 @@ const Training = () => {
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
-    const [Index, setIndex] = useState(0)
+    // const [Index, setIndex] = useState(0)
     const userImg=localStorage.getItem('userImg')
     const userName=localStorage.getItem('userName')
 
