@@ -10,7 +10,8 @@ import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
     const [currentUser, setCurrentUser] = useState({ data: null });
-    const [username, setUserName] = useState();
+    // const [username, setUserName] = useState();
+    const username = currentUser?.data?.username;
     
     const Token = localStorage.getItem('token')
     console.log(Token)
@@ -33,13 +34,13 @@ function MakeYourSet () {
             };
             
             fetchData();
-        }, []);
+        }, [currentUser.data]);
         
         console.log('render');
     if (currentUser.data) {
         console.log("userdata", currentUser.data);
         console.log("userdata", currentUser.data.username);
-        setUserName(currentUser.data.username);
+        // setUserName(currentUser.data.username);
     }
     const setArr = []
     const SetNameArr = []
