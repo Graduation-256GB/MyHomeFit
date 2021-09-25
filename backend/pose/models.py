@@ -1,10 +1,13 @@
 from typing import TYPE_CHECKING
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from rest_framework.fields import ImageField
 
 
 class CustomUser(AbstractUser):
     # Any extra fields would go here
+    profile_img = models.ImageField(null=True, blank=True, upload_to="uploads")
+
     def __str__(self):
         return self.username
 
@@ -49,7 +52,7 @@ class ExerciseSet(models.Model):
 
 
 class ExerciseLog(models.Model):
-    #user = models.ForeignKey(
+    # user = models.ForeignKey(
     #    CustomUser, on_delete=models.CASCADE)
     correct_count = models.IntegerField(default=0)  # 사용자가 운동을 정확하게 했을 때의 카운트
     fail_count = models.IntegerField(default=0)  # 사용자가 운동을 실패했을 때의 카운트
