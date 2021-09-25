@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../../css/Training/Training.css"
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
-const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCountList, exercises, csrftoken }) => {
+const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCountList, exercises, csrftoken, setImageList }) => {
     const [countdown, setCountDown]=useState(false)
     const startTraining = e => {
         if (e.target.name === 'fast') {
@@ -32,6 +32,7 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
             exercises.map(item => {
                 setNameList(NameList => [...NameList, item.name]);
                 setCountList(CountList => [...CountList, item.set_count]);
+                setImageList(ImageList => [...ImageList, item.img]);
             })
         })
         .catch(error=>console.log(error));
