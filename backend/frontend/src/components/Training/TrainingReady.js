@@ -42,7 +42,7 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
             {
                 countdown===false&&
                 <div className="ready-content">
-                    <h2>속도를 선택해주세요.</h2>
+                    <h2>운동 속도를 선택해주세요.</h2>
                     <div className="ready-choice">
                         <a onClick={startTraining } name="fast">빠르게</a>
                         <a onClick={startTraining } name="basic">보통 속도로</a>
@@ -54,7 +54,7 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
                 countdown===true&&
                 <CountdownCircleTimer
                     isPlaying
-                    duration={3}
+                    duration={5}
                     colors={[
                     ['#004777', 0.33],
                     ['#F7B801', 0.33],

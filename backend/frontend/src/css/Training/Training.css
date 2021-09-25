@@ -168,6 +168,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 6rem;
 }
 .ready-choice {
   display: flex;
@@ -183,6 +184,7 @@
   height: 3rem;
   text-align: center;
   padding-top: 1rem;
+  margin: 1rem;
 }
 
 .user-video {
@@ -225,4 +227,8 @@
 }
 .export-video video {
   width: 100%;
+}
+[aria-label="Countdown timer"] {
+  font-size: 2rem;
+  margin-top: 6rem;
 }
