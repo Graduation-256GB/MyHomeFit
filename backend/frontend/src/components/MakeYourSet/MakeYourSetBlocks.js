@@ -15,23 +15,14 @@ function MakeYourSetBlocks ({setArr}) {
     console.log("recoilvalue", useRecoilState(setidState))
     
 
-    const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
+    const [setid, setSetId]=useState(0)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
     const [type, setType]=useState('') // 선택한 블럭의 set 타입 저장
     const [isSelected, setSelected]=useState('') // 블럭 선택 유무 상태 저장 
 
-    // const addSet = e => {
-    //     window.location.replace('http://127.0.0.1:8000/makeyoursetform');
-    // }
-
-    // const startSet = (id) => {
-    //     window.location.replace('http://127.0.0.1:8000/training');
-    // }
-
     const setTitleClicked = (id, title, type) => {
         console.log("start")
         {setSetId(id)}
-        console.log("aaaaa")
         setSetTitle(title)
         setType(type)
         // setGlobalSetid(id)
@@ -54,8 +45,8 @@ function MakeYourSetBlocks ({setArr}) {
                         </a>
                     
                         {setArr.map(item => (
-                            <div className={isSelected==item.id?'page-block-selected':'page-block-unselected'} onClick={ () => {setTitleClicked(item.id, item.title, item.type); setSelected(item.id)}  }>
-                                {/* {item.id} */}
+                            <div className={isSelected == item.id ? 'page-block-selected' : 'page-block-unselected'}
+                                onClick={() => { setTitleClicked(item.id, item.title, item.type); setSelected(item.id) }}>
                                 <label>{item.title}</label>
                             </div> 
                         ))}
@@ -71,8 +62,6 @@ function MakeYourSetBlocks ({setArr}) {
                     <label># {type}</label>
                 </div>
                 <div className='page-contents-set-time'>
-                    {/* <label>예상 소요 시간 : </label>
-                    <label>00:00:00</label> */}
                 </div>
 
                 <div className='set-scroll'>

@@ -53,8 +53,8 @@
   display: flex;
   white-space: nowrap;
   overflow-x: scroll;
-  width: 1500px;
-  height: 900px;
+  width: 100%;
+  height: 77vh;
 }
 
 .fitnotes-fitness-container::-webkit-scrollbar {
@@ -69,7 +69,7 @@
 
 .recommend-container {
   width: 630px;
-  height: 730px;
+  height: 93%;
   background-color: white;
   margin-left: 60px;
   margin-top: 30px;

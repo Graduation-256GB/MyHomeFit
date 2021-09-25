@@ -33,7 +33,7 @@ class ListSetInExercise(generics.ListCreateAPIView):
 
 
 class ListExercise(generics.ListCreateAPIView):
-    queryset = Exercise.objects.all()
+    queryset = Exercise.objects.all().order_by('id')
     serializer_class = ExerciseSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -42,6 +42,13 @@ class ListExercise(generics.ListCreateAPIView):
 class TopListExercise(generics.ListCreateAPIView):
     queryset = Exercise.objects.all().order_by('-selected_count')[:3]
     serializer_class = ExerciseSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class UserRankView(generics.ListCreateAPIView):
+    queryset = CustomUser.objects.all().order_by('-user_count')[:3]
+    serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 

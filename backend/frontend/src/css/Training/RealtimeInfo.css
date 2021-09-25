@@ -1,17 +1,17 @@
 .realtime-info-success {
     position: absolute;
-    width: 150px;
+    width: 200px;
     height: 65px;
     left: 7%;
     bottom: 62%;
-    padding: 15px;
+    padding: 10px;
     background-color: #27cfb3;
     z-index: 3;
     box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
     border-radius: 20px;
 
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
     font-family: NanumSquare_acEB;
     text-align: center;
@@ -19,18 +19,18 @@
 
 .realtime-info-fail {
     position: absolute;
-    width: 150px;
+    width: 200px;
     height: 65px;
     right: 8%;
     bottom: 62%;
-    padding: 15px;
+    padding: 10px;
     background-color: #27cfb3;
     z-index: 3;
     box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
     border-radius: 20px;
 
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
     font-family: NanumSquare_acEB;
     text-align: center;
@@ -48,39 +48,4 @@
     font-weight: bold;
     font-family: NanumSquare_acEB;
     text-shadow: 6px 2px 2px white;
-}
-
-.next-video {
-    position: absolute;
-    width: 130px;
-    height: 150px;
-    left: 79%;
-    bottom: 10%;
-    margin-top: 550px;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #f0eded;
-    z-index: 3;
-    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
-
-    color: darkgray;
-    font-size: 22px;
-    font-weight: bold;
-    font-family: NanumSquare_acEB;
-}
-
-.next-video-label {
-    display: flex;
-    align-items: center;
-}
-
-.next-video-pose {
-    display: flex;
-    background-color: #ffffff;
-    border: 3px solid #27cfb3;
-}
-
-.next-video-pose > img {
-    width: 100%;
-    height: 100%;
 }

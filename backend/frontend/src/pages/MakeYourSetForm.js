@@ -3,10 +3,13 @@ import '../css/MakeYourSetForm/MakeYourSetForm.css';
 import IconSet from '../images/icon_makeyourset.png';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FiChevronRight } from 'react-icons/fi';
+import { FcOpenedFolder } from 'react-icons/fc';
 import SetListBlock from '../components/MakeYourSetForm/SetListBlock';
 import ExerciseList from '../components/MakeYourSetForm/ExerciseList';
 import SetForm from '../components/MakeYourSetForm/SetForm';
 import jQuery from 'jquery'
+import Navbar from '../components/Navbar';
+
 
 import { useAsync } from "react-async"
 
@@ -41,7 +44,9 @@ const MakeYourSetForm = () => {
     const csrftoken = getCookie('csrftoken');
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
-    const [newNum,setNewNum] = useState('0');
+    const [newNum, setNewNum] = useState('0');
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
     // const [countList, setCount] = useState([
     //     // {
     //     //     id: 0,
@@ -155,15 +160,18 @@ const MakeYourSetForm = () => {
     return (
         <div className="content">
             <div className='page-wrapper'>
+                <Navbar />
                     <div className='page-title'>
-                        <div>
-                            <label>Only for you, Gaok</label>
-                            <img src={IconSet}/>
+                        <div className="page-label">
+                            <label>Only for you, { userName }</label>
+                            <div className="menu-icon">
+                            <FcOpenedFolder/>
+                            </div>
                         </div>
 
-                        <svg width="100" height="100">
-                            <circle cx="50" cy="50" r="50" fill="white"></circle>
-                        </svg>
+                        <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
                     </div>
                     <div className='page-small-title'>
                         <label>Make Your Fitness Set.</label>

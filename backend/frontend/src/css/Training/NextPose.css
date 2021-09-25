@@ -1,43 +1,45 @@
 .next-pose-container {
-    display: inline-block;
-    position: absolute;
-    bottom: 75%;
-    width: 1200px;
-    height: 210px;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
+  display: inline-block;
+  position: absolute;
+  bottom: 75%;
+  width: 1200px;
+  height: 210px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
-
+.next-pose-container {
+  width: 90%;
+}
 .next-pose-container::-webkit-scrollbar {
-    height: 10px;
-    background-color: #ede9e9;
-    border-radius: 10px;
+  height: 10px;
+  background-color: #ede9e9;
+  border-radius: 10px;
 }
 
 .next-pose-container::-webkit-scrollbar-thumb {
-    background-color: #999494;
-    border-radius: 10px;
+  background-color: #999494;
+  border-radius: 10px;
 }
 
-.next-videos{
-    display: inline-block;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #b6f4ea;
-    width: 180px;
-    height: 180px;
-    margin: 0px 10px 10px 10px;
-    padding: 10px;
-    border-radius: 10px;
+.next-videos {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #b6f4ea;
+  width: 180px;
+  height: 180px;
+  margin: 0px 10px 10px 10px;
+  padding: 10px;
+  border-radius: 10px;
 
-    color: darkgray;
-    font-size: 22px;
-    font-weight: bold;
-    font-family: NanumSquare_acEB;
+  color: darkgray;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: NanumSquare_acEB;
 }
 
-.next-videos> img{
-    width: 100%;
-    height: 100%;
+.next-videos > img {
+  width: 100%;
+  height: 100%;
 }

@@ -8,7 +8,7 @@
     align-items: flex-end;
 }
 
-.recommend-set-container > label{
+.recommend-set-container > .name{
     background-color: #27cfb3;
     padding-right: 30px;
     padding-left: 30px;
@@ -22,4 +22,39 @@
     margin-bottom: 18px;
 }
 
+.ranking {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
 
+.trophy {
+    width: 100px;
+    height: 100px;
+    padding-left: 10px;
+}
+
+.ranking > label{
+    background-color: white;
+    border-radius: 20px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-size: 30px;
+    font-family: NanumSquare_acER;
+    font-weight: bold;
+    color: black;
+}
+
+.profile-img> img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 140px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    border: 3px solid #27cfb3;
+    border-radius: 100px;
+}

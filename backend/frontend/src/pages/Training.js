@@ -6,7 +6,7 @@ import "../css/Training/Training.css"
 import IconTraining from "../images/icon_training.png"
 import PoseShoulder from "../images/pose_shoulder.png"
 import NextPose from "../components/Training/NextPose";
-import { MdReplay } from 'react-icons/md'
+import { FcSportsMode } from "react-icons/fc";
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
@@ -17,6 +17,8 @@ import jQuery from 'jquery'
 import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 import TrainingReady from "../components/Training/TrainingReady";
+import Navbar from '../components/Navbar';
+import { MdReplay } from 'react-icons/md'
 
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
@@ -88,6 +90,9 @@ const Training = () => {
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
+    const [Index, setIndex] = useState(0)
+    const userImg=localStorage.getItem('userImg')
+    const userName=localStorage.getItem('userName')
 
     const [Index, setIndex] = useState(0)
     // const [datalength, setDataLength] = useState(0)
@@ -105,32 +110,20 @@ const Training = () => {
         // console.log("true", isFinished)
         // setIsFinished(true)
     }
-    
-    // useEffect(()=> {
-    //     // if (isFinished){
-    //     // console.log("exercise길이", Exercises.length)
-    //     console.log("index", Index+1)
-    //         if (datalength < Index + 1 ){
-    //             console.log("종료!!!")
-    //             // setIsFinished(true)
-
-    //             // if (isFinished == true) {
-    //             //     window.location.replace('http://127.0.0.1:8000/makeyourset');
-    //             // }
-    //     }
-    // });
-
     return (
-        // <RecoilRoot>
-        <div className="menu2-container">
+        <RecoilRoot>
+            <div className="menu2-container">
+                <Navbar/>
             <div className="menu2-title">
                 <div>
-                    <h5>Gaok, R U Ready?</h5>
-                    <img src={IconTraining}/>
+                    <h5>{ userName }, R U Ready?</h5>
+                    <div className="menu-icon">
+                    <FcSportsMode />
+                    </div>
                 </div>
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="50" fill="white"></circle>
-                </svg>
+                <div className="user-img">
+                            <img src={userImg}></img>
+                        </div>
             </div>
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>
@@ -146,20 +139,23 @@ const Training = () => {
                 <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
                 <img src={RightBtn} className="right-button"/>
-                {/*<div className="next-video">
+                <RealtimeInfo  setId = { SET_ID } Index={Index} setIndex={setIndex} IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
+                {/*<div className="export-video">
+                    <ReactPlayer className="export"
+                                url={myVideo} loop muted playing controls />
+                </div>*/}
+                {
+                (Index < CountList.length -1) &&
+                <div className="next-video">
                     <div className="next-video-label">
                         Next
                         <MdReplay/>
                     </div>
                     <div className="next-video-pose">
-                        <img src={PoseShoulder}/>
+                        <img src={ImageList[Index+1]}/>
                     </div>
-                </div>*/}
-                <RealtimeInfo setId = { SET_ID } Index={Index} setIndex={setIndex} IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
-                <div className="export-video">
-                    <ReactPlayer className="export"
-                                url={myVideo} loop muted playing controls />
                 </div>
+                }
                 <div className="realtime-video">
                     <div className="user-video">
                         <img src={ poseURL }></img>
