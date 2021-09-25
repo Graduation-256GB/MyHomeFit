@@ -209,9 +209,7 @@
   bottom: 30px;
   background-color: #04957c;
   text-align: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
+  padding: 0.6rem;
   text-decoration: none;
 }
 
@@ -224,8 +222,8 @@
 }
 
 .page-contents-btn-start > img {
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
   border: #27cfb3 solid 0.5rem;
   border-radius: 4rem;
   background-color: #ffffff;
