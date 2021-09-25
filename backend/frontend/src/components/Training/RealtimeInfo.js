@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 
-const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
+const RealtimeInfo = ( { FailList, setFailList, SuccessList, setSuccessList, page, setPage, exercises, setId, IsStarted, NameList, CountList } ) => {
     const [Index, setIndex] = useState(0)
-    const [FailList, setFailList] = useState([0,0])
-    const [SuccessList, setSuccessList] = useState([0,0])
+    
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)
     const [delay, setDelay] = useState(2000); // GET 시간 간격
@@ -93,6 +92,15 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
         setTimeout(function(){ setIsOK(false); }, 1000);
     }, [FailCount]);
     */}
+
+    useEffect(()=> {
+        console.log("exercises", exercises.length)
+        console.log("Index", Index)
+        if (exercises.length < Index + 1){
+            console.log("result")
+            setPage(3)
+        }
+    })
 
     return (
         <div>

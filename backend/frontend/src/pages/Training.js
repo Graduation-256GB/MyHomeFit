@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useRecoilValue, useRecoilState, RecoilRoot} from 'recoil';
 import { setidState, setidGetter } from './state';
 
@@ -7,6 +7,9 @@ import IconTraining from "../images/icon_training.png"
 import PoseShoulder from "../images/pose_shoulder.png"
 import NextPose from "../components/Training/NextPose";
 import { MdReplay } from 'react-icons/md'
+import {AiFillCheckCircle} from 'react-icons/ai'
+import {GrNotes} from 'react-icons/gr'
+import {FaBalanceScale} from 'react-icons/fa'
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
@@ -18,6 +21,8 @@ import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 import TrainingReady from "../components/Training/TrainingReady";
 
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 
@@ -88,11 +93,38 @@ const Training = () => {
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
 
+    const [FailList, setFailList] = useState([0,0])
+    const [SuccessList, setSuccessList] = useState([0,0])
+    // const [FailSum, setFailSum] = useState(0)
+    // const [SuccessSum, setSuccessSum]=useState(0)
+
+    const [countSum, setCountSum] = useState(0)
+    const [successSum, setSuccessSum] = useState(0) 
+
+    useEffect (()=> {
+        setSuccessSum( SuccessList.reduce((a,v) =>  a = a + v , 0 ) )
+        setCountSum (CountList.reduce((a,v) =>  a = a + v , 0 ))
+        console.log("success", successSum)
+        console.log("count", countSum)
+    }, [SuccessList, CountList])
+    const percentage = 66;
+
     if (data) {
         Object.keys(data).forEach(function (key) {
             Exercises.push(data[key]);
+            console.log(Exercises)
         });
     }
+
+    // const [Index, setIndex] = useState(0)
+    // useEffect(()=> {
+    //     if (Index + 1 > Exercises.length){
+    //         console.log(Index)
+    //         console.log(Exercises.length)
+    //         console.log(data.length)
+    //         console.log("종료")
+    //     }
+    // }, [Index])
 
     return (
         <RecoilRoot>
@@ -129,7 +161,7 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
-                <RealtimeInfo setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList}/>
+                <RealtimeInfo FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList}/>
                 <div className="export-video">
                     <ReactPlayer className="export"
                                 url={myVideo} loop muted playing controls />
@@ -141,6 +173,37 @@ const Training = () => {
                 </div>
             </div>
 
+            }
+
+            {page == 3 && 
+                <div className="training-result-wrapper">
+                    <div className="result-title"><GrNotes size="40"/><label> Exercise List </label></div>
+                    <div className="result-container">
+                        <div className="result-list">
+
+                            {Exercises.map(item => (
+                                <div className="result-line"><AiFillCheckCircle size="30" className="result-check"/><label className="result-check-label">{item.name}</label></div>
+                            ))}
+
+                            
+                        </div>
+                        <div className="result-grade">
+                        <div style={{ width: 300, height: 300 }}>
+                            <CircularProgressbar value={ successSum==0 ?  parseInt( 1/countSum * 100 ) : parseInt(successSum/countSum * 100)} 
+                                text={`${ successSum==0 ?  parseInt( 1/countSum * 100 ) : parseInt(successSum/countSum * 100)}%`} 
+                                
+                            />
+                        </div>
+                        </div>
+                    </div>
+
+                    <div className="result-footer">
+                        <FaBalanceScale size="40"/>
+                        <label className="result-fail">FailCount : {FailList.reduce((a,v) =>  a = a + v , 0 )}</label>
+                        <label className="result-success">SuccessCount : {SuccessList.reduce((a,v) =>  a = a + v , 0 )}</label>
+                    </div>
+
+                </div>
             }
         </div>
         </RecoilRoot>
