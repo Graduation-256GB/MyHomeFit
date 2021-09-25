@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../css/signup.css"
-import IconFitnotes from "../images/icon_fitnotes.png"
-import IconSignup from "../images/icon_signup.png"
+import "../css/login.css"
+import backgroundImg from '../images/login_background.jpg'
 
 
 const Signup = () => {
@@ -52,19 +52,26 @@ const Signup = () => {
   };
     return (
         <div className="signup-container">
-      {loading === false && <h1>Signup</h1>}
-      {errors === true && <h2>Cannot signup with provided credentials</h2>}
             <div className="signup-wrapper">
                 <div className="signup-left">
-                    <div><label className="signup-welcome">Welcome</label></div>
-
-                </div>
+                        <img src={ backgroundImg}>
+                        </img>
+                        <div className="signup-welcome">
+                            <label>Welcome</label>
+                            <div className="check-account">
+                            <label>Have an Account?</label>
+                            <div className="button-wrapper">
+                                <a href="/login">Login</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
 
                 <div className="signup-right">
                     <div className="signup-title-box">
-                        <label className="signup-title-signup">SignUp</label>
+                        <label className="signup-title-login">SignUp</label>
                         <label className="signup-title-div">/</label>
-                        <label className="signup-title-login">Login</label>
+                        <label className="signup-title-signup">Login</label>
                     </div>
                     <form onSubmit={onSubmit}>
                         <div className="signup-right-content">

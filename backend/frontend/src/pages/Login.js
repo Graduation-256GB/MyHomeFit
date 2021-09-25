@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../css/login.css"
-import IconFitnotes from "../images/icon_fitnotes.png"
-import IconSignup from "../images/icon_signup.png"
-
+import backgroundImg from '../images/login_background.jpg'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -50,13 +48,20 @@ const Login = () => {
 
     return (
         <div className="signup-container">
-            {loading === false && <h1>Login</h1>}
-            {errors === true && <h2>Cannot log in with provided credentials</h2>}
             {loading === false && (
                 <div className="signup-wrapper">
                     <div className="signup-left">
-                        <div><label className="signup-welcome">Welcome</label></div>
-
+                        <img src={ backgroundImg}>
+                        </img>
+                        <div className="signup-welcome">
+                            <label>Welcome</label>
+                            <div className="check-account">
+                                <label>Create Account</label>
+                                <div className="button-wrapper">
+                                    <a href="/signup">Signup</a>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="signup-right">
