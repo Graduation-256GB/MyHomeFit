@@ -7,6 +7,7 @@ import IconSet from '../images/icon_makeyourset.png';
 import {FcSearch} from 'react-icons/fc'
 
 import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
+import Navbar from '../components/Navbar';
 
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
@@ -63,7 +64,8 @@ function MakeYourSet () {
         <>
         <div className='page-top-layer'>
             <div className='page-top-container'>
-                <div className='page-wrapper'>
+                    <div className='page-wrapper'>
+                        <Navbar />
                     <div className='page-title'>
                         <div className="page-label">
                             <label>Make Your Set.</label>

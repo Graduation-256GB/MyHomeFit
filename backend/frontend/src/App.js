@@ -15,7 +15,7 @@ import FitNotes from "./pages/FitNotes";
 import Calender from "./pages/Calender";
 import SideMenubar from "./pages/menu/SideMenubar";
 import './App.css'
-import Navbar from "./pages/Navbar";
+// import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
@@ -34,8 +34,9 @@ const App = () => {
         <Route path="/fitnotes" component={FitNotes} />
         <Route path="/calender" component={Calender} />
 
+        <Route path="/signup" exact={true} component={Signup} />
         <Route path="/" exact={true} component={Signup} />
-        <Route path="/navbar" component={Navbar} />
+        {/* <Route path="/navbar" component={Navbar} /> */}
 
         <Route path="/login" component={Login}/>
         {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}

@@ -1,50 +1,80 @@
-import React, { useState } from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
+import React, { useState, useEffect } from 'react';
+import { Menu, Button } from 'antd';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './SidebarData';
 import '../css/Navbar.css';
+import {IoMdLogIn,IoMdLogOut} from "react-icons/io"
+import {FiUserPlus} from "react-icons/fi"
 
-/* 아이콘 컬러 전체 변경 기능 */
-import { IconContext } from 'react-icons';
+const MenuList = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .ant-menu {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+`;
 
-function Navbar() {
-    const [sidebar, setSidebar] = useState(false);
+const NavBar=()=> {
 
-    const showSidebar = () => setSidebar(!sidebar);
-    return (
-        <>
-        {/* 아이콘 컬러 전체 변경 기능 */}
-        <IconContext.Provider value={{ color: '#fff' }}>
-        {/* 네비게이션 토글 코드*/}
-        <div className="navbar">
-            <Link to="#" className="menu-bars">
-                <FaIcons.FaBars onClick={showSidebar} />
-            </Link>
+  const [auth, setAuth] = useState('')
+
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      setAuth(true);
+    }
+  }, [])
+
+  const handleLogout = () => {
+
+   fetch('http://127.0.0.1:8000/api/auth/logout/', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       Authorization: `Token ${localStorage.getItem('token')}`
+     }
+   })
+     .then(res => res.json())
+     .then(data => {
+       console.log(data);
+       localStorage.clear();
+       window.location.replace('http://127.0.0.1:8000/login');
+     });
+  };
+
+  return(
+    <div>
+      <div className="navbar-wrapper">
+        <div className="navbar-menu">
+          { auth ?
+            <div key="logout" onClick={handleLogout} className="navbar-menu-item">
+              <IoMdLogOut/>&nbsp;
+              Logout
+            </div>
+            
+            :
+            <div key="signin" className="navbar-menu-item">
+              <Link to="/login">
+                <IoMdLogIn />&nbsp;Login
+              </Link>
+            </div>
+          }
+          { auth ?
+            <></>
+          :
+            <div key="signup" className="navbar-menu-item">
+              <Link to="/signup">
+                <FiUserPlus/>&nbsp;
+              Sign Up
+              </Link>
+            </div>
+          }
         </div>
-        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-            <ul className="nav-menu-items" onClick={showSidebar}>
-                <li className="navbar-toggle">
-                    <Link to="#" className="menu-bars">
-                        <AiIcons.AiOutlineClose />
-                    </Link>
-                </li>
-                {/* SidebarData를 순서대로 담기*/}
-                {SidebarData.map((item, index) => {
-                    return (
-                        <li key={index} className={item.cName}>
-                            <Link to={item.path}>
-                                {item.icon}
-                                <span>{item.title}</span>
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
-        </nav>
-      </IconContext.Provider>
-    </>
-  );
+      </div>
+    </div>
+  )
 }
 
-export default Navbar;
+export default NavBar;
