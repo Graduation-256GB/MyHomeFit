@@ -18,6 +18,7 @@ import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 import TrainingReady from "../components/Training/TrainingReady";
 import Navbar from '../components/Navbar';
+import { MdReplay } from 'react-icons/md'
 
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}

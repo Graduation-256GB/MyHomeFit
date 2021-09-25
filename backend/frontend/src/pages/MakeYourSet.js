@@ -17,7 +17,6 @@ function MakeYourSet () {
     const userImg = currentUser?.data?.profile_img;
     
     const Token = localStorage.getItem('token')
-    console.log(Token)
     useEffect(() => {
         const fetchData = async () => {
             const setlist = await axios.get(
@@ -39,10 +38,7 @@ function MakeYourSet () {
             fetchData();
         }, [currentUser.data]);
         
-        console.log('render');
     if (currentUser.data) {
-        console.log("userdata", currentUser.data);
-        console.log("userdata", currentUser.data.username);
         localStorage.setItem('userImg',currentUser.data.profile_img)
         localStorage.setItem('userName',currentUser.data.username)
         // setUserName(currentUser.data.username);
