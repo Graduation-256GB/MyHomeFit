@@ -6,6 +6,7 @@ import {FcCloseUpMode} from "react-icons/fc"
 import FitnessRank from "../components/FitNotes/FitnessRank";
 import RecommendFitness from "../components/FitNotes/RecommendFitness";
 import FitnessCalories from "../components/FitNotes/FitnessCalories";
+import Navbar from '../components/Navbar';
 
 function getCookie(name) {
         var cookieValue = null;
@@ -47,6 +48,7 @@ const FitNotes = () => {
     }
     return (
         <div className="menu3-container">
+            <Navbar/>
             <div className="menu3-title">
                 <div className="page-label">
                     <h5>Welcome, { userName}</h5>

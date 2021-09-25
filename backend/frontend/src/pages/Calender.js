@@ -3,12 +3,14 @@ import "../css/Calender/Calender.css"
 import IconCalender from "../images/icon_calender.png"
 import FitCards from "../images/fitCards.JPG"
 import { FcCalendar } from "react-icons/fc";
+import Navbar from '../components/Navbar';
 
 const Calender = () => {
     const userImg=localStorage.getItem('userImg')
     const userName=localStorage.getItem('userName')
     return (
         <div className="menu4-container">
+            <Navbar/>
             <div className="menu4-title">
                 <div>
                     <h5>{userName}'s Fit Card</h5>

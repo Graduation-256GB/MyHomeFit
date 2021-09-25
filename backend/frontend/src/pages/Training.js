@@ -17,6 +17,7 @@ import jQuery from 'jquery'
 import axios from 'axios';
 import RealtimeInfo from "../components/Training/RealtimeInfo";
 import TrainingReady from "../components/Training/TrainingReady";
+import Navbar from '../components/Navbar';
 
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
@@ -98,7 +99,8 @@ const Training = () => {
     }
     return (
         <RecoilRoot>
-        <div className="menu2-container">
+            <div className="menu2-container">
+                <Navbar/>
             <div className="menu2-title">
                 <div>
                     <h5>{ userName }, R U Ready?</h5>

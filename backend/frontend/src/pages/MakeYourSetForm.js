@@ -8,6 +8,7 @@ import SetListBlock from '../components/MakeYourSetForm/SetListBlock';
 import ExerciseList from '../components/MakeYourSetForm/ExerciseList';
 import SetForm from '../components/MakeYourSetForm/SetForm';
 import jQuery from 'jquery'
+import Navbar from '../components/Navbar';
 
 
 import { useAsync } from "react-async"
@@ -159,6 +160,7 @@ const MakeYourSetForm = () => {
     return (
         <div className="content">
             <div className='page-wrapper'>
+                <Navbar />
                     <div className='page-title'>
                         <div className="page-label">
                             <label>Only for you, { userName }</label>
