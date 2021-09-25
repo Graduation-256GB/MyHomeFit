@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
-import { MdReplay } from 'react-icons/md'
-//import Tts from 'react-native-tts';
+import { MdDone, MdClear } from 'react-icons/md'
 
-const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, ImageList } ) => {
-    const [Index, setIndex] = useState(0)
+const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, setIndex, Index } ) => {
+    //const [Index, setIndex] = useState(0)
     const [FailList, setFailList] = useState([0,0])
     const [SuccessList, setSuccessList] = useState([0,0])
     const [FailCount, setFailCount] = useState(0)
@@ -73,45 +72,10 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, ImageList } ) =>
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
-                //if (CountList.length <= Index) {
-                //    setIsRunning(false) 
-                //}
             }
         });
     }, isRunning ? delay : null);
     
-    {/*
-    // Success
-    useEffect(() => {
-        setResult("Success")
-        setIsOK(true)
-        setTimeout(function(){ setIsOK(false); }, 1000);
-    }, [SuccessCount]);
-
-    // Fail
-    useEffect(() => {
-        setResult("Fail")
-        setIsOK(true)
-        setTimeout(function(){ setIsOK(false); }, 1000);
-    }, [FailCount]);
-    */}
-
-
-    {/*const { messages, speak } = useSpeech();
-
-    const speakButtonHandler = async () => {
-        const utterance = await speak({
-        text: 'Hello',
-        volume: 0.5,
-        rate: 1,
-        pitch: 1
-        });
-    };*/}
-
-    {/*if(!IsStarted) {
-        Tts.voices().then(voices => console.log(voices));
-    }*/}
-
 
     return (
         <div>
@@ -119,7 +83,7 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, ImageList } ) =>
                 { SuccessList[Index] + FailList[Index] } / { CountList[Index] }회 <br/> { NameList[Index] }
             </div>
             <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
-                성공{/*: { SuccessList[Index] } / { CountList[Index] }회*/}
+                성공< MdDone />
                 {/*{
                     isStarted && isOK &&
                     <div className="success_or_fail">
@@ -128,20 +92,8 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, ImageList } ) =>
                 }*/}
             </div>
             <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
-                실패{/*: { FailList[Index] } / { CountList[Index] }회*/}
+                실패< MdClear />
             </div>
-            {
-                (Index < CountList.length -1) &&
-                <div className="next-video">
-                    <div className="next-video-label">
-                        Next
-                        <MdReplay/>
-                    </div>
-                    <div className="next-video-pose">
-                        <img src={ImageList[Index+1]}/>
-                    </div>
-                </div>
-            }
         </div>
     )
 }

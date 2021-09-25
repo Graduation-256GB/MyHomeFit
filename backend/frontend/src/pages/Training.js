@@ -88,6 +88,7 @@ const Training = () => {
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
+    const [Index, setIndex] = useState(0)
 
     if (data) {
         Object.keys(data).forEach(function (key) {
@@ -121,20 +122,24 @@ const Training = () => {
                 <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
                 <img src={RightBtn} className="right-button"/>
-                {/*<div className="next-video">
+                <RealtimeInfo setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} 
+                                CountList={CountList} setIndex={setIndex} Index={Index}/>
+                {/*<div className="export-video">
+                    <ReactPlayer className="export"
+                                url={myVideo} loop muted playing controls />
+                </div>*/}
+                {
+                (Index < CountList.length -1) &&
+                <div className="next-video">
                     <div className="next-video-label">
                         Next
                         <MdReplay/>
                     </div>
                     <div className="next-video-pose">
-                        <img src={PoseShoulder}/>
+                        <img src={ImageList[Index+1]}/>
                     </div>
-                </div>*/}
-                <RealtimeInfo setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
-                <div className="export-video">
-                    <ReactPlayer className="export"
-                                url={myVideo} loop muted playing controls />
                 </div>
+                }
                 <div className="realtime-video">
                     <div className="user-video">
                         <img src={ poseURL }></img>

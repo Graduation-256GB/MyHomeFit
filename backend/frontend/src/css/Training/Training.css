@@ -52,10 +52,10 @@
 
 .videos {
   position: absolute;
-  left: 480px;
+  justify-content: center;
+  left: 405px;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin-top: 10px;
 }
 
@@ -95,38 +95,39 @@
 }
 
 .next-video {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  width: 130px;
-  height: 150px;
-  left: 79%;
-  bottom: 10%;
+  width: 220px;
+  height: 250px;
+  right: 101.5%;
+  bottom: 5%;
   margin-top: 550px;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 18px 0px 10px 20px;
+  border-radius: 30px;
   background-color: #f0eded;
   z-index: 3;
   box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
 
   color: darkgray;
-  font-size: 22px;
+  font-size: 35px;
   font-weight: bold;
   font-family: NanumSquare_acEB;
 }
 
-.next-video-label > img {
-  width: 25px;
-  height: 25px;
-  margin-left: 10px;
-}
 .next-video-label {
   display: flex;
   align-items: center;
+
 }
 
 .next-video-pose {
   display: flex;
+  justify-content: center;
   background-color: #ffffff;
   border: 3px solid #27cfb3;
+  width: 190px;
+  height: 190px;
 }
 
 .next-video-pose > img {
@@ -136,14 +137,13 @@
 
 .realtime-video {
   display: inline-flex;
-  justify-content: space-around;
   align-items: flex-end;
-  width: 70rem;
+  width: 75rem;
   height: 700px;
   background-color: #ffffff;
   border: 7px dashed #b6f4ea;
   border-radius: 70px;
-  margin: 120px 20px 20px 20px;
+  margin: 120px 20px 20px 0px;
   padding: 40px;
 }
 .ready-box {
