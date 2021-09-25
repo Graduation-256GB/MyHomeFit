@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
+import { MdReplay } from 'react-icons/md'
 //import Tts from 'react-native-tts';
 
-const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
+const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, ImageList } ) => {
     const [Index, setIndex] = useState(0)
     const [FailList, setFailList] = useState([0,0])
     const [SuccessList, setSuccessList] = useState([0,0])
@@ -61,14 +62,14 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
 
             if( SuccessList[Index] !== SuccessCount ) {
                 setSuccessCount(SuccessList[Index])
-                setColorSuccess('green')
+                setColorSuccess('blue')
                 setColorFail('#27cfb3')
             }
             if( FailList[Index] !== FailCount ) {
                 setFailCount(FailList[Index])
                 setColorFail('red')
                 setColorSuccess('#27cfb3')
-            } 
+            }
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
@@ -111,13 +112,14 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
         Tts.voices().then(voices => console.log(voices));
     }*/}
 
+
     return (
         <div>
             <div className="realtime-pose">
-                { NameList[Index] }
+                { SuccessList[Index] + FailList[Index] } / { CountList[Index] }회 <br/> { NameList[Index] }
             </div>
             <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
-                성공: { SuccessList[Index] } / { CountList[Index] }회
+                성공{/*: { SuccessList[Index] } / { CountList[Index] }회*/}
                 {/*{
                     isStarted && isOK &&
                     <div className="success_or_fail">
@@ -126,8 +128,20 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
                 }*/}
             </div>
             <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
-                실패: { FailList[Index] } / { CountList[Index] }회
-            </div> 
+                실패{/*: { FailList[Index] } / { CountList[Index] }회*/}
+            </div>
+            {
+                (Index < CountList.length -1) &&
+                <div className="next-video">
+                    <div className="next-video-label">
+                        Next
+                        <MdReplay/>
+                    </div>
+                    <div className="next-video-pose">
+                        <img src={ImageList[Index+1]}/>
+                    </div>
+                </div>
+            }
         </div>
     )
 }
