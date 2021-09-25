@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 
-const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
-    const [Index, setIndex] = useState(0)
+const RealtimeInfo = ( { setId, IsStarted, NameList, CountList, exercises, Index, setIndex } ) => {
+    // const [Index, setIndex] = useState(0)
     const [FailList, setFailList] = useState([0,0])
     const [SuccessList, setSuccessList] = useState([0,0])
     const [FailCount, setFailCount] = useState(0)
@@ -14,7 +14,7 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
     //const [Result, setResult] = useState("")
     const [ColorSuccess, setColorSuccess] = useState('#27cfb3')
     const [ColorFail, setColorFail] = useState('#27cfb3')
-    
+
 
     // start button을 눌러서 객체를 만든 후 GET
     useEffect(() => {
@@ -95,6 +95,7 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
     */}
 
     return (
+
         <div>
             <div className="realtime-pose">
                 { NameList[Index] }
@@ -112,6 +113,7 @@ const RealtimeInfo = ( { setId, IsStarted, NameList, CountList } ) => {
                 &nbsp; Fail: { FailList[Index] } / { CountList[Index] }회
             </div> 
         </div>
+        
     )
 }
 

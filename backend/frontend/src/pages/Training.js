@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useRecoilValue, useRecoilState, RecoilRoot} from 'recoil';
 import { setidState, setidGetter } from './state';
 
@@ -68,7 +68,7 @@ const Training = () => {
     // })}
     //console.log("SETID", SETID)
     const SET_ID =  window.localStorage.getItem("setid")
-    console.log("SET_ID", SET_ID)
+    // console.log("SET_ID", SET_ID)
     // const SET_ID = useRecoilState(setidState)
     // console.log(useRecoilState({setidState}))
     // console.log("트레이닝 전역변수 확인", SET_ID)
@@ -88,14 +88,39 @@ const Training = () => {
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
 
+    const [Index, setIndex] = useState(0)
+    // const [datalength, setDataLength] = useState(0)
+    // const [isFinished, setIsFinished] = useState(false)
+    // const [isResult, setIsResult] = useState(0)
+    
+    // 결과페이지 구현
+
     if (data) {
+        // setDataLength(data.length)
+        // console.log("length", datalength)
         Object.keys(data).forEach(function (key) {
             Exercises.push(data[key]);
         });
+        // console.log("true", isFinished)
+        // setIsFinished(true)
     }
+    
+    // useEffect(()=> {
+    //     // if (isFinished){
+    //     // console.log("exercise길이", Exercises.length)
+    //     console.log("index", Index+1)
+    //         if (datalength < Index + 1 ){
+    //             console.log("종료!!!")
+    //             // setIsFinished(true)
+
+    //             // if (isFinished == true) {
+    //             //     window.location.replace('http://127.0.0.1:8000/makeyourset');
+    //             // }
+    //     }
+    // });
 
     return (
-        <RecoilRoot>
+        // <RecoilRoot>
         <div className="menu2-container">
             <div className="menu2-title">
                 <div>
@@ -129,7 +154,7 @@ const Training = () => {
                         <img src={PoseShoulder}/>
                     </div>
                 </div>
-                <RealtimeInfo setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList}/>
+                <RealtimeInfo setId = { SET_ID } Index = {Index} setIndex = {setIndex} IsStarted = { IsStarted } NameList={NameList} CountList={CountList} exercises={Exercises}/>
                 <div className="export-video">
                     <ReactPlayer className="export"
                                 url={myVideo} loop muted playing controls />
@@ -142,8 +167,14 @@ const Training = () => {
             </div>
 
             }
+            { page === 3 &&
+            <div>
+                결과 페이지
+            </div>
+            
+            }
         </div>
-        </RecoilRoot>
+        // </RecoilRoot>
     );
 
 };
