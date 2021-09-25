@@ -4,6 +4,8 @@ import IconCalender from "../images/icon_calender.png"
 import FitCards from "../images/fitCards.JPG"
 import { FcCalendar } from "react-icons/fc";
 import Navbar from '../components/Navbar';
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
 const Calender = () => {
     const userImg=localStorage.getItem('userImg')
@@ -18,6 +20,8 @@ const Calender = () => {
                     <FcCalendar/>
                     </div>
                 </div>
+                <div>
+                </div>
                 <div className="user-img">
                             <img src={userImg}></img>
                         </div>
@@ -26,8 +30,20 @@ const Calender = () => {
                 <label>Hi { userName }, Check your Calender.</label>
             </div>
 
-            <div className="calendar-content">
-                <img src={FitCards} width="1300"/>
+            <div className="calendar-container">
+                <div className="calendar-content">
+
+                </div>
+                <div className="calendar-box">
+                    <div className="calendar-first-section">
+                        <Calendar activeMonth={new Date()} calendarType="US" />
+                    </div>
+                    <div className="calendar-second-section">
+                        <div className="calorie-box">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
