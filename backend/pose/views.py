@@ -33,7 +33,7 @@ class ListSetInExercise(generics.ListCreateAPIView):
 
 
 class ListExercise(generics.ListCreateAPIView):
-    queryset = Exercise.objects.all()
+    queryset = Exercise.objects.all().order_by('id')
     serializer_class = ExerciseSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
