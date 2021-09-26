@@ -133,7 +133,7 @@ const Training = () => {
         // setIsFinished(true)
     }
     return (
-        <RecoilRoot>
+        // <RecoilRoot>
             <div className="menu2-container">
                 <Navbar/>
             <div className="menu2-title">
@@ -216,7 +216,7 @@ const Training = () => {
                 </div>
             }
         </div>
-        </RecoilRoot>
+        // </RecoilRoot>
     );
 
 };
