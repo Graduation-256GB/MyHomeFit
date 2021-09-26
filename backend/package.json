@@ -2,7 +2,10 @@
   "dependencies": {
     "jquery": "^3.6.0",
     "react-calendar": "^3.4.0",
+<<<<<<< Updated upstream
     "react-circular-progressbar": "^2.0.4",
+=======
+>>>>>>> Stashed changes
     "react-countdown-circle-timer": "^2.5.4",
     "react-icons": "^4.2.0",
     "react-native": "^0.65.1",
