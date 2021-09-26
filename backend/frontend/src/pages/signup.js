@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import "../css/signup.css"
+import "../css/Signup.css"
 import "../css/login.css"
-import backgroundImg from '../images/login_background.jpg'
 
 
 const Signup = () => {
@@ -54,8 +53,7 @@ const Signup = () => {
         <div className="signup-container">
             <div className="signup-wrapper">
                 <div className="signup-left">
-                        <img src={ backgroundImg}>
-                        </img>
+                        
                         <div className="signup-welcome">
                             <label>Welcome</label>
                             <div className="check-account">

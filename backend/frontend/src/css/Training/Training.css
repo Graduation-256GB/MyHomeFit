@@ -58,7 +58,7 @@
   width: 70%;
   position: absolute;
   justify-content: center;
-  left: 405px;
+  left: 440px;
   display: flex;
   align-items: center;
   margin-top: 10px;
@@ -105,7 +105,7 @@
   position: absolute;
   width: 220px;
   height: 250px;
-  right: 101.5%;
+  right: 104%;
   bottom: 5%;
   margin-top: 550px;
   padding: 18px 0px 10px 20px;
@@ -123,7 +123,6 @@
 .next-video-label {
   display: flex;
   align-items: center;
-
 }
 
 .next-video-pose {
@@ -234,8 +233,7 @@
   margin-top: 6rem;
 }
 
-
-.training-result-wrapper{
+.training-result-wrapper {
   background-color: #fff;
   height: 60%;
   margin-left: 250px;
@@ -246,8 +244,7 @@
   border: dashed #27cfb3 6px;
 }
 
-.result-title{
-  
+.result-title {
   display: flex;
 }
 
@@ -262,13 +259,13 @@
   margin-left: 10px;
 }
 
-.result-container{
+.result-container {
   display: flex;
   flex-direction: row;
   /* margin-top: 20px; */
 }
 
-.result-list{
+.result-list {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -280,8 +277,8 @@
   border-bottom: turquoise solid 2px;
 }
 
-.result-check-label{
-  color:#A9A1A1;
+.result-check-label {
+  color: #a9a1a1;
   font-size: 30px;
   font-weight: bold;
   font-family: NanumSquare_acB;
@@ -289,9 +286,8 @@
   justify-content: center;
 }
 
-
-.result-check{
-  color: #05886A;
+.result-check {
+  color: #05886a;
   margin-right: 20px;
 }
 
@@ -299,7 +295,7 @@
   margin-left: 40px;
 }
 
-.result-footer > label{
+.result-footer > label {
   /* color:#A9A1A1; */
   font-size: 30px;
   font-weight: bold;
@@ -308,14 +304,14 @@
   justify-content: center;
 }
 
-.result-fail{
-  color: #F31111;
+.result-fail {
+  color: #f31111;
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 10px;
 }
 
-.result-success{
-  color: #05886A;
+.result-success {
+  color: #05886a;
   margin-bottom: 10px;
 }

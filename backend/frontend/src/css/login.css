@@ -44,6 +44,7 @@
   font-family: NanumSquare_acB;
   font-weight: bold;
   display: inline-block;
+  text-shadow: 1px 2px 14px #848484ee;
 }
 
 .signup-detail {

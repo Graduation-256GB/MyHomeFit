@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "../css/login.css"
-import backgroundImg from '../images/login_background.jpg'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -51,8 +50,6 @@ const Login = () => {
             {loading === false && (
                 <div className="signup-wrapper">
                     <div className="signup-left">
-                        <img src={ backgroundImg}>
-                        </img>
                         <div className="signup-welcome">
                             <label>Welcome</label>
                             <div className="check-account">
