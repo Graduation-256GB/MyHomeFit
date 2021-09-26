@@ -185,13 +185,6 @@ const Training = () => {
                 </div>
             </div>
             }
-            { page === 3 &&
-            <div>
-                결과 페이지
-            </div>
-            
-            }
-
             {page == 3 && 
                 <div className="training-result-wrapper">
                     <div className="result-title"><GrNotes size="40"/><label> Exercise List </label></div>
@@ -223,7 +216,7 @@ const Training = () => {
                 </div>
             }
         </div>
-        // </RecoilRoot>
+        </RecoilRoot>
     );
 
 };

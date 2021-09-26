@@ -30,7 +30,7 @@ const ExerciseList = ({ exerciseArr,addList }) => {
                     </div>
                 ))
             }
-                    <div className="exercise-box">
+                    {/* <div className="exercise-box">
                     <div className="exercise-hover" data-id="1" data-name="Squat" data-img="/static/media/squat.a09ebb93.png" onClick={addList}>
                             <BiAddToQueue data-id="1" data-name="Squat" data-img="/static/media/squat.a09ebb93.png"/>
                         </div>
@@ -47,7 +47,7 @@ const ExerciseList = ({ exerciseArr,addList }) => {
                             <img src={Stretch}></img>
                         </div>
                         <div className="exercise-title" >Stretch</div>
-                    </div>
+                    </div> */}
                     
                 </div>
     )
