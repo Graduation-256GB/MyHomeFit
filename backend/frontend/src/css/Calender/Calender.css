@@ -133,6 +133,6 @@
 
 .calendar-first-section div {
   font-size: 1rem;
-  text-align: center;
+  /* text-align: center; */
   /* padding: 1rem; */
 }
