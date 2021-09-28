@@ -1,0 +1,21 @@
+.navbar-menu {
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar-menu-item {
+  color: white;
+}
+.navbar-menu-item a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.navbar-menu-item a:hover {
+  color: rgb(142, 142, 142);
+}
+.navbar-menu-item {
+  font-size: 1.2rem;
+  margin: 1rem;
+  font-weight: 600;
+}

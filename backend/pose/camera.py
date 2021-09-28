@@ -2,16 +2,21 @@ import time
 import mediapipe as mp
 import cv2
 import numpy as np
+from datetime import datetime, date
 from django.conf import settings
 import os
 import math
 from tensorflow.keras.models import load_model
+import time
+
+from .models import ExerciseSet, Set, ExerciseLog
+
 poseEstimationModel = load_model(
     os.path.join(settings.BASE_DIR, 'pose/my_model.h5'))
 
 
 class PoseWebCam(object):
-    def __init__(self):
+    def __init__(self, pk, num):
         # self.vs = VideoStream(src=0).start()
         self.cap = cv2.VideoCapture(0)
         # self.mpPose = mp.solutions.pose
@@ -24,7 +29,36 @@ class PoseWebCam(object):
         self.allkeypoints = []
         self.outputkeypoints = []
 
-        self.predicted_pose='start'
+        #self.predicted_pose = 'start'
+        self.predicted_pose_list = []
+
+        # About realtime pose counting
+        self.set_id = pk  # set_id
+        self.exercise_set = ExerciseSet.objects.filter(
+            set=self.set_id).order_by('set_num')
+        self.exercise_log = []
+        self.n = 0  # ExerciseSet n번째
+        # n번째 운동 set_count
+        self.total_count = self.exercise_set[self.n].set_count
+        # n번째 운동 name
+        self.current_exercise = self.exercise_set[self.n].exercise.name
+        self.exercise_count = 1  # 실시간 수행 횟수
+        self.isFinished = False  # 한 세트를 끝냈는지
+
+        # About exerciselog
+        # self.user_id = 1    # user_id
+        self.isAdded = False    # ExerciseLog 객체 한 번만 생성
+        self.logs = []    # ExerciseLog id 배열
+
+        self.successOrFail = 'Checking.....'
+
+        print(self.exercise_set)
+
+        self.pose_cnt = 0  # n번 째 포즈
+
+        self.fps = 14  # 본인 환경에서의 fps => 상수값 대신 메소드를 통해 구할 수 있도록 나중에 구현하기
+        self.frame_per_second = int(num)  # 1초 당 추출할 프레임 수
+        self.time_count = 16/self.frame_per_second
 
         """
         # mediapipe 키포인트 33개 중에서내 사용될 12개의 키포인트
@@ -39,113 +73,177 @@ class PoseWebCam(object):
     def get_frame(self):
 
         success, img = self.cap.read()
+
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = self.pose.process(imgRGB)
-        # print(results.pose_landmarks.landmark[0])
-
+        # print('time_count', math.floor(self.time_count))
         keypoints = []  # 1프레임의 keypoints를 담은 배열
-        # keypoints.add([results.pose_landmarks.landmark[0]])
-
         if results.pose_landmarks:
-            self.frame_cnt += 1
+            # About exerciselog
+            if (self.isAdded == False):
+                for exercise in self.exercise_set:
+                    log = ExerciseLog.objects.filter(
+                        set_exercise_id=exercise.id).last()
+                    self.exercise_log.append(log)
+                    self.logs.append(log.id)
+                self.isAdded = True  # 1번 만
+                print("self.exercise_log: ", self.exercise_log)
+
+            # Success Fail 화면에 표시
+            # cv2.putText(img, self.successOrFail, (200, 200),
+            #            cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 3)
+
+            for id, lm in enumerate(results.pose_landmarks.landmark):
+                self.mpDraw.draw_landmarks(
+                    img, results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
+                h, w, c = img.shape
+
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
 
             # print(results.pose_landmarks.landmark[0])
 
-            self.mpDraw.draw_landmarks(
-                img, results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
-            for id, lm in enumerate(results.pose_landmarks.landmark):
-                h, w, c = img.shape
+            self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
+            interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
+            cv2.putText(img, str(math.floor(self.time_count)), (600, 80),
+                        cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
-                cx, cy = int(lm.x*w), int(lm.y*h)
-                cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
+            if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
 
-                keypoints.append((cx, cy))  # 1프레임에 33개의 keypoints값 차례로 넣어줌.
+                # self.exercise_user_frame_cnt += 1
 
-            # if self.frame_cnt < 17 : # 나머지 이용
-            # self.allkeypoints.append(keypoints) # 프레임별 keypoints가 모두 있는 배열
-            # input을 계산하는데 필요한 12 points만 append 함
-            self.allkeypoints.append(keypoints)
+                # 프레임 순서 출력
+                frame_order = (self.frame_cnt // interval) % 16
+                if frame_order == 0:
+                    frame_order = 16
 
-            if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
-                # self.outputkeypoints=[self.allkeypoints]  # 단지, 3차원 배열로 만들어주기 위함(이전까지는 2차원 배열)
-                #                                             (수정) => get_input()에서 3차원으로 입력층을 생성
-                self.outputkeypoints = self.allkeypoints
-                # self.get_keypoints() # 프레임 수가 16개가 되면, 16개의 프레임에 대한 keypoints가 모여있는 배열 반환해주는 함수
+                if(self.pose_cnt+1 > self.total_count):
+                    return
 
-                self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
-                print(self.predicted_pose)
-                # 예측된 포즈(라벨) 출력
-                """
-                font = ImageFont.truetype("fonts/gulim.ttc", 20)
-                img = np.full((200, 300, 3), (255, 255, 255), np.uint8)
-                img = Image.fromarray(img)
-                draw = ImageDraw(img)
-                text = predicted_pose
-                draw.text((30, 50), text, font=font, fill=(0,0,0))
-                img = np.array(img)
-                cv2.imshow("text", img)
-                """
-                # cv2.putText(img, predicted_pose, (50, 50),
-                #             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
-                frame_flip = cv2.flip(img, 1)
-                ret, jpeg = cv2.imencode('.jpg', frame_flip)
+                # About pose counting
+                if frame_order == 1 and not self.isFinished:
+                    print((self.exercise_set[self.n]).set_num, "번째 운동")
+                    print("<<", self.current_exercise, ": ",
+                          self.exercise_count, "/", self.total_count, "회 >>")
+                    self.time_count = 16/self.frame_per_second
 
-                self.allkeypoints = []  # 배열 초기화
+                print(frame_order, "th frame")
+                # cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
+                #             cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
+                print("time_count: ", math.floor(self.time_count))
+                if frame_order % self.frame_per_second == 0 and frame_order != 15:
+                    self.time_count -= 1
 
-            # 제대로 만들었는지 확인하기 위한 print문 (cmd창 참고)
-            # print(self.frame_cnt)
-            # print(len(self.allkeypoints))
+                for id, lm in enumerate(results.pose_landmarks.landmark):
+                    h, w, c = img.shape
+                    cx, cy = int(lm.x*w), int(lm.y*h)
 
-            # print(len(self.allkeypoints[0]))
+                    # 1프레임에 33개의 keypoints값 차례로 넣어줌.
+                    keypoints.append((cx, cy))
 
-            # print(self.allkeypoints)
+                self.allkeypoints.append(keypoints)
 
-        cv2.putText(img, self.predicted_pose, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+                if len(self.allkeypoints) == 16:  # 배열의 길이는 항상 16개를 유지
 
-        cTime = time.time()
-        fps = 1/(cTime-self.pTime)
-        self.pTime = cTime
+                    self.pose_cnt += 1
 
-        ## cv2.putText(img, str(int(fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0), 3)
+                    # self.outputkeypoints=[self.allkeypoints]  # 단지, 3차원 배열로 만들어주기 위함(이전까지는 2차원 배열)
+                    #                                             (수정) => get_input()에서 3차원으로 입력층을 생성
+                    self.outputkeypoints = self.allkeypoints
+                    # self.get_keypoints() # 프레임 수가 16개가 되면, 16개의 프레임에 대한 keypoints가 모여있는 배열 반환해주는 함수
 
-        # cv2.imshow("Image", img)
-        # cv2.waitKey(1)
+                    # self.predicted_pose = self.detect_and_predict_pose()  # 예측된 포즈(라벨)
+                    #print(self.pose_cnt, "th pose is", self.predicted_pose)
+                    self.predicted_pose_list = self.detect_and_predict_pose()
+                    print(self.pose_cnt, "th pose is",
+                          self.predicted_pose_list)
+                    # # 예측된 포즈(라벨) 출력
+
+                    # if self.predicted_pose == self.current_exercise:
+                    if self.current_exercise in self.predicted_pose_list:  # 확률이 높은 4개 중 하나라도 속하면 Success
+                        self.successOrFail = 'Success'
+                    else:
+                        self.successOrFail = 'Fail'
+
+                    # About pose counting
+                    if (self.isFinished == False):
+                        # About exerciselog
+                        current_log = ExerciseLog.objects.get(
+                            id=self.logs[self.n])
+                        # counting
+                        if (self.successOrFail == 'Fail'):
+                            current_log.fail_count = current_log.fail_count + 1
+                        else:
+                            current_log.correct_count = current_log.correct_count + 1
+                        current_log.save()
+
+                        if self.exercise_count % self.total_count == 0:
+                            # About exerciselog
+                            current_log = ExerciseLog.objects.get(
+                                id=self.logs[self.n])
+                            current_log.time_finished = datetime.now()  # time_finished 필드 값 추가
+                            current_log.save()
+
+                            self.exercise_count = 0
+                            self.n += 1
+
+                            if (len(self.exercise_set) <= self.n):
+                                self.isFinished = True
+                            else:
+                                self.total_count = self.exercise_set[self.n].set_count
+                                self.current_exercise = self.exercise_set[self.n].exercise.name
+
+                        if (self.n < len(self.exercise_set)):
+                            self.exercise_count += 1
+
+                    frame_flip = cv2.flip(img, 1)
+                    ret, jpeg = cv2.imencode('.jpg', frame_flip)
+
+                    self.allkeypoints = []  # 배열 초기화
+
         frame_flip = cv2.flip(img, 1)
         ret, jpeg = cv2.imencode('.jpg', frame_flip)
+
         return jpeg.tobytes()
 
     # 16개의 프레임에서 keypoints를 모두 모아서 반환해주는 함수 (3차원 배열 형태) -> ## 2차원으로 수정
     def get_keypoints(self):
-        #print("get_keypoints 호출!")
-        # print(self.outputkeypoints)
         return self.outputkeypoints
 
     # 예측 값에 해당하는 라벨(한글) 반환하는 함수
     def detect_and_predict_pose(self):
-        """
-        poses = { 0: "스탠딩 사이드 크런치",
-                    1: "스탠딩 니업",
-                    2: "버피 테스트",
-                    3: "스텝 포워드 다이나믹 런지",
-                    4: "스텝 백워드 다이나믹 런지",
-                    5: "사이드 런지",
-                    6: "크로스 런지",
-                    7: "굿모닝"
-                  }
-        """
 
-        poses = {0: "STANDING SIDE CRUNCH",
-                 1: "STANDING KNEE UP",
-                 2: "BURPEE TEST",
-                 3: "STEP FORWARD DYNAMIC LUNGE",
-                 4: "STEP BACKWARD DYNAMIC LUNGE",
-                 5: "SIDE LUNGE",
-                 6: "CROSS LUNGE",
-                 7: "GOODMORNING"
+        poses = {0: "스탠딩 사이드 크런치",
+                 1: "스탠딩 니업",
+                 2: "버피 테스트",
+                 3: "스텝 포워드 다이나믹 런지",
+                 4: "스텝 백워드 다이나믹 런지",
+                 5: "사이드 런지",
+                 6: "크로스 런지",
+                 7: "굿모닝"
                  }
+
+        """
+        poses = {0: "STANDING SIDE CRUNCH",
+                1: "STANDING KNEE UP",
+                2: "BURPEE TEST",
+                3: "STEP FORWARD DYNAMIC LUNGE",
+                4: "STEP BACKWARD DYNAMIC LUNGE",
+                5: "SIDE LUNGE",
+                6: "CROSS LUNGE",
+                7: "GOODMORNING"
+                }
+        """
+        # 확률이 높은 4개의 list를 label로 return
+        label = []
         inputs = np.array(self.get_input(), dtype="float32")
         preds = poseEstimationModel.predict(inputs, batch_size=32)
-        label = poses[np.argmax(preds)]
+        preds_listed = list(preds[0])
+        preds_sorted = np.sort(preds, axis=1)
+        preds_sorted = list(preds_sorted[0][-5:])  # 확률이 가장 높은 4개
+        for e in preds_sorted:
+            label.append(poses[preds_listed.index(e)])
+        #label = poses[np.argmax(preds)]
 
         return label
 
@@ -259,3 +357,14 @@ class PoseWebCam(object):
         skeleton_dic = {2: 12, 3: 14, 4: 16, 5: 11, 6: 13,
                         7: 15, 8: 24, 9: 26, 10: 28, 11: 23, 12: 25, 13: 27}
         return skeleton_dic[openpose_index]
+
+    # def print_exercise_count(self):
+
+    # def countdown(self, num_of_secs):
+    #     print('count')
+    #     while num_of_secs:
+    #         m, s = divmod(num_of_secs, 60)
+    #         min_sec_format = '{:02d}:{:02d}'.format(m, s)
+    #         print(min_sec_format, end='/r')
+    #         time.sleep(1)
+    #         num_of_secs -= 1
