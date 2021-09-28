@@ -117,8 +117,8 @@ class PoseWebCam(object):
                 if frame_order == 0:
                     frame_order = 16
 
-                if(self.pose_cnt+1 > self.total_count):
-                    return
+                # if(self.pose_cnt+1 > self.total_count):
+                #     return
 
                 # About pose counting
                 if frame_order == 1 and not self.isFinished:
@@ -240,7 +240,7 @@ class PoseWebCam(object):
         preds = poseEstimationModel.predict(inputs, batch_size=32)
         preds_listed = list(preds[0])
         preds_sorted = np.sort(preds, axis=1)
-        preds_sorted = list(preds_sorted[0][-5:])  # 확률이 가장 높은 4개
+        preds_sorted = list(preds_sorted[0][-2:])  # 확률이 가장 높은 4개
         for e in preds_sorted:
             label.append(poses[preds_listed.index(e)])
         #label = poses[np.argmax(preds)]
