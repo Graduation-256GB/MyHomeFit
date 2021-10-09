@@ -1,6 +1,6 @@
 .menu4-container {
-  height: 1230px;
-  width: 83%;
+  height: 100vh;
+  width: 100%;
   background-color: #27cfb3;
   display: block;
 }
@@ -127,7 +127,7 @@
   /* background: rgb(254, 246, 163); */
 }
 
-.calendar-first-section > *{
+.calendar-first-section > * {
   font-family: NanumSquare_acB;
 }
 

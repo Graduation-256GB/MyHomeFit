@@ -24,11 +24,6 @@ const Calender = () => {
                     <FcCalendar/>
                     </div>
                 </div>
-                <div>
-                </div>
-                <div className="user-img">
-                            <img src={userImg}></img>
-                </div>
             </div>
             <div className="menu4-small-title">
                 <label>Hi { userName }, Check your Calender.</label>

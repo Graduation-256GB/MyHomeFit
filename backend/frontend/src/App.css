@@ -7,9 +7,10 @@
   pointer-events: none;
 }
 
-.main-container{
+.main-container {
   height: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -43,21 +44,21 @@
 }
 
 @font-face {
-  font-family: "NanumSquare_acB";     
-  src: url("./fonts/NanumSquare_acB.ttf"); 
+  font-family: "NanumSquare_acB";
+  src: url("./fonts/NanumSquare_acB.ttf");
 }
 
 @font-face {
-  font-family: "NanumSquare_acEB";     
-  src: url("./fonts/NanumSquare_acEB.ttf"); 
+  font-family: "NanumSquare_acEB";
+  src: url("./fonts/NanumSquare_acEB.ttf");
 }
 
 @font-face {
-  font-family: "NanumSquare_acL";     
-  src: url("./fonts/NanumSquare_acL.ttf"); 
+  font-family: "NanumSquare_acL";
+  src: url("./fonts/NanumSquare_acL.ttf");
 }
 
 @font-face {
-  font-family: "NanumSquare_acR";     
-  src: url("./fonts/NanumSquare_acR.ttf"); 
+  font-family: "NanumSquare_acR";
+  src: url("./fonts/NanumSquare_acR.ttf");
 }

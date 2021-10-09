@@ -66,9 +66,7 @@ const FitNotes = () => {
                         <FcCloseUpMode/>
                     </div>
                 </div>
-                <div className="user-img">
-                            <img src={userImg}></img>
-                        </div>
+                
             </div>
             <div className="menu3-small-title">
                 <label>Hi { userName }, This is your FitNotes.</label>

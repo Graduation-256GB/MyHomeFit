@@ -143,9 +143,6 @@ const Training = () => {
                     <FcSportsMode />
                     </div>
                 </div>
-                <div className="user-img">
-                            <img src={userImg}></img>
-                        </div>
             </div>
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>

@@ -62,22 +62,7 @@ function MakeYourSet () {
             <div className='page-top-container'>
                     <div className='page-wrapper'>
                         <Navbar />
-                    <div className='page-title'>
-                        <div className="page-label">
-                            <label>Make Your Set.</label>
-                            <div className="menu-icon">
-                            <FcSearch />
-                            </div>
-                        </div>
-
-                        <div className="user-img">
-                            <img src={userImg}></img>
-                        </div>
-                    </div>
-                    <div className='page-small-title'>
-                            <label>Only For You, </label>
-                            <label>{ username }</label>
-                    </div> 
+                    
                 </div>
             </div>
            

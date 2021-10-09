@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import '../css/Navbar.css';
 import {IoMdLogIn,IoMdLogOut} from "react-icons/io"
-import {FiUserPlus} from "react-icons/fi"
+import {MdPlayCircleOutline} from "react-icons/md"
+import {FiFolderPlus, FiUserPlus} from "react-icons/fi"
+import {BiNotepad, BiLineChart} from "react-icons/bi"
 
 const MenuList = styled.div`
   display: flex;
@@ -20,6 +22,8 @@ const MenuList = styled.div`
 const NavBar=()=> {
 
   const [auth, setAuth] = useState('')
+  const userImg=localStorage.getItem('userImg')
+  const userName=localStorage.getItem('userName')
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
@@ -45,35 +49,46 @@ const NavBar=()=> {
   };
 
   return(
-    <div>
       <div className="navbar-wrapper">
         <div className="navbar-menu">
-          { auth ?
-            <div key="logout" onClick={handleLogout} className="navbar-menu-item">
-              <IoMdLogOut/>&nbsp;
-              Logout
+          <div className="navbar-menu-item">
+            <Link to="/login" className="logo">MY HOME FIT</Link>
+          </div>
+          <div className="navbar-menu-item">
+            <Link to="/makeyourset"><FiFolderPlus />&nbsp;Make Your Set</Link>
+            <Link to="/training"><MdPlayCircleOutline />&nbsp;Training</Link>
+            <Link to="/fitnotes"><BiLineChart/>&nbsp;Community</Link>
+            <Link to="/calender"><BiNotepad/>&nbsp;Calender</Link>
+          
+        {auth ?
+          <div>
+            <div className="navbar-user">
+              <div className="user-img">
+                <img src={userImg}></img>
+              </div>
+                <span>
+                  {userName}&nbsp;
+              </span>
+            <div key="logout" onClick={handleLogout} className="logout" >
+              <IoMdLogOut/>
             </div>
+            </div>
+          </div>
             
             :
-            <div key="signin" className="navbar-menu-item">
-              <Link to="/login">
-                <IoMdLogIn />&nbsp;Login
-              </Link>
-            </div>
-          }
-          { auth ?
-            <></>
-          :
-            <div key="signup" className="navbar-menu-item">
-              <Link to="/signup">
-                <FiUserPlus/>&nbsp;
-              Sign Up
-              </Link>
-            </div>
+              <div key="signin" className="log-box">
+                <Link to="/login">
+                  <IoMdLogIn />&nbsp;Login
+                </Link>
+                <Link to="/signup">
+                  <FiUserPlus/>&nbsp;
+                Sign Up
+                </Link>
+              </div>
           }
         </div>
+        </div>
       </div>
-    </div>
   )
 }
 
