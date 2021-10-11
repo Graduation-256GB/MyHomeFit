@@ -176,6 +176,8 @@
 #block-wrapper {
   position: fixed;
   bottom: 30px;
+  max-height: 25rem;
+  overflow: scroll;
 }
 .page-contents-exercise-count {
   width: 15rem;

@@ -3,7 +3,7 @@ import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 import { MdDone, MdClear } from 'react-icons/md'
 
-const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, exercises, setId, IsStarted, NameList, CountList } ) => {
+const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, exercises, setId, IsStarted, NameList, CountList,ImageList } ) => {
     
     
     const [FailCount, setFailCount] = useState(0)
@@ -86,22 +86,15 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
     })
 
     return (
-
-        <div>
-            <div className="realtime-pose">
-                { SuccessList[Index] + FailList[Index] } / { CountList[Index] }회 <br/> { NameList[Index] }
+        <div className="training-note">
+            <div className="note-set">
+                <h2>set name</h2>
+                <span>#sdfsf</span>        
             </div>
-            <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
-                성공< MdDone />
-                {/*{
-                    isStarted && isOK &&
-                    <div className="success_or_fail">
-                        {Result}
-                    </div>
-                }*/}
-            </div>
-            <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
-                실패< MdClear />
+            <div className="current-exercise">
+                <img src={ImageList[Index]} />
+                <h2>{NameList[Index]}</h2>
+                <span>{ SuccessList[Index] + FailList[Index] } / { CountList[Index] }</span>        
             </div>
         </div>
         

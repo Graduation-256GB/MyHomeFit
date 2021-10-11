@@ -158,14 +158,13 @@ const Training = () => {
                 {/* <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
                 <img src={RightBtn} className="right-button"/> */}
-                {/* <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/> */}
                 {/*<div className="export-video">
                     <ReactPlayer className="export"
                                 url={myVideo} loop muted playing controls />
                 </div>*/}
+                    <div className="training-note-container">
                 {
-                (Index < CountList.length -1) &&
-                <div className="training-note-container">
+                    (Index < CountList.length -1) &&
                     <div className="next-video">
                         <div className="next-video-label">
                             <span id="next-label">Next<MdReplay/></span>
@@ -177,19 +176,9 @@ const Training = () => {
                             <img src={ImageList[Index+1]}/>
                         </div>
                     </div>
-                    <div className="training-note">
-                        <div className="note-set">
-                            <h2>set name</h2>
-                            <span>#sdfsf</span>        
-                        </div>
-                        <div className="current-exercise">
-                            <img src={ImageList[Index]} />
-                            <h2>{NameList[Index]}</h2>
-                            <span>{ SuccessList[Index] + FailList[Index] } / { CountList[Index] }</span>        
-                        </div>
-                    </div>
-                </div>
                 }
+                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
+                </div>
                 <div className="realtime-video">
                     <div className="user-video">
                         <img src={ poseURL }></img>

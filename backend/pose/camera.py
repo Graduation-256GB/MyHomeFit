@@ -105,7 +105,7 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
-            cv2.putText(img, str(math.floor(self.time_count)), (1115, 80),
+            cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
