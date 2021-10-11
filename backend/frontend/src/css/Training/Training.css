@@ -103,13 +103,38 @@
   margin-right: 4rem;
 }
 .training-note {
+  color: #7e7e7e;
+  display: flex;
+  flex-direction: column;
   border-radius: 30px;
   background-color: rgb(255 255 255 / 75%);
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.16);
   width: 20rem;
   height: 51vh;
   padding: 1rem;
 }
-
+.note-set h2 {
+  margin: 0.5rem;
+}
+.note-set span {
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}
+.current-exercise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.current-exercise img {
+  width: 10rem;
+  height: 10rem;
+}
+.current-exercise span {
+  font-size: 2rem;
+  color: #3ccfc0;
+  font-weight: 700;
+}
 .next-video {
   display: flex;
   justify-content: space-around;
@@ -119,7 +144,7 @@
   width: 20rem;
   height: 12vh;
   z-index: 3;
-  box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.16);
 }
 
 .next-video-label {
@@ -208,6 +233,7 @@
   height: 100%;
   margin-right: 13px;
   align-items: flex-end;
+  position: relative;
 }
 
 .user-video > img {
@@ -216,6 +242,13 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+}
+.count-icon {
+  font-size: 3rem;
+  color: #27cfb3;
+  position: absolute;
+  right: 3%;
+  top: 5%;
 }
 
 .export-video {

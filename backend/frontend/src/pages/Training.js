@@ -9,7 +9,7 @@ import NextPose from "../components/Training/NextPose";
 import { FcSportsMode } from "react-icons/fc";
 import {AiFillCheckCircle} from 'react-icons/ai'
 import {GrNotes} from 'react-icons/gr'
-import {FaBalanceScale} from 'react-icons/fa'
+import {FaBalanceScale, FaCircleNotch} from 'react-icons/fa'
 
 import myVideo from '../images/squatvideo.mp4'
 import ReactPlayer from 'react-player'
@@ -178,14 +178,25 @@ const Training = () => {
                         </div>
                     </div>
                     <div className="training-note">
-                                
+                        <div className="note-set">
+                            <h2>set name</h2>
+                            <span>#sdfsf</span>        
+                        </div>
+                        <div className="current-exercise">
+                            <img src={ImageList[Index]} />
+                            <h2>{NameList[Index]}</h2>
+                            <span>{ SuccessList[Index] + FailList[Index] } / { CountList[Index] }</span>        
+                        </div>
                     </div>
                 </div>
                 }
                 <div className="realtime-video">
                     <div className="user-video">
-                        {/* <img src={ poseURL }></img> */}
-                        <img src=""></img>
+                        <img src={ poseURL }></img>
+                            {/* <img src=""></img> */}
+                            <div className="count-icon">
+                            <FaCircleNotch/>
+                            </div>
                     </div>
                 </div>
             </div>
