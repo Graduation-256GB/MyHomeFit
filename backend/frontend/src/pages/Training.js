@@ -183,9 +183,9 @@ const Training = () => {
                     <div className="user-video">
                         <img src={ poseURL }></img>
                             {/* <img src=""></img> */}
-                            <div className="count-icon">
+                            {/* <div className="count-icon">
                             <FaCircleNotch/>
-                            </div>
+                            </div> */}
                     </div>
                 </div>
             </div>

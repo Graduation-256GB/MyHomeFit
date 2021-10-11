@@ -74,6 +74,9 @@
   background-color: white;
   border-radius: 70px;
   box-shadow: 0 16px 28px rgb(0 0 0 / 16%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .rank-container {
   padding: 3rem 0;

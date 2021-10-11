@@ -50,9 +50,10 @@
 }
 .calendar-container {
   display: flex;
+  justify-content: center;
 }
 .calendar-content {
-  margin: 50px;
+  margin: 2rem;
 }
 .react-calendar {
   border-radius: 20px !important;
@@ -92,7 +93,7 @@
 }
 .calendar-box {
   width: 30%;
-  margin-top: 50px;
+  margin-top: 2rem;
 }
 .calorie-user {
   display: flex;
