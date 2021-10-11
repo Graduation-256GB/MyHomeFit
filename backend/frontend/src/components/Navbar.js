@@ -61,7 +61,7 @@ const NavBar=()=> {
             <Link to="/calender"><BiNotepad/>&nbsp;Calender</Link>
           
         {auth ?
-          <div>
+          <div class="navbar-user-container">
             <div className="navbar-user">
               <div className="user-img">
                 <img src={userImg}></img>

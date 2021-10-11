@@ -136,7 +136,7 @@ const Training = () => {
         // <RecoilRoot>
             <div className="menu2-container">
                 <Navbar/>
-            <div className="menu2-title">
+            {/* <div className="menu2-title">
                 <div>
                     <h5>{ userName }, R U Ready?</h5>
                     <div className="menu-icon">
@@ -146,7 +146,7 @@ const Training = () => {
             </div>
             <div className="menu2-small-title">
                 <label>Start your Fitness.</label>
-            </div>
+            </div> */}
             {
                 page === 1 &&
                 <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum}
@@ -155,29 +155,37 @@ const Training = () => {
             {
                 page===2 &&
             <div className="videos">
-                <img src={LeftBtn} className="left-button"/>
+                {/* <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
-                <img src={RightBtn} className="right-button"/>
-                <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
+                <img src={RightBtn} className="right-button"/> */}
+                {/* <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/> */}
                 {/*<div className="export-video">
                     <ReactPlayer className="export"
                                 url={myVideo} loop muted playing controls />
                 </div>*/}
                 {
                 (Index < CountList.length -1) &&
-                <div className="next-video">
-                    <div className="next-video-label">
-                        Next
-                        <MdReplay/>
+                <div className="training-note-container">
+                    <div className="next-video">
+                        <div className="next-video-label">
+                            <span id="next-label">Next<MdReplay/></span>
+                            <span id="next-name">
+                                {NameList[Index+1]}       
+                            </span>
+                        </div>
+                        <div className="next-video-pose">
+                            <img src={ImageList[Index+1]}/>
+                        </div>
                     </div>
-                    <div className="next-video-pose">
-                        <img src={ImageList[Index+1]}/>
+                    <div className="training-note">
+                                
                     </div>
                 </div>
                 }
                 <div className="realtime-video">
                     <div className="user-video">
-                        <img src={ poseURL }></img>
+                        {/* <img src={ poseURL }></img> */}
+                        <img src=""></img>
                     </div>
                 </div>
             </div>

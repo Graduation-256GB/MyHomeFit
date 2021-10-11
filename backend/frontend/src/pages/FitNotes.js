@@ -73,9 +73,12 @@ const FitNotes = () => {
             </div>
 
             <div className="fitnotes-fitness-container">
-                <div>
+                <div className="rank-container">
                     <FitnessRank name="Top" array={ top3ListArr}/>
                     <FitnessCalories/>
+                </div>
+                <div className="recommend-container">
+                    <RecommendFitness name="Monthly Ranking" nameList={nameList1} imgList={imgList1}/>
                 </div>
                 <div className="recommend-container">
                     <RecommendFitness name="Monthly Ranking" nameList={nameList1} imgList={imgList1}/>

@@ -55,6 +55,7 @@
   overflow-x: scroll;
   width: 100%;
   height: 77vh;
+  justify-content: space-evenly;
 }
 
 .fitnotes-fitness-container::-webkit-scrollbar {
@@ -68,13 +69,12 @@
 }
 
 .recommend-container {
-  width: 630px;
-  height: 90%;
+  width: 29%;
+  height: 40rem;
   background-color: white;
-  margin-left: 60px;
-  margin-top: 30px;
-  border: 1px solid #707070;
   border-radius: 70px;
-  padding-left: 60px;
-  padding-right: 60px;
+  box-shadow: 0 16px 28px rgb(0 0 0 / 16%);
+}
+.rank-container {
+  padding: 3rem 0;
 }
