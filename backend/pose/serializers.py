@@ -23,12 +23,6 @@ class SetSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Set
-        fields = '__all__'
-
-
 class ExerciseInSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseSet
@@ -42,11 +36,13 @@ class ExerciseSetSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source="exercise.name")
     calories = serializers.IntegerField(source="exercise.calories")
     url = serializers.URLField(source="exercise.url")
-    
+    set_title = serializers.CharField(source="set.title")
+    set_type = serializers.CharField(source="set.type")
+
     class Meta:
         model = ExerciseSet
         fields = ('id', 'exercise', 'set', 'set_num',
-                  'set_count', 'created_at', 'img', 'name', 'calories', 'url')
+                  'set_count', 'created_at', 'img', 'name', 'calories', 'url', 'set_title', 'set_type')
 
 
 class ExerciseLogSerializer(serializers.ModelSerializer):

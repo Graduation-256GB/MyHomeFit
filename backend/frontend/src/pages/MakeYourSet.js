@@ -12,9 +12,6 @@ import Navbar from '../components/Navbar';
 function MakeYourSet () {
     const [setList, setSetList] = useState({ data: null });
     const [currentUser, setCurrentUser] = useState({ data: null });
-    // const [username, setUserName] = useState();
-    const username = currentUser?.data?.username;
-    const userImg = currentUser?.data?.profile_img;
     
     const Token = localStorage.getItem('token')
     useEffect(() => {

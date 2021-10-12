@@ -3,7 +3,7 @@ import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 import { MdDone, MdClear } from 'react-icons/md'
 
-const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, exercises, setId, IsStarted, NameList, CountList,ImageList } ) => {
+const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList,ImageList } ) => {
     
     
     const [FailCount, setFailCount] = useState(0)
@@ -77,9 +77,9 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
     
 
     useEffect(()=> {
-        console.log("exercises", exercises.length)
+        console.log("exercises", Exercises.length)
         console.log("Index", Index)
-        if (exercises.length < Index + 1){
+        if (Exercises.length < Index + 1){
             console.log("result")
             setPage(3)
         }
@@ -88,8 +88,8 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
     return (
         <div className="training-note">
             <div className="note-set">
-                <h2>set name</h2>
-                <span>#sdfsf</span>        
+                <h2>{Exercises[Index].set_title}</h2>
+                <span>{Exercises[Index].set_type}</span>        
             </div>
             <div className="current-exercise">
                 <img src={ImageList[Index]} />

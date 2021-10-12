@@ -57,30 +57,7 @@ const loadExerciseSet = async ({ set_id }) => {
 
 const Training = () => {
 
-    // 전역변수 사용
-    // const [globalSetid, setGlobalSetid] = useRecoilState(setidState);
-    // const [SET_ID, setSET_ID] = useState() 
-    // console.log("test", {globalSetid})
-    // setSET_ID({globalSetid})
-    // useRecoilValue(setidState)
-    // setSET_ID(globalSetid);
-    // SET_ID = {globalSetid}
-
-    // console.log("test", useRecoilState(setidState))
-
-    // const SET_ID=6;
-    // const [SETID, setSETID] = useState()
-    // {Object.entries(localStorage).map((key, valueJSON) => {
-    //     setSETID(JSON.parse(valueJSON))
-    // })}
-    //console.log("SETID", SETID)
     const SET_ID =  window.localStorage.getItem("setid")
-    // console.log("SET_ID", SET_ID)
-    // const SET_ID = useRecoilState(setidState)
-    // console.log(useRecoilState({setidState}))
-    // console.log("트레이닝 전역변수 확인", SET_ID)
-    
-    // const poseURL=`http://127.0.0.1:8000/api/pose_feed/${SET_ID}/`
 
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
     const [speed_num, setSpeedNum]=useState(4)
@@ -89,27 +66,22 @@ const Training = () => {
     const csrftoken = getCookie('csrftoken');
 
     const Exercises = [];
-    const [page, setPage] = useState(1);
-    // const [speed, setSpeed] = useState('');
+    const [page, setPage] = useState(1)
     const [IsStarted, setIsStarted] = useState(false)
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
-    // const [Index, setIndex] = useState(0)
+    const [Title, setTitle] = useState('')
+    const [Type, setType] = useState('')
     const userImg=localStorage.getItem('userImg')
     const userName=localStorage.getItem('userName')
 
     const [Index, setIndex] = useState(0)
-    // const [datalength, setDataLength] = useState(0)
-    // const [isFinished, setIsFinished] = useState(false)
-    // const [isResult, setIsResult] = useState(0)
     
     // 결과페이지 구현
 
     const [FailList, setFailList] = useState([0,0])
     const [SuccessList, setSuccessList] = useState([0,0])
-    // const [FailSum, setFailSum] = useState(0)
-    // const [SuccessSum, setSuccessSum]=useState(0)
 
     const [countSum, setCountSum] = useState(0)
     const [successSum, setSuccessSum] = useState(0) 
@@ -123,30 +95,15 @@ const Training = () => {
     const percentage = 66;
 
     if (data) {
-        // setDataLength(data.length)
-        // console.log("length", datalength)
         Object.keys(data).forEach(function (key) {
             Exercises.push(data[key]);
             console.log(Exercises)
         });
-        // console.log("true", isFinished)
-        // setIsFinished(true)
     }
     return (
         // <RecoilRoot>
             <div className="menu2-container">
                 <Navbar/>
-            {/* <div className="menu2-title">
-                <div>
-                    <h5>{ userName }, R U Ready?</h5>
-                    <div className="menu-icon">
-                    <FcSportsMode />
-                    </div>
-                </div>
-            </div>
-            <div className="menu2-small-title">
-                <label>Start your Fitness.</label>
-            </div> */}
             {
                 page === 1 &&
                 <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum}
@@ -177,7 +134,7 @@ const Training = () => {
                         </div>
                     </div>
                 }
-                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
+                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} Exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
                 </div>
                 <div className="realtime-video">
                     <div className="user-video">
