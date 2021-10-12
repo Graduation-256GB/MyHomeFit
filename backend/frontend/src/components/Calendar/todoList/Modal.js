@@ -36,11 +36,11 @@ export default class CustomModal extends Component {
 
     return (
       <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Todo Item</ModalHeader>
+        <ModalHeader toggle={toggle}>Todo List</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="todo-title">Title</Label>
+              <Label for="todo-title" className="modal-title">일정 제목</Label>
               <Input
                 type="text"
                 id="todo-title"
@@ -51,7 +51,7 @@ export default class CustomModal extends Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="todo-description">Description</Label>
+              <Label for="todo-description" className="modal-detail">상세 내용</Label>
               <Input
                 type="text"
                 id="todo-description"
@@ -62,7 +62,7 @@ export default class CustomModal extends Component {
               />
             </FormGroup>
             <FormGroup check>
-              <Label check>
+              <Label check className="modal-completed">
                 <Input
                   type="checkbox"
                   name="completed"
@@ -79,7 +79,7 @@ export default class CustomModal extends Component {
             color="success"
             onClick={() => onSave(this.state.activeItem)}
           >
-            Save
+            {/* Save */} <label className="modal-save">저장</label>
           </Button>
         </ModalFooter>
       </Modal>

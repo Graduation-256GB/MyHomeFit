@@ -26,7 +26,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <div className='main-container'>
-        {/* <SideMenubar /> */}
+        <SideMenubar />
         {/* <Navbar/> */}
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/makeyoursetform" component={MakeYourSetForm} />
