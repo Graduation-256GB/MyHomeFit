@@ -1,7 +1,6 @@
 from django.urls import path, include
 from . import views
 
-
 app_name = 'pose'
 urlpatterns = [
     path('exercise/', views.ListExercise.as_view()),
@@ -21,4 +20,6 @@ urlpatterns = [
     path('auth/register/', include('rest_auth.registration.urls')),
     # path('', views.index, name='index'),
     path('pose_feed/', views.pose_feed, name='pose_feed'),
+    path('todos/', views.todo_list),
+    path('todos/<int:pk>/', views.todo_detail),
 ]

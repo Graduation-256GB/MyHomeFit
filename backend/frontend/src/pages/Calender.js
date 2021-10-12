@@ -10,6 +10,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
 import Memo from '../components/Calendar/Memo';
+import TodoList from '../components/Calendar/TodoList/Todolist'
 
 const Calender = () => {
     const userImg=localStorage.getItem('userImg')
@@ -40,7 +41,8 @@ const Calender = () => {
                 </div>
                 <div className="calendar-box">
                     <div className="calendar-first-section">
-                        <Memo/>
+                        {/* <Memo/> */}
+                        <TodoList/>
                     </div>
                     <div className="calendar-second-section">
                         

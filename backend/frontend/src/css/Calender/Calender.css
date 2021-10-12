@@ -1,6 +1,6 @@
 .menu4-container {
   height: 1230px;
-  width: 83%;
+  width: 100%;
   background-color: #27cfb3;
   display: block;
 }
@@ -16,7 +16,6 @@
   margin-left: 100px;
   color: #ffffff;
   font-size: 45px;
-  margin-top: 40px;
   font-family: NanumSquare_acEB;
 }
 
@@ -132,7 +131,34 @@
 }
 
 .calendar-first-section div {
-  font-size: 1rem;
+  font-size: 1.3rem;
   /* text-align: center; */
   /* padding: 1rem; */
+}
+
+.todolist-container{
+  width:100%
+}
+
+.todolist-wrapper{
+  padding: 5px;
+  height: 200px;
+}
+
+.todolist-ul{
+  height: 200px;
+  overflow: auto;
+  font-size: 1rem;
+}
+
+.todolist-ul::-webkit-scrollbar {
+  display: none; 
+}
+
+.list-group-flush>.list-group-item{
+  font-size: 1.2rem;
+}
+
+.btn:not(:disabled):not(.disabled){
+  font-size: 1.2rem;
 }

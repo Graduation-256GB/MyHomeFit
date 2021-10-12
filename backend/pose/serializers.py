@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Exercise, ExerciseLog, ExerciseSet, Set
-from .models import CustomUser
+from .models import CustomUser, Todo
 import base64
 
 
@@ -69,3 +69,8 @@ class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = '__all__'
+
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('id', 'title', 'description', 'completed')

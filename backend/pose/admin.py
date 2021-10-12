@@ -4,7 +4,7 @@ from .models import Exercise
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser, Exercise, ExerciseSet, ExerciseLog, Set
+from .models import CustomUser, Exercise, ExerciseSet, ExerciseLog, Set, Todo
 
 admin.site.register(Exercise)
 admin.site.register(ExerciseSet)
@@ -19,3 +19,8 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ['username']
     list_display_links = ['username']
+
+class TodoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'completed')
+
+admin.site.register(Todo, TodoAdmin)

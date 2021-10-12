@@ -18,6 +18,7 @@ import './App.css'
 // import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Todo from "./components/Calendar/TodoList/Todolist"
 
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <div className='main-container'>
-        <SideMenubar />
+        {/* <SideMenubar /> */}
         {/* <Navbar/> */}
         <Route path="/makeyourset" exact={true} component={MakeYourSet} />
         <Route path="/makeyoursetform" component={MakeYourSetForm} />
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/login" component={Login}/>
         {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}
         {/* <Route path="/maketest" component={MakeTest}/> */}
+        <Route path="/todo" component={Todo}/>
       </div>
       </RecoilRoot>
   );

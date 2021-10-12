@@ -63,7 +63,6 @@ class ExerciseLog(models.Model):
     time_started = models.DateTimeField(blank=True, null=True)
     time_finished = models.DateTimeField(blank=True, null=True)
 
-
 class Calendar(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
@@ -71,3 +70,11 @@ class Calendar(models.Model):
     memo = models.TextField()
     total_calories = models.IntegerField()
     total_time = models.IntegerField()
+
+class Todo(models.Model):
+    title = models.CharField(max_length=120)
+    description = models.TextField()
+    completed = models.BooleanField(default=False)
+
+    def _str_(self):
+        return self.title

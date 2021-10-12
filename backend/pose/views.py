@@ -3,10 +3,10 @@ from django.http.response import HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
-from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer
+from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer, TodoSerializer
 from datetime import datetime
 from django.utils.dateformat import DateFormat
-from .models import Exercise, ExerciseSet, Set, CustomUser, ExerciseLog
+from .models import Exercise, ExerciseSet, Set, CustomUser, ExerciseLog, Todo
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -174,3 +174,19 @@ def log_create(request):
                 set_exercise=set_exercise, correct_count=0, fail_count=0, time_started=time_started)
 
     return JsonResponse({'exercise_log_id': exercise_log.id})
+
+class TodoViewSet(viewsets.ModelViewSet):
+    serializer_class = TodoSerializer
+    queryset = Todo.objects.all()
+    
+todo_list = TodoViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+})
+
+todo_detail = TodoViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy',
+})

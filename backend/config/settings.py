@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+
 ]
 
 AUTH_USER_MODEL = 'pose.CustomUser'
