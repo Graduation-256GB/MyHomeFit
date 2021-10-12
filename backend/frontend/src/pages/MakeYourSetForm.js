@@ -168,10 +168,6 @@ const MakeYourSetForm = () => {
                             <FcOpenedFolder/>
                             </div>
                         </div>
-
-                        <div className="user-img">
-                            <img src={userImg}></img>
-                        </div>
                     </div>
                     <div className='page-small-title'>
                         <label>Make Your Fitness Set.</label>

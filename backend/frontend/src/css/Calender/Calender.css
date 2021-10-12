@@ -1,5 +1,5 @@
 .menu4-container {
-  height: 1230px;
+  height: 100vh;
   width: 100%;
   background-color: #27cfb3;
   display: block;
@@ -49,9 +49,10 @@
 }
 .calendar-container {
   display: flex;
+  justify-content: center;
 }
 .calendar-content {
-  margin: 50px;
+  margin: 2rem;
 }
 .react-calendar {
   border-radius: 20px !important;
@@ -82,7 +83,7 @@
   border-radius: 20px;
   background: #d1fdf6;
   margin-top: 30px;
-  color: rgb(204, 201, 201)
+  color: rgb(204, 201, 201);
 }
 .calendar-content {
   width: 60%;
@@ -92,12 +93,12 @@
 }
 .calendar-box {
   width: 30%;
-  margin-top: 50px;
   flex-direction: column;
+  margin-top: 2rem;
 }
 .calorie-user {
   display: flex;
-  padding: 1.0rem 1.0rem 0rem 2.0rem;
+  padding: 1rem 1rem 0rem 2rem;
   font-size: 1.4rem;
   color: #919191;
   font-family: "NanumSquare_acB";
@@ -107,7 +108,7 @@
   font-weight: bolder;
   display: flex;
   justify-content: center;
-  padding: 0rem 1.0rem 1.0rem 1.0rem;
+  padding: 0rem 1rem 1rem 1rem;
   font-size: 1.8rem;
   color: #656565;
   font-family: "NanumSquare_acB";
@@ -143,7 +144,7 @@
   /* background: rgb(254, 246, 163); */
 }
 
-.calendar-first-section > *{
+.calendar-first-section > * {
   font-family: NanumSquare_acB;
 }
 
@@ -153,29 +154,29 @@
   /* padding: 1rem; */
 }
 
-.todolist-container{
-  width:100%
+.todolist-container {
+  width: 100%;
 }
 
-.todolist-wrapper{
+.todolist-wrapper {
   padding: 5px;
   height: 200px;
 }
 
-.todolist-ul{
+.todolist-ul {
   height: 200px;
   overflow: auto;
   font-size: 1rem;
 }
 
 .todolist-ul::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
-.list-group-flush>.list-group-item{
+.list-group-flush > .list-group-item {
   font-size: 1.2rem;
 }
 
-.btn:not(:disabled):not(.disabled){
+.btn:not(:disabled):not(.disabled) {
   font-size: 1.2rem;
 }

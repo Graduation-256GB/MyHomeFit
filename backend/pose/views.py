@@ -15,17 +15,10 @@ import json
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# def exercise_list(request):
-#     serializer_class = ExerciseSerializer
-#     queryset = Exercise.objects.all()
-#     ctx={
-#         queryset:queryset
-#     }
-#     return render(request, "index.tsx", ctx)
-
-
 # id랑 같은 인스턴스만 가져와서 만들어보기,,
 # set의 id = ExerciseSet.set
+
+
 class ListSetInExercise(generics.ListCreateAPIView):
     queryset = ExerciseSet.objects.all()
     # queryset = ExerciseSet.objects.
@@ -75,8 +68,6 @@ class ListExerciseSet(APIView):
         serializer = ExerciseSetSerializer(
             ExerciseSet.objects.filter(set=set).order_by('set_num'), many=True)
         return Response(serializer.data)
-        # queryset = ExerciseSet.objects.filter(set=set)
-        # serializer_class = ExerciseSerializer
 
 
 class CurrentUserView(APIView):

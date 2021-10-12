@@ -1,21 +1,44 @@
 .navbar-menu {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
 }
 .navbar-menu-item {
   color: white;
+  display: flex;
 }
 .navbar-menu-item a {
   text-decoration: none;
   display: flex;
   align-items: center;
   color: white;
+  margin: 0 2rem;
 }
 .navbar-menu-item a:hover {
-  color: rgb(142, 142, 142);
+  text-shadow: 1px 2px 4px rgb(133, 133, 133);
 }
 .navbar-menu-item {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 1rem;
   font-weight: 600;
+}
+.navbar-wrapper {
+  margin-top: 1rem;
+}
+.log-box {
+  display: flex;
+}
+.navbar-user {
+  display: flex;
+  align-items: center;
+}
+.logout {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+.logo {
+  font-size: 2rem;
+  margin-right: 13rem;
+}
+.navbar-user-container {
+  margin: 0 1rem 0 3rem;
 }
