@@ -71,7 +71,7 @@ const Calender = () => {
                 </div>
             </div>
             <div className="menu4-small-title">
-                <label>Hi { userName }, Check your Calender.</label>
+                <label>Hi { userName }, Check your Calendar.</label>
             </div>
 
             <div className="calendar-container">
