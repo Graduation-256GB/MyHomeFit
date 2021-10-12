@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
-import { MdDone, MdClear } from 'react-icons/md'
 
 const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList,ImageList } ) => {
     
@@ -14,6 +13,8 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
     //const [Result, setResult] = useState("")
     const [ColorSuccess, setColorSuccess] = useState('#27cfb3')
     const [ColorFail, setColorFail] = useState('#27cfb3')
+    const [DisplayFail, setDisplayFail] = useState('none')
+    const [DisplaySuccess, setDisplaySuccess] = useState('none')
 
 
     // start button을 눌러서 객체를 만든 후 GET
@@ -60,13 +61,15 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
 
             if( SuccessList[Index] !== SuccessCount ) {
                 setSuccessCount(SuccessList[Index])
-                setColorSuccess('blue')
-                setColorFail('#27cfb3')
+                setDisplaySuccess('block')
+                setDisplayFail('none')
+                console.log('success')
             }
             if( FailList[Index] !== FailCount ) {
                 setFailCount(FailList[Index])
-                setColorFail('red')
-                setColorSuccess('#27cfb3')
+                setDisplayFail('block')
+                setDisplaySuccess('none')
+                console.log('fail')
             }
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
@@ -94,7 +97,23 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
             <div className="current-exercise">
                 <img src={ImageList[Index]} />
                 <h2>{NameList[Index]}</h2>
-                <span>{ SuccessList[Index] + FailList[Index] } / { CountList[Index] }</span>        
+                <span className="current-count">{SuccessList[Index] + FailList[Index]} / {CountList[Index]}</span>
+                <div className="current-score">
+                    <span className="current-success">Success: { SuccessList[Index] }</span>
+                    <span className="current-fail">Fail: { FailList[Index] }</span>
+                </div>
+            </div>
+            {/* <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
+                Success: { SuccessList[Index] } / { CountList[Index] }회
+            </div>
+            <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
+                &nbsp; Fail: { FailList[Index] } / { CountList[Index] }회
+            </div>  */}
+            <div className="realtime-info-success" style={{display:DisplaySuccess}}>
+                Success!
+            </div>
+            <div className="realtime-info-fail" style={{display:DisplayFail}}>
+                Fail
             </div>
         </div>
         

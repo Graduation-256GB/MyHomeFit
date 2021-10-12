@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import {useRecoilValue, useRecoilState, RecoilRoot} from 'recoil';
 import { setidState, setidGetter } from './state';
 
 import "../css/Training/Training.css"
-import IconTraining from "../images/icon_training.png"
-import PoseShoulder from "../images/pose_shoulder.png"
-import NextPose from "../components/Training/NextPose";
-import { FcSportsMode } from "react-icons/fc";
 import {AiFillCheckCircle} from 'react-icons/ai'
 import {GrNotes} from 'react-icons/gr'
 import {FaBalanceScale, FaCircleNotch} from 'react-icons/fa'
 
-import myVideo from '../images/squatvideo.mp4'
-import ReactPlayer from 'react-player'
-import LeftBtn from '../images/menu_left.png';
-import RightBtn from '../images/menu_right.png';
 import { useAsync } from "react-async"
 import jQuery from 'jquery'
 import axios from 'axios';
@@ -137,7 +130,8 @@ const Training = () => {
                     <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} Exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
                 </div>
                 <div className="realtime-video">
-                    <div className="user-video">
+                        <div className="user-video">
+                         <ProgressBar variant="info" now={20} className="w-100 mb-2"/>
                         <img src={ poseURL }></img>
                             {/* <img src=""></img> */}
                             {/* <div className="count-icon">
