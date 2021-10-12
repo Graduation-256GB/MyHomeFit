@@ -112,7 +112,7 @@ const Training = () => {
     // const [SuccessSum, setSuccessSum]=useState(0)
 
     const [countSum, setCountSum] = useState(0)
-    const [successSum, setSuccessSum] = useState(0) 
+    const [successSum, setSuccessSum] = useState(0)
 
     useEffect (()=> {
         setSuccessSum( SuccessList.reduce((a,v) =>  a = a + v , 0 ) )

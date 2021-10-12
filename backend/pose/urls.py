@@ -16,6 +16,7 @@ urlpatterns = [
     path('log/create/', views.log_create),
     path('user/current/', views.CurrentUserView.as_view()),
     path('user/rank/', views.UserRankView.as_view()),
+    path('calendar/today/<int:pk>/', views.ListTodayAPIView.as_view()),
     path('auth/', include('rest_auth.urls')),
     path('auth/register/', include('rest_auth.registration.urls')),
     # path('', views.index, name='index'),

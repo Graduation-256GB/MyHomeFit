@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
 from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer, TodoSerializer
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from django.utils.dateformat import DateFormat
 from .models import Exercise, ExerciseSet, Set, CustomUser, ExerciseLog, Todo
 from rest_framework.authentication import TokenAuthentication
@@ -165,10 +165,12 @@ class ListExerciseLogAPIView(APIView):
 def log_create(request):
     if request.method == 'POST':
         req = json.loads(request.body)
+        KST = timezone(timedelta(hours=9))
         for i in range(len(req)):
             set_exercise_id = req[i]['id']
             print(set_exercise_id)
-            time_started = DateFormat(datetime.now()).format('Y-m-d h:m:s')
+            #time_started = DateFormat(datetime.now()).format('Y-m-d h:m:s')
+            time_started = datetime.now(KST)
             set_exercise = ExerciseSet.objects.get(id=set_exercise_id)
             exercise_log = ExerciseLog.objects.create(
                 set_exercise=set_exercise, correct_count=0, fail_count=0, time_started=time_started)
@@ -190,3 +192,28 @@ todo_detail = TodoViewSet.as_view({
     'patch': 'partial_update',
     'delete': 'destroy',
 })
+
+class ListTodayAPIView(APIView):
+    def get(self, request, pk):
+        today_log_list = []
+        today = datetime.date(datetime.now())
+        #user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user, 
+        #                time_started__date=datetime.date(datetime.today()))
+        #user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user, 
+        #                   time_finished__year=datetime.date(datetime.today()).year, 
+        #                   time_finished__month=datetime.date(datetime.today()).month, 
+        #                   time_finished__day=datetime.date(datetime.today()).day)
+
+        user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user)
+        for e in user_log_list:
+            if e.time_finished and e.time_started:
+                year = e.time_finished.year
+                month = e.time_finished.month
+                day = e.time_finished.day
+                today = datetime.date(datetime.now())
+                if year == today.year and month == today.month and day == today.day :
+                    today_log_list.append(e)
+        print("같은 날짜 객체들: ", today_log_list)
+        serializer = ExerciseLogSerializer(today_log_list, many=True)
+
+        return Response(serializer.data)

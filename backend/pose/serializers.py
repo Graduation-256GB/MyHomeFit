@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Exercise, ExerciseLog, ExerciseSet, Set
-from .models import CustomUser, Todo
+from .models import CustomUser, Todo, Calendar
 import base64
 
 
@@ -52,10 +52,11 @@ class ExerciseSetSerializer(serializers.ModelSerializer):
 class ExerciseLogSerializer(serializers.ModelSerializer):
     #user = UserSerializer(many=True, read_only=True)
     #set_exercise = ExerciseSetSerializer(many=True, read_only=True)
+    calories = serializers.IntegerField(source="set_exercise.exercise.calories")
     class Meta:
         model = ExerciseLog
         fields = ('set_exercise', 'id', 'correct_count',
-                  'fail_count', 'time_started', 'time_finished')
+                  'fail_count', 'time_started', 'time_finished', 'calories')
 
 # class ExerciseSetListSerializer(serializers.ModelSerializer):
 #     exercise_set = ExerciseSetSerializer(many=True, read_only=True)
@@ -67,7 +68,7 @@ class ExerciseLogSerializer(serializers.ModelSerializer):
 
 class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Set
+        model = Calendar
         fields = '__all__'
 
 class TodoSerializer(serializers.ModelSerializer):

@@ -2,7 +2,8 @@ import time
 import mediapipe as mp
 import cv2
 import numpy as np
-from datetime import datetime, date
+from datetime import datetime, date, timezone, timedelta
+from django.utils.dateformat import DateFormat
 from django.conf import settings
 import os
 import math
@@ -117,8 +118,8 @@ class PoseWebCam(object):
                 if frame_order == 0:
                     frame_order = 16
 
-                if(self.pose_cnt+1 > self.total_count):
-                    return
+                #if(self.pose_cnt+1 > self.total_count):
+                #    return
 
                 # About pose counting
                 if frame_order == 1 and not self.isFinished:
@@ -181,8 +182,11 @@ class PoseWebCam(object):
                             # About exerciselog
                             current_log = ExerciseLog.objects.get(
                                 id=self.logs[self.n])
-                            current_log.time_finished = datetime.now()  # time_finished 필드 값 추가
+                            KST = timezone(timedelta(hours=9))
+                            current_log.time_finished = datetime.now(KST)  # time_finished 필드 값 추가
+                            #current_log.time_finished = DateFormat(datetime.now()).format('Y-m-d h:m:s')
                             current_log.save()
+                            print("time_finished 생성: ", current_log.time_finished)
 
                             self.exercise_count = 0
                             self.n += 1
@@ -212,7 +216,7 @@ class PoseWebCam(object):
 
     # 예측 값에 해당하는 라벨(한글) 반환하는 함수
     def detect_and_predict_pose(self):
-
+    
         poses = {0: "스탠딩 사이드 크런치",
                  1: "스탠딩 니업",
                  2: "버피 테스트",

@@ -1,12 +1,15 @@
 {
   "dependencies": {
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
     "react-calendar": "^3.4.0",
     "react-circular-progressbar": "^2.0.4",
     "react-countdown-circle-timer": "^2.5.4",
     "react-icons": "^4.2.0",
     "react-native": "^0.65.1",
     "react-native-tts": "^4.1.0",
+    "react-number-format": "^4.7.3",
     "react-responsive": "^9.0.0-beta.4",
     "react-web-voice": "^1.0.0",
     "recoil": "^0.4.1",
