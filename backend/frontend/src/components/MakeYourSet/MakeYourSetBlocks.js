@@ -6,6 +6,7 @@ import {BiAddToQueue} from 'react-icons/bi'
 import '../../css/gaok/MakeYourSet.css'
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 import IconStart from '../../images/icon_start.png'
+import { Modal } from 'antd';
 
 function MakeYourSetBlocks ({setArr}) {
 
@@ -30,7 +31,11 @@ function MakeYourSetBlocks ({setArr}) {
         const setObj = { setid: id };
         window.localStorage.setItem("setid", id);
         console.log("test", window.localStorage.getItem("setid"))
-        
+    }
+
+    const [modal, setModal] = useState(false)
+    const selectModal = (info) => {
+        setModal(!{modal})
     }
 
     return(
