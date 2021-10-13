@@ -24,3 +24,23 @@
   align-items: center;
   justify-content: center;
 }
+.fitness-container {
+  display: flex;
+  align-items: center;
+}
+
+.fitness {
+  /* border: 2px solid #27cfb3; */
+  box-shadow: 0 5px 12px #d7d7d7;
+  width: 8rem;
+  height: 8rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fitness img {
+  width: 100%;
+  height: 100%;
+}

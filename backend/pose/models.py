@@ -38,8 +38,8 @@ class Set(models.Model):
         CustomUser, on_delete=models.CASCADE)
     date = models.DateField()
     type = models.CharField(max_length=50)
+    selected_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
 
 
 class ExerciseSet(models.Model):
@@ -63,6 +63,7 @@ class ExerciseLog(models.Model):
     time_started = models.DateTimeField(blank=True, null=True)
     time_finished = models.DateTimeField(blank=True, null=True)
 
+
 class Calendar(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
@@ -70,6 +71,7 @@ class Calendar(models.Model):
     memo = models.TextField()
     total_calories = models.IntegerField()
     total_time = models.IntegerField()
+
 
 class Todo(models.Model):
     title = models.CharField(max_length=120)
