@@ -91,8 +91,8 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
     return (
         <div className="training-note">
             <div className="note-set">
-                <h2>{Exercises[Index].set_title}</h2>
-                <span>{Exercises[Index].set_type}</span>        
+                <h2>{Exercises[0].set_title}</h2>
+                <span>{Exercises[0].set_type}</span>        
             </div>
             <div className="current-exercise">
                 <img src={ImageList[Index]} />
