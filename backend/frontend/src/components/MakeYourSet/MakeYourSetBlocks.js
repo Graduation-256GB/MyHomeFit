@@ -43,7 +43,6 @@ function MakeYourSetBlocks ({setArr}) {
                             <label>세트 추가하기</label>
                             <BiAddToQueue className='page-block-icon'/>
                         </a>
-                    
                         {setArr.map(item => (
                             <div className={isSelected == item.id ? 'page-block-selected' : 'page-block-unselected'}
                                 onClick={() => { setTitleClicked(item.id, item.title, item.type); setSelected(item.id) }}>

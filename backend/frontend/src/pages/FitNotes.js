@@ -66,18 +66,19 @@ const FitNotes = () => {
                         <FcCloseUpMode/>
                     </div>
                 </div>
-                <div className="user-img">
-                            <img src={userImg}></img>
-                        </div>
+                
             </div>
             <div className="menu3-small-title">
                 <label>Hi { userName }, This is your FitNotes.</label>
             </div>
 
             <div className="fitnotes-fitness-container">
-                <div>
+                <div className="rank-container">
                     <FitnessRank name="Top" array={ top3ListArr}/>
                     <FitnessCalories/>
+                </div>
+                <div className="recommend-container">
+                    <RecommendFitness name="Monthly Ranking" nameList={nameList1} imgList={imgList1}/>
                 </div>
                 <div className="recommend-container">
                     <RecommendFitness name="Monthly Ranking" nameList={nameList1} imgList={imgList1}/>

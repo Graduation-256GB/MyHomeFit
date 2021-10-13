@@ -106,7 +106,7 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
-            cv2.putText(img, str(math.floor(self.time_count)), (600, 80),
+            cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
@@ -118,7 +118,7 @@ class PoseWebCam(object):
                 if frame_order == 0:
                     frame_order = 16
 
-                #if(self.pose_cnt+1 > self.total_count):
+                # if(self.pose_cnt+1 > self.total_count):
                 #    return
 
                 # About pose counting
@@ -183,10 +183,12 @@ class PoseWebCam(object):
                             current_log = ExerciseLog.objects.get(
                                 id=self.logs[self.n])
                             KST = timezone(timedelta(hours=9))
-                            current_log.time_finished = datetime.now(KST)  # time_finished 필드 값 추가
+                            current_log.time_finished = datetime.now(
+                                KST)  # time_finished 필드 값 추가
                             #current_log.time_finished = DateFormat(datetime.now()).format('Y-m-d h:m:s')
                             current_log.save()
-                            print("time_finished 생성: ", current_log.time_finished)
+                            print("time_finished 생성: ",
+                                  current_log.time_finished)
 
                             self.exercise_count = 0
                             self.n += 1
@@ -216,7 +218,7 @@ class PoseWebCam(object):
 
     # 예측 값에 해당하는 라벨(한글) 반환하는 함수
     def detect_and_predict_pose(self):
-    
+
         poses = {0: "스탠딩 사이드 크런치",
                  1: "스탠딩 니업",
                  2: "버피 테스트",

@@ -1,51 +1,47 @@
 .realtime-info-success {
-    position: absolute;
-    width: 200px;
-    height: 65px;
-    left: 7%;
-    bottom: 62%;
-    padding: 10px;
-    background-color: #27cfb3;
-    z-index: 3;
-    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
-    border-radius: 20px;
-
-    color: white;
-    font-size: 50px;
-    font-weight: bold;
-    font-family: NanumSquare_acEB;
-    text-align: center;
+  font-family: "Pixel_Sans_Serif";
+  position: absolute;
+  bottom: 78%;
+  left: 41%;
+  z-index: 3;
+  color: #ffdf41;
+  font-size: 2.5rem;
 }
 
 .realtime-info-fail {
-    position: absolute;
-    width: 200px;
-    height: 65px;
-    right: 8%;
-    bottom: 62%;
-    padding: 10px;
-    background-color: #27cfb3;
-    z-index: 3;
-    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.16);
-    border-radius: 20px;
-
-    color: white;
-    font-size: 50px;
-    font-weight: bold;
-    font-family: NanumSquare_acEB;
-    text-align: center;
+  font-family: "Pixel_Sans_Serif";
+  position: absolute;
+  bottom: 50%;
+  left: 41%;
+  z-index: 3;
+  color: #fc3e13;
+  font-size: 2.5rem;
 }
 
 .realtime-pose {
-    position: absolute;
-    left: 7%;
-    bottom: 10%;
-    color: rgb(255, 0, 170);
-    border: turquoise;
-    background-color: rgba( 255, 255, 255, 0 );
-    z-index: 3;
-    font-size: 60px;
-    font-weight: bold;
-    font-family: NanumSquare_acEB;
-    text-shadow: 6px 2px 2px white;
+  position: absolute;
+  left: 7%;
+  bottom: 10%;
+  color: rgb(255, 0, 170);
+  border: turquoise;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 3;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: NanumSquare_acEB;
+  text-shadow: 6px 2px 2px white;
+}
+.current-score {
+  display: flex;
+  flex-direction: column;
+}
+.current-success {
+  font-family: "Pixel_Sans_Serif";
+  color: #ffd400;
+  font-size: 1.5rem;
+}
+.current-fail {
+  font-family: "Pixel_Sans_Serif";
+  color: #fc3e13;
+  font-size: 1.5rem;
 }
