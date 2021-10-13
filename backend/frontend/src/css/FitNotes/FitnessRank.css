@@ -1,9 +1,10 @@
 .rank-fitness-container {
   background-color: white;
-  width: 90%;
-  height: 11rem;
-  margin-top: 30px;
-  border-radius: 70px;
+  width: 100%;
+  height: 13.8rem;
+  margin-top: 2rem;
+  border-radius: 50px;
+  padding: 6.6rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

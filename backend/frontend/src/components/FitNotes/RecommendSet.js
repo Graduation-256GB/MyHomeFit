@@ -5,11 +5,10 @@ import { BiTrophy } from 'react-icons/bi';
 const RecommendSet = ({name, rank, proImg}) => {
     return(
         <div className="recommend-set-container">
-            {/*<label>SET {name}</label>*/}
-            <div className="ranking">
+            {/* <div className="ranking">
                 < BiTrophy className="trophy"/>
                 <label>{rank}등</label>
-            </div>
+            </div> */}
             <div className="profile-img">
                 <img src= {proImg}/>
             </div>

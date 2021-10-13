@@ -40,7 +40,7 @@ class TopListExercise(generics.ListCreateAPIView):
 
 
 class UserRankView(generics.ListCreateAPIView):
-    queryset = CustomUser.objects.all().order_by('-user_count')[:3]
+    queryset = CustomUser.objects.all().order_by('-user_count')[:5]
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -168,10 +168,12 @@ def log_create(request):
 
     return JsonResponse({'exercise_log_id': exercise_log.id})
 
+
 class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
-    
+
+
 todo_list = TodoViewSet.as_view({
     'get': 'list',
     'post': 'create',
@@ -184,25 +186,27 @@ todo_detail = TodoViewSet.as_view({
     'delete': 'destroy',
 })
 
+
 class ListTodayAPIView(APIView):
     def get(self, request, pk):
         today_log_list = []
         today = datetime.date(datetime.now())
-        #user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user, 
+        # user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user,
         #                time_started__date=datetime.date(datetime.today()))
-        #user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user, 
-        #                   time_finished__year=datetime.date(datetime.today()).year, 
-        #                   time_finished__month=datetime.date(datetime.today()).month, 
+        # user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user,
+        #                   time_finished__year=datetime.date(datetime.today()).year,
+        #                   time_finished__month=datetime.date(datetime.today()).month,
         #                   time_finished__day=datetime.date(datetime.today()).day)
 
-        user_log_list = ExerciseLog.objects.filter(set_exercise__set__user=request.user)
+        user_log_list = ExerciseLog.objects.filter(
+            set_exercise__set__user=request.user)
         for e in user_log_list:
             if e.time_finished and e.time_started:
                 year = e.time_finished.year
                 month = e.time_finished.month
                 day = e.time_finished.day
                 today = datetime.date(datetime.now())
-                if year == today.year and month == today.month and day == today.day :
+                if year == today.year and month == today.month and day == today.day:
                     today_log_list.append(e)
         print("같은 날짜 객체들: ", today_log_list)
         serializer = ExerciseLogSerializer(today_log_list, many=True)

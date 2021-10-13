@@ -1,21 +1,19 @@
 .recommend-set-container {
-  width: 90%;
-  height: 8.5rem;
-  background-color: white;
-  border-radius: 30px;
-  border: 3px solid #d7dddc;
+  width: 85%;
+  height: 5rem;
+  background-color: #f3f4f5;
+  border-radius: 20px;
   display: flex;
   align-items: center;
 }
 
 .recommend-set-container > .name {
-  background-color: #27cfb3;
-  padding: 0.3rem 1rem;
   border-radius: 20px;
-  font-size: 20px;
+  font-size: 1.3rem;
   font-family: NanumSquare_acER;
-  color: white;
-  margin-left: 1.5rem;
+  color: #444;
+  font-weight: 500;
+  margin: 1.5rem 2rem;
 }
 
 .ranking {
@@ -42,15 +40,15 @@
   font-weight: bold;
   color: black;
 }
+.profile-img {
+  margin-left: 3rem;
+}
 
 .profile-img > img {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6rem;
-  height: 6rem;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  border: 3px solid #27cfb3;
+  width: 3.8rem;
+  height: 3.8rem;
   border-radius: 100px;
 }
