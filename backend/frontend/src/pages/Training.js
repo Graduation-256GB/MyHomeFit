@@ -141,7 +141,8 @@ const Training = () => {
                 </div>
             </div>
             }
-            {page == 3 && 
+            {
+            page == 3 && 
                 <div className="training-result-wrapper">
                     <div className="result-title"><GrNotes size="40"/><label> Exercise List </label></div>
                     <div className="result-container">
@@ -150,14 +151,12 @@ const Training = () => {
                             {Exercises.map(item => (
                                 <div className="result-line"><AiFillCheckCircle size="30" className="result-check"/><label className="result-check-label">{item.name}</label></div>
                             ))}
-
                             
                         </div>
                         <div className="result-grade">
                         <div style={{ width: 300, height: 300 }}>
                             <CircularProgressbar value={ successSum==0 ?  parseInt( 1/countSum * 100 ) : parseInt(successSum/countSum * 100)} 
                                 text={`${ successSum==0 ?  parseInt( 1/countSum * 100 ) : parseInt(successSum/countSum * 100)}%`} 
-                                
                             />
                         </div>
                         </div>

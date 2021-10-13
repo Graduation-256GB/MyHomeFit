@@ -4,7 +4,7 @@
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "react-bootstrap": "^2.0.0-rc.0",
+    "react-bootstrap": "^1.6.4",
     "react-calendar": "^3.4.0",
     "react-circular-progressbar": "^2.0.4",
     "react-countdown-circle-timer": "^2.5.4",
