@@ -30,7 +30,7 @@ const UserRank = ({ name}) => {
             <label>{name}</label>
             {
                 rankList.map((item,index) => (
-                    <UserContent name={item.username} proImg={item.profile_img}/>
+                    <UserContent name={item.username} proImg={item.profile_img} index={parseInt(index)+1}/>
                 ))
             }
         </div>

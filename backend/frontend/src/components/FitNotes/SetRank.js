@@ -29,7 +29,7 @@ const SetRank = ({ name}) => {
             <label>{name}</label>
             {
                 rankList.map((item,index) => (
-                    <SetContent title={item.title} count={item.selected_count} user={item.user} type={ item.type }/>
+                    <SetContent title={item.title} count={item.selected_count} username={item.username} type={item.type} index={ parseInt(index)+1 }/>
                 ))
             }
         </div>
