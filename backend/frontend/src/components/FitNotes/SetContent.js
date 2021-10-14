@@ -1,11 +1,19 @@
 import React from 'react';
+import { MdAccountCircle,MdCheckCircle,MdInfo } from 'react-icons/md';
 import '../../css/FitNotes/RankContent.css'
-import { BiTrophy } from 'react-icons/bi';
 
-const SetContent = ({title}) => {
+const SetContent = ({title,count,user,type}) => {
     return(
-        <div className="recommend-set-container">
-            <label className="name">{title}</label>
+        <div id="set-rank-container">
+            <label id="name">{title}</label>
+            <div id="set-rank-info">
+                <MdCheckCircle/>
+                <span>{count}</span>
+                <MdAccountCircle/>
+                <span>{user}</span>
+                <MdInfo/>
+                <span>{ type }</span>
+            </div>
         </div>
     )
 }

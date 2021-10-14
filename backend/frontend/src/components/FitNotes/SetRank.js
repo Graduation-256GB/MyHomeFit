@@ -23,14 +23,13 @@ const SetRank = ({ name}) => {
         Object.keys(data).forEach(function (key) {
             rankList.push(data[key]);
         });
-        console.log(rankList)
     }   
     return(
         <div className="recommend-fitness-container">
             <label>{name}</label>
             {
                 rankList.map((item,index) => (
-                    <SetContent title={item.title}/>
+                    <SetContent title={item.title} count={item.selected_count} user={item.user} type={ item.type }/>
                 ))
             }
         </div>

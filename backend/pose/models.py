@@ -6,7 +6,8 @@ from rest_framework.fields import ImageField
 
 class CustomUser(AbstractUser):
     # Any extra fields would go here
-    profile_img = models.ImageField(null=True, blank=True, upload_to="uploads")
+    profile_img = models.ImageField(
+        null=True, blank=True, upload_to="uploads", default='../media/uploads/user.png')
     user_count = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
