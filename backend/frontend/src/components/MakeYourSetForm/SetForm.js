@@ -36,20 +36,21 @@ const SetForm = ({ setNewNum,csrftoken }) => {
                 // localStorage.clear();
             }
         });
+        window.location.href = '#list';
     };
     return (
         <form onSubmit={onSubmit}>
                     <div className="form-box">
-                        <div className="label-box">
-                            <label htmlFor="set-title">Title</label>
-                            <label htmlFor="set-type">Category</label>  
-                        </div>
+                        {/* <div className="label-box">
+                        </div> */}
                         <div className="input-box">
-                    <input type="text"
-                        name="set-title"
-                        value={title}
-                        required
-                        onChange={e => setTitle(e.target.value)}/>
+                            <label htmlFor="set-title">Title</label>
+                            <input type="text"
+                                name="set-title"
+                                value={title}
+                                required
+                                onChange={e => setTitle(e.target.value)}/>
+                            <label htmlFor="set-type">Category</label>  
                             <select name="set-type"
                             value={type}
                             required
