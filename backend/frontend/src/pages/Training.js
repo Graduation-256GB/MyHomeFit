@@ -18,6 +18,7 @@ import { MdReplay } from 'react-icons/md'
 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import ModalTest from '../components/MakeYourSet/ModalTest'
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 
@@ -93,15 +94,24 @@ const Training = () => {
             console.log(Exercises)
         });
     }
+
+     // 속도 선택 모달 만들기
+     const [isSpeedMadalOn, setSpeedModalOn] = useState(false)
+     const speedOnClicked = () => {
+         setSpeedModalOn(!{isSpeedMadalOn})
+     }
+
     return (
         // <RecoilRoot>
             <div className="menu2-container">
                 <Navbar/>
             {
                 page === 1 &&
+
                 <TrainingReady setPage={setPage} setSpeedNum={setSpeedNum}
                     setIsStarted={setIsStarted} setNameList={setNameList} setCountList={setCountList} 
-                    exercises = { Exercises } csrftoken={csrftoken} setImageList={setImageList}/>}
+                    exercises = { Exercises } csrftoken={csrftoken} setImageList={setImageList} speedOnClicked={speedOnClicked}/>}
+                {/* <ModalTest speedOnClicked={speedOnClicked}/>} */}
             {
                 page===2 &&
             <div className="videos">

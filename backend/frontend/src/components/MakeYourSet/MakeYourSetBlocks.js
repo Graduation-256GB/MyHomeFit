@@ -7,6 +7,7 @@ import '../../css/gaok/MakeYourSet.css'
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 import IconStart from '../../images/icon_start.png'
 import { Modal } from 'antd';
+import ModalTest from './ModalTest'
 
 function MakeYourSetBlocks ({setArr}) {
 
@@ -33,9 +34,10 @@ function MakeYourSetBlocks ({setArr}) {
         console.log("test", window.localStorage.getItem("setid"))
     }
 
-    const [modal, setModal] = useState(false)
-    const selectModal = (info) => {
-        setModal(!{modal})
+    // 속도 선택 모달 만들기
+    const [isSpeedMadalOn, setSpeedModalOn] = useState(false)
+    const speedOnClicked = () => {
+        setSpeedModalOn(!{isSpeedMadalOn})
     }
 
     return(
@@ -78,7 +80,14 @@ function MakeYourSetBlocks ({setArr}) {
                     <img src={IconStart}/>
                     <label>START</label>
                 </a>
-                
+                {/* <a className='page-contents-btn-start'>
+                    <img src={IconStart}/>
+                    <label>START</label>
+                </a> */}
+                {/* <button onClick={speedOnClicked}>Modal</button>
+                {isSpeedMadalOn && (
+                    <ModalTest speedOnClicked={speedOnClicked} />
+                )} */}
             </div>
         </div>
     )
