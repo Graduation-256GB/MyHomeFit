@@ -39,7 +39,12 @@ class Todolist extends Component {
             Authorization: `Token ${Token}`
         }
       })
-      .then((res) => this.setState({ todoList: res.data }))
+      .then((res) => {
+        this.setState({ todoList: res.data.filter(element => 
+            new Date(element.created_at).getFullYear() === this.props.year && 
+            new Date(element.created_at).getMonth()+1 === this.props.month &&
+            new Date(element.created_at).getDate() === this.props.day)}); 
+      })
       .catch((err) => console.log(err));
   };
 
@@ -76,7 +81,7 @@ class Todolist extends Component {
   handleDelete = (item) => {
     // alert("delete" + JSON.stringify(item));
     axios
-      .delete(`http://127.0.0.1:8000/api/todos/${item.id}/`, {
+      .delete("http://127.0.0.1:8000/api/todos/", {
         headers: {
             Authorization: `Token ${Token}`
         }
@@ -130,7 +135,6 @@ class Todolist extends Component {
       (item) => item.completed == viewCompleted
     );
 
-
     return newItems.map((item) => (
       <li
         key={item.id}
@@ -168,6 +172,12 @@ class Todolist extends Component {
       </li>
     ));
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.day !== prevProps.day || this.props.month !== prevProps.month || this.props.year !== prevProps.year) {
+      this.refreshList()
+    }
+  }
 
   render() {
     return (

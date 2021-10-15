@@ -2,7 +2,7 @@ import time
 import mediapipe as mp
 import cv2
 import numpy as np
-from datetime import datetime, date, timezone, timedelta
+from datetime import datetime
 from django.utils.dateformat import DateFormat
 from django.conf import settings
 import os
@@ -180,15 +180,10 @@ class PoseWebCam(object):
 
                         if self.exercise_count % self.total_count == 0:
                             # About exerciselog
-                            current_log = ExerciseLog.objects.get(
-                                id=self.logs[self.n])
-                            KST = timezone(timedelta(hours=9))
-                            current_log.time_finished = datetime.now(
-                                KST)  # time_finished 필드 값 추가
-                            #current_log.time_finished = DateFormat(datetime.now()).format('Y-m-d h:m:s')
+                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log.time_finished = datetime.now()
                             current_log.save()
-                            print("time_finished 생성: ",
-                                  current_log.time_finished)
+                            print("time_finished 생성: ", current_log.time_finished)
 
                             self.exercise_count = 0
                             self.n += 1

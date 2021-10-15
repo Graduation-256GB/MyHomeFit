@@ -24,10 +24,12 @@ const Calender = () => {
     const ExerciseLogList = []
     const [TodayInfoList, setTodayInfoList] = useState([])
     const [MillisecondsList, setMillisecondsList] = useState([])
+    const [SelectedDate, setSelectedDate] = useState(new Date())
+
 
     useEffect(() => {
         const Token = localStorage.getItem('token')
-        fetch(`http://127.0.0.1:8000/api/calendar/today/${SET_ID}/`, {
+        fetch(`http://127.0.0.1:8000/api/calendar/today/${SelectedDate.getFullYear()}/${SelectedDate.getMonth()+1}/${SelectedDate.getDate()}/`, {
             method: "GET",
             dataType: 'json',
             headers: {
@@ -39,20 +41,20 @@ const Calender = () => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            setTodayInfoList([])
+            setMillisecondsList([])
             Object.keys(data).forEach(function (key) {
                 ExerciseLogList.push(data[key]);
                 setTodayInfoList(TodayInfoList => [...TodayInfoList, (data[key].correct_count + data[key].fail_count) * data[key].calories]);
                 const startDate = moment(data[key].time_started, "MM/DD/YYYY HH:mm:ss");
                 const timeEnd = moment(data[key].time_finished, "MM/DD/YYYY HH:mm:ss");
-                //console.log("startDate: ", startDate.format("MM/DD/YYYY HH:mm:ss"))
-                //console.log("timeEnd: ", timeEnd.format("MM/DD/YYYY HH:mm:ss"))
 
                 const diffMilliseconds = moment.duration(timeEnd.diff(startDate)).asMilliseconds();
                 setMillisecondsList(MillisecondsList => [...MillisecondsList, diffMilliseconds])
             });
             console.log("ExerciseLogs: ", ExerciseLogList)
         });
-    }, []);
+    }, [SelectedDate]);
 
     return (
         <div className="menu4-container">
@@ -71,12 +73,12 @@ const Calender = () => {
 
             <div className="calendar-container">
                 <div className="calendar-content">
-                    <Calendar activeMonth={new Date()} calendarType="US" />
+                    <Calendar activeMonth={new Date()} calendarType="US"  value={SelectedDate} onChange={setSelectedDate}/>
                 </div>
                 <div className="calendar-box">
                     <div className="calendar-first-section">
                         {/* <Memo/> */}
-                        <TodoList/>
+                        <TodoList year={SelectedDate.getFullYear()} month={SelectedDate.getMonth()+1} day={SelectedDate.getDate()}/>
                     </div>
                     <div className="calendar-second-section">
                         <div className="calorie-box">
