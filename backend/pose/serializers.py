@@ -18,9 +18,12 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
 
 class SetSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source="user.username")
+
     class Meta:
         model = Set
-        fields = '__all__'
+        fields = ('title', 'date', 'type', 'selected_count',
+                  'created_at', 'username')
 
 
 class ExerciseInSetSerializer(serializers.ModelSerializer):
@@ -48,7 +51,9 @@ class ExerciseSetSerializer(serializers.ModelSerializer):
 class ExerciseLogSerializer(serializers.ModelSerializer):
     #user = UserSerializer(many=True, read_only=True)
     #set_exercise = ExerciseSetSerializer(many=True, read_only=True)
-    calories = serializers.IntegerField(source="set_exercise.exercise.calories")
+    calories = serializers.IntegerField(
+        source="set_exercise.exercise.calories")
+
     class Meta:
         model = ExerciseLog
         fields = ('set_exercise', 'id', 'correct_count',
@@ -66,6 +71,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calendar
         fields = '__all__'
+
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:

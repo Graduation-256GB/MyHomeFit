@@ -1,9 +1,10 @@
 .rank-fitness-container {
   background-color: white;
-  width: 90%;
-  height: 11rem;
-  margin-top: 30px;
-  border-radius: 70px;
+  width: 100%;
+  height: 13.8rem;
+  margin-top: 2rem;
+  border-radius: 50px;
+  padding: 6.6rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -22,4 +23,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.fitness-container {
+  display: flex;
+  align-items: center;
+}
+
+.fitness {
+  /* border: 2px solid #27cfb3; */
+  box-shadow: 0 5px 12px #d7d7d7;
+  width: 8rem;
+  height: 8rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fitness img {
+  width: 100%;
+  height: 100%;
 }

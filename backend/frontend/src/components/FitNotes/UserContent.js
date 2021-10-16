@@ -1,14 +1,12 @@
 import React from 'react';
-import '../../css/FitNotes/RecommendSet.css'
+import '../../css/FitNotes/RankContent.css'
 import { BiTrophy } from 'react-icons/bi';
 
-const RecommendSet = ({name, rank, proImg}) => {
+const UserContent = ({name, proImg,index}) => {
     return(
         <div className="recommend-set-container">
-            {/*<label>SET {name}</label>*/}
-            <div className="ranking">
-                < BiTrophy className="trophy"/>
-                <label>{rank}등</label>
+            <div className="rank-number">
+                {index}
             </div>
             <div className="profile-img">
                 <img src= {proImg}/>
@@ -18,4 +16,4 @@ const RecommendSet = ({name, rank, proImg}) => {
     )
 }
 
-export default RecommendSet;
+export default UserContent;

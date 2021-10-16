@@ -1,8 +1,7 @@
 .recommend-fitness-container > label {
   font-family: NanumSquare_acR;
-  font-size: 27px;
+  font-size: 1.7rem;
   color: #949090;
-  margin-top: 30px;
   display: flex;
 }
 

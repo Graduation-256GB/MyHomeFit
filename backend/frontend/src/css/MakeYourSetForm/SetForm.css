@@ -9,32 +9,42 @@
   justify-content: space-between;
 }
 .input-box {
-  height: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-left: 20px;
 }
 .input-box input {
-  width: 300px;
-  height: 25px;
-  font-size: 20px;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1.3rem;
   border: none;
-  border-bottom: 1px solid #a1a9a9;
+  border: 1px solid #cbcbcb;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px #cbcbcb;
+  padding-left: 1rem;
+  color: #525252;
+  margin-bottom: 1.4rem;
 }
 .input-box select {
-  width: 150px;
-  height: 30px;
-  font-size: 15px;
-  border: none;
-  border-bottom: 1px solid #a1a9a9;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1.3rem;
+  border: 1px solid #cbcbcb;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px #cbcbcb;
+  padding-left: 1rem;
+  color: #525252;
+  margin-bottom: 2rem;
 }
 .set-submit {
   border-style: none;
-  font-size: 23px;
+  font-size: 1.5rem;
   color: #a9a1a1;
   cursor: pointer;
   border-radius: 20px;
-  padding: 5px 15px;
-  margin-top: 20px;
+  margin: 1rem 0 0 1.2rem;
+  padding: 0.4rem 1.2rem;
 }

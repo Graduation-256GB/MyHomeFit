@@ -5,8 +5,9 @@
   border-radius: 20px;
   padding: 20px;
   flex-wrap: wrap;
-  /* justify-content: center; */
-  margin: 25px;
+  margin: 2rem;
+  width: 85%;
+  min-height: 20rem;
 }
 .exercise-box {
   padding: 0 20px;
