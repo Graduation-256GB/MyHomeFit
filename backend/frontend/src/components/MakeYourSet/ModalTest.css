@@ -1,0 +1,19 @@
+.speedModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #00000080;
+    z-index: 10000;
+}
+
+.modalContainer{
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    top:25%;
+    bottom: 25%;
+    background-color: #FFFFFF;
+    border-radius: 3rem;
+}

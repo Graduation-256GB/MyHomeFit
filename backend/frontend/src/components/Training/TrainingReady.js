@@ -38,37 +38,57 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
         })
         .catch(error=>console.log(error));
     }
+
+
+    const renderTime = ({ remainingTime }) => {
+        return (
+          <div className="timer">
+            <div className="text">Remaining</div>
+            <div className="value">{remainingTime}</div>
+            <div className="text">seconds</div>
+          </div>
+        );
+      };
+
     return (
-    <div className="ready-box-wrapper">
-        <div className="ready-box">   
+    <div className="speedModal">
+         
                 {
                     countdown===false&&
+                    <div className="modalContainer">  
                     <div className="ready-content">
                         <h2>운동 속도를 선택해주세요.</h2>
                         <div className="ready-choice">
-                            <a onClick={startTraining } name="fast">빠르게</a>
-                            <a onClick={startTraining } name="basic">보통 속도로</a>
-                            <a onClick={startTraining } name="slow">천천히</a>
+                            <a onClick={startTraining } className="fast" name="fast">빠르게</a>
+                            <a onClick={startTraining } className="basic" name="basic">보통 속도로</a>
+                            <a onClick={startTraining } className="slow" name="slow">천천히</a>
                         </div>
+                    </div>
                     </div>
                 }
                 {
                     countdown===true&&
+                    <div className="count-circle-content">
+                        <label> Please take 5 steps back. </label>
                     <CountdownCircleTimer
                         isPlaying
+                        size="350"
+                        strokeWidth="25"
                         duration={5}
                         colors={[
-                        ['#004777', 0.33],
-                        ['#F7B801', 0.33],
-                        ['#A30000', 0.33],
-                        ]}
+                            ["#9000ff", 0],
+                            ["#0066FF", 1]
+                          ]}
+                        isLinearGradient={true}
+                        
                         onComplete={() => { setPage(2)}}
                     >
-                        {({ remainingTime }) => remainingTime}
+                        {renderTime}
                     </CountdownCircleTimer>
+                    </div>
                 }
         </div>
-    </div>
+    // </div>
     )
 };
 export default TrainingReady;

@@ -59,10 +59,8 @@ function MakeYourSet () {
             <div className='page-top-container'>
                     <div className='page-wrapper'>
                         <Navbar />
-                    
                 </div>
             </div>
-           
             <MakeYourSetBlocks setArr={setArr} />
         </div>
 
