@@ -23,7 +23,7 @@ class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = ('title', 'date', 'type', 'selected_count',
-                  'created_at', 'username')
+                  'created_at', 'username', 'id')
 
 
 class ExerciseInSetSerializer(serializers.ModelSerializer):
