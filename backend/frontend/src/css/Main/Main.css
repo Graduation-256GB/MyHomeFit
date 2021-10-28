@@ -40,7 +40,7 @@
 .custom-shape-divider-bottom-1635440189 .shape-fill {
     fill: #FFFFFF;
 } */
-#intro {
+#intro-page {
   background: rgb(2, 0, 36);
   background: linear-gradient(
     170deg,
@@ -50,5 +50,47 @@
     rgba(21, 161, 241, 1) 100%
   );
   position: relative;
-  height: 83vh;
+  height: 95vh;
+}
+#intro-content {
+  display: flex;
+  justify-content: center;
+  color: white;
+  height: 70%;
+  align-items: center;
+}
+#intro-text {
+  display: flex;
+  flex-direction: column;
+  font-family: "NanumSquare_acEB";
+}
+#intro-text a {
+  color: white;
+  border: 1px solid white;
+  border-radius: 30px;
+  text-align: center;
+  width: 14rem;
+  font-size: 1.6rem;
+  padding: 0.6rem 0;
+  margin-top: 3rem;
+}
+#intro-title {
+  font-size: 4rem;
+}
+#intro-message {
+}
+#intro-img img {
+  width: 54rem;
+  animation: motion 1s /* 속도 */ linear 0s infinite alternate; /* 무한 반복 */
+}
+@keyframes motion {
+  0% {
+    margin-top: 0px;
+  } /* 처음 위치 */
+  100% {
+    margin-top: 20px;
+  } /* 마지막 위치 */
+}
+#makeyourset-page {
+  height: 85vh;
 }

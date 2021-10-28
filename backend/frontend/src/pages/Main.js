@@ -2,12 +2,26 @@ import renderEmpty from 'antd/lib/config-provider/renderEmpty';
 import React from 'react';
 import Navbar from '../components/Navbar';
 import '../css/Main/Main.css'
+import IntroImg from "../images/fitness-img.png";
+import { Link } from 'react-router-dom';
 
 function Main() {
     return(
         <div className="mainpage-content">
-            <div id="intro">
+            <div id="intro-page">
                 <Navbar />
+                <div id="intro-content">
+                    <div id="intro-text">
+                        <span id="intro-title">
+                            My Home Fit
+                        </span >
+                        <span id="intro-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
+                        <Link to="/signup">Get Started</Link>
+                    </div>
+                    <div id="intro-img">
+                        <img src={ IntroImg }></img>
+                    </div>
+                </div>
                 <div class="custom-shape-divider-bottom-1635440065">
                     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                         <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
@@ -22,7 +36,7 @@ function Main() {
                     </svg>
                 </div> */}
             </div>
-            <div id="">
+            <div id="makeyourset-page">
 
             </div>
         </div>
