@@ -22,7 +22,7 @@
   font-weight: 600;
 }
 .navbar-wrapper {
-  margin-top: 1rem;
+  padding-top: 1rem;
 }
 .log-box {
   display: flex;
@@ -33,7 +33,6 @@
 }
 .logout {
   margin-left: 1rem;
-  margin-top: 0.5rem;
 }
 .logo {
   font-size: 2rem;

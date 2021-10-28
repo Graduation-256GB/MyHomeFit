@@ -106,8 +106,9 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
-            cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
-                        cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
+            if self.time_count >= 0:
+                cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
+                            cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
 
@@ -180,10 +181,12 @@ class PoseWebCam(object):
 
                         if self.exercise_count % self.total_count == 0:
                             # About exerciselog
-                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log = ExerciseLog.objects.get(
+                                id=self.logs[self.n])
                             current_log.time_finished = datetime.now()
                             current_log.save()
-                            print("time_finished 생성: ", current_log.time_finished)
+                            print("time_finished 생성: ",
+                                  current_log.time_finished)
 
                             self.exercise_count = 0
                             self.n += 1
@@ -196,6 +199,8 @@ class PoseWebCam(object):
 
                         if (self.n < len(self.exercise_set)):
                             self.exercise_count += 1
+                        else:
+                            return
 
                     frame_flip = cv2.flip(img, 1)
                     ret, jpeg = cv2.imencode('.jpg', frame_flip)
@@ -241,7 +246,7 @@ class PoseWebCam(object):
         preds = poseEstimationModel.predict(inputs, batch_size=32)
         preds_listed = list(preds[0])
         preds_sorted = np.sort(preds, axis=1)
-        preds_sorted = list(preds_sorted[0][-5:])  # 확률이 가장 높은 4개
+        preds_sorted = list(preds_sorted[0][-2:])  # 확률이 가장 높은 4개
         for e in preds_sorted:
             label.append(poses[preds_listed.index(e)])
         #label = poses[np.argmax(preds)]

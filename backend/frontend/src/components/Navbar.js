@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Button } from 'antd';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import '../css/Navbar.css';
@@ -52,7 +51,7 @@ const NavBar=()=> {
       <div className="navbar-wrapper">
         <div className="navbar-menu">
           <div className="navbar-menu-item">
-            <Link to="/login" className="logo">MY HOME FIT</Link>
+            <Link to="/main" className="logo">MY HOME FIT</Link>
           </div>
           <div className="navbar-menu-item">
             <Link to="/makeyourset"><FiFolderPlus />&nbsp;Make Your Set</Link>
