@@ -7,6 +7,7 @@ import {IoMdLogIn,IoMdLogOut} from "react-icons/io"
 import {MdPlayCircleOutline} from "react-icons/md"
 import {FiFolderPlus, FiUserPlus} from "react-icons/fi"
 import {BiNotepad, BiLineChart} from "react-icons/bi"
+import MyHomeFitLogo from "../images/myhomefit_logo.png" 
 
 const MenuList = styled.div`
   display: flex;
@@ -52,7 +53,10 @@ const NavBar=()=> {
       <div className="navbar-wrapper">
         <div className="navbar-menu">
           <div className="navbar-menu-item">
-            <Link to="/login" className="logo">MY HOME FIT</Link>
+            <Link to="/login" className="logo">
+              {/* <img src={MyHomeFitLogo} width='256' height='64'/> */}
+              MY HOME FIT
+            </Link>
           </div>
           <div className="navbar-menu-item">
             <Link to="/makeyourset"><FiFolderPlus />&nbsp;Make Your Set</Link>

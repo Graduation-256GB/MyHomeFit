@@ -1,6 +1,6 @@
 .navbar-menu {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .navbar-menu-item {
   color: white;
@@ -20,6 +20,7 @@
   font-size: 1.3rem;
   margin: 1rem;
   font-weight: 600;
+  /* margin-left: 1.5rem; */
 }
 .navbar-wrapper {
   margin-top: 1rem;

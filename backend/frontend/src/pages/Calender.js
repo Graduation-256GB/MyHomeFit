@@ -10,7 +10,8 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { useAsync } from "react-async";
 
-import TodoList from '../components/Calendar/TodoList/Todolist'
+// import TodoList from '../components/Calendar/TodoList/Todolist'
+import Todo from '../components/Calendar/TodoList/Todo'
 import moment from 'moment';
 import { FcAlarmClock, FcLike } from "react-icons/fc";
 import NumberFormat from 'react-number-format';
@@ -78,7 +79,8 @@ const Calender = () => {
                 <div className="calendar-box">
                     <div className="calendar-first-section">
                         {/* <Memo/> */}
-                        <TodoList year={SelectedDate.getFullYear()} month={SelectedDate.getMonth()+1} day={SelectedDate.getDate()}/>
+                        {/* <TodoList year={SelectedDate.getFullYear()} month={SelectedDate.getMonth()+1} day={SelectedDate.getDate()}/> */}
+                        <Todo year={SelectedDate.getFullYear()} month={SelectedDate.getMonth()+1} day={SelectedDate.getDate()}/>
                     </div>
                     <div className="calendar-second-section">
                         <div className="calorie-box">

@@ -17,7 +17,7 @@ import Calender from "./pages/Calender";
 import './App.css'
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Todo from "./components/Calendar/TodoList/Todolist"
+import Todo from "./components/Calendar/TodoList/Todo"
 
 
 const App = () => {
