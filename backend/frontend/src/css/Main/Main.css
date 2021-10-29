@@ -63,30 +63,46 @@ img {
   height: 70%;
   align-items: center;
 }
+#fitnotes-text,
 #intro-text,
 #makeyourset-text {
   display: flex;
   flex-direction: column;
   font-family: "NanumSquare_acEB";
-  width: 30rem;
+  width: 32rem;
   word-break: break-word;
-  margin-left: 4rem;
+  margin: 0 4rem;
 }
 #intro-text a {
   color: white;
-  border: 1px solid white;
   border-radius: 30px;
   text-align: center;
   width: 14rem;
   font-size: 1.6rem;
   padding: 0.6rem 0;
   margin-top: 3rem;
+  background: rgb(184, 47, 169);
+  background: linear-gradient(
+    147deg,
+    rgba(184, 47, 169, 1) 0%,
+    rgba(139, 67, 191, 1) 100%
+  );
+}
+#intro-text a:hover {
+  text-decoration: none;
+  text-shadow: 1px 1px 10px #b0b0b0;
+  background: rgb(184, 47, 169);
+  background: linear-gradient(
+    233deg,
+    rgba(184, 47, 169, 1) 0%,
+    rgba(139, 67, 191, 1) 100%
+  );
 }
 #intro-title {
-  font-size: 4rem;
+  font-size: 5rem;
 }
 #intro-message {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 #intro-img {
   width: 54rem;
@@ -109,22 +125,25 @@ img {
   justify-content: center;
   align-items: center;
 }
-#makeyourset-content {
+#makeyourset-content,
+#fitnotes-content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #makeyourset-title {
-  font-size: 4rem;
+  font-size: 4.3rem;
   color: #3a6bcf;
+  margin: 1rem 0;
 }
-#makeyourset-message {
-  font-size: 1.3rem;
+#makeyourset-message,
+#fitnotes-message {
+  font-size: 1.5rem;
   color: #999999;
 }
 #makeyourset-img {
-  width: 48rem;
-  height: 30rem;
+  width: 44rem;
+  height: 29rem;
 }
 #menu-intro {
   display: flex;
@@ -135,5 +154,10 @@ img {
 
 /* fitnotes */
 #fitnotes-img {
-  width: 43rem;
+  width: 38rem;
+}
+#fitnotes-title {
+  font-size: 4rem;
+  color: #7e43a8;
+  margin: 1rem 0;
 }

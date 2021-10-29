@@ -3,7 +3,8 @@ import Navbar from '../components/Navbar';
 import '../css/Main/Main.css'
 import IntroImg from "../images/fitness-img.png";
 import Screen1 from "../images/makeyourset.png";
-import Screen2 from "../images/fitnotes.png";
+import Screen2 from "../images/training.png";
+import Screen3 from "../images/fitnotes.png";
 import { Link } from 'react-router-dom';
 import IntroBox from '../components/Main/IntroBox';
 
@@ -58,32 +59,44 @@ function Main() {
                     </div>
                 </div>
             </div>
-            <div id="training-page">
-                <div id="training-content">
-                    <div id="training-img">
-                    </div>
-                    <div id="training-text">
-                        <span id="training-title">
+            <div id="fitnotes-page">
+                <div id="fitnotes-content">
+                    <div id="fitnotes-text">
+                        <span id="fitnotes-title">Training
                         </span >
-                        <span id="training-message"></span>
+                        <span id="fitnotes-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
+                    </div>
+                    <div id="fitnotes-img">
+                        <img src={Screen2}></img>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="fitnotes-page">
+                <div id="fitnotes-content">
+                    <div id="fitnotes-img">
+                        <img src={Screen3}></img>
+                    </div>
+                    <div id="fitnotes-text">
+                        <span id="fitnotes-title">Fitnotes
+                        </span >
+                        <span id="fitnotes-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
                     </div>
                 </div>
             </div>
             <div id="fitnotes-page">
                 <div id="fitnotes-content">
+                    <div id="fitnotes-text">
+                        <span id="fitnotes-title">Calendar
+                        </span >
+                        <span id="fitnotes-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
+                    </div>
                     <div id="fitnotes-img">
                         <img src={Screen2}></img>
                     </div>
-                    <div id="fitnotes-text">
-                        <span id="fitnotes-title">
-                        </span >
-                        <span id="fitnotes-message"></span>
-                    </div>
                 </div>
             </div>
-            <div id="calendar-page">
-
-            </div>
+            
         </div>
     )
 }
