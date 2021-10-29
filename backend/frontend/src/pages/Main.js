@@ -1,9 +1,12 @@
-import renderEmpty from 'antd/lib/config-provider/renderEmpty';
 import React from 'react';
 import Navbar from '../components/Navbar';
 import '../css/Main/Main.css'
 import IntroImg from "../images/fitness-img.png";
+import Screen1 from "../images/makeyourset.png";
+import Screen2 from "../images/fitnotes.png";
 import { Link } from 'react-router-dom';
+import IntroBox from '../components/Main/IntroBox';
+
 
 function Main() {
     return(
@@ -36,7 +39,49 @@ function Main() {
                     </svg>
                 </div> */}
             </div>
+            <div id="menu-intro">
+                <IntroBox name={'Make Your Set'} icon={1} content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
+                <IntroBox name={ 'Training'} icon={ 2 } content={'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef' }/>
+                <IntroBox name={ 'Fitnotes'} icon={ 3 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
+                <IntroBox name={ 'Calendar'} icon={ 4 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
+            </div>
             <div id="makeyourset-page">
+                <div id="makeyourset-content">
+                    <div id="makeyourset-img">
+                        <img src={ Screen1}></img>
+                    </div>
+                    <div id="makeyourset-text">
+                        <span id="makeyourset-title">
+                            Make your set!
+                        </span >
+                        <span id="makeyourset-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
+                    </div>
+                </div>
+            </div>
+            <div id="training-page">
+                <div id="training-content">
+                    <div id="training-img">
+                    </div>
+                    <div id="training-text">
+                        <span id="training-title">
+                        </span >
+                        <span id="training-message"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="fitnotes-page">
+                <div id="fitnotes-content">
+                    <div id="fitnotes-img">
+                        <img src={Screen2}></img>
+                    </div>
+                    <div id="fitnotes-text">
+                        <span id="fitnotes-title">
+                        </span >
+                        <span id="fitnotes-message"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="calendar-page">
 
             </div>
         </div>

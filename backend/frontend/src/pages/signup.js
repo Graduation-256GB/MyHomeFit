@@ -12,7 +12,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      window.location.replace('http://127.0.0.1:8000/makeyourset');
+      window.location.replace('/makeyourset');
     } else {
       setLoading(false);
     }

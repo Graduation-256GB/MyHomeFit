@@ -1,0 +1,20 @@
+#menu-intro-box {
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+  width: 15rem;
+  margin: 1.3rem;
+}
+#menu-intro-icon {
+  font-size: 4rem;
+  color: #3a6bcf;
+}
+#menu-intro-title {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  font-family: "NanumSquare_acEB";
+}
+#menu-intro-text {
+  font-size: 1.1rem;
+  font-family: "NanumSquare_acL";
+}

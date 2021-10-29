@@ -1,3 +1,7 @@
+img {
+  width: 100%;
+  height: 100%;
+}
 .custom-shape-divider-bottom-1635440065 {
   position: absolute;
   bottom: 0;
@@ -59,10 +63,14 @@
   height: 70%;
   align-items: center;
 }
-#intro-text {
+#intro-text,
+#makeyourset-text {
   display: flex;
   flex-direction: column;
   font-family: "NanumSquare_acEB";
+  width: 30rem;
+  word-break: break-word;
+  margin-left: 4rem;
 }
 #intro-text a {
   color: white;
@@ -78,8 +86,9 @@
   font-size: 4rem;
 }
 #intro-message {
+  font-size: 1.3rem;
 }
-#intro-img img {
+#intro-img {
   width: 54rem;
   animation: motion 1s /* 속도 */ linear 0s infinite alternate; /* 무한 반복 */
 }
@@ -91,6 +100,40 @@
     margin-top: 20px;
   } /* 마지막 위치 */
 }
-#makeyourset-page {
-  height: 85vh;
+#makeyourset-page,
+#training-page,
+#fitnotes-page,
+#calendar-page {
+  height: 73vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#makeyourset-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#makeyourset-title {
+  font-size: 4rem;
+  color: #3a6bcf;
+}
+#makeyourset-message {
+  font-size: 1.3rem;
+  color: #999999;
+}
+#makeyourset-img {
+  width: 48rem;
+  height: 30rem;
+}
+#menu-intro {
+  display: flex;
+  justify-content: center;
+  height: 40vh;
+  align-items: center;
+}
+
+/* fitnotes */
+#fitnotes-img {
+  width: 43rem;
 }
