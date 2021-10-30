@@ -69,7 +69,7 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
                 {
                     countdown===true&&
                     <div className="count-circle-content">
-                        <label> 3 발자국 뒤로 가서 전신이 보이게 서주세요. </label>
+                        <label> 세 발자국 뒤로 가서 전신이 보이게 서주세요. </label>
                     <CountdownCircleTimer
                         isPlaying
                         size="350"

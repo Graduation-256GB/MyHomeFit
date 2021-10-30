@@ -62,9 +62,9 @@
 }
 .videos {
   width: 100%;
-  position: absolute;
   justify-content: center;
   display: flex;
+  margin-top: 3rem;
 }
 
 .left-button {
@@ -135,11 +135,15 @@
   margin-top: 2rem;
 }
 .current-exercise img {
-  width: 10rem;
-  height: 10rem;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 20px;
+}
+.current-name {
+  font-size: 3rem;
 }
 .current-count {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #3ccfc0;
   font-weight: 700;
 }
@@ -151,7 +155,7 @@
   border-radius: 30px;
   background-color: rgb(255 255 255 / 75%);
   width: 20rem;
-  height: 12vh;
+  height: 15vh;
   z-index: 3;
   box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.16);
 }
@@ -162,12 +166,11 @@
   align-items: center;
   justify-content: center;
   color: #7e7e7e;
-  font-size: 1.7rem;
+  font-size: 2.2rem;
 }
 #next-label {
   display: flex;
   align-items: center;
-  margin-bottom: 0.7rem;
 }
 #next-name {
   font-weight: 700;
@@ -178,8 +181,8 @@
   justify-content: center;
   background-color: #ffffff;
   border: 3px solid #27cfb3;
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
 }
 
 .next-video-pose > img {
@@ -194,7 +197,7 @@
   border: 7px dashed #b6f4ea;
   border-radius: 70px;
   padding: 2rem;
-  width: 50%;
+  width: 65%;
   height: 68vh;
   margin: 3rem 0;
 }
@@ -324,7 +327,7 @@
 
 .text {
   color: #aaa;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .value {

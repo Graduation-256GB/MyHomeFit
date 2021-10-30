@@ -90,18 +90,18 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
 
     return (
         <div className="training-note">
-            <div className="note-set">
+            {/* <div className="note-set">
                 <h2>{Exercises[0].set_title}</h2>
                 <span>{Exercises[0].set_type}</span>        
-            </div>
+            </div> */}
             <div className="current-exercise">
                 <img src={ImageList[Index]} />
-                <h2>{NameList[Index]}</h2>
+                <span className="current-name">{NameList[Index]}</span>
                 <span className="current-count">{SuccessList[Index] + FailList[Index]} / {CountList[Index]}</span>
-                <div className="current-score">
+                {/* <div className="current-score">
                     <span className="current-success">Success: { SuccessList[Index] }</span>
                     <span className="current-fail">Fail: { FailList[Index] }</span>
-                </div>
+                </div> */}
             </div>
             {/* <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
                 Success: { SuccessList[Index] } / { CountList[Index] }회
