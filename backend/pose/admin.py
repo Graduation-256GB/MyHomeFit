@@ -21,6 +21,6 @@ class CustomUserAdmin(UserAdmin):
     list_display_links = ['username']
 
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'completed')
+    list_display = ('title', 'completed')
 
 admin.site.register(Todo, TodoAdmin)

@@ -91,17 +91,11 @@
   height: 600px;
   border-radius: 20px;
   background: white;
-  position:fixed;
-  left: 3rem;
-  bottom: 0.5rem;
 }
 .calendar-box {
   width: 30%;
   flex-direction: column;
   margin-top: 2rem;
-  position: fixed;
-  right: 3rem;
-  bottom: 2.5rem;
 }
 .calorie-user {
   display: flex;

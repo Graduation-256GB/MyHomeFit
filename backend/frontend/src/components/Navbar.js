@@ -6,6 +6,7 @@ import {IoMdLogIn,IoMdLogOut} from "react-icons/io"
 import {MdPlayCircleOutline} from "react-icons/md"
 import {FiFolderPlus, FiUserPlus} from "react-icons/fi"
 import {BiNotepad, BiLineChart} from "react-icons/bi"
+import MyHomeFitLogo from "../images/myhomefit_logo.png" 
 
 const MenuList = styled.div`
   display: flex;

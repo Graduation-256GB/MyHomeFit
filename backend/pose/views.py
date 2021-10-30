@@ -16,6 +16,7 @@ from rest_framework.views import APIView
 import json
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 
 # id랑 같은 인스턴스만 가져와서 만들어보기,,
 # set의 id = ExerciseSet.set
@@ -178,22 +179,63 @@ def log_create(request):
     return JsonResponse({'exercise_log_id': exercise_log.id})
 
 
-class TodoViewSet(viewsets.ModelViewSet):
-    serializer_class = TodoSerializer
-    queryset = Todo.objects.all()
+# class TodoViewSet(viewsets.ModelViewSet):
+#     serializer_class = TodoSerializer
+#     queryset = Todo.objects.all()
 
 
-todo_list = TodoViewSet.as_view({
-    'get': 'list',
-    'post': 'create',
-})
+# todo_list = TodoViewSet.as_view({
+#     'get': 'list',
+#     'post': 'create',
+# })
 
-todo_detail = TodoViewSet.as_view({
-    'get': 'retrieve',
-    'put': 'update',
-    'patch': 'partial_update',
-    'delete': 'destroy',
-})
+# todo_detail = TodoViewSet.as_view({
+#     'get': 'retrieve',
+#     'put': 'update',
+#     'patch': 'partial_update',
+#     'delete': 'destroy',
+# })
+
+
+@api_view(['GET'])
+def todo_list(request):
+    todos = Todo.objects.all()
+    serializer = TodoSerializer(todos, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def todo_detail(request, pk):
+    todos = Todo.objects.get(id=pk)
+    serializer = TodoSerializer(todos, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def todo_create(request):
+    serializer = TodoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def todo_update(request, pk):
+    todo = Todo.objects.get(id=pk)
+
+    serializer = TodoSerializer(instance=todo, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def todo_delete(request, pk):
+    todo = Todo.objects.get(id=pk)
+    todo.delete()
+
+    return Response("Item deleted")
 
 
 class ListTodayAPIView(APIView):

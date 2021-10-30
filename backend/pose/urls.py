@@ -21,6 +21,9 @@ urlpatterns = [
     path('auth/register/', include('rest_auth.registration.urls')),
     # path('', views.index, name='index'),
     path('pose_feed/', views.pose_feed, name='pose_feed'),
-    path('todos/', views.todo_list),
-    path('todos/<int:pk>/', views.todo_detail),
+    path('todos/', views.todo_list, name="todolist"),
+    path("todo-detail/<int:pk>/", views.todo_detail, name="Tododetail"),
+    path("todo-create/", views.todo_create, name="Todocreate"),
+    path("todo-update/<int:pk>", views.todo_update, name="Todoupdate"),
+    path("todo-delete/<int:pk>", views.todo_delete, name="Tododelete")
 ]

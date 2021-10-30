@@ -17,7 +17,7 @@ function MakeYourSetBlocks ({setArr}) {
     console.log("recoilvalue", useRecoilState(setidState))
     
 
-    const [setid, setSetId]=useState(0)   // 선택한 블럭의 set_id 저장 
+    const [setid, setSetId]=useState(1)   // 선택한 블럭의 set_id 저장 
     const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
     const [type, setType]=useState('') // 선택한 블럭의 set 타입 저장
     const [isSelected, setSelected]=useState('') // 블럭 선택 유무 상태 저장 

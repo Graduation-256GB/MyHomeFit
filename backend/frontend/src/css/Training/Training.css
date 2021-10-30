@@ -237,7 +237,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.5rem dashed #27cfb3;
+  border: 0.4rem dashed #27cfb3;
 }
 
 .ready-content {
@@ -324,12 +324,12 @@
 
 .text {
   color: #aaa;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .value {
   font-family: NanumSquare_acEB;
-  font-size: 3rem;
+  font-size: 4rem;
   color: #ffffff;
 }
 
