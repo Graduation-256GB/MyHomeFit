@@ -128,20 +128,16 @@ function Todo({year, month, day}) {
             <div className="task" key={index}>
                 {todo.completed ? <GrCheckboxSelected/> : <GrCheckbox/>}
                 <div style={{flex:20}} onClick={()=>handleComplete(todo)} >
-                    <label className="todo-text ml-2 "><span className={todo.completed?"todo-completed" : ""}>{todo.title}</span></label>
+                    <label className="todo-text ml-2 mb-0"><span className={todo.completed?"todo-completed" : ""}>{todo.title}</span></label>
                 </div>
            
                <div className="d-flex">
                     
                     <button  className="btn btn-default mr-1 edit-btn" onClick={()=>handleToUpdate(todo)}  >
-                        {/* <i className="fa fa-edit fa-2x"></i> */}
-                        {/* <label>수정</label> */}
-                        <BiEditAlt size="30" color=" #009000"/>
+                        <BiEditAlt size="30" color= "#686868"/>
                     </button>
                    <button className="btn btn-default delete-btn" onClick={()=>handleDelete(todo.id)} >
-                       {/* <i className="fa fa-minus fa-2x"></i> */}
-                       {/* <label>삭제</label> */}
-                       <RiDeleteBin5Fill size="30" color="#ff0000"/>
+                       <RiDeleteBin5Fill size="30" color= "#686868"/>
                     </button>
               </div>
              
