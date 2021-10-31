@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 
-const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList,ImageList } ) => {
-    
+const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList,ImageList, isRunning, setIsRunning } ) => {
     
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)
-    const [delay, setDelay] = useState(2000); // GET 시간 간격
-    const [isRunning, setIsRunning] = useState(false)
-    //const [isOK, setIsOK] = useState(false)
-    //const [Result, setResult] = useState("")
-    const [ColorSuccess, setColorSuccess] = useState('#27cfb3')
-    const [ColorFail, setColorFail] = useState('#27cfb3')
+    const [delay, setDelay] = useState(1000); // GET 시간 간격
     const [DisplayFail, setDisplayFail] = useState('none')
     const [DisplaySuccess, setDisplaySuccess] = useState('none')
 
+    const [SuccessLength, setSuccessLength] = useState(0)
+    const [FailLength, setFailLength] = useState(0)
 
     // start button을 눌러서 객체를 만든 후 GET
     useEffect(() => {
@@ -58,14 +54,20 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
                 setSuccessList(SuccessList => [...SuccessList, data[key].correct_count]);
                 setFailList(FailList => [...FailList, data[key].fail_count]);
             })
+            setSuccessLength(SuccessList.length)
+            setFailLength(FailList.length)
+        });
+    }, isRunning ? delay : null);
 
-            if( SuccessList[Index] !== SuccessCount ) {
+    useEffect(() => {
+        if (SuccessList.length === SuccessLength && FailList.length === FailLength && 0 < SuccessLength && 0 < FailLength ) {
+            if ( SuccessList[Index] !== SuccessCount ) {
                 setSuccessCount(SuccessList[Index])
                 setDisplaySuccess('block')
                 setDisplayFail('none')
                 console.log('success')
             }
-            if( FailList[Index] !== FailCount ) {
+            else if( FailList[Index] !== FailCount ) {
                 setFailCount(FailList[Index])
                 setDisplayFail('block')
                 setDisplaySuccess('none')
@@ -74,10 +76,11 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
+                setSuccessCount(0)
+                setFailCount(0)
             }
-        });
-    }, isRunning ? delay : null);
-    
+        }
+    }, [SuccessList, FailList])
 
     useEffect(()=> {
         console.log("exercises", Exercises.length)
@@ -109,6 +112,7 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
             <div className="realtime-info-fail" style={{backgroundColor: ColorFail}}>
                 &nbsp; Fail: { FailList[Index] } / { CountList[Index] }회
             </div>  */}
+            
             <div className="realtime-info-success" style={{display:DisplaySuccess}}>
                 Success!
             </div>

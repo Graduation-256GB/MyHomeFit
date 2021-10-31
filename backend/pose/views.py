@@ -2,7 +2,7 @@ from django.utils.timezone import localtime
 from numpy.lib.function_base import trim_zeros
 from pose.camera import PoseWebCam
 from django.http.response import HttpResponse, JsonResponse, StreamingHttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from rest_framework import viewsets
 from rest_framework import generics
 from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer, TodoSerializer
@@ -117,6 +117,9 @@ def set_create(request):
             title=set_title, type=set_type, date=set_date, user=request.user)
     return JsonResponse({'set_id': set.pk})
 
+def set_delete(request, set_id):
+    Set.objects.get(pk=set_id).delete()
+    return redirect('/makeyourset/')
 
 def exercise_create(request):
     if request.method == 'POST':
@@ -204,3 +207,4 @@ class ListTodayAPIView(APIView):
 
         print("[", year, "/", month, "/", day, "]", "객체들:", today_log_list)
         return Response(serializer.data)
+

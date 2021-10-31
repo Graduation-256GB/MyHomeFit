@@ -79,7 +79,7 @@ class PoseWebCam(object):
         results = self.pose.process(imgRGB)
         # print('time_count', math.floor(self.time_count))
         keypoints = []  # 1프레임의 keypoints를 담은 배열
-        if results.pose_landmarks:
+        if results.pose_landmarks and not self.isFinished:
             # About exerciselog
             if (self.isAdded == False):
                 for exercise in self.exercise_set:
@@ -241,7 +241,7 @@ class PoseWebCam(object):
         preds = poseEstimationModel.predict(inputs, batch_size=32)
         preds_listed = list(preds[0])
         preds_sorted = np.sort(preds, axis=1)
-        preds_sorted = list(preds_sorted[0][-5:])  # 확률이 가장 높은 4개
+        preds_sorted = list(preds_sorted[0][-3:])  # 확률이 가장 높은 x개
         for e in preds_sorted:
             label.append(poses[preds_listed.index(e)])
         #label = poses[np.argmax(preds)]

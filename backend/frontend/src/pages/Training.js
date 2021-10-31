@@ -71,6 +71,7 @@ const Training = () => {
     const userName=localStorage.getItem('userName')
 
     const [Index, setIndex] = useState(0)
+    const [isRunning, setIsRunning] = useState(false)
     
     // 결과페이지 구현
 
@@ -100,6 +101,7 @@ const Training = () => {
      const speedOnClicked = () => {
          setSpeedModalOn(!{isSpeedMadalOn})
      }
+
 
     return (
         // <RecoilRoot>
@@ -137,12 +139,15 @@ const Training = () => {
                         </div>
                     </div>
                 }
-                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} Exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
+                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} 
+                            setSuccessList={setSuccessList} page={page} setPage={setPage} Exercises={Exercises} setId = { SET_ID } 
+                            IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}
+                            isRunning={isRunning} setIsRunning={setIsRunning}/>
                 </div>
                 <div className="realtime-video">
                         <div className="user-video">
-                         <ProgressBar variant="info" now={20} className="w-100 mb-2"/>
-                        <img src={ poseURL }></img>
+                        <ProgressBar variant="info" now={20} className="w-100 mb-2"/>
+                        <img src={ poseURL }/>
                             {/* <img src=""></img> */}
                             {/* <div className="count-icon">
                             <FaCircleNotch/>
