@@ -58,13 +58,13 @@ const Training = () => {
     const poseURL = `http://127.0.0.1:8000/api/pose_feed/?set_id=${SET_ID}&speed_num=${speed_num}`
 
     const csrftoken = getCookie('csrftoken');
-
     const Exercises = [];
     const [page, setPage] = useState(1)
     const [IsStarted, setIsStarted] = useState(false)
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
+    const [allCount, setAllCount] = useState(0)
     const [Title, setTitle] = useState('')
     const [Type, setType] = useState('')
     const userImg=localStorage.getItem('userImg')
@@ -137,16 +137,15 @@ const Training = () => {
                         </div>
                     </div>
                 }
-                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList} page={page} setPage={setPage} Exercises={Exercises} setId = { SET_ID } IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}/>
+                        <RealtimeInfo Index={Index} setIndex={setIndex} FailList={FailList}
+                            setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList}
+                            page={page} setPage={setPage} Exercises={Exercises} setId={SET_ID} IsStarted={IsStarted}
+                            NameList={NameList} CountList={CountList} ImageList={ImageList} setAllCount={setAllCount} allCount={allCount} />
                 </div>
                 <div className="realtime-video">
                         <div className="user-video">
-                         <ProgressBar variant="info" now={20} className="w-100 mb-2"/>
+                         <ProgressBar variant="info" now={allCount/countSum*100} className="w-100 mb-2"/>
                         <img src={ poseURL }></img>
-                            {/* <img src=""></img> */}
-                            {/* <div className="count-icon">
-                            <FaCircleNotch/>
-                            </div> */}
                     </div>
                 </div>
             </div>

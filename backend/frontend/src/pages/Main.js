@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import IntroBox from '../components/Main/IntroBox';
 import RightSection from '../components/Main/RightSection';
 import LeftSection from '../components/Main/LeftSection';
+import AboutUs from '../components/Main/AboutUs';
 
 
 
@@ -44,11 +45,11 @@ function Main() {
                 <IntroBox name={ 'Fitnotes'} icon={ 3 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
                 <IntroBox name={ 'Calendar'} icon={ 4 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
             </div>
-            <RightSection img={Screen1} color={ '#3A6BCF' } title={'Make Your Set!'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'45rem'} height={'29rem'}/>
-            <LeftSection img={ Screen2 } color={ '#00BCCA' } title={'Training'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'40rem'} height={'33rem'}/>
-            <RightSection img={ Screen3 } color={ '#7E43A8' } title={'Fitnotes'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'40rem'} height={'42rem'}/>
+            <RightSection img={Screen1} color={ '#3A6BCF' } title={'Make Your Set!'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'44rem'} height={'29rem'}/>
+            <LeftSection img={ Screen2 } color={ '#00BCCA' } title={'Training'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'39rem'} height={'32.5rem'}/>
+            <RightSection img={ Screen3 } color={ '#7E43A8' } title={'Fitnotes'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'40rem'} height={'44.5rem'}/>
             <LeftSection img={ Screen4 } color={ '#00B3AD' } title={'Calendar'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'43rem'} height={'34rem'}/>
-            
+            {/* <AboutUs/> */}
         </div>
     )
 }

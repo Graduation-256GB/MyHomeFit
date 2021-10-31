@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 
-const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList,ImageList } ) => {
+const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList, ImageList, setAllCount,allCount}) => {
     
     
     const [FailCount, setFailCount] = useState(0)
@@ -64,12 +64,14 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
                 setDisplaySuccess('block')
                 setDisplayFail('none')
                 console.log('success')
+                setAllCount(allCount+1)
             }
             if( FailList[Index] !== FailCount ) {
                 setFailCount(FailList[Index])
                 setDisplayFail('block')
                 setDisplaySuccess('none')
                 console.log('fail')
+                setAllCount(allCount+1)
             }
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
