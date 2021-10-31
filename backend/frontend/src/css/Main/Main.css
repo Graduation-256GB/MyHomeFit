@@ -23,27 +23,6 @@ img {
 .custom-shape-divider-bottom-1635440065 .shape-fill {
   fill: #ffffff;
 }
-/* 
-.custom-shape-divider-bottom-1635440189 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-}
-
-.custom-shape-divider-bottom-1635440189 svg {
-    position: relative;
-    display: block;
-    width: calc(154% + 1.3px);
-    height: 248px;
-}
-
-.custom-shape-divider-bottom-1635440189 .shape-fill {
-    fill: #FFFFFF;
-} */
 #intro-page {
   background: rgb(2, 0, 36);
   background: linear-gradient(
@@ -63,9 +42,7 @@ img {
   height: 70%;
   align-items: center;
 }
-#fitnotes-text,
-#intro-text,
-#makeyourset-text {
+#intro-text {
   display: flex;
   flex-direction: column;
   font-family: "NanumSquare_acEB";
@@ -116,48 +93,9 @@ img {
     margin-top: 20px;
   } /* 마지막 위치 */
 }
-#makeyourset-page,
-#training-page,
-#fitnotes-page,
-#calendar-page {
-  height: 73vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#makeyourset-content,
-#fitnotes-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#makeyourset-title {
-  font-size: 4.3rem;
-  color: #3a6bcf;
-  margin: 1rem 0;
-}
-#makeyourset-message,
-#fitnotes-message {
-  font-size: 1.5rem;
-  color: #999999;
-}
-#makeyourset-img {
-  width: 44rem;
-  height: 29rem;
-}
 #menu-intro {
   display: flex;
   justify-content: center;
   height: 40vh;
   align-items: center;
-}
-
-/* fitnotes */
-#fitnotes-img {
-  width: 38rem;
-}
-#fitnotes-title {
-  font-size: 4rem;
-  color: #7e43a8;
-  margin: 1rem 0;
 }

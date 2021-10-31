@@ -5,8 +5,12 @@ import IntroImg from "../images/fitness-img.png";
 import Screen1 from "../images/makeyourset.png";
 import Screen2 from "../images/training.png";
 import Screen3 from "../images/fitnotes.png";
+import Screen4 from "../images/calendar.png";
 import { Link } from 'react-router-dom';
 import IntroBox from '../components/Main/IntroBox';
+import RightSection from '../components/Main/RightSection';
+import LeftSection from '../components/Main/LeftSection';
+
 
 
 function Main() {
@@ -33,12 +37,6 @@ function Main() {
                         <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
                     </svg>
                 </div>
-                {/* 
-                <div class="custom-shape-divider-bottom-1635440189">
-                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-                    </svg>
-                </div> */}
             </div>
             <div id="menu-intro">
                 <IntroBox name={'Make Your Set'} icon={1} content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
@@ -46,56 +44,10 @@ function Main() {
                 <IntroBox name={ 'Fitnotes'} icon={ 3 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
                 <IntroBox name={ 'Calendar'} icon={ 4 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
             </div>
-            <div id="makeyourset-page">
-                <div id="makeyourset-content">
-                    <div id="makeyourset-img">
-                        <img src={ Screen1}></img>
-                    </div>
-                    <div id="makeyourset-text">
-                        <span id="makeyourset-title">
-                            Make your set!
-                        </span >
-                        <span id="makeyourset-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
-                    </div>
-                </div>
-            </div>
-            <div id="fitnotes-page">
-                <div id="fitnotes-content">
-                    <div id="fitnotes-text">
-                        <span id="fitnotes-title">Training
-                        </span >
-                        <span id="fitnotes-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
-                    </div>
-                    <div id="fitnotes-img">
-                        <img src={Screen2}></img>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="fitnotes-page">
-                <div id="fitnotes-content">
-                    <div id="fitnotes-img">
-                        <img src={Screen3}></img>
-                    </div>
-                    <div id="fitnotes-text">
-                        <span id="fitnotes-title">Fitnotes
-                        </span >
-                        <span id="fitnotes-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
-                    </div>
-                </div>
-            </div>
-            <div id="fitnotes-page">
-                <div id="fitnotes-content">
-                    <div id="fitnotes-text">
-                        <span id="fitnotes-title">Calendar
-                        </span >
-                        <span id="fitnotes-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
-                    </div>
-                    <div id="fitnotes-img">
-                        <img src={Screen2}></img>
-                    </div>
-                </div>
-            </div>
+            <RightSection img={Screen1} color={ '#3A6BCF' } title={'Make Your Set!'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'45rem'} height={'29rem'}/>
+            <LeftSection img={ Screen2 } color={ '#00BCCA' } title={'Training'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'40rem'} height={'33rem'}/>
+            <RightSection img={ Screen3 } color={ '#7E43A8' } title={'Fitnotes'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'40rem'} height={'42rem'}/>
+            <LeftSection img={ Screen4 } color={ '#00B3AD' } title={'Calendar'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'43rem'} height={'34rem'}/>
             
         </div>
     )
