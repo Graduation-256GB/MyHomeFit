@@ -8,17 +8,13 @@ urlpatterns = [
     path('exercise/top/', views.TopListExercise.as_view()),
     path('set/rank/', views.TopListSet.as_view()),
     path('exercise/create/', views.exercise_create),
-
     path('exercise/<int:set_id>/update/', views.set_exercise_update),
-
     path('exercise/<int:pk>/', views.DetailExercise.as_view()),
     path('exerciseset/<int:pk>/', views.ListExerciseSet.as_view()),
     path('set/list/', views.ListSet.as_view()),
     path('set/create/', views.set_create),
-
     path('set/<int:set_id>/delete/', views.set_delete),
     path('set/<int:set_id>/update/', views.set_update),
-
     path('log/<int:pk>/', views.ListExerciseLogAPIView.as_view()),
     path('log/create/', views.log_create),
     path('user/current/', views.CurrentUserView.as_view()),

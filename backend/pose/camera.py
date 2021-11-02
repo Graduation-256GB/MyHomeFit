@@ -216,26 +216,15 @@ class PoseWebCam(object):
     def detect_and_predict_pose(self):
 
         poses = {0: "스탠딩 사이드 크런치",
-                 1: "스탠딩 니업",
-                 2: "버피 테스트",
-                 3: "스텝 포워드 다이나믹 런지",
-                 4: "스텝 백워드 다이나믹 런지",
-                 5: "사이드 런지",
-                 6: "크로스 런지",
-                 7: "굿모닝"
-                 }
-
-        """
-        poses = {0: "STANDING SIDE CRUNCH",
-                1: "STANDING KNEE UP",
-                2: "BURPEE TEST",
-                3: "STEP FORWARD DYNAMIC LUNGE",
-                4: "STEP BACKWARD DYNAMIC LUNGE",
-                5: "SIDE LUNGE",
-                6: "CROSS LUNGE",
-                7: "GOODMORNING"
+                1: "스탠딩 니업",
+                2: "버피 테스트",
+                3: "스텝 포워드 다이나믹 런지",
+                4: "스텝 백워드 다이나믹 런지",
+                5: "사이드 런지",
+                6: "크로스 런지",
+                7: "굿모닝"
                 }
-        """
+
         # 확률이 높은 4개의 list를 label로 return
         label = []
         inputs = np.array(self.get_input(), dtype="float32")
