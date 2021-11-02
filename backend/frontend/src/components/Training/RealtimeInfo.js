@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
+import countSound from '../../audio/countSound';
+// import one from '../../audio/1.mp3';
 
 const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList, ImageList, setAllCount,allCount}) => {
-    
+    // const one = countSound(one, 1); 
     
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)

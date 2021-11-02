@@ -19,9 +19,10 @@ import { MdReplay } from 'react-icons/md'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import ModalTest from '../components/MakeYourSet/ModalTest'
-
 import useSound from '../audio/useSound'
-import BGM from '../audio/training_audio_cut.mp3'
+import BGM from '../audio/training_audio.mp3'
+
+
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 
@@ -53,7 +54,8 @@ const loadExerciseSet = async ({ set_id }) => {
 }
 
 const Training = () => {
-    // useSound(BGM, 0.5, 2000);
+
+    useSound(BGM, 0.5, 2000)
 
     const SET_ID =  window.localStorage.getItem("setid")
 
@@ -89,6 +91,7 @@ const Training = () => {
         setCountSum (CountList.reduce((a,v) =>  a = a + v , 0 ))
         console.log("success", successSum)
         console.log("count", countSum)
+
     }, [SuccessList, CountList])
     const percentage = 66;
 
@@ -107,6 +110,7 @@ const Training = () => {
 
     return (
         // <RecoilRoot>
+        
             <div className="menu2-container">
                 <Navbar/>
             {
@@ -118,6 +122,7 @@ const Training = () => {
                 {/* <ModalTest speedOnClicked={speedOnClicked}/>} */}
             {
                 page===2 &&
+                
             <div className="videos">
                 {/* <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>

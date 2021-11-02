@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Howl } from 'howler';
 
-function useSound(src, volume = 1, fadeoutTime = 0) {
+function useSound(src, volume, fadeoutTime) {
     let sound;
     const soundStop = () => sound.stop();
     const soundPlay = (src) => {
