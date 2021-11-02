@@ -43,13 +43,13 @@ const SetEdit = ({ setid, Title, csrftoken }) => {
         <form onSubmit={onSubmit}>
                     <div className="form-box">
                         <div className="input-box">
-                            <label htmlFor="set-title">Title</label>
+                            <label htmlFor="set-title">제목</label>
                             <input type="text"
                                 name="set-title"
                                 value={title}
                                 required
                                 onChange={e => settitle(e.target.value)}/>
-                            <label htmlFor="set-type">Category</label>  
+                            <label htmlFor="set-type">카테고리</label>  
                             <select name="set-type"
                             value={type}
                             required
@@ -62,7 +62,7 @@ const SetEdit = ({ setid, Title, csrftoken }) => {
                             </select>
                         </div>
                     </div>
-                    <input type="submit" value="Edit Set" className="set-submit" />
+                    <input type="submit" value="세트 수정" className="set-submit" />
                 </form>
     )
 }

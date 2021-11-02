@@ -183,11 +183,11 @@ const MakeYourSetEdit = ({match}) => {
             </div>
             <div className="form-list-wrapper">
                 <div className="content-form">
-                    <h2>If You Want, Edit Your Fitness Set.</h2>
+                    <h2>1. 세트 이름과 카테고리를 선택해주세요.</h2>
                     <SetEdit setid={ setid } Title={ Title } csrftoken={ csrftoken } />
                 </div>
                 <div className="content-list" id="list">
-                    <h2>If You Want, Edit Your Exercises.</h2>
+                    <h2>2. 운동을 선택해주세요.</h2>
                     <div className="list-wrapper">
                         <div className="left-arrow" onClick={()=>scroll(-80)}>
                         <FiChevronLeft/>
@@ -206,7 +206,7 @@ const MakeYourSetEdit = ({match}) => {
                         </div>
                     </div>
                     <ExerciseList exerciseArr={ exerciseArr } addList={addList} />
-                    <button className="form-submit" onClick={ formSubmit}>Finish Edit</button>
+                    <button className="form-submit" onClick={ formSubmit}>목록 수정</button>
                 </div>
             </div>
         </div>
