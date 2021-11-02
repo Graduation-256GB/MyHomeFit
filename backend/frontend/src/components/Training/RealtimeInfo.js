@@ -30,7 +30,6 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (IsStarted == true) {
                 setIsRunning(true)
             }
@@ -68,14 +67,12 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
                 setSuccessCount(SuccessList[Index])
                 setDisplaySuccess('block')
                 setDisplayFail('none')
-                console.log('success')
                 setAllCount(allCount+1)
             }
             else if( FailList[Index] !== FailCount ) {
                 setFailCount(FailList[Index])
                 setDisplayFail('block')
                 setDisplaySuccess('none')
-                console.log('fail')
                 setAllCount(allCount+1)
             }
 
@@ -88,10 +85,7 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
     }, [SuccessList, FailList])
 
     useEffect(()=> {
-        console.log("exercises", Exercises.length)
-        console.log("Index", Index)
         if (Exercises.length < Index + 1){
-            console.log("result")
             setPage(3)
         }
     })

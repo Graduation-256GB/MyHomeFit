@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import '../css/gaok/MakeYourSet.css'
-import IconSet from '../images/icon_makeyourset.png';
-// import {IoIosCut} from 'react-icons/io'
-import {FcSearch} from 'react-icons/fc'
+import '../css/MakeYourSet/MakeYourSet.css'
 
 import MakeYourSetBlocks from '../components/MakeYourSet/MakeYourSetBlocks';
 import Navbar from '../components/Navbar';
@@ -46,11 +43,8 @@ function MakeYourSet () {
     if (setList.data) {
         Object.keys(setList.data).forEach(function (key) {
             setArr.push(setList.data[key]);
-            console.log(setList.data[key].title)
-            console.log(setList.data[key].id)
             SetNameArr.push(setList.data[key].title)
         });
-        console.log(SetNameArr.length);
         
     }
     return(

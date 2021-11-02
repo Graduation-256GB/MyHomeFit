@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react';
 import '../../css/MakeYourSetForm/SetForm.css';
-import jQuery from 'jquery'
 
 
 const SetForm = ({ setNewNum,csrftoken }) => {
@@ -26,14 +25,10 @@ const SetForm = ({ setNewNum,csrftoken }) => {
         .then(res => res.json())
         .then(data => {
             if (data.key) {
-                // localStorage.clear();
-                // localStorage.setItem('token', data.key);
-                // window.location.replace('http://127.0.0.1:8000/makeyourset');
             } else {
                 setNewNum(data.set_id);
                 setTitle('');
                 setType('');
-                // localStorage.clear();
             }
         });
         window.location.href = '#list';
@@ -41,8 +36,6 @@ const SetForm = ({ setNewNum,csrftoken }) => {
     return (
         <form onSubmit={onSubmit}>
                     <div className="form-box">
-                        {/* <div className="label-box">
-                        </div> */}
                         <div className="input-box">
                             <label htmlFor="set-title">제목</label>
                             <input type="text"

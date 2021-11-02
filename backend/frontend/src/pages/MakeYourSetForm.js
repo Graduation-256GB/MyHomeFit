@@ -83,7 +83,6 @@ const MakeYourSetForm = () => {
         const exerciseImg = e.target.dataset.img
         const exerciseRemove = e.target.dataset.remove
 
-        console.log(exerciseId)
         if (exerciseId != null) {
             const exercise = {
                 id:nextId.current,
@@ -97,13 +96,11 @@ const MakeYourSetForm = () => {
             setFormarr(formArr.concat(exercise));
         }
         nextId.current += 1;
-        console.log(formArr)
     }
     const removeList = (id) => {
         setFormarr(formArr.filter(exercise => exercise.id !== id));
     }
     const clickCount = (id,count) => {
-        console.log(count)
         if (count === "up") {
             setFormarr(formArr.map(element =>
                 element.id === id ? { ...element, count: parseInt(element.count) + 1 } : element))
@@ -113,7 +110,6 @@ const MakeYourSetForm = () => {
         }
     }
     const changeCount = (id,countValue) => {
-        console.log(countValue)
         setFormarr(formArr.map(element =>
         element.id === id ? { ...element, count: element.count =countValue } : element))
     }

@@ -67,8 +67,6 @@ const MakeYourSetEdit = ({match}) => {
             Object.keys(exercisesetList.data).forEach(function (key) {
                 exercisesetArr.push(exercisesetList.data[key]);
             });
-            
-            console.log("exercisesetArr:", exercisesetArr);
         }
     }, [exercisesetList.data]);
     
@@ -77,7 +75,6 @@ const MakeYourSetEdit = ({match}) => {
             exercisesetArr.map(item => {
                 setFormarr(Formarr => [...Formarr, item]);
             })
-            console.log("formArr: ", formArr)
         }
     }, [exercisesetArr]);
 
@@ -86,14 +83,12 @@ const MakeYourSetEdit = ({match}) => {
             formArr.map(item => {
                 setuserSetTitle({ title: item.set_title })
             })
-            console.log("userSetTitle.title: ", userSetTitle.title)
         }
     }, [formArr]);
 
     useEffect(() => {
         if (userSetTitle) {
             setTitle(userSetTitle.title)
-            console.log("Title: ", Title)
         }
     }, [userSetTitle]);
 
@@ -101,7 +96,6 @@ const MakeYourSetEdit = ({match}) => {
         Object.keys(exerciseList.data).forEach(function (key) {
             exerciseArr.push(exerciseList.data[key]);
         });
-        console.log("exerciseArr:", exerciseArr);
     }
 
     const scroll = (scrollOffset) => {
@@ -144,13 +138,11 @@ const MakeYourSetEdit = ({match}) => {
             setFormarr(formArr.concat(exerciseset));
         }
         nextId.current += 1;
-        console.log("formArr: ",formArr)
     }
     const removeList = (id) => {
         setFormarr(formArr.filter(exercise => exercise.id !== id));
     }
     const clickCount = (id,set_count) => {
-        console.log(set_count)
         if (set_count === "up") {
             setFormarr(formArr.map(element =>
                 element.id === id ? { ...element, set_count: parseInt(element.set_count) + 1 } : element))
@@ -160,7 +152,6 @@ const MakeYourSetEdit = ({match}) => {
         }
     }
     const changeCount = (id,countValue) => {
-        console.log(countValue)
         setFormarr(formArr.map(element =>
         element.id === id ? { ...element, set_count: element.set_count =countValue } : element))
     }

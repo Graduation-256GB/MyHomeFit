@@ -9,7 +9,6 @@ const SetEdit = ({ setid, Title, csrftoken }) => {
     useEffect(() => {
         if (Title) {
             settitle(Title)
-            console.log("title: ", title)
         }
     }, [Title]);
 

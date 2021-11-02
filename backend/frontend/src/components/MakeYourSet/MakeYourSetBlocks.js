@@ -3,45 +3,34 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {  setidState } from '../../pages/state';
 
 import {BiAddToQueue} from 'react-icons/bi'
-import '../../css/gaok/MakeYourSet.css'
+import '../../css/MakeYourSet/MakeYourSet.css'
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 import IconStart from '../../images/icon_start.png'
 import { FiEdit,FiTrash2 } from "react-icons/fi";
 
 function MakeYourSetBlocks ({setArr}) {
 
-    // 전역변수 사용
-    const [globalSetid, setGlobalSetid] = useRecoilState(setidState);
-    
-    //console.log("recoilvalue", useRecoilState(setidState))
-    
 
-    const [setid, setSetId]=useState(-1)   // 선택한 블럭의 set_id 저장 
-    const [setTitle, setSetTitle]=useState('') // 선택한 블럭의 set 이름 저장
-    const [type, setType]=useState('') // 선택한 블럭의 set 타입 저장
-    const [isSelected, setSelected]=useState('') // 블럭 선택 유무 상태 저장 
+    const [setid, setSetId]=useState(-1)   
+    const [setTitle, setSetTitle]=useState('') 
+    const [type, setType]=useState('') 
+    const [isSelected, setSelected]=useState('')
 
     const Token = localStorage.getItem('token')
 
     const setTitleClicked = (id, title, type) => {
-        //console.log("start")
         {setSetId(id)}
         setSetTitle(title)
         setType(type)
-        // setGlobalSetid(id)
-        // console.log("전역변수 확인",{globalSetid})
         const setObj = { setid: id };
         window.localStorage.setItem("setid", id);
-        //console.log("test", window.localStorage.getItem("setid"))
     }
 
-    // 속도 선택 모달 만들기
     const [isSpeedMadalOn, setSpeedModalOn] = useState(false)
     const speedOnClicked = () => {
         setSpeedModalOn(!{isSpeedMadalOn})
     }
 
-    // 세트 삭제
     const onDeleteSet = () => {
         const Token = localStorage.getItem('token')
         fetch(`http://127.0.0.1:8000/api/set/${setid}/delete/`, {
@@ -52,9 +41,8 @@ function MakeYourSetBlocks ({setArr}) {
         setType('')
     }
 
-    // 세트 수정 페이지 이동
     const onEditeSet = () => {
-        window.location.replace(`http://127.0.0.1:8000/makeyoursetedit/${setid}`);
+        window.location.replace(`/makeyoursetedit/${setid}`);
     }
 
     return(

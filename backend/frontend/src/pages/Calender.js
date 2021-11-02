@@ -78,21 +78,15 @@ const Calender = () => {
                 </div>
                 <div className="calendar-box">
                     <div className="calendar-first-section">
-                        {/* <Memo/> */}
-                        {/* <TodoList year={SelectedDate.getFullYear()} month={SelectedDate.getMonth()+1} day={SelectedDate.getDate()}/> */}
                         <Todo year={SelectedDate.getFullYear()} month={SelectedDate.getMonth()+1} day={SelectedDate.getDate()}/>
                     </div>
                     <div className="calendar-second-section">
                         <div className="calorie-box">
                             <div className="calorie-user">
-                                {/*<div className="user-img">
-                                    <img src={userImg}></img>
-                                </div>*/}
                                 Calories Burned
                                 <div className="calorie-info-icon"><FcLike/> &ensp;</div>
                             </div>
                             <div className="calorie-info">
-                                    {/*{userName?userName:'user name'}*/}
                                     <NumberFormat value={TodayInfoList.reduce((a,v) =>  a = a + v , 0 )} displayType={'text'} thousandSeparator={true} suffix={' kcal'} />
                                 </div>
                         </div>

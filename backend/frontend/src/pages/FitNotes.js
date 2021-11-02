@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React from 'react';
 import jQuery from 'jquery'
 import "../css/FitNotes/FitNotes.css"
 import {FcCloseUpMode} from "react-icons/fc"
@@ -46,14 +46,7 @@ const loadNew3List = async () => {
 }
 const FitNotes = () => {
     const csrftoken = getCookie('csrftoken');
-    // const { data, error, isLoading } = useAsync({ promiseFn: loadTop3List })
-    // const top3ListArr = [];
     const userName=localStorage.getItem('userName')
-    // if (data) {
-    //     Object.keys(data).forEach(function (key) {
-    //         top3ListArr.push(data[key]);
-    //     });
-    // }
     return (
         <div className="menu3-container">
             <Navbar/>
