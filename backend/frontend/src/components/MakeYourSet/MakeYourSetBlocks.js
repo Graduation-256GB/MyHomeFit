@@ -98,7 +98,7 @@ function MakeYourSetBlocks ({setArr}) {
                 </div>
                 
                 {
-                    (setid !== -1) &&
+                    // (setid !== -1) &&
                         <div className='set-management-container'>
                             <div className='set-management-update-icon' onClick={onEditeSet}>
                                 <FaEdit/>
