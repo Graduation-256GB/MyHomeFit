@@ -106,7 +106,8 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
-            cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
+            ## cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
+            cv2.putText(img, str(math.floor(self.time_count)), (500, 80),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
@@ -132,7 +133,7 @@ class PoseWebCam(object):
                 # cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
                 #             cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
                 print("time_count: ", math.floor(self.time_count))
-                if frame_order % self.frame_per_second == 0 and frame_order != 15:
+                if (frame_order % self.frame_per_second == 0 and frame_order != 15) or frame_order == 16:
                     self.time_count -= 1
 
                 for id, lm in enumerate(results.pose_landmarks.landmark):

@@ -56,6 +56,11 @@ function MakeYourSetBlocks ({setArr}) {
         setType('')
     }
 
+    // 세트 수정 페이지 이동
+    const onEditeSet = () => {
+        window.location.replace(`http://127.0.0.1:8000/makeyoursetedit/${setid}`);
+    }
+
     return(
         <div className='page-center-container'>
             <div className='page-block-wrapper'>
@@ -95,7 +100,7 @@ function MakeYourSetBlocks ({setArr}) {
                 {
                     (setid !== -1) &&
                         <div className='set-management-container'>
-                            <div className='set-management-update-icon'>
+                            <div className='set-management-update-icon' onClick={onEditeSet}>
                                 <FaEdit/>
                             </div>
                             <div className='set-management-delete-icon' onClick={onDeleteSet}>

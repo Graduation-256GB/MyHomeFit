@@ -341,7 +341,8 @@
 .user-video > img {
   display: flex;
   transform: scaleX(-1);
-  object-fit: cover;
+  /*object-fit: cover;*/
+  object-fit: contain;
   width: 100%;
   height: 100%;
 }
