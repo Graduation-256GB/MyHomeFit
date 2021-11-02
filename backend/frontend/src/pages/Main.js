@@ -24,8 +24,11 @@ function Main() {
                         <span id="intro-title">
                             My Home Fit
                         </span >
-                        <span id="intro-message">fkfnfknewjknflewnfewfjwo;ejfoiwejfoewjofjweojf;weojf;owejfowejfowjfo;wejfwe</span>
-                        <Link to="/signup">Get Started</Link>
+                        <span id="intro-message">
+                            세트 관리부터 실시간 운동까지, 언제 어디서든 나만의 AI 트레이너 마이홈핏과 함께해요.
+                            {/* 건강한 습관을 만들어주는 나만의 AI 트레이너, 마이홈핏. */}
+                        </span>
+                        <Link to="/signup">시작하기</Link>
                     </div>
                     <div id="intro-img">
                         <img src={ IntroImg }></img>
@@ -40,15 +43,15 @@ function Main() {
                 </div>
             </div>
             <div id="menu-intro">
-                <IntroBox name={'Make Your Set'} icon={1} content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
-                <IntroBox name={ 'Training'} icon={ 2 } content={'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef' }/>
-                <IntroBox name={ 'Fitnotes'} icon={ 3 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
-                <IntroBox name={ 'Calendar'} icon={ 4 } content={ 'sdfwfwefwefwfewfwefwefwfdssdvfwevwevwevwevwevwevwevwwfwfwef'}/>
+                <IntroBox name={'Make Your Set'} icon={1} content={ '원하는 운동만으로 구성된 나만의 세트를 만들고, 관리할 수 있습니다.'}/>
+                <IntroBox name={ 'Training'} icon={ 2 } content={'세트를 선택하여 실시간으로 세트를 수행할 수 있습니다.' }/>
+                <IntroBox name={ 'Fitnotes'} icon={ 3 } content={ '사용자 랭킹, 세트 랭킹을 확인할 수 있습니다.'}/>
+                <IntroBox name={ 'Calendar'} icon={ 4 } content={ '캘린더를 통해 운동 패턴 관리와 일정 관리를 할 수 있습니다.'}/>
             </div>
-            <RightSection img={Screen1} color={ '#3A6BCF' } title={'Make Your Set!'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'44rem'} height={'29rem'}/>
-            <LeftSection img={ Screen2 } color={ '#00BCCA' } title={'Training'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'39rem'} height={'32.5rem'}/>
-            <RightSection img={ Screen3 } color={ '#7E43A8' } title={'Fitnotes'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'40rem'} height={'44.5rem'}/>
-            <LeftSection img={ Screen4 } color={ '#00B3AD' } title={'Calendar'} text={'wefwfwefwefwefwefwefwefwefwefwefwfwefwefwefwefwefwffewf'} width={'43rem'} height={'34rem'}/>
+            <RightSection img={Screen1} color={'#3A6BCF'} title={'나만의 운동세트 만들기'} text={'나에게 맞는 운동을 선별하여 내가 원하는 운동 세트를 만들 수 있어요.'} width={'44rem'} height={'29rem'} link={ 1}/>
+            <LeftSection img={ Screen2 } color={ '#00BCCA' } title={'AI 트레이너와 함께 하는 실시간 운동'} text={'원하는 세트를 선택하여 AI 트레이너와 함께 실시간으로 운동을 할 수 있어요.'} width={'39rem'} height={'32.5rem'} link={2 }/>
+            <RightSection img={ Screen3 } color={ '#7E43A8' } title={'랭킹 확인을 통한 동기부여'} text={'가장 인기있는 운동부터 사용자 순위, 세트 순위까지 확인할 수 있어요.'} width={'40rem'} height={'44.5rem'} link={ 3}/>
+            <LeftSection img={ Screen4 } color={ '#00B3AD' } title={'일정 관리부터 운동 루틴 확인 까지'} text={'나만의 캘린더로 운동 일정을 관리하여 건강한 운동 습관을 만들어요.'} width={'43rem'} height={'34rem'} link={ 4}/>
             {/* <AboutUs/> */}
         </div>
     )

@@ -133,8 +133,6 @@ class PoseWebCam(object):
                 # cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
                 #             cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
                 print("time_count: ", math.floor(self.time_count))
-                # if frame_order % self.frame_per_second == 0 and frame_order != 15:
-                #     self.time_count -= 1
                 if (frame_order % self.frame_per_second == 0 and frame_order != 15) or frame_order == 16:
                     self.time_count -= 1
 

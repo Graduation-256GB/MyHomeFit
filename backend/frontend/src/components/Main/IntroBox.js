@@ -3,6 +3,7 @@ import '../../css/Main/IntroBox.css'
 import { MdPlayCircleOutline } from "react-icons/md"
 import {FiFolderPlus} from "react-icons/fi"
 import { BiNotepad, BiLineChart } from "react-icons/bi"
+import { Link } from 'react-router-dom';
 
 const IntroBox = ({name,icon,content }) => {
     return (
@@ -30,7 +31,7 @@ const IntroBox = ({name,icon,content }) => {
                     </span>
                     <span id="menu-intro-text">
                         {content}
-                    </span>
+            </span>
                 </div>
     )
 }

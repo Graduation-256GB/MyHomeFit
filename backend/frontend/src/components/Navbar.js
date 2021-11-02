@@ -57,7 +57,7 @@ const NavBar=()=> {
           <div className="navbar-menu-item">
             <Link to="/makeyourset"><FiFolderPlus />&nbsp;Make Your Set</Link>
             <Link to="/training"><MdPlayCircleOutline />&nbsp;Training</Link>
-            <Link to="/fitnotes"><BiLineChart/>&nbsp;Community</Link>
+            <Link to="/fitnotes"><BiLineChart/>&nbsp;Fitnotes</Link>
             <Link to="/calender"><BiNotepad/>&nbsp;Calender</Link>
           
         {auth ?
