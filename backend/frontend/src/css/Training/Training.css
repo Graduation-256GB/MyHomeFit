@@ -64,6 +64,7 @@
   justify-content: center;
   display: flex;
   margin-top: 3rem;
+  height: 80vh;
 }
 
 .left-button {
@@ -342,6 +343,7 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  height: 100%;
   margin-right: 13px;
   align-items: flex-end;
   position: relative;
@@ -352,7 +354,7 @@
   transform: scaleX(-1);
   object-fit: cover;
   width: 100%;
-  height: 100%;
+  height: 95%;
 }
 .count-icon {
   font-size: 3rem;

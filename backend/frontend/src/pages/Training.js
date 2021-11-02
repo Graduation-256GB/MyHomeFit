@@ -20,6 +20,9 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import ModalTest from '../components/MakeYourSet/ModalTest'
 
+import useSound from '../audio/useSound'
+import BGM from '../audio/training_audio_cut.mp3'
+
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 
 function getCookie(name) {
@@ -50,6 +53,7 @@ const loadExerciseSet = async ({ set_id }) => {
 }
 
 const Training = () => {
+    // useSound(BGM, 0.5, 2000);
 
     const SET_ID =  window.localStorage.getItem("setid")
 

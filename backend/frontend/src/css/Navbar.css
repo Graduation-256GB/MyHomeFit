@@ -24,6 +24,8 @@
 }
 .navbar-wrapper {
   padding-top: 1rem;
+  height: 12vh;
+  
 }
 .log-box {
   display: flex;

@@ -6,6 +6,7 @@ import { Content } from 'antd/lib/layout/layout';
 const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCountList, exercises, csrftoken, setImageList }) => {
     const [countdown, setCountDown]=useState(false)
     const startTraining = e => {
+        
         if (e.target.name === 'fast') {
             setSpeedNum(5)
         }
