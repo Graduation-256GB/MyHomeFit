@@ -77,14 +77,12 @@
 }
 
 .signup-right-content > div > input {
-  height: 20px;
   font-size: 20px;
   border-bottom: 1px solid #27cfb3;
   border-right: 0px;
   border-left: 0px;
   border-top: 0px;
   width: 400px;
-  color: #afb8b6;
 }
 
 .signup-right-content > div > input:focus {

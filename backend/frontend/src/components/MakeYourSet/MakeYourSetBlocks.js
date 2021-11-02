@@ -1,16 +1,12 @@
 import React, { useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import { setidGetter, setidState } from '../../pages/state';
+import {  setidState } from '../../pages/state';
 
 import {BiAddToQueue} from 'react-icons/bi'
 import '../../css/gaok/MakeYourSet.css'
 import MakeYourSetExerciseList from './MakeYourSetExerciseList';
 import IconStart from '../../images/icon_start.png'
-import { Modal } from 'antd';
-import ModalTest from './ModalTest'
-
-import { FcEmptyTrash } from "react-icons/fc";
-import { FaEdit } from "react-icons/fa";
+import { FiEdit,FiTrash2 } from "react-icons/fi";
 
 function MakeYourSetBlocks ({setArr}) {
 
@@ -84,11 +80,15 @@ function MakeYourSetBlocks ({setArr}) {
                 
                 <div className='page-contents-set-title'>
                     <label>{setTitle}</label>
+                    <div className='set-management-update-icon' onClick={onEditeSet}>
+                        <FiEdit/>
+                    </div>
+                    <div className='set-management-delete-icon' onClick={onDeleteSet}>
+                        <FiTrash2/>
+                    </div>
                 </div>
                 <div className='page-contents-set-tag'>
                     <label># {type}</label>
-                </div>
-                <div className='page-contents-set-time'>
                 </div>
 
                 <div className='set-scroll'>
@@ -96,31 +96,11 @@ function MakeYourSetBlocks ({setArr}) {
                     <MakeYourSetExerciseList setid={setid}/>
 
                 </div>
-                
-                {
-                    // (setid !== -1) &&
-                        <div className='set-management-container'>
-                            <div className='set-management-update-icon' onClick={onEditeSet}>
-                                <FaEdit/>
-                            </div>
-                            <div className='set-management-delete-icon' onClick={onDeleteSet}>
-                                <FcEmptyTrash/>
-                            </div>
-                        </div>
-                }
 
                 <a className='page-contents-btn-start' href="/training">
                     <img src={IconStart}/>
                     <label>START</label>
                 </a>
-                {/* <a className='page-contents-btn-start'>
-                    <img src={IconStart}/>
-                    <label>START</label>
-                </a> */}
-                {/* <button onClick={speedOnClicked}>Modal</button>
-                {isSpeedMadalOn && (
-                    <ModalTest speedOnClicked={speedOnClicked} />
-                )} */}
             </div>
         </div>
     )

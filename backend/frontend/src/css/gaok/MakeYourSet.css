@@ -58,18 +58,18 @@
 .page-title > div > label {
   font-family: NanumSquare_acEB;
   margin-left: 6.25rem;
-  /* margin-right: 1rem; */
-  color: #ffffff;
+  color: #fff;
   font-size: 2.8rem;
-  margin-top: 0.5rem;
+  margin-top: 1.7rem;
+  margin-right: 0.7rem;
 }
 
 .page-small-title {
-  font-family: NanumSquare_acL;
+  font-family: NanumSquare_ac;
   margin-left: 6.25rem;
   margin-right: 1rem;
   color: #ffffff;
-  font-size: 1.875rem;
+  font-size: 2rem;
 }
 
 .page-center-container {
@@ -93,25 +93,21 @@
 
 .page-contents-set-title {
   font-family: NanumSquare_acB;
-  font-size: 2rem;
-  color: #a9a1a1;
+  font-size: 2.3rem;
+  color: #666666;
   padding-bottom: 1rem;
+  display: flex;
+  align-content: center;
+}
+.page-contents-set-title label {
+  margin: 0.5rem 2rem 0 0;
 }
 
 .page-contents-set-tag {
-  font-family: NanumSquare_acL;
-  font-size: 1.5rem;
-  color: #a9a1a1;
+  font-family: NanumSquare_ac;
+  font-size: 1.7rem;
+  color: #6c6c6c;
   padding-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.page-contents-set-time {
-  font-family: NanumSquare_acL;
-  font-size: 1.2rem;
-  color: #a9a1a1;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .page-contents-exercise-list {
@@ -132,12 +128,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1.2rem;
+  border-radius: 30px;
   border: #a9a1a1 solid 0.1rem;
   margin-top: 0.5rem;
-  font-family: NanumSquare_acL;
-  font-size: 1.2rem;
-  color: #a9a1a1;
+  font-family: NanumSquare_ac;
+  font-size: 1.3rem;
   padding: 0.4rem 1.2rem;
 }
 
@@ -278,8 +273,7 @@
 .page-block-unselected > label {
   font-family: NanumSquare_acB;
   color: #ffffff;
-  font-size: 1.6rem;
-  margin-right: 1rem;
+  font-size: 1.7rem;
   margin-bottom: 0;
 }
 
@@ -391,27 +385,19 @@
   height: 4rem;
 }
 
-.set-management-update-icon {
-  margin: 0rem 0.5rem;
-  align-items: center;
-  cursor: pointer;
-  width: 2.5rem;
-  height: 100%;
-}
-
+.set-management-update-icon,
 .set-management-delete-icon {
-  margin: 0rem 0.5rem;
   align-items: center;
   cursor: pointer;
   width: 2.5rem;
-  height: 100%;
+  margin: 0 0.5rem;
 }
 
-.set-management-delete-icon> svg{
+.set-management-delete-icon > svg {
   width: 100%;
   height: 100%;
 }
-.set-management-update-icon> svg{
+.set-management-update-icon > svg {
   width: 100%;
   height: 100%;
 }

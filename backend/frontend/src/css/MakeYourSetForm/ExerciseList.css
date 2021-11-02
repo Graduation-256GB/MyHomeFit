@@ -13,6 +13,11 @@
   padding: 0 20px;
   margin: 25px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 11.3rem;
 }
 .exercise-img {
   width: 150px;
@@ -46,18 +51,25 @@
   box-shadow: 1px 2px 13px #dcdcdc;
 }
 .exercise-title {
-  font-size: 20px;
+  font-size: 1.4rem;
   text-align: center;
   margin-top: 10px;
   color: #585858;
 }
 
-.exercise-video-url{
+.exercise-video-url {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "NanumSquare_acB";
-  font-size: 1.1rem;
-  background-color: antiquewhite;
-  color: slategrey;
+  font-size: 1.2rem;
+  background-color: #faebd7;
+  color: #708090;
+  width: 100%;
+  padding: 0.3rem;
+  margin: 0.6rem 0;
+}
+.exercise-video-url:hover {
+  color: rgb(43, 43, 43);
+  text-decoration: none;
 }

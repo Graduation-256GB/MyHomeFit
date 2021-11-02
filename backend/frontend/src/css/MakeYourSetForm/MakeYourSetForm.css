@@ -16,13 +16,13 @@ html {
 }
 .content-form h2,
 .content-list h2 {
-  color: #a9a1a1;
+  color: #747474;
   font-size: 2.2rem;
   font-weight: 500;
   font-family: "NanumSquare_acB";
 }
 .content-form label {
-  color: #a9a1a1;
+  color: #666666;
   font-size: 2rem;
 }
 .content-form form {
@@ -55,7 +55,7 @@ html {
 .form-submit {
   border-style: none;
   font-size: 1.8rem;
-  color: #a9a1a1;
+  color: #666666;
   cursor: pointer;
   border-radius: 20px;
   padding: 0.4rem 1.2rem;

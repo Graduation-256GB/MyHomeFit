@@ -18,7 +18,7 @@
   align-items: center;
 }
 #title {
-  font-size: 4.3rem;
+  font-size: 3.5rem;
   color: #3a6bcf;
   margin: 1rem 0;
 }
@@ -33,7 +33,7 @@
 }
 #section-start {
   font-size: 1.5rem;
-  margin: 1rem 0;
+  margin: 2rem 0;
   width: 10rem;
   text-align: center;
   border-radius: 36px;
