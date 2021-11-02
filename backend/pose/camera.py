@@ -79,7 +79,7 @@ class PoseWebCam(object):
         results = self.pose.process(imgRGB)
         # print('time_count', math.floor(self.time_count))
         keypoints = []  # 1프레임의 keypoints를 담은 배열
-        if results.pose_landmarks:
+        if results.pose_landmarks and not self.isFinished:
             # About exerciselog
             if (self.isAdded == False):
                 for exercise in self.exercise_set:
@@ -106,7 +106,8 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
-            cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
+            ## cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
+            cv2.putText(img, str(math.floor(self.time_count)), (500, 80),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
             if self.frame_cnt % interval == 0:  # 1초에 3 프레임 씩
@@ -132,7 +133,7 @@ class PoseWebCam(object):
                 # cv2.putText(img, str(math.floor(self.time_count)), (1200, 80),
                 #             cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
                 print("time_count: ", math.floor(self.time_count))
-                if frame_order % self.frame_per_second == 0 and frame_order != 15:
+                if (frame_order % self.frame_per_second == 0 and frame_order != 15) or frame_order == 16:
                     self.time_count -= 1
 
                 for id, lm in enumerate(results.pose_landmarks.landmark):
@@ -215,33 +216,22 @@ class PoseWebCam(object):
     def detect_and_predict_pose(self):
 
         poses = {0: "스탠딩 사이드 크런치",
-                 1: "스탠딩 니업",
-                 2: "버피 테스트",
-                 3: "스텝 포워드 다이나믹 런지",
-                 4: "스텝 백워드 다이나믹 런지",
-                 5: "사이드 런지",
-                 6: "크로스 런지",
-                 7: "굿모닝"
-                 }
-
-        """
-        poses = {0: "STANDING SIDE CRUNCH",
-                1: "STANDING KNEE UP",
-                2: "BURPEE TEST",
-                3: "STEP FORWARD DYNAMIC LUNGE",
-                4: "STEP BACKWARD DYNAMIC LUNGE",
-                5: "SIDE LUNGE",
-                6: "CROSS LUNGE",
-                7: "GOODMORNING"
+                1: "스탠딩 니업",
+                2: "버피 테스트",
+                3: "스텝 포워드 다이나믹 런지",
+                4: "스텝 백워드 다이나믹 런지",
+                5: "사이드 런지",
+                6: "크로스 런지",
+                7: "굿모닝"
                 }
-        """
+
         # 확률이 높은 4개의 list를 label로 return
         label = []
         inputs = np.array(self.get_input(), dtype="float32")
         preds = poseEstimationModel.predict(inputs, batch_size=32)
         preds_listed = list(preds[0])
         preds_sorted = np.sort(preds, axis=1)
-        preds_sorted = list(preds_sorted[0][-5:])  # 확률이 가장 높은 4개
+        preds_sorted = list(preds_sorted[0][-3:])  # 확률이 가장 높은 x개
         for e in preds_sorted:
             label.append(poses[preds_listed.index(e)])
         #label = poses[np.argmax(preds)]

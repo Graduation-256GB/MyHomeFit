@@ -11,6 +11,8 @@ import {
 
 import MakeYourSet from "./pages/MakeYourSet";
 import MakeYourSetForm from "./pages/MakeYourSetForm";
+import MakeYourSetEdit from "./pages/MakeYourSetEdit";
+
 import Training from "./pages/Training";
 import FitNotes from "./pages/FitNotes";
 import Calender from "./pages/Calender";
@@ -39,6 +41,8 @@ const App = () => {
         {/* <Route path="/new/makeyourset" component={new_makeYourSet}/> */}
         {/* <Route path="/maketest" component={MakeTest}/> */}
         <Route path="/todo" component={Todo}/>
+
+        <Route path="/makeyoursetedit/:setid" component={MakeYourSetEdit} />
       </div>
       </RecoilRoot>
   );

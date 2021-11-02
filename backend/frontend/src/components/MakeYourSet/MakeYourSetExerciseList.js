@@ -4,26 +4,31 @@ import '../../css/gaok/MakeYourSet.css'
 
 function MakeYourSetExerciseList ({setid}) {
 
-    const SET_ID=setid
-    console.log("props 전달 확인")
-    console.log(SET_ID)
+    //const SET_ID=setid
+    //console.log("props 전달 확인")
+    //console.log(SET_ID)
 
     const [exercise, setExercise] = useState({ data: '' });
     const Token = localStorage.getItem('token')
     useEffect(() => {
-        const fetchData = async () => {
-            const exerciselist = await axios(
-                `http://127.0.0.1:8000/api/exerciseset/${setid}/`, {
-                    headers: {
-                        Authorization: `Token ${Token}`
-                    }
-            });
-            
-            setExercise({ data: exerciselist.data });
-        };
-
-        fetchData();
-     }, [setid]);
+        if (setid !== -1) {
+            const fetchData = async () => {
+                const exerciselist = await axios(
+                    `http://127.0.0.1:8000/api/exerciseset/${setid}/`, {
+                        headers: {
+                            Authorization: `Token ${Token}`
+                        }
+                });
+                
+                setExercise({ data: exerciselist.data });
+            };
+    
+            fetchData();
+        }
+        else {
+            setExercise([])
+        }
+    }, [setid]);
 
     console.log('render2');
     const exerciseArr=[]

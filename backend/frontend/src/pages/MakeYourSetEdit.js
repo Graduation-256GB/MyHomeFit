@@ -5,12 +5,10 @@ import { FiChevronRight } from 'react-icons/fi';
 import { FcOpenedFolder } from 'react-icons/fc';
 import SetListBlock from '../components/MakeYourSetForm/SetListBlock';
 import ExerciseList from '../components/MakeYourSetForm/ExerciseList';
-import SetForm from '../components/MakeYourSetForm/SetForm';
+import SetEdit from '../components/MakeYourSetEdit/SetEdit';
 import jQuery from 'jquery'
 import Navbar from '../components/Navbar';
-
-
-import { useAsync } from "react-async"
+import axios from 'axios';
 
 function getCookie(name) {
         var cookieValue = null;
@@ -27,30 +25,84 @@ function getCookie(name) {
         return cookieValue;
     }
 
-const loadExerciseList = async () => {
-    const Token = localStorage.getItem('token')
-    const res = await fetch('http://127.0.0.1:8000/api/exercise/', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Token ${Token}`
-        }
-    })
-    if (!res.ok) throw new Error(res)
-    return res.json()
-}
-
-const MakeYourSetForm = () => {
+const MakeYourSetEdit = ({match}) => {
     const csrftoken = getCookie('csrftoken');
-    const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseList })
     const exerciseArr = [];
-    const [newNum, setNewNum] = useState('0');
+    const [exerciseList, SetexerciseList] = useState({ data: null });
     const userImg=localStorage.getItem('userImg')
     const userName=localStorage.getItem('userName')
-
-    const [formArr, setFormarr] = useState([
-    ]);
+    const [formArr, setFormarr] = useState([]);
     const ref = useRef();
     const nextId = useRef(0);
+
+    const setid = match.params.setid
+    const exercisesetArr = [];
+    const [exercisesetList, SetexercisesetList] = useState({ data: null });
+    const [userSetTitle, setuserSetTitle] = useState({ title: null })
+    const [Title, setTitle] = useState('')
+
+    const Token = localStorage.getItem('token')
+    useEffect(() => {
+        const fetchData = async () => {
+            const exerciselist = await axios.get(
+                'http://127.0.0.1:8000/api/exercise/', {
+                    headers: {
+                        Authorization: `Token ${Token}`
+                    }
+            });
+            const exercisesetlist = await axios.get(
+                `http://127.0.0.1:8000/api/exerciseset/${setid}/`, {
+                    headers: {
+                        Authorization: `Token ${Token}`
+                    }
+            });
+            SetexerciseList({ data: exerciselist.data });
+            SetexercisesetList({ data: exercisesetlist.data });
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        if (exercisesetList.data) {
+            Object.keys(exercisesetList.data).forEach(function (key) {
+                exercisesetArr.push(exercisesetList.data[key]);
+            });
+            
+            console.log("exercisesetArr:", exercisesetArr);
+        }
+    }, [exercisesetList.data]);
+    
+    useEffect(() => {
+        if (0 < exercisesetArr.length) {
+            exercisesetArr.map(item => {
+                setFormarr(Formarr => [...Formarr, item]);
+            })
+            console.log("formArr: ", formArr)
+        }
+    }, [exercisesetArr]);
+
+    useEffect(() => {
+        if (0 < formArr.length) {
+            formArr.map(item => {
+                setuserSetTitle({ title: item.set_title })
+            })
+            console.log("userSetTitle.title: ", userSetTitle.title)
+        }
+    }, [formArr]);
+
+    useEffect(() => {
+        if (userSetTitle) {
+            setTitle(userSetTitle.title)
+            console.log("Title: ", Title)
+        }
+    }, [userSetTitle]);
+
+    if (exerciseList.data) {
+        Object.keys(exerciseList.data).forEach(function (key) {
+            exerciseArr.push(exerciseList.data[key]);
+        });
+        console.log("exerciseArr:", exerciseArr);
+    }
 
     const scroll = (scrollOffset) => {
         ref.current.scrollLeft += scrollOffset;
@@ -58,7 +110,7 @@ const MakeYourSetForm = () => {
     const formSubmit = e => {
         e.preventDefault();
 
-        fetch('http://127.0.0.1:8000/api/exercise/create/', {
+        fetch(`http://127.0.0.1:8000/api/exercise/${setid}/update/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,11 +120,7 @@ const MakeYourSetForm = () => {
         })
         .then(res => res.json())
         .then(data => {
-            if (data.key) {
-                // localStorage.clear();
-                // localStorage.setItem('token', data.key);
-            } else {
-                // setNewNum(data.set_id);
+            if (!data.key) {
                 window.location.replace('http://127.0.0.1:8000/makeyourset');
             }
         });
@@ -85,44 +133,38 @@ const MakeYourSetForm = () => {
 
         console.log(exerciseId)
         if (exerciseId != null) {
-            const exercise = {
-                id:nextId.current,
-                setId:newNum,
-                exerciseId: exerciseId,
+            const exerciseset = {
+                id: nextId.current,
+                exercise: exerciseId,
                 name: exerciseName,
                 img: exerciseImg,
-                count: 10,
+                set_count: 10,
                 remove:exerciseRemove
             }
-            setFormarr(formArr.concat(exercise));
+            setFormarr(formArr.concat(exerciseset));
         }
         nextId.current += 1;
-        console.log(formArr)
+        console.log("formArr: ",formArr)
     }
     const removeList = (id) => {
         setFormarr(formArr.filter(exercise => exercise.id !== id));
     }
-    const clickCount = (id,count) => {
-        console.log(count)
-        if (count === "up") {
+    const clickCount = (id,set_count) => {
+        console.log(set_count)
+        if (set_count === "up") {
             setFormarr(formArr.map(element =>
-                element.id === id ? { ...element, count: parseInt(element.count) + 1 } : element))
+                element.id === id ? { ...element, set_count: parseInt(element.set_count) + 1 } : element))
         }else{
             setFormarr(formArr.map(element =>
-                element.id === id ? { ...element, count: parseInt(element.count) - 1 } : element))
+                element.id === id ? { ...element, set_count: parseInt(element.set_count) - 1 } : element))
         }
     }
     const changeCount = (id,countValue) => {
         console.log(countValue)
         setFormarr(formArr.map(element =>
-        element.id === id ? { ...element, count: element.count =countValue } : element))
+        element.id === id ? { ...element, set_count: element.set_count =countValue } : element))
     }
-    if (data) {
-        
-        Object.keys(data).forEach(function (key) {
-            exerciseArr.push(data[key]);
-        });
-    }
+
     return (
         <div className="content">
             <div className='page-wrapper'>
@@ -136,16 +178,16 @@ const MakeYourSetForm = () => {
                         </div>
                     </div>
                     <div className='page-small-title'>
-                        <label>Make Your Fitness Set.</label>
+                        <label>Edit Your Fitness Set.</label>
                     </div> 
             </div>
             <div className="form-list-wrapper">
                 <div className="content-form">
-                    <h2>First Step : Make Your Fitness Set.</h2>
-                    <SetForm setNewNum={setNewNum } csrftoken={csrftoken} />
+                    <h2>If You Want, Edit Your Fitness Set.</h2>
+                    <SetEdit setid={ setid } Title={ Title } csrftoken={ csrftoken } />
                 </div>
                 <div className="content-list" id="list">
-                    <h2>Second Step : Choose Exercises.</h2>
+                    <h2>If You Want, Edit Your Exercises.</h2>
                     <div className="list-wrapper">
                         <div className="left-arrow" onClick={()=>scroll(-80)}>
                         <FiChevronLeft/>
@@ -154,7 +196,7 @@ const MakeYourSetForm = () => {
                             {
                                 formArr.map(item => (
                                     <SetListBlock picture={item.img} name={item.name}
-                                        count={item.count} removeList={removeList} id={item.id}
+                                        count={item.set_count} removeList={removeList} id={item.id}
                                         clickCount={clickCount} changeCount={ changeCount}/>
                                 ))
                             }
@@ -164,7 +206,7 @@ const MakeYourSetForm = () => {
                         </div>
                     </div>
                     <ExerciseList exerciseArr={ exerciseArr } addList={addList} />
-                    <button className="form-submit" onClick={ formSubmit}>Make Set</button>
+                    <button className="form-submit" onClick={ formSubmit}>Finish Edit</button>
                 </div>
             </div>
         </div>
@@ -172,4 +214,4 @@ const MakeYourSetForm = () => {
 
 };
 
-export default MakeYourSetForm;
+export default MakeYourSetEdit;

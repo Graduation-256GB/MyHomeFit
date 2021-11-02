@@ -2,7 +2,7 @@ from django.utils.timezone import localtime
 from numpy.lib.function_base import trim_zeros
 from pose.camera import PoseWebCam
 from django.http.response import HttpResponse, JsonResponse, StreamingHttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from rest_framework import viewsets
 from rest_framework import generics
 from .serializers import ExerciseSerializer, SetSerializer, ExerciseSetSerializer, UserSerializer, ExerciseInSetSerializer, ExerciseLogSerializer, TodoSerializer
@@ -79,7 +79,6 @@ class ListExerciseSet(APIView):
             ExerciseSet.objects.filter(set=set).order_by('set_num'), many=True)
         return Response(serializer.data)
 
-
 class CurrentUserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
@@ -118,6 +117,20 @@ def set_create(request):
             title=set_title, type=set_type, date=set_date, user=request.user)
     return JsonResponse({'set_id': set.pk})
 
+def set_delete(request, set_id):
+    Set.objects.get(pk=set_id).delete()
+    return redirect('/makeyourset/')
+
+def set_update(request, set_id):
+    if request.method == 'POST':
+        req = json.loads(request.body)
+        set = Set.objects.get(pk=set_id)
+        set.title = req['title']
+        set.type = req['type']
+        set.date = datetime.now()
+        set.user=request.user
+        set.save()
+    return JsonResponse({'set_id': set_id})
 
 def exercise_create(request):
     if request.method == 'POST':
@@ -131,6 +144,23 @@ def exercise_create(request):
             exercise_set = ExerciseSet.objects.create(
                 exercise=exercise, set=set, set_num=i+1, set_count=count)
 
+    return JsonResponse({'exercise_set_id': exercise_set.id})
+
+def set_exercise_update(request, set_id):
+    if request.method == 'POST':
+        user_set = Set.objects.get(pk=set_id)
+        req = json.loads(request.body)
+        print("req: ", req)
+        ExerciseSet.objects.filter(set=user_set).delete()
+        if 0 < len(req):
+            for i in range(len(req)):
+                set_id = user_set.id
+                exercise_id = req[i]['exercise']
+                count = req[i]['set_count']
+                exercise = Exercise.objects.get(id=exercise_id)
+                set = user_set
+                exercise_set = ExerciseSet.objects.create(
+                    exercise=exercise, set=set, set_num=i+1, set_count=count)
     return JsonResponse({'exercise_set_id': exercise_set.id})
 
 
@@ -246,3 +276,4 @@ class ListTodayAPIView(APIView):
 
         print("[", year, "/", month, "/", day, "]", "객체들:", today_log_list)
         return Response(serializer.data)
+

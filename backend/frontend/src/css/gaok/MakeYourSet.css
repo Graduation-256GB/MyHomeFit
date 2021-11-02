@@ -378,3 +378,36 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.set-management-container {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  height: 4rem;
+}
+
+.set-management-update-icon {
+  margin: 0rem 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  width: 2.5rem;
+  height: 100%;
+}
+
+.set-management-delete-icon {
+  margin: 0rem 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  width: 2.5rem;
+  height: 100%;
+}
+
+.set-management-delete-icon> svg{
+  width: 100%;
+  height: 100%;
+}
+.set-management-update-icon> svg{
+  width: 100%;
+  height: 100%;
+}
