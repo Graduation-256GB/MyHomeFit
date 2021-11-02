@@ -1,8 +1,6 @@
 .list-container {
   display: flex;
   flex-direction: column;
-  /* height: 350px; */
-  width: 30%;
 }
 .form-container {
   /* padding: 0 20px; */
@@ -13,12 +11,12 @@
 .form-group,
 .form-input-container {
   display: flex;
-  width: 29rem;
+  width: 100%;
 }
 .tasks-container {
   display: flex;
   flex-direction: column;
-  width: 29rem;
+  width: 100%;
   height: 17rem;
   background: #fff;
   overflow: auto;
@@ -60,7 +58,8 @@
 }
 .form-control {
   height: 50px;
-  border-radius: 1px;
+  width: 70%;
+  border: none;
   font-family: NanumSquare_acB;
   font-size: 1.2rem;
 }
@@ -73,7 +72,8 @@
 
 .todo-text {
   font-family: NanumSquare_acB;
-  font-size: 1.2rem;
+  font-size: 1.45rem;
+  margin: 0.7rem;
 }
 
 /* .edit-btn{

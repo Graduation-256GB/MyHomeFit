@@ -106,7 +106,7 @@ class PoseWebCam(object):
 
             self.frame_cnt += 1  # frame_cnt 번째 프레임 - 관절값이 인식된 프레임들
             interval = int(self.fps) // self.frame_per_second  # 프레임 간격(0.x초)
-            ## cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
+            # cv2.putText(img, str(math.floor(self.time_count)), (1111, 80),
             cv2.putText(img, str(math.floor(self.time_count)), (500, 80),
                         cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 3)
 
@@ -181,10 +181,12 @@ class PoseWebCam(object):
 
                         if self.exercise_count % self.total_count == 0:
                             # About exerciselog
-                            current_log = ExerciseLog.objects.get(id=self.logs[self.n])
+                            current_log = ExerciseLog.objects.get(
+                                id=self.logs[self.n])
                             current_log.time_finished = datetime.now()
                             current_log.save()
-                            print("time_finished 생성: ", current_log.time_finished)
+                            print("time_finished 생성: ",
+                                  current_log.time_finished)
 
                             self.exercise_count = 0
                             self.n += 1
@@ -197,6 +199,8 @@ class PoseWebCam(object):
 
                         if (self.n < len(self.exercise_set)):
                             self.exercise_count += 1
+                        else:
+                            return
 
                     frame_flip = cv2.flip(img, 1)
                     ret, jpeg = cv2.imencode('.jpg', frame_flip)
@@ -216,14 +220,14 @@ class PoseWebCam(object):
     def detect_and_predict_pose(self):
 
         poses = {0: "스탠딩 사이드 크런치",
-                1: "스탠딩 니업",
-                2: "버피 테스트",
-                3: "스텝 포워드 다이나믹 런지",
-                4: "스텝 백워드 다이나믹 런지",
-                5: "사이드 런지",
-                6: "크로스 런지",
-                7: "굿모닝"
-                }
+                 1: "스탠딩 니업",
+                 2: "버피 테스트",
+                 3: "스텝 포워드 다이나믹 런지",
+                 4: "스텝 백워드 다이나믹 런지",
+                 5: "사이드 런지",
+                 6: "크로스 런지",
+                 7: "굿모닝"
+                 }
 
         # 확률이 높은 4개의 list를 label로 return
         label = []

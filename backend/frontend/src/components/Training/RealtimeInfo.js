@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
+import countSound from '../../audio/countSound';
+// import one from '../../audio/1.mp3';
 
-const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList,ImageList, isRunning, setIsRunning } ) => {
+const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList, ImageList, setAllCount,allCount, isRunning, setIsRunning}) => {
+    // const one = countSound(one, 1); 
     
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)
@@ -66,12 +69,14 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
                 setDisplaySuccess('block')
                 setDisplayFail('none')
                 console.log('success')
+                setAllCount(allCount+1)
             }
             else if( FailList[Index] !== FailCount ) {
                 setFailCount(FailList[Index])
                 setDisplayFail('block')
                 setDisplaySuccess('none')
                 console.log('fail')
+                setAllCount(allCount+1)
             }
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
@@ -93,18 +98,18 @@ const RealtimeInfo = ( {  Index, setIndex, FailList, setFailList, SuccessList, s
 
     return (
         <div className="training-note">
-            <div className="note-set">
+            {/* <div className="note-set">
                 <h2>{Exercises[0].set_title}</h2>
                 <span>{Exercises[0].set_type}</span>        
-            </div>
+            </div> */}
             <div className="current-exercise">
                 <img src={ImageList[Index]} />
-                <h2>{NameList[Index]}</h2>
+                <span className="current-name">{NameList[Index]}</span>
                 <span className="current-count">{SuccessList[Index] + FailList[Index]} / {CountList[Index]}</span>
-                <div className="current-score">
+                {/* <div className="current-score">
                     <span className="current-success">Success: { SuccessList[Index] }</span>
                     <span className="current-fail">Fail: { FailList[Index] }</span>
-                </div>
+                </div> */}
             </div>
             {/* <div className="realtime-info-success" style={{backgroundColor: ColorSuccess}}>
                 Success: { SuccessList[Index] } / { CountList[Index] }회

@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import "../../css/Training/Training.css"
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { Content } from 'antd/lib/layout/layout';
+import countSound from '../../audio/countSound';
+import READY from '../../audio/ready.mp3';
+import START from '../../audio/start.mp3';
 
 const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCountList, exercises, csrftoken, setImageList }) => {
     const [countdown, setCountDown]=useState(false)
     const startTraining = e => {
+        
         if (e.target.name === 'fast') {
             setSpeedNum(5)
         }
@@ -17,6 +21,8 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
             setSpeedNum(3)
         }
         setCountDown(true)
+        ready.play()
+        start.play()
 
         fetch('http://127.0.0.1:8000/api/log/create/', {
             method: 'POST',
@@ -50,6 +56,9 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
         );
       };
 
+    const ready = countSound(READY, 1); 
+    const start = countSound(START, 1)
+
     return (
     <div className="speedModal">
          
@@ -69,7 +78,7 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
                 {
                     countdown===true&&
                     <div className="count-circle-content">
-                        <label> 3 발자국 뒤로 가서 전신이 보이게 서주세요. </label>
+                        <label> 세 발자국 뒤로 가서 전신이 보이게 서주세요. </label>
                     <CountdownCircleTimer
                         isPlaying
                         size="350"

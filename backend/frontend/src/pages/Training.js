@@ -19,6 +19,10 @@ import { MdReplay } from 'react-icons/md'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import ModalTest from '../components/MakeYourSet/ModalTest'
+import useSound from '../audio/useSound'
+import BGM from '../audio/training_audio.mp3'
+
+
 
 {/* 추후 makeyourset 에서 값받아오도록 수정 */}
 
@@ -51,6 +55,8 @@ const loadExerciseSet = async ({ set_id }) => {
 
 const Training = () => {
 
+    useSound(BGM, 0.5, 2000)
+
     const SET_ID =  window.localStorage.getItem("setid")
 
     const { data, error, isLoading } = useAsync({ promiseFn: loadExerciseSet, set_id: SET_ID })
@@ -58,13 +64,13 @@ const Training = () => {
     const poseURL = `http://127.0.0.1:8000/api/pose_feed/?set_id=${SET_ID}&speed_num=${speed_num}`
 
     const csrftoken = getCookie('csrftoken');
-
     const Exercises = [];
     const [page, setPage] = useState(1)
     const [IsStarted, setIsStarted] = useState(false)
     const [NameList, setNameList] = useState([])
     const [CountList, setCountList] = useState([])
     const [ImageList, setImageList] = useState([])
+    const [allCount, setAllCount] = useState(0)
     const [Title, setTitle] = useState('')
     const [Type, setType] = useState('')
     const userImg=localStorage.getItem('userImg')
@@ -86,6 +92,7 @@ const Training = () => {
         setCountSum (CountList.reduce((a,v) =>  a = a + v , 0 ))
         console.log("success", successSum)
         console.log("count", countSum)
+
     }, [SuccessList, CountList])
     const percentage = 66;
 
@@ -105,6 +112,7 @@ const Training = () => {
 
     return (
         // <RecoilRoot>
+        
             <div className="menu2-container">
                 <Navbar/>
             {
@@ -116,6 +124,7 @@ const Training = () => {
                 {/* <ModalTest speedOnClicked={speedOnClicked}/>} */}
             {
                 page===2 &&
+                
             <div className="videos">
                 {/* <img src={LeftBtn} className="left-button"/>
                 <NextPose exercises = { Exercises }/>
@@ -139,19 +148,15 @@ const Training = () => {
                         </div>
                     </div>
                 }
-                    <RealtimeInfo  Index={Index} setIndex={setIndex} FailList={FailList} setFailList={setFailList} SuccessList={SuccessList} 
-                            setSuccessList={setSuccessList} page={page} setPage={setPage} Exercises={Exercises} setId = { SET_ID } 
-                            IsStarted = { IsStarted } NameList={NameList} CountList={CountList} ImageList={ImageList}
-                            isRunning={isRunning} setIsRunning={setIsRunning}/>
+                        <RealtimeInfo Index={Index} setIndex={setIndex} FailList={FailList}
+                            setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList}
+                            page={page} setPage={setPage} Exercises={Exercises} setId={SET_ID} IsStarted={IsStarted}
+                            NameList={NameList} CountList={CountList} ImageList={ImageList} setAllCount={setAllCount} allCount={allCount} isRunning={isRunning} setIsRunning={setIsRunning}/>
                 </div>
                 <div className="realtime-video">
                         <div className="user-video">
-                        <ProgressBar variant="info" now={20} className="w-100 mb-2"/>
-                        <img src={ poseURL }/>
-                            {/* <img src=""></img> */}
-                            {/* <div className="count-icon">
-                            <FaCircleNotch/>
-                            </div> */}
+                         <ProgressBar variant="info" now={allCount/countSum*100} className="w-100 mb-2"/>
+                        <img src={ poseURL }></img>
                     </div>
                 </div>
             </div>

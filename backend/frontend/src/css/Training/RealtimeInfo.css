@@ -1,11 +1,11 @@
 .realtime-info-success {
   font-family: "Pixel_Sans_Serif";
   position: absolute;
-  bottom: 78%;
+  bottom: 60%;
   left: 41%;
   z-index: 3;
   color: #ffdf41;
-  font-size: 2.5rem;
+  font-size: 4.3rem;
 }
 
 .realtime-info-fail {
@@ -15,7 +15,7 @@
   left: 41%;
   z-index: 3;
   color: #fc3e13;
-  font-size: 2.5rem;
+  font-size: 4.3rem;
 }
 
 .realtime-pose {
@@ -30,18 +30,4 @@
   font-weight: bold;
   font-family: NanumSquare_acEB;
   text-shadow: 6px 2px 2px white;
-}
-.current-score {
-  display: flex;
-  flex-direction: column;
-}
-.current-success {
-  font-family: "Pixel_Sans_Serif";
-  color: #ffd400;
-  font-size: 1.5rem;
-}
-.current-fail {
-  font-family: "Pixel_Sans_Serif";
-  color: #fc3e13;
-  font-size: 1.5rem;
 }

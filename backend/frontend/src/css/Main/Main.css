@@ -1,0 +1,101 @@
+img {
+  width: 100%;
+  height: 100%;
+}
+.custom-shape-divider-bottom-1635440065 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1635440065 svg {
+  position: relative;
+  display: block;
+  width: calc(140% + 1.3px);
+  height: 86px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1635440065 .shape-fill {
+  fill: #ffffff;
+}
+#intro-page {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    170deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(39, 207, 179, 1) 0%,
+    rgba(0, 188, 202, 1) 84%,
+    rgba(21, 161, 241, 1) 100%
+  );
+  position: relative;
+  height: 95vh;
+}
+#intro-content {
+  display: flex;
+  justify-content: center;
+  color: white;
+  height: 70%;
+  align-items: center;
+}
+#intro-text {
+  display: flex;
+  flex-direction: column;
+  font-family: "NanumSquare_acEB";
+  width: 32rem;
+  word-break: break-word;
+  margin: 0 4rem;
+}
+#intro-text a {
+  color: white;
+  border-radius: 30px;
+  text-align: center;
+  width: 14rem;
+  font-size: 1.6rem;
+  padding: 0.6rem 0;
+  margin-top: 3rem;
+  background: rgb(184, 47, 169);
+  background: linear-gradient(
+    147deg,
+    rgba(184, 47, 169, 1) 0%,
+    rgba(139, 67, 191, 1) 100%
+  );
+}
+#intro-text a:hover {
+  text-decoration: none;
+  text-shadow: 1px 1px 10px #b0b0b0;
+  background: rgb(184, 47, 169);
+  background: linear-gradient(
+    233deg,
+    rgba(184, 47, 169, 1) 0%,
+    rgba(139, 67, 191, 1) 100%
+  );
+}
+#intro-title {
+  font-size: 5rem;
+}
+#intro-message {
+  font-size: 1.5rem;
+}
+#intro-img {
+  width: 54rem;
+  animation: motion 1s /* 속도 */ linear 0s infinite alternate; /* 무한 반복 */
+}
+@keyframes motion {
+  0% {
+    margin-top: 0px;
+  } /* 처음 위치 */
+  100% {
+    margin-top: 20px;
+  } /* 마지막 위치 */
+}
+#menu-intro {
+  display: flex;
+  justify-content: center;
+  height: 40vh;
+  align-items: center;
+}

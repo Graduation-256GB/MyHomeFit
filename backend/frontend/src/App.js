@@ -16,6 +16,7 @@ import MakeYourSetEdit from "./pages/MakeYourSetEdit";
 import Training from "./pages/Training";
 import FitNotes from "./pages/FitNotes";
 import Calender from "./pages/Calender";
+import Main from "./pages/Main";
 import './App.css'
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/training" component={Training} />
         <Route path="/fitnotes" component={FitNotes} />
         <Route path="/calender" component={Calender} />
+        <Route path="/main" component={Main} />
 
         <Route path="/signup" exact={true} component={Signup} />
         <Route path="/" exact={true} component={Signup} />

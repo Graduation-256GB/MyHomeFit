@@ -1,9 +1,15 @@
 .menu3-container {
   height: 800px;
   width: 100%;
-  background-color: #27cfb3;
+  /* background-color: #27cfb3; */
   border-bottom-left-radius: 170px;
   display: block;
+  background: rgb(0, 188, 202);
+  background: linear-gradient(
+    315deg,
+    rgba(0, 188, 202, 1) 0%,
+    rgba(39, 207, 179, 1) 100%
+  );
 }
 .menu3-title {
   display: flex;
