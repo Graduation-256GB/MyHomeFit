@@ -25,7 +25,16 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
     const soundNine = countSound(nine, 1); 
     const soundTen = countSound(ten, 1); 
 
-    const [flag, setFlag] = useState(1);
+    const [flag1, setFlag1] = useState(true);
+    const [flag2, setFlag2] = useState(true);
+    const [flag3, setFlag3] = useState(true);
+    const [flag4, setFlag4] = useState(true);
+    const [flag5, setFlag5] = useState(true);
+    const [flag6, setFlag6] = useState(true);
+    const [flag7, setFlag7] = useState(true);
+    const [flag8, setFlag8] = useState(true);
+    const [flag9, setFlag9] = useState(true);
+    const [flag10, setFlag10] = useState(true);
     
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)
@@ -98,24 +107,37 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
-                setFlag(1)
+                setFlag1(true)
+                setFlag2(true)
+                setFlag3(true)
                 setSuccessCount(0)
                 setFailCount(0)
             }
         }
     }, [SuccessList, FailList])
 
-    const [voice, isVoice] = useState(true)
     useEffect(()=> {
 
-        if ((SuccessList[Index]+FailList[Index]) == 1){
-            setFlag(1)
-            if (flag == 1){
+        if (flag1==true){
+            if ( (SuccessList[Index]+FailList[Index]) == 1) {
                 soundOne.play()
-                setFlag(-1)
+                setFlag1(false)
             } 
         }
-        
+        if (flag2==true){
+            if ( (SuccessList[Index]+FailList[Index]) == 2) {
+                soundTwo.play()
+                setFlag2(false)
+            } 
+        }
+
+        if (flag3==true){
+            if ( (SuccessList[Index]+FailList[Index]) == 3) {
+                soundThree.play()
+                setFlag3(false)
+            } 
+        }
+
 
         if (Exercises.length < Index + 1){
             setPage(3)
