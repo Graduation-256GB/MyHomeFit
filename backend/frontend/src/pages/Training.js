@@ -141,7 +141,8 @@ const Training = () => {
                         <RealtimeInfo Index={Index} setIndex={setIndex} FailList={FailList}
                             setFailList={setFailList} SuccessList={SuccessList} setSuccessList={setSuccessList}
                             page={page} setPage={setPage} Exercises={Exercises} setId={SET_ID} IsStarted={IsStarted}
-                            NameList={NameList} CountList={CountList} ImageList={ImageList} setAllCount={setAllCount} allCount={allCount} isRunning={isRunning} setIsRunning={setIsRunning}/>
+                            NameList={NameList} CountList={CountList} ImageList={ImageList} setAllCount={setAllCount} 
+                            allCount={allCount} isRunning={isRunning} setIsRunning={setIsRunning}/>
                 </div>
                 <div className="realtime-video">
                         <div className="user-video">

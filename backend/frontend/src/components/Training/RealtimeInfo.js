@@ -2,10 +2,30 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Training/RealtimeInfo.css';
 import { useInterval } from 'usehooks-ts'
 import countSound from '../../audio/countSound';
-// import one from '../../audio/1.mp3';
+import one from '../../audio/1.mp3';
+import two from '../../audio/2.mp3';
+import three from '../../audio/3.mp3';
+import four from '../../audio/4.mp3';
+import five from '../../audio/5.mp3';
+import six from '../../audio/6.mp3';
+import seven from '../../audio/7.mp3';
+import eight from '../../audio/8.mp3';
+import nine from '../../audio/9.mp3';
+import ten from '../../audio/10.mp3';
 
 const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, setSuccessList, page, setPage, Exercises, setId, IsStarted, NameList, CountList, ImageList, setAllCount,allCount, isRunning, setIsRunning}) => {
-    // const one = countSound(one, 1); 
+    const soundOne = countSound(one, 1); 
+    const soundTwo = countSound(two, 1); 
+    const soundThree = countSound(three, 1); 
+    const soundFour = countSound(four, 1); 
+    const soundFive = countSound(five, 1); 
+    const soundSix = countSound(six, 1); 
+    const soundSeven = countSound(seven, 1); 
+    const soundEight = countSound(eight, 1); 
+    const soundNine = countSound(nine, 1); 
+    const soundTen = countSound(ten, 1); 
+
+    const [flag, setFlag] = useState(1);
     
     const [FailCount, setFailCount] = useState(0)
     const [SuccessCount, setSuccessCount] = useState(0)
@@ -78,13 +98,25 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
 
             if (SuccessList[Index] + FailList[Index] === CountList[Index]) {
                 setIndex(Index => Index + 1)
+                setFlag(1)
                 setSuccessCount(0)
                 setFailCount(0)
             }
         }
     }, [SuccessList, FailList])
 
+    const [voice, isVoice] = useState(true)
     useEffect(()=> {
+
+        if ((SuccessList[Index]+FailList[Index]) == 1){
+            setFlag(1)
+            if (flag == 1){
+                soundOne.play()
+                setFlag(-1)
+            } 
+        }
+        
+
         if (Exercises.length < Index + 1){
             setPage(3)
         }
