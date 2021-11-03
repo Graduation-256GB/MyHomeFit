@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../css/gaok/MakeYourSet.css'
+import '../../css/MakeYourSet/MakeYourSet.css'
 
 function MakeYourSetExerciseList ({setid}) {
-
-    //const SET_ID=setid
-    //console.log("props 전달 확인")
-    //console.log(SET_ID)
 
     const [exercise, setExercise] = useState({ data: '' });
     const Token = localStorage.getItem('token')
@@ -30,13 +26,10 @@ function MakeYourSetExerciseList ({setid}) {
         }
     }, [setid]);
 
-    console.log('render2');
     const exerciseArr=[]
     if (exercise.data) {
         Object.keys(exercise.data).forEach(function (key) {
             exerciseArr.push(exercise.data[key])
-            // console.log("setlist", resp.data);
-            console.log("exerciseset", exercise.data)
         });
     }  
     

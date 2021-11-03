@@ -35,7 +35,7 @@ const Login = () => {
         if (data.key) {
           localStorage.clear();
           localStorage.setItem('token', data.key);
-          window.location.replace('http://127.0.0.1:8000/makeyourset');
+          window.location.replace('/makeyourset');
         } else {
           setEmail('');
           setPassword('');

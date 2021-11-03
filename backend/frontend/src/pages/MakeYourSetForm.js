@@ -83,7 +83,6 @@ const MakeYourSetForm = () => {
         const exerciseImg = e.target.dataset.img
         const exerciseRemove = e.target.dataset.remove
 
-        console.log(exerciseId)
         if (exerciseId != null) {
             const exercise = {
                 id:nextId.current,
@@ -97,13 +96,11 @@ const MakeYourSetForm = () => {
             setFormarr(formArr.concat(exercise));
         }
         nextId.current += 1;
-        console.log(formArr)
     }
     const removeList = (id) => {
         setFormarr(formArr.filter(exercise => exercise.id !== id));
     }
     const clickCount = (id,count) => {
-        console.log(count)
         if (count === "up") {
             setFormarr(formArr.map(element =>
                 element.id === id ? { ...element, count: parseInt(element.count) + 1 } : element))
@@ -113,7 +110,6 @@ const MakeYourSetForm = () => {
         }
     }
     const changeCount = (id,countValue) => {
-        console.log(countValue)
         setFormarr(formArr.map(element =>
         element.id === id ? { ...element, count: element.count =countValue } : element))
     }
@@ -141,11 +137,11 @@ const MakeYourSetForm = () => {
             </div>
             <div className="form-list-wrapper">
                 <div className="content-form">
-                    <h2>First Step : Make Your Fitness Set.</h2>
+                    <h2>1. 세트 이름과 카테고리를 선택해주세요.</h2>
                     <SetForm setNewNum={setNewNum } csrftoken={csrftoken} />
                 </div>
                 <div className="content-list" id="list">
-                    <h2>Second Step : Choose Exercises.</h2>
+                    <h2>2. 운동을 선택해주세요.</h2>
                     <div className="list-wrapper">
                         <div className="left-arrow" onClick={()=>scroll(-80)}>
                         <FiChevronLeft/>
@@ -164,7 +160,7 @@ const MakeYourSetForm = () => {
                         </div>
                     </div>
                     <ExerciseList exerciseArr={ exerciseArr } addList={addList} />
-                    <button className="form-submit" onClick={ formSubmit}>Make Set</button>
+                    <button className="form-submit" onClick={ formSubmit}>세트 생성</button>
                 </div>
             </div>
         </div>

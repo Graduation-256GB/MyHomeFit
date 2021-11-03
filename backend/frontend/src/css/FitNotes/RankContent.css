@@ -12,7 +12,7 @@
 }
 #set-rank-content > #name {
   border-radius: 20px;
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-family: NanumSquare_acER;
   color: #444;
   font-weight: 500;
@@ -29,7 +29,7 @@
 
 .recommend-set-container > .name {
   border-radius: 20px;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-family: NanumSquare_acER;
   color: #444;
   font-weight: 500;

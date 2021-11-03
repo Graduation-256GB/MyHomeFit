@@ -24,6 +24,8 @@
   color: #ffffff;
   font-size: 45px;
   font-family: NanumSquare_acEB;
+  margin-bottom: 1.7rem;
+  margin-right: 0.7rem;
 }
 
 .menu3-title > div {
@@ -47,7 +49,7 @@
 
 .menu3-small-title {
   margin-left: 100px;
-  font-size: 30px;
+  font-size: 2rem;
 }
 
 .menu3-small-title > label {

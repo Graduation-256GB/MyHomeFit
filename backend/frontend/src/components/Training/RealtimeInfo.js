@@ -30,7 +30,7 @@ const RealtimeInfo = ({ Index, setIndex, FailList, setFailList, SuccessList, set
         })
         .then(response => response.json())
         .then(data => {
-            if (IsStarted == true) {
+                        if (IsStarted == true) {
                 setIsRunning(true)
             }
         });

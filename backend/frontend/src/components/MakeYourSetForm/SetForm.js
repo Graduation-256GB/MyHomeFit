@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react';
 import '../../css/MakeYourSetForm/SetForm.css';
-import jQuery from 'jquery'
 
 
 const SetForm = ({ setNewNum,csrftoken }) => {
@@ -26,14 +25,10 @@ const SetForm = ({ setNewNum,csrftoken }) => {
         .then(res => res.json())
         .then(data => {
             if (data.key) {
-                // localStorage.clear();
-                // localStorage.setItem('token', data.key);
-                // window.location.replace('http://127.0.0.1:8000/makeyourset');
             } else {
                 setNewNum(data.set_id);
                 setTitle('');
                 setType('');
-                // localStorage.clear();
             }
         });
         window.location.href = '#list';
@@ -41,16 +36,14 @@ const SetForm = ({ setNewNum,csrftoken }) => {
     return (
         <form onSubmit={onSubmit}>
                     <div className="form-box">
-                        {/* <div className="label-box">
-                        </div> */}
                         <div className="input-box">
-                            <label htmlFor="set-title">Title</label>
+                            <label htmlFor="set-title">제목</label>
                             <input type="text"
                                 name="set-title"
                                 value={title}
                                 required
                                 onChange={e => setTitle(e.target.value)}/>
-                            <label htmlFor="set-type">Category</label>  
+                            <label htmlFor="set-type">카테고리</label>  
                             <select name="set-type"
                             value={type}
                             required
@@ -62,7 +55,7 @@ const SetForm = ({ setNewNum,csrftoken }) => {
                             </select>
                         </div>
                     </div>
-                    <input type="submit" value="Next Step" className="set-submit" />
+                    <input type="submit" value="다음" className="set-submit" />
                 </form>
     )
 }

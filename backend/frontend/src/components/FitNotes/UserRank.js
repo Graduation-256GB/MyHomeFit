@@ -23,7 +23,6 @@ const UserRank = ({ name}) => {
         Object.keys(data).forEach(function (key) {
             rankList.push(data[key]);
         });
-        console.log(rankList)
     }   
     return(
         <div className="recommend-fitness-container">

@@ -34,7 +34,6 @@ const TrainingReady = ({ setPage, setSpeedNum, setIsStarted, setNameList, setCou
         })
         .then(response=>response.json())
         .then(data => {
-            console.log(data)
             setIsStarted(true)
             exercises.map(item => {
                 setNameList(NameList => [...NameList, item.name]);
