@@ -90,8 +90,6 @@ const Training = () => {
     useEffect (()=> {
         setSuccessSum( SuccessList.reduce((a,v) =>  a = a + v , 0 ) )
         setCountSum (CountList.reduce((a,v) =>  a = a + v , 0 ))
-        console.log("success", successSum)
-        console.log("count", countSum)
 
     }, [SuccessList, CountList])
     const percentage = 66;
@@ -99,7 +97,6 @@ const Training = () => {
     if (data) {
         Object.keys(data).forEach(function (key) {
             Exercises.push(data[key]);
-            console.log(Exercises)
         });
     }
 
@@ -126,13 +123,6 @@ const Training = () => {
                 page===2 &&
                 
             <div className="videos">
-                {/* <img src={LeftBtn} className="left-button"/>
-                <NextPose exercises = { Exercises }/>
-                <img src={RightBtn} className="right-button"/> */}
-                {/*<div className="export-video">
-                    <ReactPlayer className="export"
-                                url={myVideo} loop muted playing controls />
-                </div>*/}
                     <div className="training-note-container">
                 {
                     (Index < CountList.length -1) &&
